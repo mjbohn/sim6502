@@ -21,7 +21,36 @@ namespace CPU_emulator
             
             Cpu = new CPU();
             Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
+            Cpu.OnMemoryUpdate += Cpu_OnMemoryUpdate;
             Cpu.Reset();
+        }
+
+        private void Cpu_OnMemoryUpdate(object sender, EventArgs e)
+        {
+            byte[] Data = Cpu.ReadMemory();
+            
+            FillRichTextBox(Data);
+        }
+
+        private void FillRichTextBox(byte[] data)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                if (i == 0)
+                {
+                    sb.Append("<" + i.ToString("X4") + "> ");
+                }
+                if ((i % 16) == 0 && i > 0)
+                {
+                    sb.Append("\n" + "<" + i.ToString("X4") + "> ");
+                }
+                                
+                sb.Append(data[i].ToString("X2") + " | ");
+            }
+
+            richTextBox1.Text = sb.ToString();
         }
 
         private void Cpu_onFlagsUpdate(object sender, EventArgs e)
@@ -41,6 +70,11 @@ namespace CPU_emulator
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Cpu.ResetMemory();
         }
     }
 }

@@ -12,21 +12,19 @@ public class CPU
 	//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
 	public IDictionary<string, bool> flags = new Dictionary<string, bool>();
 
-	public const uint MAX_MEM = 1024 * 64;
-	
-	public byte[] Data = new byte[MAX_MEM];
+	private const uint MAX_MEM = 1024 * 64;
+	private byte[] Data = new byte[MAX_MEM];
 
 	public event EventHandler OnFlagsUpdate;
-
-	struct Mem
-    {
-		
-    }
-	
+	public event EventHandler OnMemoryUpdate;	
 	public CPU() { }
 	
 	public void Reset()
     {
+		var rand = new Random();
+		rand.NextBytes(Data);
+		OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+
 		PC = 0xFFFC;
 		SP = 0x0100;
          
@@ -38,4 +36,26 @@ public class CPU
 		OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
 	}
 
+	public void ResetMemory()
+	{
+		for (int i = 0; i < MAX_MEM; i++)
+        {
+            Data[i] = 0x00;
+        }
+
+        //Data[0] = 0xff;
+        //Data[1] = 0x0a;
+        //Data[2] = 0x0b;
+        //Data[3] = 0x0c;
+        //Data[15] = 0xff;
+
+        OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+	}
+
+	public byte[] ReadMemory()
+    {
+		return Data;
+    }
+
+	
 }
