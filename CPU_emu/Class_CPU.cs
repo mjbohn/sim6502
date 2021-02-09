@@ -5,10 +5,9 @@ using System.Windows.Forms;
 
 public class CPU
 {
-	public ushort PC;  // ProgramCounter
-	public ushort SP;  // StackPointer
+	public ushort PC;    // ProgramCounter
+	public ushort SP;    // StackPointer
 	public byte A, X, Y; // registers
-//	public bool C, Z, I, D, B, V, N; 
 	
 	//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
 	public IDictionary<string, bool> flags = new Dictionary<string, bool>();
@@ -17,7 +16,7 @@ public class CPU
 	
 	public byte[] Data = new byte[MAX_MEM];
 
-	public event EventHandler onFlagsUpdate;
+	public event EventHandler OnFlagsUpdate;
 
 	struct Mem
     {
@@ -26,7 +25,7 @@ public class CPU
 	
 	public CPU() { }
 	
-	public void reset()
+	public void Reset()
     {
 		PC = 0xFFFC;
 		SP = 0x0100;
@@ -35,8 +34,8 @@ public class CPU
 
 		// set all status flags to false
 		flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
-
-		onFlagsUpdate?.Invoke(this, EventArgs.Empty);
+		
+		OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
 	}
 
 }

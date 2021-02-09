@@ -20,13 +20,22 @@ namespace CPU_emulator
             InitializeComponent();
             
             Cpu = new CPU();
-            Cpu.onFlagsUpdate += Cpu_onFlagsUpdate;
-            Cpu.reset();
+            Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
+            Cpu.Reset();
         }
 
         private void Cpu_onFlagsUpdate(object sender, EventArgs e)
         {
-            label1.Text = "onFlagsUpdate";
+            GetCpuFlags();
+            
+        }
+
+        private void GetCpuFlags()
+        {
+            foreach (CheckBox checkBox in groupBoxFlags.Controls)
+            {
+                checkBox.Checked = Cpu.flags[checkBox.Tag.ToString()];
+            }
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
