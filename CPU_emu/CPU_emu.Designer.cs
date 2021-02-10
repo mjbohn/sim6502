@@ -43,17 +43,18 @@ namespace CPU_emulator
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelRegA = new System.Windows.Forms.Label();
-            this.textBoxRegA = new System.Windows.Forms.TextBox();
-            this.textBoxRegX = new System.Windows.Forms.TextBox();
-            this.labelRegX = new System.Windows.Forms.Label();
             this.textBoxRegY = new System.Windows.Forms.TextBox();
             this.labelRegY = new System.Windows.Forms.Label();
+            this.textBoxRegX = new System.Windows.Forms.TextBox();
+            this.labelRegX = new System.Windows.Forms.Label();
+            this.textBoxRegA = new System.Windows.Forms.TextBox();
+            this.labelRegA = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxPC = new System.Windows.Forms.TextBox();
-            this.labelPC = new System.Windows.Forms.Label();
             this.textBoxSP = new System.Windows.Forms.TextBox();
             this.labelSP = new System.Windows.Forms.Label();
+            this.textBoxPC = new System.Windows.Forms.TextBox();
+            this.labelPC = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -88,7 +89,6 @@ namespace CPU_emulator
             // 
             // checkBoxCarryFlag
             // 
-            this.checkBoxCarryFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxCarryFlag.AutoCheck = false;
             this.checkBoxCarryFlag.AutoSize = true;
             this.checkBoxCarryFlag.Checked = true;
@@ -96,7 +96,7 @@ namespace CPU_emulator
             this.checkBoxCarryFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxCarryFlag.Location = new System.Drawing.Point(6, 19);
             this.checkBoxCarryFlag.Name = "checkBoxCarryFlag";
-            this.checkBoxCarryFlag.Size = new System.Drawing.Size(90, 26);
+            this.checkBoxCarryFlag.Size = new System.Drawing.Size(99, 20);
             this.checkBoxCarryFlag.TabIndex = 1;
             this.checkBoxCarryFlag.Tag = "C";
             this.checkBoxCarryFlag.Text = "Carry [C]";
@@ -121,7 +121,6 @@ namespace CPU_emulator
             // 
             // checkBoxNegativFlag
             // 
-            this.checkBoxNegativFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxNegativFlag.AutoCheck = false;
             this.checkBoxNegativFlag.AutoSize = true;
             this.checkBoxNegativFlag.Checked = true;
@@ -129,7 +128,7 @@ namespace CPU_emulator
             this.checkBoxNegativFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxNegativFlag.Location = new System.Drawing.Point(6, 175);
             this.checkBoxNegativFlag.Name = "checkBoxNegativFlag";
-            this.checkBoxNegativFlag.Size = new System.Drawing.Size(114, 26);
+            this.checkBoxNegativFlag.Size = new System.Drawing.Size(123, 20);
             this.checkBoxNegativFlag.TabIndex = 7;
             this.checkBoxNegativFlag.Tag = "N";
             this.checkBoxNegativFlag.Text = "Negativ  [N]";
@@ -137,7 +136,6 @@ namespace CPU_emulator
             // 
             // checkBoxOverflowFlag
             // 
-            this.checkBoxOverflowFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxOverflowFlag.AutoCheck = false;
             this.checkBoxOverflowFlag.AutoSize = true;
             this.checkBoxOverflowFlag.Checked = true;
@@ -145,7 +143,7 @@ namespace CPU_emulator
             this.checkBoxOverflowFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxOverflowFlag.Location = new System.Drawing.Point(6, 149);
             this.checkBoxOverflowFlag.Name = "checkBoxOverflowFlag";
-            this.checkBoxOverflowFlag.Size = new System.Drawing.Size(114, 26);
+            this.checkBoxOverflowFlag.Size = new System.Drawing.Size(123, 20);
             this.checkBoxOverflowFlag.TabIndex = 6;
             this.checkBoxOverflowFlag.Tag = "V";
             this.checkBoxOverflowFlag.Text = "Overflow [V]";
@@ -153,7 +151,6 @@ namespace CPU_emulator
             // 
             // checkBoxBreakFlag
             // 
-            this.checkBoxBreakFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxBreakFlag.AutoCheck = false;
             this.checkBoxBreakFlag.AutoSize = true;
             this.checkBoxBreakFlag.Checked = true;
@@ -161,7 +158,7 @@ namespace CPU_emulator
             this.checkBoxBreakFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxBreakFlag.Location = new System.Drawing.Point(6, 123);
             this.checkBoxBreakFlag.Name = "checkBoxBreakFlag";
-            this.checkBoxBreakFlag.Size = new System.Drawing.Size(90, 26);
+            this.checkBoxBreakFlag.Size = new System.Drawing.Size(99, 20);
             this.checkBoxBreakFlag.TabIndex = 5;
             this.checkBoxBreakFlag.Tag = "B";
             this.checkBoxBreakFlag.Text = "Break [B]";
@@ -169,7 +166,6 @@ namespace CPU_emulator
             // 
             // checkBoxDecimalModeFlag
             // 
-            this.checkBoxDecimalModeFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxDecimalModeFlag.AutoCheck = false;
             this.checkBoxDecimalModeFlag.AutoSize = true;
             this.checkBoxDecimalModeFlag.Checked = true;
@@ -177,7 +173,7 @@ namespace CPU_emulator
             this.checkBoxDecimalModeFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxDecimalModeFlag.Location = new System.Drawing.Point(6, 97);
             this.checkBoxDecimalModeFlag.Name = "checkBoxDecimalModeFlag";
-            this.checkBoxDecimalModeFlag.Size = new System.Drawing.Size(138, 26);
+            this.checkBoxDecimalModeFlag.Size = new System.Drawing.Size(147, 20);
             this.checkBoxDecimalModeFlag.TabIndex = 4;
             this.checkBoxDecimalModeFlag.Tag = "D";
             this.checkBoxDecimalModeFlag.Text = "DecimalMode [D]";
@@ -185,7 +181,6 @@ namespace CPU_emulator
             // 
             // checkBoxIntDisableFlag
             // 
-            this.checkBoxIntDisableFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxIntDisableFlag.AutoCheck = false;
             this.checkBoxIntDisableFlag.AutoSize = true;
             this.checkBoxIntDisableFlag.Checked = true;
@@ -193,7 +188,7 @@ namespace CPU_emulator
             this.checkBoxIntDisableFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxIntDisableFlag.Location = new System.Drawing.Point(6, 71);
             this.checkBoxIntDisableFlag.Name = "checkBoxIntDisableFlag";
-            this.checkBoxIntDisableFlag.Size = new System.Drawing.Size(138, 26);
+            this.checkBoxIntDisableFlag.Size = new System.Drawing.Size(147, 20);
             this.checkBoxIntDisableFlag.TabIndex = 3;
             this.checkBoxIntDisableFlag.Tag = "I";
             this.checkBoxIntDisableFlag.Text = "intDisable  [I]";
@@ -201,7 +196,6 @@ namespace CPU_emulator
             // 
             // checkBoxZeroFlag
             // 
-            this.checkBoxZeroFlag.Appearance = System.Windows.Forms.Appearance.Button;
             this.checkBoxZeroFlag.AutoCheck = false;
             this.checkBoxZeroFlag.AutoSize = true;
             this.checkBoxZeroFlag.Checked = true;
@@ -209,7 +203,7 @@ namespace CPU_emulator
             this.checkBoxZeroFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxZeroFlag.Location = new System.Drawing.Point(6, 45);
             this.checkBoxZeroFlag.Name = "checkBoxZeroFlag";
-            this.checkBoxZeroFlag.Size = new System.Drawing.Size(90, 26);
+            this.checkBoxZeroFlag.Size = new System.Drawing.Size(99, 20);
             this.checkBoxZeroFlag.TabIndex = 2;
             this.checkBoxZeroFlag.Tag = "Z";
             this.checkBoxZeroFlag.Text = "Zero  [Z]";
@@ -218,12 +212,12 @@ namespace CPU_emulator
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(161, 1);
+            this.button1.Location = new System.Drawing.Point(12, 552);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.TabStop = false;
-            this.button1.Text = "Test";
+            this.button1.Text = "Test 1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -254,25 +248,25 @@ namespace CPU_emulator
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registers";
             // 
-            // labelRegA
+            // textBoxRegY
             // 
-            this.labelRegA.AutoSize = true;
-            this.labelRegA.Location = new System.Drawing.Point(6, 23);
-            this.labelRegA.Name = "labelRegA";
-            this.labelRegA.Size = new System.Drawing.Size(17, 16);
-            this.labelRegA.TabIndex = 0;
-            this.labelRegA.Text = "A";
-            this.labelRegA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxRegY.Location = new System.Drawing.Point(38, 78);
+            this.textBoxRegY.Name = "textBoxRegY";
+            this.textBoxRegY.ReadOnly = true;
+            this.textBoxRegY.Size = new System.Drawing.Size(58, 23);
+            this.textBoxRegY.TabIndex = 5;
+            this.textBoxRegY.Text = "FF";
+            this.textBoxRegY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBoxRegA
+            // labelRegY
             // 
-            this.textBoxRegA.Location = new System.Drawing.Point(38, 20);
-            this.textBoxRegA.Name = "textBoxRegA";
-            this.textBoxRegA.ReadOnly = true;
-            this.textBoxRegA.Size = new System.Drawing.Size(58, 23);
-            this.textBoxRegA.TabIndex = 1;
-            this.textBoxRegA.Text = "FF";
-            this.textBoxRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.labelRegY.AutoSize = true;
+            this.labelRegY.Location = new System.Drawing.Point(6, 81);
+            this.labelRegY.Name = "labelRegY";
+            this.labelRegY.Size = new System.Drawing.Size(18, 16);
+            this.labelRegY.TabIndex = 4;
+            this.labelRegY.Text = "Y";
+            this.labelRegY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxRegX
             // 
@@ -294,25 +288,25 @@ namespace CPU_emulator
             this.labelRegX.Text = "X";
             this.labelRegX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxRegY
+            // textBoxRegA
             // 
-            this.textBoxRegY.Location = new System.Drawing.Point(38, 78);
-            this.textBoxRegY.Name = "textBoxRegY";
-            this.textBoxRegY.ReadOnly = true;
-            this.textBoxRegY.Size = new System.Drawing.Size(58, 23);
-            this.textBoxRegY.TabIndex = 5;
-            this.textBoxRegY.Text = "FF";
-            this.textBoxRegY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxRegA.Location = new System.Drawing.Point(38, 20);
+            this.textBoxRegA.Name = "textBoxRegA";
+            this.textBoxRegA.ReadOnly = true;
+            this.textBoxRegA.Size = new System.Drawing.Size(58, 23);
+            this.textBoxRegA.TabIndex = 1;
+            this.textBoxRegA.Text = "FF";
+            this.textBoxRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelRegY
+            // labelRegA
             // 
-            this.labelRegY.AutoSize = true;
-            this.labelRegY.Location = new System.Drawing.Point(6, 81);
-            this.labelRegY.Name = "labelRegY";
-            this.labelRegY.Size = new System.Drawing.Size(18, 16);
-            this.labelRegY.TabIndex = 4;
-            this.labelRegY.Text = "Y";
-            this.labelRegY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelRegA.AutoSize = true;
+            this.labelRegA.Location = new System.Drawing.Point(6, 23);
+            this.labelRegA.Name = "labelRegA";
+            this.labelRegA.Size = new System.Drawing.Size(17, 16);
+            this.labelRegA.TabIndex = 0;
+            this.labelRegA.Text = "A";
+            this.labelRegA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox2
             // 
@@ -326,26 +320,6 @@ namespace CPU_emulator
             this.groupBox2.Size = new System.Drawing.Size(162, 100);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
-            // 
-            // textBoxPC
-            // 
-            this.textBoxPC.Location = new System.Drawing.Point(38, 22);
-            this.textBoxPC.Name = "textBoxPC";
-            this.textBoxPC.ReadOnly = true;
-            this.textBoxPC.Size = new System.Drawing.Size(58, 23);
-            this.textBoxPC.TabIndex = 7;
-            this.textBoxPC.Text = "FF";
-            this.textBoxPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // labelPC
-            // 
-            this.labelPC.AutoSize = true;
-            this.labelPC.Location = new System.Drawing.Point(6, 25);
-            this.labelPC.Name = "labelPC";
-            this.labelPC.Size = new System.Drawing.Size(27, 16);
-            this.labelPC.TabIndex = 6;
-            this.labelPC.Text = "PC";
-            this.labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxSP
             // 
@@ -367,11 +341,42 @@ namespace CPU_emulator
             this.labelSP.Text = "SP";
             this.labelSP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // textBoxPC
+            // 
+            this.textBoxPC.Location = new System.Drawing.Point(38, 22);
+            this.textBoxPC.Name = "textBoxPC";
+            this.textBoxPC.ReadOnly = true;
+            this.textBoxPC.Size = new System.Drawing.Size(58, 23);
+            this.textBoxPC.TabIndex = 7;
+            this.textBoxPC.Text = "FF";
+            this.textBoxPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelPC
+            // 
+            this.labelPC.AutoSize = true;
+            this.labelPC.Location = new System.Drawing.Point(6, 25);
+            this.labelPC.Name = "labelPC";
+            this.labelPC.Size = new System.Drawing.Size(27, 16);
+            this.labelPC.TabIndex = 6;
+            this.labelPC.Text = "PC";
+            this.labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(128, 551);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Test 2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1017, 601);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
@@ -424,6 +429,7 @@ namespace CPU_emulator
         private System.Windows.Forms.Label labelPC;
         private System.Windows.Forms.TextBox textBoxSP;
         private System.Windows.Forms.Label labelSP;
+        private System.Windows.Forms.Button button2;
     }
 }
 

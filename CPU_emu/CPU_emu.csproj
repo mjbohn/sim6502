@@ -53,6 +53,7 @@
     <Compile Include="CPU_emu.Designer.cs">
       <DependentUpon>CPU_emu.cs</DependentUpon>
     </Compile>
+    <Compile Include="CPU_emu.opcodes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CPU_emu.resx">

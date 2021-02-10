@@ -94,7 +94,13 @@ namespace CPU_emulator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cpu.IncPC();
+            //Cpu.SetRegister("A", LDA_IM);
+            Cpu.Run(2);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Cpu.Reset(); 
         }
     }
 }
