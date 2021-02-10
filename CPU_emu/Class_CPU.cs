@@ -16,27 +16,52 @@ public class CPU
 	private byte[] Data = new byte[MAX_MEM];
 
 	public event EventHandler OnFlagsUpdate;
-	public event EventHandler OnMemoryUpdate;	
+	public event EventHandler OnMemoryUpdate;
+	public event EventHandler OnRegisterUpdate;
 	public CPU() { }
 	
 	public void Reset()
     {
-		var rand = new Random();
-		rand.NextBytes(Data);
-		OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+		//var rand = new Random();
+		//rand.NextBytes(Data);
+		//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 
 		PC = 0xFFFC;
 		SP = 0x0100;
          
-        A = X = Y = 0;
+        //A = X = Y = 0;
+		SetRegister("A", 0xab);
+		SetRegister("X", 0xac);
+		SetRegister("Y", 0xad);
 
 		// set all status flags to false
 		flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
 		
 		OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
+
+		ResetMemory();
 	}
 
-	public void ResetMemory()
+    private void SetRegister(string regname, byte value)
+    {
+        switch (regname)
+        {
+            case "A":
+				A = value;
+				break;
+			case "X":
+				X = value;
+				break;
+			case "Y":
+				Y = value;
+				break;
+            default:
+                break;
+        }
+		OnRegisterUpdate?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void ResetMemory()
 	{
 		for (int i = 0; i < MAX_MEM; i++)
         {

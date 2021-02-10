@@ -22,7 +22,15 @@ namespace CPU_emulator
             Cpu = new CPU();
             Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
             Cpu.OnMemoryUpdate += Cpu_OnMemoryUpdate;
+            Cpu.OnRegisterUpdate += Cpu_OnRegisterUpdate;
             Cpu.Reset();
+        }
+
+        private void Cpu_OnRegisterUpdate(object sender, EventArgs e)
+        {
+            textBoxRegA.Text = Cpu.A.ToString("X2");
+            textBoxRegX.Text = Cpu.X.ToString("X2");
+            textBoxRegY.Text = Cpu.Y.ToString("X2");
         }
 
         private void Cpu_OnMemoryUpdate(object sender, EventArgs e)
