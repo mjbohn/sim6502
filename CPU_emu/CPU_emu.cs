@@ -23,7 +23,19 @@ namespace CPU_emulator
             Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
             Cpu.OnMemoryUpdate += Cpu_OnMemoryUpdate;
             Cpu.OnRegisterUpdate += Cpu_OnRegisterUpdate;
+            Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
+            Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.Reset();
+        }
+
+        private void Cpu_OnProgramCounterUpdate(object sender, EventArgs e)
+        {
+            textBoxPC.Text = Cpu.PC.ToString("X4");
+        }
+
+        private void Cpu_OnStackPointerUpdate(object sender, EventArgs e)
+        {
+            textBoxSP.Text = Cpu.SP.ToString("X4");
         }
 
         private void Cpu_OnRegisterUpdate(object sender, EventArgs e)
@@ -82,7 +94,7 @@ namespace CPU_emulator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Cpu.ResetMemory();
+            Cpu.IncPC();
         }
     }
 }

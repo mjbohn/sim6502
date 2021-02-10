@@ -18,6 +18,8 @@ public class CPU
 	public event EventHandler OnFlagsUpdate;
 	public event EventHandler OnMemoryUpdate;
 	public event EventHandler OnRegisterUpdate;
+	public event EventHandler OnProgramCounterUpdate;
+	public event EventHandler OnStackPointerUpdate;
 	public CPU() { }
 	
 	public void Reset()
@@ -26,13 +28,12 @@ public class CPU
 		//rand.NextBytes(Data);
 		//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 
-		PC = 0xFFFC;
-		SP = 0x0100;
-         
-        //A = X = Y = 0;
-		SetRegister("A", 0xab);
-		SetRegister("X", 0xac);
-		SetRegister("Y", 0xad);
+		SetPC(0xFFFC);
+		SetSP(0x0100);
+
+       	SetRegister("A", 0);
+		SetRegister("X", 0);
+		SetRegister("Y", 0);
 
 		// set all status flags to false
 		flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
@@ -41,6 +42,40 @@ public class CPU
 
 		ResetMemory();
 	}
+
+    private void SetSP(ushort value)
+    {
+		SP = value;
+		OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+    }
+
+	private void IncSP()
+	{
+		SP++;
+		OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+	}
+
+	private void DecSP()
+	{
+		SP--;
+		OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+	}
+
+	private void SetPC(ushort value)
+    {
+		PC = value;
+		OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+    }
+    public void IncPC()
+    {
+        PC++;
+        OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+    } 
+	public void DecPC()
+    {
+        PC--;
+        OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+    }
 
     private void SetRegister(string regname, byte value)
     {

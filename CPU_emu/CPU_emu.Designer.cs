@@ -49,9 +49,15 @@ namespace CPU_emulator
             this.labelRegX = new System.Windows.Forms.Label();
             this.textBoxRegY = new System.Windows.Forms.TextBox();
             this.labelRegY = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxPC = new System.Windows.Forms.TextBox();
+            this.labelPC = new System.Windows.Forms.Label();
+            this.textBoxSP = new System.Windows.Forms.TextBox();
+            this.labelSP = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -211,14 +217,13 @@ namespace CPU_emulator
             // 
             // button1
             // 
-            this.button1.Enabled = false;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(161, 1);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
             this.button1.TabStop = false;
-            this.button1.Text = "reset mem";
+            this.button1.Text = "Test";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -242,9 +247,9 @@ namespace CPU_emulator
             this.groupBox1.Controls.Add(this.textBoxRegA);
             this.groupBox1.Controls.Add(this.labelRegA);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 271);
+            this.groupBox1.Location = new System.Drawing.Point(12, 253);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(162, 134);
+            this.groupBox1.Size = new System.Drawing.Size(162, 118);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registers";
@@ -309,11 +314,65 @@ namespace CPU_emulator
             this.labelRegY.Text = "Y";
             this.labelRegY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.textBoxSP);
+            this.groupBox2.Controls.Add(this.labelSP);
+            this.groupBox2.Controls.Add(this.textBoxPC);
+            this.groupBox2.Controls.Add(this.labelPC);
+            this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(12, 377);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(162, 100);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            // 
+            // textBoxPC
+            // 
+            this.textBoxPC.Location = new System.Drawing.Point(38, 22);
+            this.textBoxPC.Name = "textBoxPC";
+            this.textBoxPC.ReadOnly = true;
+            this.textBoxPC.Size = new System.Drawing.Size(58, 23);
+            this.textBoxPC.TabIndex = 7;
+            this.textBoxPC.Text = "FF";
+            this.textBoxPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelPC
+            // 
+            this.labelPC.AutoSize = true;
+            this.labelPC.Location = new System.Drawing.Point(6, 25);
+            this.labelPC.Name = "labelPC";
+            this.labelPC.Size = new System.Drawing.Size(27, 16);
+            this.labelPC.TabIndex = 6;
+            this.labelPC.Text = "PC";
+            this.labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxSP
+            // 
+            this.textBoxSP.Location = new System.Drawing.Point(38, 51);
+            this.textBoxSP.Name = "textBoxSP";
+            this.textBoxSP.ReadOnly = true;
+            this.textBoxSP.Size = new System.Drawing.Size(58, 23);
+            this.textBoxSP.TabIndex = 9;
+            this.textBoxSP.Text = "FF";
+            this.textBoxSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labelSP
+            // 
+            this.labelSP.AutoSize = true;
+            this.labelSP.Location = new System.Drawing.Point(6, 54);
+            this.labelSP.Name = "labelSP";
+            this.labelSP.Size = new System.Drawing.Size(26, 16);
+            this.labelSP.TabIndex = 8;
+            this.labelSP.Text = "SP";
+            this.labelSP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1017, 601);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
@@ -331,6 +390,8 @@ namespace CPU_emulator
             this.groupBoxFlags.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -358,6 +419,11 @@ namespace CPU_emulator
         private System.Windows.Forms.Label labelRegY;
         private System.Windows.Forms.TextBox textBoxRegX;
         private System.Windows.Forms.Label labelRegX;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBoxPC;
+        private System.Windows.Forms.Label labelPC;
+        private System.Windows.Forms.TextBox textBoxSP;
+        private System.Windows.Forms.Label labelSP;
     }
 }
 
