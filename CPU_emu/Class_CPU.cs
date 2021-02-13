@@ -60,7 +60,7 @@ namespace CPU_emulator
         private void LoadInlineTestProg()
         {
             Data[PC] = 0xA9;
-			Data[PC+1] = 0x80;
+			Data[PC+1] = 0x00;
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
