@@ -142,6 +142,20 @@ namespace CPU_emulator
         {
             Cpu.Reset();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                button1.Text = "Step";
+            }
+            else
+            {
+                button1.Text = "Start";
+            }
+
+            Cpu.SteppingMode = checkBox1.Checked;
+        }
     }
 
     public static class FormInvokeExtension

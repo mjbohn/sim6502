@@ -15,19 +15,24 @@ namespace CPU_emulator
 		//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
 		public IDictionary<string, bool> flags = new Dictionary<string, bool>();
         public bool CpuIsRunning = true;
-		ulong InterruptPeriod;
-		bool ExitRequested;
+		private ulong _InterruptPeriod;
+		private bool _ExitRequested;
+		private bool _SteppingMode;
 
         private const uint MAX_MEM = 1024 * 64;
 		private byte[] Data = new byte[MAX_MEM];
-        
-		private byte 
-			NegativeFlagBit = 0b10000000,
+
+        private byte
+            NegativeFlagBit = 0b10000000,
 			OverflowFlagBit = 0b01000000,
-			BreakFlagBit = 0b000010000,
-			UnusedFlagBit = 0b000100000,
-			InterruptDisableFlagBit = 0b000000100,
-			ZeroBit = 0b00000001;
+			BreakFlagBit    = 0b000010000,
+			UnusedFlagBit   = 0b000100000,
+            InterruptDisableFlagBit = 0b000000100,
+            ZeroBit = 0b00000001;
+
+        public bool SteppingMode { get => _SteppingMode; set => _SteppingMode = value; }
+        public bool ExitRequested { get => _ExitRequested; set => _ExitRequested = value; }
+        public ulong InterruptPeriod { get => _InterruptPeriod; set => _InterruptPeriod = value; }
 
         public event EventHandler OnFlagsUpdate;
 		public event EventHandler OnMemoryUpdate;
@@ -43,7 +48,7 @@ namespace CPU_emulator
 			//rand.NextBytes(Data);
 			//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 
-			SetPC(0x0100);//(0xFFFC);
+			SetPC(0x0200);//(0xFFFC);
 			SetSP(0x0100);
 
 			SetRegister("A", 0);
@@ -65,14 +70,21 @@ namespace CPU_emulator
         private void LoadInlineTestProg()
         {
             Data[PC] = 0xA9;
-			Data[PC+1] = 0xab;
+			Data[PC + 1] = 0xab;
+			Data[PC + 2] = 0xA9;
+			Data[PC + 3] = 0xac;
+			Data[PC + 4] = 0xA9;
+			Data[PC + 5] = 0xad;
+			Data[PC + 6] = 0xA9;
+			Data[PC + 7] = 0xae;
+
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
 		public void Start()
         {
 			ExitRequested = false;
-			//Run(InterruptPeriod);
+			
 			var CpuRunner = new BackgroundWorker();
             CpuRunner.DoWork += CpuRunner_DoWork;
 			CpuRunner.RunWorkerAsync();
@@ -96,7 +108,12 @@ namespace CPU_emulator
 						
 						break;
 				}
-								
+
+                if (_SteppingMode)
+                {
+					break;
+                }
+
 				if (cycles <= 0)
 				{
 					cycles = InterruptPeriod;
@@ -104,6 +121,7 @@ namespace CPU_emulator
 					{
 						break;
 					}
+
 				}
 
 			}
