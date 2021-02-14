@@ -14,9 +14,12 @@ namespace CPU_emulator
     public partial class CPU_emu : Form
     {
         CPU Cpu ;
-        
+
+        private delegate void CpuEventCallback(object sender, EventArgs e);
+
         public CPU_emu()
         {
+            //CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             
             Cpu = new CPU();
@@ -25,12 +28,27 @@ namespace CPU_emulator
             Cpu.OnRegisterUpdate += Cpu_OnRegisterUpdate;
             Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
+            
             Cpu.Reset();
+        }
+
+        private void Cpu_OnRefreshGraphics(object sender, EventArgs e)
+        {
+            this.Refresh();
         }
 
         private void Cpu_OnProgramCounterUpdate(object sender, EventArgs e)
         {
-            textBoxPC.Text = Cpu.PC.ToString("X4");
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnProgramCounterUpdate);
+                this.Invoke(cb,new object[] {sender ,e });
+            }
+            else
+            {
+                textBoxPC.Text = Cpu.PC.ToString("X4");
+            }
+                        
         }
 
         private void Cpu_OnStackPointerUpdate(object sender, EventArgs e)
@@ -40,15 +58,24 @@ namespace CPU_emulator
 
         private void Cpu_OnRegisterUpdate(object sender, EventArgs e)
         {
-            textBoxRegA.Text = Cpu.A.ToString("X2");
-            textBoxRegX.Text = Cpu.X.ToString("X2");
-            textBoxRegY.Text = Cpu.Y.ToString("X2");
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnRegisterUpdate);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                textBoxRegA.Text = Cpu.A.ToString("X2");
+                textBoxRegX.Text = Cpu.X.ToString("X2");
+                textBoxRegY.Text = Cpu.Y.ToString("X2");
+                //textBoxRegA.Refresh();
+            }
+            
         }
 
         private void Cpu_OnMemoryUpdate(object sender, EventArgs e)
         {
             byte[] Data = Cpu.ReadMemory();
-            
             FillRichTextBox(Data);
         }
 
@@ -75,8 +102,16 @@ namespace CPU_emulator
 
         private void Cpu_onFlagsUpdate(object sender, EventArgs e)
         {
-            GetCpuFlags();
-            
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_onFlagsUpdate);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                GetCpuFlags();
+            }
+                       
         }
 
         private void GetCpuFlags()
@@ -85,6 +120,7 @@ namespace CPU_emulator
             {
                 checkBox.Checked = Cpu.flags[checkBox.Tag.ToString()];
             }
+
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -94,13 +130,40 @@ namespace CPU_emulator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Cpu.SetRegister("A", LDA_IM);
-            Cpu.Run(2);
+            Cpu.Start();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Cpu.Reset(); 
+            Cpu.Stop(); 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Cpu.Reset();
+        }
+    }
+
+    public static class FormInvokeExtension
+    {
+        static public void UIThreadAsync(this Control control, Action code)
+        {
+            if (control.InvokeRequired)
+            {
+                control.BeginInvoke(code);
+                return;
+            }
+            code.Invoke();
+        }
+
+        static public void UIThreadSync(this Control control, Action code)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(code);
+                return;
+            }
+            code.Invoke();
         }
     }
 }

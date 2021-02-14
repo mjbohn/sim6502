@@ -1,6 +1,7 @@
 ﻿using CPU_emulator;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace CPU_emulator
@@ -13,9 +14,11 @@ namespace CPU_emulator
 
 		//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
 		public IDictionary<string, bool> flags = new Dictionary<string, bool>();
-		public bool run = true;
+        public bool CpuIsRunning = true;
+		ulong InterruptPeriod;
+		bool ExitRequested;
 
-		private const uint MAX_MEM = 1024 * 64;
+        private const uint MAX_MEM = 1024 * 64;
 		private byte[] Data = new byte[MAX_MEM];
         
 		private byte 
@@ -26,12 +29,12 @@ namespace CPU_emulator
 			InterruptDisableFlagBit = 0b000000100,
 			ZeroBit = 0b00000001;
 
-
         public event EventHandler OnFlagsUpdate;
 		public event EventHandler OnMemoryUpdate;
 		public event EventHandler OnRegisterUpdate;
 		public event EventHandler OnProgramCounterUpdate;
 		public event EventHandler OnStackPointerUpdate;
+		
 		public CPU() { }
 
 		public void Reset()
@@ -46,6 +49,8 @@ namespace CPU_emulator
 			SetRegister("A", 0);
 			SetRegister("X", 0);
 			SetRegister("Y", 0);
+			InterruptPeriod = 1000;
+			ExitRequested = false;
 
 			// set all status flags to false
 			flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
@@ -60,27 +65,54 @@ namespace CPU_emulator
         private void LoadInlineTestProg()
         {
             Data[PC] = 0xA9;
-			Data[PC+1] = 0x00;
+			Data[PC+1] = 0xab;
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
-        public void Run(int cycles)
-		{
-			while (cycles > 0)
+		public void Start()
+        {
+			ExitRequested = false;
+			//Run(InterruptPeriod);
+			var CpuRunner = new BackgroundWorker();
+            CpuRunner.DoWork += CpuRunner_DoWork;
+			CpuRunner.RunWorkerAsync();
+        }
+
+        private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
+        {
+			ulong cycles = InterruptPeriod;
+
+			while (CpuIsRunning)
 			{
 				byte instruction = FetchByte(ref cycles);
-                switch (instruction)
-                {
+				switch (instruction)
+				{
 					case LDA_IM:
 						byte b = FetchByte(ref cycles);
 						SetRegister("A", b);
-						SetZeroAndNegativeFlags(A);
+						SetZeroAndNegativeFlags(A); 
 						break;
-                    default:
-                        break;
-                }
-            }
+					default:
+						
+						break;
+				}
+								
+				if (cycles <= 0)
+				{
+					cycles = InterruptPeriod;
+					if (ExitRequested)
+					{
+						break;
+					}
+				}
+
+			}
 		}
+
+        public void Stop()
+        {
+			ExitRequested = true;
+        }
 
         private void SetZeroAndNegativeFlags(byte register)
         {
@@ -89,7 +121,7 @@ namespace CPU_emulator
 			OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
-        private byte FetchByte(ref int cycles)
+        private byte FetchByte(ref ulong cycles)
 		{
 			byte data = Data[PC];
 			IncPC();
@@ -151,12 +183,6 @@ namespace CPU_emulator
 			{
 				Data[i] = 0x00;
 			}
-
-			//Data[0] = 0xff;
-			//Data[1] = 0x0a;
-			//Data[2] = 0x0b;
-			//Data[3] = 0x0c;
-			//Data[15] = 0xff;
 
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
