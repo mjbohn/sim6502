@@ -10,7 +10,11 @@ namespace CPU_emulator
     {
         private const byte 
             // LDA
-            LDA_IM = 0xA9, 
-            LDA_ZP = 0xA5;
+            OC_LDA_IM = 0xA9, 
+            OC_LDA_ZP = 0xA5,
+            // Stack
+            OC_PHA    = 0x48,
+            OC_PLA    = 0x68
+            ;
     }
 }

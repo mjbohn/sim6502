@@ -8,7 +8,7 @@ namespace CPU_emulator
 {
 	public partial class CPU
 	{
-		public ushort PC;    // ProgramCounter
+		public uint PC;    // ProgramCounter
 		public ushort SP;    // StackPointer
 		public byte A, X, Y; // registers
 
@@ -49,7 +49,7 @@ namespace CPU_emulator
 			//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 
 			SetPC(0x0200);//(0xFFFC);
-			SetSP(0x0100);
+			SetSP(0x01FF);
 
 			SetRegister("A", 0);
 			SetRegister("X", 0);
@@ -69,14 +69,18 @@ namespace CPU_emulator
 
         private void LoadInlineTestProg()
         {
-            Data[PC] = 0xA9;
+			Data[PC] = 0xA9;
 			Data[PC + 1] = 0xab;
-			Data[PC + 2] = 0xA9;
-			Data[PC + 3] = 0xac;
-			Data[PC + 4] = 0xA9;
-			Data[PC + 5] = 0xad;
+			Data[PC + 2] = 0x48;
+			Data[PC + 3] = 0xA9;
+			Data[PC + 4] = 0xac;
+			Data[PC + 5] = 0x48;
 			Data[PC + 6] = 0xA9;
-			Data[PC + 7] = 0xae;
+			Data[PC + 7] = 0xad;
+			Data[PC + 8] = 0x48;
+			Data[PC + 9] = 0xA9;
+			Data[PC + 10] = 0xae;
+			Data[PC + 11] = 0x48;
 
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
@@ -99,10 +103,13 @@ namespace CPU_emulator
 				byte instruction = FetchByte(ref cycles);
 				switch (instruction)
 				{
-					case LDA_IM:
+					case OC_LDA_IM:
 						byte b = FetchByte(ref cycles);
 						SetRegister("A", b);
 						SetZeroAndNegativeFlags(A); 
+						break;
+					case OC_PHA:
+						PushByteToStack(A,ref cycles);
 						break;
 					default:
 						
@@ -121,11 +128,24 @@ namespace CPU_emulator
 					{
 						break;
 					}
+                    if (PC>=MAX_MEM)
+                    {
+						break;
+                    }
 
 				}
 
 			}
 		}
+
+        private void PushByteToStack(byte b,ref ulong cycles)
+        {
+			WriteByteToMemory(b, SP);
+			cycles--;
+			DecrementSP();
+			cycles--;
+			
+        }
 
         public void Stop()
         {
@@ -142,9 +162,15 @@ namespace CPU_emulator
         private byte FetchByte(ref ulong cycles)
 		{
 			byte data = Data[PC];
-			IncPC();
+			IncrementPC();
 			cycles--;
 			return data;
+		}
+
+		private void WriteByteToMemory(byte b,ushort address)
+        {
+			Data[address] = b;
+			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
 		private void SetSP(ushort value)
@@ -152,12 +178,12 @@ namespace CPU_emulator
 			SP = value;
 			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
 		}
-		private void IncSP()
+		private void IncrementSP()
 		{
 			SP++;
 			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
 		}
-		private void DecSP()
+		private void DecrementSP()
 		{
 			SP--;
 			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
@@ -167,12 +193,12 @@ namespace CPU_emulator
 			PC = value;
 			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
 		}
-		public void IncPC()
+		public void IncrementPC()
 		{
 			PC++;
 			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
 		}
-		public void DecPC()
+		public void DecrementPC()
 		{
 			PC--;
 			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);

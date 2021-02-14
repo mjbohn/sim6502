@@ -29,6 +29,7 @@ namespace CPU_emulator
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CPU_emu));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +58,7 @@ namespace CPU_emulator
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -78,15 +80,15 @@ namespace CPU_emulator
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.dateiToolStripMenuItem.Text = "Datei";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.dateiToolStripMenuItem.Text = "File";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.beendenToolStripMenuItem.Text = "beenden";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Text = "close";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
             // checkBoxCarryFlag
@@ -394,11 +396,20 @@ namespace CPU_emulator
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1017, 22);
+            this.statusStrip1.TabIndex = 11;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 601);
+            this.ClientSize = new System.Drawing.Size(1017, 617);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -409,6 +420,7 @@ namespace CPU_emulator
             this.Controls.Add(this.groupBoxFlags);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "CPU_emu";
@@ -457,6 +469,7 @@ namespace CPU_emulator
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }
 

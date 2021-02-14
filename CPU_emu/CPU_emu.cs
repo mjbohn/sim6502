@@ -53,7 +53,16 @@ namespace CPU_emulator
 
         private void Cpu_OnStackPointerUpdate(object sender, EventArgs e)
         {
-            textBoxSP.Text = Cpu.SP.ToString("X4");
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnStackPointerUpdate);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                textBoxSP.Text = Cpu.SP.ToString("X4");
+            }
+            
         }
 
         private void Cpu_OnRegisterUpdate(object sender, EventArgs e)
@@ -75,8 +84,17 @@ namespace CPU_emulator
 
         private void Cpu_OnMemoryUpdate(object sender, EventArgs e)
         {
-            byte[] Data = Cpu.ReadMemory();
-            FillRichTextBox(Data);
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnMemoryUpdate);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                byte[] Data = Cpu.ReadMemory();
+                FillRichTextBox(Data);
+            }
+            
         }
 
         private void FillRichTextBox(byte[] data)
