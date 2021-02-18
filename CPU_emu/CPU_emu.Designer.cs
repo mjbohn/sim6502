@@ -59,6 +59,9 @@ namespace CPU_emulator
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.textBoxInitialPC = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -87,7 +90,7 @@ namespace CPU_emulator
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.beendenToolStripMenuItem.Text = "close";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
@@ -398,17 +401,52 @@ namespace CPU_emulator
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 595);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 677);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1017, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
+            // textBoxInitialPC
+            // 
+            this.textBoxInitialPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxInitialPC.Location = new System.Drawing.Point(12, 602);
+            this.textBoxInitialPC.Name = "textBoxInitialPC";
+            this.textBoxInitialPC.Size = new System.Drawing.Size(100, 23);
+            this.textBoxInitialPC.TabIndex = 12;
+            this.textBoxInitialPC.Text = "0200";
+            this.textBoxInitialPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxInitialPC.TextChanged += new System.EventHandler(this.textBoxInitialPC_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 586);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 16);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "InitialPC";
+            // 
+            // checkBoxSlowDown
+            // 
+            this.checkBoxSlowDown.AutoSize = true;
+            this.checkBoxSlowDown.Location = new System.Drawing.Point(106, 484);
+            this.checkBoxSlowDown.Name = "checkBoxSlowDown";
+            this.checkBoxSlowDown.Size = new System.Drawing.Size(49, 17);
+            this.checkBoxSlowDown.TabIndex = 14;
+            this.checkBoxSlowDown.Text = "Slow";
+            this.checkBoxSlowDown.UseVisualStyleBackColor = true;
+            this.checkBoxSlowDown.CheckedChanged += new System.EventHandler(this.checkBoxSlowDown_CheckedChanged);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 617);
+            this.ClientSize = new System.Drawing.Size(1017, 699);
+            this.Controls.Add(this.checkBoxSlowDown);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBoxInitialPC);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
@@ -470,6 +508,9 @@ namespace CPU_emulator
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.TextBox textBoxInitialPC;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxSlowDown;
     }
 }
 

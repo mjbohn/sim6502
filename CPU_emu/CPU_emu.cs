@@ -28,8 +28,15 @@ namespace CPU_emulator
             Cpu.OnRegisterUpdate += Cpu_OnRegisterUpdate;
             Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
-            
+            Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
+
+            SetCpuInitialPC();
             Cpu.Reset();
+        }
+
+        private void Cpu_OnPCgtThenMaxMem(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void Cpu_OnRefreshGraphics(object sender, EventArgs e)
@@ -158,14 +165,16 @@ namespace CPU_emulator
 
         private void button3_Click(object sender, EventArgs e)
         {
+            SetCpuInitialPC();
             Cpu.Reset();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void checkBox1_CheckedChanged(object sender, EventArgs e) //StepMode
         {
             if (checkBox1.Checked)
             {
                 button1.Text = "Step";
+                checkBoxSlowDown.Checked = false;
             }
             else
             {
@@ -173,6 +182,29 @@ namespace CPU_emulator
             }
 
             Cpu.SteppingMode = checkBox1.Checked;
+        }
+        
+        private void SetCpuInitialPC()
+        {
+            uint pc = (uint)Int32.Parse(textBoxInitialPC.Text, System.Globalization.NumberStyles.HexNumber);
+            Cpu.SetPC(pc);
+        }
+
+        private void textBoxInitialPC_TextChanged(object sender, EventArgs e)
+        {
+            SetCpuInitialPC();
+        }
+
+        private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox cb = sender as CheckBox;
+            
+            if (cb.Checked)
+            {
+                checkBox1.Checked = false;
+            }
+
+            Cpu.SlowDown = cb.Checked;
         }
     }
 

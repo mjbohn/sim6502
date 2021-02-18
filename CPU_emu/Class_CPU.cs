@@ -8,8 +8,11 @@ namespace CPU_emulator
 {
 	public partial class CPU
 	{
-		public uint PC;    // ProgramCounter
-		public ushort SP;    // StackPointer
+		public uint PC { get; set; } = 0x0200;   // ProgramCounter
+		public bool SlowDown { get; set; } = false;
+		public int SlowDownTime { get; set; } = 750; //
+		
+        public ushort SP;    // StackPointer
 		public byte A, X, Y; // registers
 
 		//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
@@ -33,12 +36,15 @@ namespace CPU_emulator
         public bool SteppingMode { get => _SteppingMode; set => _SteppingMode = value; }
         public bool ExitRequested { get => _ExitRequested; set => _ExitRequested = value; }
         public ulong InterruptPeriod { get => _InterruptPeriod; set => _InterruptPeriod = value; }
+        //public uint PC { get => pC; set => pC = value; }
+        //public uint InitialPC { get => _initialPC; set => _initialPC = value; }
 
         public event EventHandler OnFlagsUpdate;
 		public event EventHandler OnMemoryUpdate;
 		public event EventHandler OnRegisterUpdate;
 		public event EventHandler OnProgramCounterUpdate;
 		public event EventHandler OnStackPointerUpdate;
+		public event EventHandler OnPCoverflow;
 		
 		public CPU() { }
 
@@ -48,7 +54,7 @@ namespace CPU_emulator
 			//rand.NextBytes(Data);
 			//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 
-			SetPC(0x0200);//(0xFFFC);
+			SetPC(PC);//(0xFFFC);
 			SetSP(0x01FF);
 
 			SetRegister("A", 0);
@@ -115,25 +121,31 @@ namespace CPU_emulator
 						
 						break;
 				}
-
+				
                 if (_SteppingMode)
                 {
 					break;
                 }
+				if (ExitRequested)
+				{
+					break;
+				}
+				if (PC >= MAX_MEM)
+				{
+					OnPCoverflow?.Invoke(this, EventArgs.Empty);
+					break;
+				}
 
 				if (cycles <= 0)
 				{
 					cycles = InterruptPeriod;
-					if (ExitRequested)
-					{
-						break;
-					}
-                    if (PC>=MAX_MEM)
-                    {
-						break;
-                    }
-
 				}
+
+                if (SlowDown && !_SteppingMode)
+                {
+					System.Threading.Thread.Sleep(SlowDownTime);
+				}
+				
 
 			}
 		}
@@ -188,7 +200,7 @@ namespace CPU_emulator
 			SP--;
 			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
 		}
-		private void SetPC(ushort value)
+		public void SetPC(uint value)
 		{
 			PC = value;
 			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
