@@ -11,12 +11,13 @@ namespace CPU_emulator
 	public partial class CPU
 	{
 		
-		public uint PC { get; set; } = 0x0200;   // ProgramCounter
+		public uint PC { get; set; } = 0xFFFC;   // ProgramCounter
 		public bool SlowDown { get; set; } = false;
 		public int SlowDownTime { get; set; } = 750; //
 		
         public ushort SP;    // StackPointer
 		public byte A, X, Y; // registers
+		private ushort ResetVector = 0xFFFC;
 
 		//status Flags Carry, Zero, intDisable, Decimalmode, Break, Overflow, Negative flag 
 		public IDictionary<string, bool> flags = new Dictionary<string, bool>();
@@ -49,15 +50,24 @@ namespace CPU_emulator
 		public event EventHandler OnStackPointerUpdate;
 		public event EventHandler OnPCoverflow;
 		
-		public CPU() { }
-
-		public void Reset()
+		public CPU() 
 		{
-			//var rand = new Random();
-			//rand.NextBytes(Data);
-			//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+			SetVectors();
+		}
 
-			SetPC(PC);//(0xFFFC);
+        private void SetVectors()
+        {
+			//Data[0xFFFC] = 0x00; Data[0xFFFD] = 0x20;
+			WriteByteToMemory(0x00, 0xFFFC);
+			WriteByteToMemory(0x02, 0xFFFD);
+
+        }
+
+        public void Reset()
+		{
+			ushort tmpPC = ReadWordFromMemory(ResetVector);
+			
+			SetPC(tmpPC);
 			SetSP(0x01FF);
 
 			SetRegister("A", 0);
@@ -78,21 +88,21 @@ namespace CPU_emulator
 
         private void LoadInlineTestProg()
         {
-			Data[PC] = 0xA9;
-			Data[PC + 1] = 0xab;
-			Data[PC + 2] = 0x48;
-			Data[PC + 3] = 0xA9;
-			Data[PC + 4] = 0xac;
-			Data[PC + 5] = 0x48;
-			Data[PC + 6] = 0xA9;
-			Data[PC + 7] = 0xad;
-			Data[PC + 8] = 0x48;
-			Data[PC + 9] = 0xA9;
-			Data[PC + 10] = 0xae;
-			Data[PC + 11] = 0x48;
+            Data[PC] = 0xA9;
+            Data[PC + 1] = 0xab;
+            Data[PC + 2] = 0x48;
+            Data[PC + 3] = 0xA9;
+            Data[PC + 4] = 0xac;
+            Data[PC + 5] = 0x48;
+            Data[PC + 6] = 0xA9;
+            Data[PC + 7] = 0xad;
+            Data[PC + 8] = 0x48;
+            Data[PC + 9] = 0xA9;
+            Data[PC + 10] = 0xae;
+            Data[PC + 11] = 0x48;
 
-			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
-		}
+            OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+        }
 
 		public void Start()
         {
@@ -188,6 +198,25 @@ namespace CPU_emulator
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}
 
+		private byte ReadByteFromMemory(ushort address)
+        {
+			return Data[address];
+        }
+
+		private ushort ReadWordFromMemory(ushort address)
+        {
+			//ushort tmpPC = ReadByteFromMemory(ResetVector);
+			//ResetVector++;
+			//tmpPC |= (ushort)(ReadByteFromMemory(ResetVector) << 8);
+
+
+			ushort LoByte = ReadByteFromMemory(address);
+			address++;
+			ushort HiByte = (ushort)(ReadByteFromMemory(address) <<8);
+			
+			return LoByte |= HiByte;
+        }
+
 		private void SetSP(ushort value)
 		{
 			SP = value;
@@ -242,6 +271,8 @@ namespace CPU_emulator
 			{
 				Data[i] = 0x00;
 			}
+
+			SetVectors();
 
 			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
 		}

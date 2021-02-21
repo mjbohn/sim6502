@@ -39,8 +39,8 @@ namespace CPU_emulator
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
 
-            SetCpuInitialPC();
             Cpu.Reset();
+            
         }
 
         private void Cpu_OnPCgtThenMaxMem(object sender, EventArgs e)
@@ -216,7 +216,7 @@ namespace CPU_emulator
 
         private void button3_Click(object sender, EventArgs e)
         {
-            SetCpuInitialPC();
+            //SetCpuInitialPC();
             Cpu.Reset();
         }
 
@@ -243,7 +243,7 @@ namespace CPU_emulator
 
         private void textBoxInitialPC_TextChanged(object sender, EventArgs e)
         {
-            SetCpuInitialPC();
+            //SetCpuInitialPC();
         }
 
         private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
