@@ -89,17 +89,21 @@ namespace CPU_emulator
         private void LoadInlineTestProg()
         {
             Data[PC] = 0xA9;
-            Data[PC + 1] = 0xab;
+            Data[PC + 1] = 0x0b;
             Data[PC + 2] = 0x48;
             Data[PC + 3] = 0xA9;
             Data[PC + 4] = 0xac;
             Data[PC + 5] = 0x48;
             Data[PC + 6] = 0xA9;
-            Data[PC + 7] = 0xad;
+            Data[PC + 7] = 0x00;
             Data[PC + 8] = 0x48;
             Data[PC + 9] = 0xA9;
             Data[PC + 10] = 0xae;
             Data[PC + 11] = 0x48;
+			Data[PC + 12] = 0x68;
+			Data[PC + 13] = 0x68;
+            Data[PC + 14] = 0x68;
+            Data[PC + 15] = 0x68;
 
             OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
         }
@@ -116,19 +120,25 @@ namespace CPU_emulator
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
 			ulong cycles = InterruptPeriod;
+			byte b_tmp = 0;
 
 			while (CpuIsRunning)
 			{
 				byte instruction = FetchByte(ref cycles);
 				switch (instruction)
 				{
-					case OC_LDA_IM:
-						byte b = FetchByte(ref cycles);
-						SetRegister("A", b);
+					case OC_LDA_IM: // Load Accumulator immidiate
+                        b_tmp = FetchByte(ref cycles);
+						SetRegister("A", b_tmp);
 						SetZeroAndNegativeFlags(A); 
 						break;
-					case OC_PHA:
+					case OC_PHA: // Push Accumulator on Stack
 						PushByteToStack(A,ref cycles);
+						break;
+					case OC_PLA: // Pull Accumulator from Stack
+                        b_tmp = PullByteFromStack(ref cycles);
+						SetRegister("A", b_tmp);
+						SetZeroAndNegativeFlags(A);
 						break;
 					default:
 						
@@ -162,6 +172,15 @@ namespace CPU_emulator
 
 			}
 		}
+
+        private byte PullByteFromStack(ref ulong cycles)
+        {
+            IncrementSP();
+			cycles--;
+			byte b = ReadByteFromMemory(SP);
+			cycles--;
+			return b;
+        }
 
         private void PushByteToStack(byte b,ref ulong cycles)
         {
