@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace CPU_emulator
 {
 	public partial class CPU
 	{
+		
 		public uint PC { get; set; } = 0x0200;   // ProgramCounter
 		public bool SlowDown { get; set; } = false;
 		public int SlowDownTime { get; set; } = 750; //

@@ -42,7 +42,7 @@ namespace CPU_emulator
             this.checkBoxIntDisableFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxZeroFlag = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxMem = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxRegY = new System.Windows.Forms.TextBox();
             this.labelRegY = new System.Windows.Forms.Label();
@@ -62,10 +62,13 @@ namespace CPU_emulator
             this.textBoxInitialPC = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -228,16 +231,19 @@ namespace CPU_emulator
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
+            // richTextBoxMem
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Font = new System.Drawing.Font("Courier New", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.Location = new System.Drawing.Point(257, 28);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(748, 561);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
+            this.richTextBoxMem.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxMem.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richTextBoxMem.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxMem.Location = new System.Drawing.Point(93, 0);
+            this.richTextBoxMem.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.richTextBoxMem.Name = "richTextBoxMem";
+            this.richTextBoxMem.ReadOnly = true;
+            this.richTextBoxMem.Size = new System.Drawing.Size(596, 645);
+            this.richTextBoxMem.TabIndex = 5;
+            this.richTextBoxMem.Text = "";
+            this.richTextBoxMem.VScroll += new System.EventHandler(this.richTextBoxMem_VScroll);
             // 
             // groupBox1
             // 
@@ -439,11 +445,39 @@ namespace CPU_emulator
             this.checkBoxSlowDown.UseVisualStyleBackColor = true;
             this.checkBoxSlowDown.CheckedChanged += new System.EventHandler(this.checkBoxSlowDown_CheckedChanged);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.richTextBoxMem);
+            this.panel1.Controls.Add(this.richTextBoxLineNum);
+            this.panel1.Location = new System.Drawing.Point(297, 27);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(691, 647);
+            this.panel1.TabIndex = 15;
+            // 
+            // richTextBoxLineNum
+            // 
+            this.richTextBoxLineNum.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.richTextBoxLineNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxLineNum.Dock = System.Windows.Forms.DockStyle.Left;
+            this.richTextBoxLineNum.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBoxLineNum.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxLineNum.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
+            this.richTextBoxLineNum.Name = "richTextBoxLineNum";
+            this.richTextBoxLineNum.ReadOnly = true;
+            this.richTextBoxLineNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.richTextBoxLineNum.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.richTextBoxLineNum.Size = new System.Drawing.Size(90, 645);
+            this.richTextBoxLineNum.TabIndex = 6;
+            this.richTextBoxLineNum.Text = "";
+            this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1017, 699);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxSlowDown);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxInitialPC);
@@ -453,7 +487,6 @@ namespace CPU_emulator
             this.Controls.Add(this.button2);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBoxFlags);
             this.Controls.Add(this.menuStrip1);
@@ -472,6 +505,7 @@ namespace CPU_emulator
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,7 +525,7 @@ namespace CPU_emulator
         private System.Windows.Forms.CheckBox checkBoxNegativFlag;
         private System.Windows.Forms.CheckBox checkBoxOverflowFlag;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBoxMem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBoxRegA;
         private System.Windows.Forms.Label labelRegA;
@@ -511,6 +545,8 @@ namespace CPU_emulator
         private System.Windows.Forms.TextBox textBoxInitialPC;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RichTextBox richTextBoxLineNum;
     }
 }
 
