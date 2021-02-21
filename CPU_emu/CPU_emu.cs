@@ -38,8 +38,24 @@ namespace CPU_emulator
             Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
+            Cpu.OnBreak += Cpu_OnBreak;
 
             Cpu.Reset();
+            
+        }
+
+        private void Cpu_OnBreak(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnBreak);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                toolStripStatusLabelBRK.Text = "BRK";
+                toolStripStatusLabelBRK.ForeColor = Color.Red;
+            }
             
         }
 
@@ -130,18 +146,18 @@ namespace CPU_emulator
                 if ((i % 16) == 0 && i > 0)
                 {
                     //sbmem.Append("\n" + "<" + i.ToString("X4") + "> ");
-                    sbmem.Append("\n" );
+                    sbmem.Append("\n");
                     sblinenum.Append("\n" + "<" + i.ToString("X4") + "> ");
                 }
-                                               
+
                 sbmem.Append(data[i].ToString("X2") + separator);
             }
-            
+
             richTextBoxMem.Text = sbmem.ToString();
             richTextBoxLineNum.Text = sblinenum.ToString();
 
             int separatorLength = separator.Length;
-            
+
             int PCposition = (int)Cpu.PC;
             int PClinecorrection = PCposition / 16;
             int PCselStart = (PCposition * 2) + (PCposition * separatorLength) + PClinecorrection;
@@ -173,7 +189,7 @@ namespace CPU_emulator
             richTextBoxMem.SelectionColor = Color.Lime;
             richTextBoxMem.SelectionBackColor = Color.Black;
 
-            
+
         }
 
         private void Cpu_onFlagsUpdate(object sender, EventArgs e)
@@ -218,6 +234,7 @@ namespace CPU_emulator
         {
             //SetCpuInitialPC();
             Cpu.Reset();
+            toolStripStatusLabelBRK.Text = string.Empty;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) //StepMode
