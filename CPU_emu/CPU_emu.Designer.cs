@@ -77,7 +77,7 @@ namespace CPU_emulator
             this.dateiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1017, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -124,7 +124,7 @@ namespace CPU_emulator
             this.groupBoxFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxFlags.Location = new System.Drawing.Point(12, 27);
             this.groupBoxFlags.Name = "groupBoxFlags";
-            this.groupBoxFlags.Size = new System.Drawing.Size(162, 220);
+            this.groupBoxFlags.Size = new System.Drawing.Size(162, 223);
             this.groupBoxFlags.TabIndex = 2;
             this.groupBoxFlags.TabStop = false;
             this.groupBoxFlags.Text = "Flags";
@@ -222,7 +222,7 @@ namespace CPU_emulator
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(12, 517);
+            this.button1.Location = new System.Drawing.Point(344, 69);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -233,14 +233,15 @@ namespace CPU_emulator
             // 
             // richTextBoxMem
             // 
+            this.richTextBoxMem.BackColor = System.Drawing.Color.Silver;
             this.richTextBoxMem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxMem.Dock = System.Windows.Forms.DockStyle.Right;
             this.richTextBoxMem.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxMem.Location = new System.Drawing.Point(93, 0);
+            this.richTextBoxMem.Location = new System.Drawing.Point(117, 0);
             this.richTextBoxMem.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.richTextBoxMem.Name = "richTextBoxMem";
             this.richTextBoxMem.ReadOnly = true;
-            this.richTextBoxMem.Size = new System.Drawing.Size(596, 645);
+            this.richTextBoxMem.Size = new System.Drawing.Size(691, 795);
             this.richTextBoxMem.TabIndex = 5;
             this.richTextBoxMem.Text = "";
             this.richTextBoxMem.VScroll += new System.EventHandler(this.richTextBoxMem_VScroll);
@@ -254,9 +255,9 @@ namespace CPU_emulator
             this.groupBox1.Controls.Add(this.textBoxRegA);
             this.groupBox1.Controls.Add(this.labelRegA);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(12, 253);
+            this.groupBox1.Location = new System.Drawing.Point(193, 27);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(162, 118);
+            this.groupBox1.Size = new System.Drawing.Size(135, 117);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registers";
@@ -328,9 +329,9 @@ namespace CPU_emulator
             this.groupBox2.Controls.Add(this.textBoxPC);
             this.groupBox2.Controls.Add(this.labelPC);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(12, 377);
+            this.groupBox2.Location = new System.Drawing.Point(193, 150);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(162, 100);
+            this.groupBox2.Size = new System.Drawing.Size(135, 100);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
@@ -376,7 +377,7 @@ namespace CPU_emulator
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 546);
+            this.button2.Location = new System.Drawing.Point(344, 98);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -386,7 +387,7 @@ namespace CPU_emulator
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(99, 546);
+            this.button3.Location = new System.Drawing.Point(431, 98);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 9;
@@ -397,7 +398,7 @@ namespace CPU_emulator
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 484);
+            this.checkBox1.Location = new System.Drawing.Point(344, 36);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(68, 17);
             this.checkBox1.TabIndex = 10;
@@ -407,16 +408,16 @@ namespace CPU_emulator
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 677);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 827);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1017, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1345, 22);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // textBoxInitialPC
             // 
             this.textBoxInitialPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInitialPC.Location = new System.Drawing.Point(12, 602);
+            this.textBoxInitialPC.Location = new System.Drawing.Point(365, 204);
             this.textBoxInitialPC.Name = "textBoxInitialPC";
             this.textBoxInitialPC.Size = new System.Drawing.Size(100, 23);
             this.textBoxInitialPC.TabIndex = 12;
@@ -428,7 +429,7 @@ namespace CPU_emulator
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 586);
+            this.label1.Location = new System.Drawing.Point(365, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 13;
@@ -437,7 +438,7 @@ namespace CPU_emulator
             // checkBoxSlowDown
             // 
             this.checkBoxSlowDown.AutoSize = true;
-            this.checkBoxSlowDown.Location = new System.Drawing.Point(106, 484);
+            this.checkBoxSlowDown.Location = new System.Drawing.Point(438, 36);
             this.checkBoxSlowDown.Name = "checkBoxSlowDown";
             this.checkBoxSlowDown.Size = new System.Drawing.Size(49, 17);
             this.checkBoxSlowDown.TabIndex = 14;
@@ -450,9 +451,9 @@ namespace CPU_emulator
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.richTextBoxMem);
             this.panel1.Controls.Add(this.richTextBoxLineNum);
-            this.panel1.Location = new System.Drawing.Point(297, 27);
+            this.panel1.Location = new System.Drawing.Point(523, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(691, 647);
+            this.panel1.Size = new System.Drawing.Size(810, 797);
             this.panel1.TabIndex = 15;
             // 
             // richTextBoxLineNum
@@ -467,7 +468,7 @@ namespace CPU_emulator
             this.richTextBoxLineNum.ReadOnly = true;
             this.richTextBoxLineNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.richTextBoxLineNum.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxLineNum.Size = new System.Drawing.Size(90, 645);
+            this.richTextBoxLineNum.Size = new System.Drawing.Size(117, 795);
             this.richTextBoxLineNum.TabIndex = 6;
             this.richTextBoxLineNum.Text = "";
             this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
@@ -476,7 +477,7 @@ namespace CPU_emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 699);
+            this.ClientSize = new System.Drawing.Size(1345, 849);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxSlowDown);
             this.Controls.Add(this.label1);
@@ -493,7 +494,6 @@ namespace CPU_emulator
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximizeBox = false;
             this.Name = "CPU_emu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CPU emu";
