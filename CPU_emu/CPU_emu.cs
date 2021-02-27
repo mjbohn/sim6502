@@ -252,17 +252,6 @@ namespace CPU_emulator
             Cpu.SteppingMode = checkBox1.Checked;
         }
         
-        private void SetCpuInitialPC()
-        {
-            uint pc = (uint)Int32.Parse(textBoxInitialPC.Text, System.Globalization.NumberStyles.HexNumber);
-            Cpu.SetPC(pc);
-        }
-
-        private void textBoxInitialPC_TextChanged(object sender, EventArgs e)
-        {
-            //SetCpuInitialPC();
-        }
-
         private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cb = sender as CheckBox;
@@ -291,6 +280,12 @@ namespace CPU_emulator
             SendMessage(richTextBoxLineNum.Handle, EM_GETSCROLLPOS, 0, ref pt);
 
             SendMessage(richTextBoxMem.Handle, EM_SETSCROLLPOS, 0, ref pt);
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEditor fe = new FormEditor(Cpu);
+            fe.ShowDialog();
         }
     }
 

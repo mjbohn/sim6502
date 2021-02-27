@@ -59,12 +59,13 @@ namespace CPU_emulator
             this.button3 = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.textBoxInitialPC = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
             this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
+            this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -76,7 +77,8 @@ namespace CPU_emulator
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem});
+            this.dateiToolStripMenuItem,
+            this.memoryToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
@@ -95,7 +97,7 @@ namespace CPU_emulator
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
             this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.beendenToolStripMenuItem.Text = "close";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
@@ -417,17 +419,6 @@ namespace CPU_emulator
             this.statusStrip1.Size = new System.Drawing.Size(1345, 22);
             this.statusStrip1.TabIndex = 11;
             // 
-            // textBoxInitialPC
-            // 
-            this.textBoxInitialPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInitialPC.Location = new System.Drawing.Point(365, 204);
-            this.textBoxInitialPC.Name = "textBoxInitialPC";
-            this.textBoxInitialPC.Size = new System.Drawing.Size(100, 23);
-            this.textBoxInitialPC.TabIndex = 12;
-            this.textBoxInitialPC.Text = "0200";
-            this.textBoxInitialPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxInitialPC.TextChanged += new System.EventHandler(this.textBoxInitialPC_TextChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -482,6 +473,21 @@ namespace CPU_emulator
             this.toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
             this.toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
             // 
+            // memoryToolStripMenuItem
+            // 
+            this.memoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
+            this.memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.memoryToolStripMenuItem.Text = "Memory";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -490,7 +496,6 @@ namespace CPU_emulator
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxSlowDown);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxInitialPC);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
@@ -553,12 +558,13 @@ namespace CPU_emulator
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.TextBox textBoxInitialPC;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBoxLineNum;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBRK;
+        private System.Windows.Forms.ToolStripMenuItem memoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
     }
 }
 
