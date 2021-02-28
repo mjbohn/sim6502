@@ -149,62 +149,65 @@ namespace CPU_emulator
 
         private void FillRichTextBox(byte[] data)
         {
-            StringBuilder sbmem = new StringBuilder();
-            StringBuilder sblinenum = new StringBuilder();
-            string separator = " | ";
-
-            for (int i = 0; i < data.Length; i++)
+            if (checkBoxLiveMemory.Checked)
             {
-                if (i == 0)
+                StringBuilder sbmem = new StringBuilder();
+                StringBuilder sblinenum = new StringBuilder();
+                string separator = " | ";
+
+                for (int i = 0; i < data.Length; i++)
                 {
-                    //sbmem.Append("<" + i.ToString("X4") + "> ");
-                    sblinenum.Append("<" + i.ToString("X4") + "> ");
-                }
-                if ((i % 16) == 0 && i > 0)
-                {
-                    //sbmem.Append("\n" + "<" + i.ToString("X4") + "> ");
-                    sbmem.Append("\n");
-                    sblinenum.Append("\n" + "<" + i.ToString("X4") + "> ");
+                    if (i == 0)
+                    {
+                        //sbmem.Append("<" + i.ToString("X4") + "> ");
+                        sblinenum.Append("<" + i.ToString("X4") + "> ");
+                    }
+                    if ((i % 16) == 0 && i > 0)
+                    {
+                        //sbmem.Append("\n" + "<" + i.ToString("X4") + "> ");
+                        sbmem.Append("\n");
+                        sblinenum.Append("\n" + "<" + i.ToString("X4") + "> ");
+                    }
+
+                    sbmem.Append(data[i].ToString("X2") + separator);
                 }
 
-                sbmem.Append(data[i].ToString("X2") + separator);
+                richTextBoxMem.Text = sbmem.ToString();
+                richTextBoxLineNum.Text = sblinenum.ToString();
+
+                int separatorLength = separator.Length;
+
+                int PCposition = (int)Cpu.PC;
+                int PClinecorrection = PCposition / 16;
+                int PCselStart = (PCposition * 2) + (PCposition * separatorLength) + PClinecorrection;
+
+                int SPposition = (int)Cpu.SP;
+                int SPlinecorrection = SPposition / 16;
+                int SPselStart = (SPposition * 2) + (SPposition * separatorLength) + SPlinecorrection;
+
+                //ZeroPage Marker
+                richTextBoxMem.SelectionStart = 0;
+                richTextBoxMem.SelectionLength = 1295;
+                richTextBoxMem.SelectionBackColor = Color.MediumPurple;
+
+                //Stack Marker
+                richTextBoxMem.SelectionStart = 1296;
+                richTextBoxMem.SelectionLength = 1295;
+                richTextBoxMem.SelectionBackColor = Color.LightCoral;
+
+                // PC Marker
+                richTextBoxMem.SelectionStart = PCselStart;
+                richTextBoxMem.SelectionLength = 2;
+                richTextBoxMem.SelectionColor = Color.Red;
+                richTextBoxMem.SelectionBackColor = Color.Yellow;
+                //richTextBoxMem.SelectionFont = new Font("Courier New", 9 ,FontStyle.Bold);
+
+                // SP Marker
+                richTextBoxMem.SelectionStart = SPselStart;
+                richTextBoxMem.SelectionLength = 2;
+                richTextBoxMem.SelectionColor = Color.Lime;
+                richTextBoxMem.SelectionBackColor = Color.Black; 
             }
-
-            richTextBoxMem.Text = sbmem.ToString();
-            richTextBoxLineNum.Text = sblinenum.ToString();
-
-            int separatorLength = separator.Length;
-
-            int PCposition = (int)Cpu.PC;
-            int PClinecorrection = PCposition / 16;
-            int PCselStart = (PCposition * 2) + (PCposition * separatorLength) + PClinecorrection;
-
-            int SPposition = (int)Cpu.SP;
-            int SPlinecorrection = SPposition / 16;
-            int SPselStart = (SPposition * 2) + (SPposition * separatorLength) + SPlinecorrection;
-
-            //ZeroPage Marker
-            richTextBoxMem.SelectionStart = 0;
-            richTextBoxMem.SelectionLength = 1295;
-            richTextBoxMem.SelectionBackColor = Color.MediumPurple;
-
-            //Stack Marker
-            richTextBoxMem.SelectionStart = 1296;
-            richTextBoxMem.SelectionLength = 1295;
-            richTextBoxMem.SelectionBackColor = Color.LightCoral;
-
-            // PC Marker
-            richTextBoxMem.SelectionStart = PCselStart;
-            richTextBoxMem.SelectionLength = 2;
-            richTextBoxMem.SelectionColor = Color.Red;
-            richTextBoxMem.SelectionBackColor = Color.Yellow;
-            //richTextBoxMem.SelectionFont = new Font("Courier New", 9 ,FontStyle.Bold);
-
-            // SP Marker
-            richTextBoxMem.SelectionStart = SPselStart;
-            richTextBoxMem.SelectionLength = 2;
-            richTextBoxMem.SelectionColor = Color.Lime;
-            richTextBoxMem.SelectionBackColor = Color.Black;
 
 
         }

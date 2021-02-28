@@ -62,17 +62,21 @@ namespace CPU_emulator
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
-            this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.checkBoxLiveMemory = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBoxStartStop.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -142,7 +146,7 @@ namespace CPU_emulator
             this.groupBoxFlags.Controls.Add(this.checkBoxZeroFlag);
             this.groupBoxFlags.Controls.Add(this.checkBoxCarryFlag);
             this.groupBoxFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxFlags.Location = new System.Drawing.Point(12, 27);
+            this.groupBoxFlags.Location = new System.Drawing.Point(12, 13);
             this.groupBoxFlags.Name = "groupBoxFlags";
             this.groupBoxFlags.Size = new System.Drawing.Size(162, 223);
             this.groupBoxFlags.TabIndex = 2;
@@ -241,10 +245,10 @@ namespace CPU_emulator
             // 
             // buttonStart
             // 
-            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(344, 69);
+            this.buttonStart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStart.Location = new System.Drawing.Point(6, 23);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.Size = new System.Drawing.Size(170, 23);
             this.buttonStart.TabIndex = 4;
             this.buttonStart.TabStop = false;
             this.buttonStart.Text = "Start";
@@ -258,7 +262,6 @@ namespace CPU_emulator
             this.richTextBoxMem.Dock = System.Windows.Forms.DockStyle.Right;
             this.richTextBoxMem.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBoxMem.Location = new System.Drawing.Point(117, 0);
-            this.richTextBoxMem.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.richTextBoxMem.Name = "richTextBoxMem";
             this.richTextBoxMem.ReadOnly = true;
             this.richTextBoxMem.Size = new System.Drawing.Size(691, 795);
@@ -275,7 +278,7 @@ namespace CPU_emulator
             this.groupBox1.Controls.Add(this.textBoxRegA);
             this.groupBox1.Controls.Add(this.labelRegA);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(193, 27);
+            this.groupBox1.Location = new System.Drawing.Point(180, 13);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(135, 117);
             this.groupBox1.TabIndex = 6;
@@ -349,7 +352,7 @@ namespace CPU_emulator
             this.groupBox2.Controls.Add(this.textBoxPC);
             this.groupBox2.Controls.Add(this.labelPC);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(193, 150);
+            this.groupBox2.Location = new System.Drawing.Point(180, 136);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(135, 100);
             this.groupBox2.TabIndex = 7;
@@ -397,9 +400,10 @@ namespace CPU_emulator
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(344, 98);
+            this.buttonStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStop.Location = new System.Drawing.Point(6, 52);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.Size = new System.Drawing.Size(170, 23);
             this.buttonStop.TabIndex = 8;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -407,9 +411,10 @@ namespace CPU_emulator
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(431, 98);
+            this.buttonReset.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonReset.Location = new System.Drawing.Point(6, 81);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.Size = new System.Drawing.Size(170, 23);
             this.buttonReset.TabIndex = 9;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
@@ -418,9 +423,9 @@ namespace CPU_emulator
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(344, 36);
+            this.checkBox1.Location = new System.Drawing.Point(6, 118);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(68, 17);
+            this.checkBox1.Size = new System.Drawing.Size(90, 20);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Stepping";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -442,22 +447,17 @@ namespace CPU_emulator
             this.toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
             this.toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
             // 
-            // label1
+            // toolStripStatusElapsedTime
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(365, 188);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 16);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "InitialPC";
+            this.toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
+            this.toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
             // 
             // checkBoxSlowDown
             // 
             this.checkBoxSlowDown.AutoSize = true;
-            this.checkBoxSlowDown.Location = new System.Drawing.Point(438, 36);
+            this.checkBoxSlowDown.Location = new System.Drawing.Point(6, 144);
             this.checkBoxSlowDown.Name = "checkBoxSlowDown";
-            this.checkBoxSlowDown.Size = new System.Drawing.Size(49, 17);
+            this.checkBoxSlowDown.Size = new System.Drawing.Size(60, 20);
             this.checkBoxSlowDown.TabIndex = 14;
             this.checkBoxSlowDown.Text = "Slow";
             this.checkBoxSlowDown.UseVisualStyleBackColor = true;
@@ -490,27 +490,53 @@ namespace CPU_emulator
             this.richTextBoxLineNum.Text = "";
             this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
             // 
-            // toolStripStatusElapsedTime
+            // groupBoxStartStop
             // 
-            this.toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
-            this.toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
+            this.groupBoxStartStop.Controls.Add(this.checkBoxLiveMemory);
+            this.groupBoxStartStop.Controls.Add(this.buttonStart);
+            this.groupBoxStartStop.Controls.Add(this.buttonStop);
+            this.groupBoxStartStop.Controls.Add(this.checkBoxSlowDown);
+            this.groupBoxStartStop.Controls.Add(this.buttonReset);
+            this.groupBoxStartStop.Controls.Add(this.checkBox1);
+            this.groupBoxStartStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxStartStop.Location = new System.Drawing.Point(321, 13);
+            this.groupBoxStartStop.Name = "groupBoxStartStop";
+            this.groupBoxStartStop.Size = new System.Drawing.Size(182, 223);
+            this.groupBoxStartStop.TabIndex = 16;
+            this.groupBoxStartStop.TabStop = false;
+            this.groupBoxStartStop.Text = "Start/Stop";
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Controls.Add(this.groupBoxStartStop);
+            this.panel2.Controls.Add(this.groupBoxFlags);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Location = new System.Drawing.Point(0, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(518, 797);
+            this.panel2.TabIndex = 16;
+            // 
+            // checkBoxLiveMemory
+            // 
+            this.checkBoxLiveMemory.AutoSize = true;
+            this.checkBoxLiveMemory.Checked = true;
+            this.checkBoxLiveMemory.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxLiveMemory.Location = new System.Drawing.Point(6, 169);
+            this.checkBoxLiveMemory.Name = "checkBoxLiveMemory";
+            this.checkBoxLiveMemory.Size = new System.Drawing.Size(91, 20);
+            this.checkBoxLiveMemory.TabIndex = 15;
+            this.checkBoxLiveMemory.Text = "LiveMem";
+            this.checkBoxLiveMemory.UseVisualStyleBackColor = true;
             // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 849);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkBoxSlowDown);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.buttonReset);
-            this.Controls.Add(this.buttonStop);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.buttonStart);
-            this.Controls.Add(this.groupBoxFlags);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -529,6 +555,9 @@ namespace CPU_emulator
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.groupBoxStartStop.ResumeLayout(false);
+            this.groupBoxStartStop.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -565,7 +594,6 @@ namespace CPU_emulator
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBoxLineNum;
@@ -573,6 +601,9 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem memoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusElapsedTime;
+        private System.Windows.Forms.GroupBox groupBoxStartStop;
+        private System.Windows.Forms.CheckBox checkBoxLiveMemory;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 
