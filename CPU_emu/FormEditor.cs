@@ -68,5 +68,14 @@ namespace CPU_emulator
                                    
         }
 
+        private void contextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
+        {
+            numericUpDown_StartAddress.Value = 0;
+        }
+
+        private void contextMenuSetStartAdrToMax_Click(object sender, EventArgs e)
+        {
+            numericUpDown_EndAddress.Value = 0xffff;
+        }
     }
 }

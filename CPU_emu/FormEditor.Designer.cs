@@ -29,30 +29,37 @@ namespace CPU_emulator
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.DGVmemory = new System.Windows.Forms.DataGridView();
             this.buttonLoadRange = new System.Windows.Forms.Button();
             this.numericUpDown_StartAddress = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_EndAddress = new System.Windows.Forms.NumericUpDown();
             this.labelStartAddress = new System.Windows.Forms.Label();
             this.labelEndAddress = new System.Windows.Forms.Label();
+            this.contextMenuStartAddress = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuSetStartAdrToZero = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuEndAdress = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuSetStartAdrToMax = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmemory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_StartAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).BeginInit();
+            this.contextMenuStartAddress.SuspendLayout();
+            this.contextMenuEndAdress.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGVmemory
             // 
             this.DGVmemory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DGVmemory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.NullValue = null;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DGVmemory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVmemory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGVmemory.Location = new System.Drawing.Point(12, 12);
             this.DGVmemory.Name = "DGVmemory";
@@ -72,6 +79,7 @@ namespace CPU_emulator
             // 
             // numericUpDown_StartAddress
             // 
+            this.numericUpDown_StartAddress.ContextMenuStrip = this.contextMenuStartAddress;
             this.numericUpDown_StartAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown_StartAddress.Hexadecimal = true;
             this.numericUpDown_StartAddress.Increment = new decimal(new int[] {
@@ -98,6 +106,7 @@ namespace CPU_emulator
             // 
             // numericUpDown_EndAddress
             // 
+            this.numericUpDown_EndAddress.ContextMenuStrip = this.contextMenuEndAdress;
             this.numericUpDown_EndAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numericUpDown_EndAddress.Hexadecimal = true;
             this.numericUpDown_EndAddress.Increment = new decimal(new int[] {
@@ -142,6 +151,34 @@ namespace CPU_emulator
             this.labelEndAddress.TabIndex = 6;
             this.labelEndAddress.Text = "End Address";
             // 
+            // contextMenuStartAddress
+            // 
+            this.contextMenuStartAddress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuSetStartAdrToZero});
+            this.contextMenuStartAddress.Name = "contextMenuStartAddress";
+            this.contextMenuStartAddress.Size = new System.Drawing.Size(114, 26);
+            // 
+            // contextMenuSetStartAdrToZero
+            // 
+            this.contextMenuSetStartAdrToZero.Name = "contextMenuSetStartAdrToZero";
+            this.contextMenuSetStartAdrToZero.Size = new System.Drawing.Size(113, 22);
+            this.contextMenuSetStartAdrToZero.Text = "Set to 0";
+            this.contextMenuSetStartAdrToZero.Click += new System.EventHandler(this.contextMenuSetStartAdrToZero_Click);
+            // 
+            // contextMenuEndAdress
+            // 
+            this.contextMenuEndAdress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuSetStartAdrToMax});
+            this.contextMenuEndAdress.Name = "contextMenuStartAddress";
+            this.contextMenuEndAdress.Size = new System.Drawing.Size(181, 48);
+            // 
+            // contextMenuSetStartAdrToMax
+            // 
+            this.contextMenuSetStartAdrToMax.Name = "contextMenuSetStartAdrToMax";
+            this.contextMenuSetStartAdrToMax.Size = new System.Drawing.Size(180, 22);
+            this.contextMenuSetStartAdrToMax.Text = "Set to max";
+            this.contextMenuSetStartAdrToMax.Click += new System.EventHandler(this.contextMenuSetStartAdrToMax_Click);
+            // 
             // FormEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -163,6 +200,8 @@ namespace CPU_emulator
             ((System.ComponentModel.ISupportInitialize)(this.DGVmemory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_StartAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).EndInit();
+            this.contextMenuStartAddress.ResumeLayout(false);
+            this.contextMenuEndAdress.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,5 +214,9 @@ namespace CPU_emulator
         private System.Windows.Forms.NumericUpDown numericUpDown_EndAddress;
         private System.Windows.Forms.Label labelStartAddress;
         private System.Windows.Forms.Label labelEndAddress;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStartAddress;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuSetStartAdrToZero;
+        private System.Windows.Forms.ContextMenuStrip contextMenuEndAdress;
+        private System.Windows.Forms.ToolStripMenuItem contextMenuSetStartAdrToMax;
     }
 }
