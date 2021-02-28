@@ -20,6 +20,8 @@ namespace CPU_emulator
         const int EM_GETSCROLLPOS = WM_USER + 221;
         const int EM_SETSCROLLPOS = WM_USER + 222;
 
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+
         [DllImport("User32.dll")]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
 
@@ -39,7 +41,7 @@ namespace CPU_emulator
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
             Cpu.OnBreak += Cpu_OnBreak;
-
+                        
             Cpu.Reset();
             
         }
@@ -53,8 +55,23 @@ namespace CPU_emulator
             }
             else
             {
+                stopwatch.Stop();
+                SetToolStripElapsedTime();
                 toolStripStatusLabelBRK.Text = "BRK";
                 toolStripStatusLabelBRK.ForeColor = Color.Red;
+            }
+
+        }
+
+        private void SetToolStripElapsedTime(bool reset = false)
+        {
+            if (reset)
+            {
+                toolStripStatusElapsedTime.Text = string.Empty;
+            }
+            else
+            {
+                toolStripStatusElapsedTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
             }
             
         }
@@ -220,20 +237,25 @@ namespace CPU_emulator
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonStart_Click(object sender, EventArgs e)
         {
+            stopwatch.Reset();
+            stopwatch.Start();
             Cpu.Start();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonStop_Click(object sender, EventArgs e)
         {
+            stopwatch.Stop();
+            SetToolStripElapsedTime();
             Cpu.Stop(); 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonReset_Click(object sender, EventArgs e)
         {
-            //SetCpuInitialPC();
             Cpu.Reset();
+            stopwatch.Reset();
+            SetToolStripElapsedTime(true);
             toolStripStatusLabelBRK.Text = string.Empty;
         }
 
@@ -241,12 +263,12 @@ namespace CPU_emulator
         {
             if (checkBox1.Checked)
             {
-                button1.Text = "Step";
+                buttonStart.Text = "Step";
                 checkBoxSlowDown.Checked = false;
             }
             else
             {
-                button1.Text = "Start";
+                buttonStart.Text = "Start";
             }
 
             Cpu.SteppingMode = checkBox1.Checked;
@@ -287,6 +309,8 @@ namespace CPU_emulator
             FormEditor fe = new FormEditor(Cpu);
             fe.ShowDialog();
         }
+
+        
     }
 
     //public static class FormInvokeExtension
