@@ -49,6 +49,7 @@ namespace CPU_emulator
 		public event EventHandler OnProgramCounterUpdate;
 		public event EventHandler OnStackPointerUpdate;
 		public event EventHandler OnPCoverflow;
+		public event EventHandler OnBreak;
 		
 		public CPU() 
 		{
@@ -127,6 +128,10 @@ namespace CPU_emulator
 				byte instruction = FetchByte(ref cycles);
 				switch (instruction)
 				{
+					case OC_BRK:
+						ExitRequested = true;
+						OnBreak?.Invoke(this, EventArgs.Empty);
+						break;
 					case OC_LDA_IM: // Load Accumulator immidiate
                         b_tmp = FetchByte(ref cycles);
 						SetRegister("A", b_tmp);

@@ -9,6 +9,7 @@ namespace CPU_emulator
     public partial class CPU
     {
         private const byte 
+            OC_BRK    = 0x00,
             // LDA
             OC_LDA_IM = 0xA9, 
             OC_LDA_ZP = 0xA5,

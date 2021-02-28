@@ -33,6 +33,8 @@ namespace CPU_emulator
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
             this.groupBoxFlags = new System.Windows.Forms.GroupBox();
             this.checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
@@ -41,7 +43,7 @@ namespace CPU_emulator
             this.checkBoxDecimalModeFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxIntDisableFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxZeroFlag = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.richTextBoxMem = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxRegY = new System.Windows.Forms.TextBox();
@@ -55,26 +57,29 @@ namespace CPU_emulator
             this.labelSP = new System.Windows.Forms.Label();
             this.textBoxPC = new System.Windows.Forms.TextBox();
             this.labelPC = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonStop = new System.Windows.Forms.Button();
+            this.buttonReset = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.textBoxInitialPC = new System.Windows.Forms.TextBox();
+            this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
+            this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem});
+            this.dateiToolStripMenuItem,
+            this.memoryToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
@@ -96,6 +101,21 @@ namespace CPU_emulator
             this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.beendenToolStripMenuItem.Text = "close";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            // 
+            // memoryToolStripMenuItem
+            // 
+            this.memoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editToolStripMenuItem});
+            this.memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
+            this.memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            this.memoryToolStripMenuItem.Text = "Memory";
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.editToolStripMenuItem.Text = "Edit";
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // checkBoxCarryFlag
             // 
@@ -219,17 +239,17 @@ namespace CPU_emulator
             this.checkBoxZeroFlag.Text = "Zero  [Z]";
             this.checkBoxZeroFlag.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // buttonStart
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(344, 69);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.TabStop = false;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStart.Location = new System.Drawing.Point(344, 69);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 4;
+            this.buttonStart.TabStop = false;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // richTextBoxMem
             // 
@@ -375,25 +395,25 @@ namespace CPU_emulator
             this.labelPC.Text = "PC";
             this.labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button2
+            // buttonStop
             // 
-            this.button2.Location = new System.Drawing.Point(344, 98);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 8;
-            this.button2.Text = "Stop";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonStop.Location = new System.Drawing.Point(344, 98);
+            this.buttonStop.Name = "buttonStop";
+            this.buttonStop.Size = new System.Drawing.Size(75, 23);
+            this.buttonStop.TabIndex = 8;
+            this.buttonStop.Text = "Stop";
+            this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
-            // button3
+            // buttonReset
             // 
-            this.button3.Location = new System.Drawing.Point(431, 98);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Reset";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonReset.Location = new System.Drawing.Point(431, 98);
+            this.buttonReset.Name = "buttonReset";
+            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.TabIndex = 9;
+            this.buttonReset.Text = "Reset";
+            this.buttonReset.UseVisualStyleBackColor = true;
+            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
             // checkBox1
             // 
@@ -408,22 +428,19 @@ namespace CPU_emulator
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabelBRK,
+            this.toolStripStatusElapsedTime});
             this.statusStrip1.Location = new System.Drawing.Point(0, 827);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1345, 22);
             this.statusStrip1.TabIndex = 11;
-            this.statusStrip1.Text = "statusStrip1";
             // 
-            // textBoxInitialPC
+            // toolStripStatusLabelBRK
             // 
-            this.textBoxInitialPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInitialPC.Location = new System.Drawing.Point(365, 204);
-            this.textBoxInitialPC.Name = "textBoxInitialPC";
-            this.textBoxInitialPC.Size = new System.Drawing.Size(100, 23);
-            this.textBoxInitialPC.TabIndex = 12;
-            this.textBoxInitialPC.Text = "0200";
-            this.textBoxInitialPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBoxInitialPC.TextChanged += new System.EventHandler(this.textBoxInitialPC_TextChanged);
+            this.toolStripStatusLabelBRK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
+            this.toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
             // 
             // label1
             // 
@@ -473,6 +490,11 @@ namespace CPU_emulator
             this.richTextBoxLineNum.Text = "";
             this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
             // 
+            // toolStripStatusElapsedTime
+            // 
+            this.toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
+            this.toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -481,14 +503,13 @@ namespace CPU_emulator
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.checkBoxSlowDown);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxInitialPC);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonReset);
+            this.Controls.Add(this.buttonStop);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.groupBoxFlags);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -505,6 +526,8 @@ namespace CPU_emulator
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -524,7 +547,7 @@ namespace CPU_emulator
         private System.Windows.Forms.CheckBox checkBoxBreakFlag;
         private System.Windows.Forms.CheckBox checkBoxNegativFlag;
         private System.Windows.Forms.CheckBox checkBoxOverflowFlag;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.RichTextBox richTextBoxMem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBoxRegA;
@@ -538,15 +561,18 @@ namespace CPU_emulator
         private System.Windows.Forms.Label labelPC;
         private System.Windows.Forms.TextBox textBoxSP;
         private System.Windows.Forms.Label labelSP;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button buttonStop;
+        private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.TextBox textBoxInitialPC;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBoxLineNum;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBRK;
+        private System.Windows.Forms.ToolStripMenuItem memoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusElapsedTime;
     }
 }
 

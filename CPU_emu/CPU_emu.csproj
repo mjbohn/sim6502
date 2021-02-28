@@ -54,10 +54,19 @@
       <DependentUpon>CPU_emu.cs</DependentUpon>
     </Compile>
     <Compile Include="CPU_emu.opcodes.cs" />
+    <Compile Include="FormEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditor.Designer.cs">
+      <DependentUpon>FormEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CPU_emu.resx">
       <DependentUpon>CPU_emu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditor.resx">
+      <DependentUpon>FormEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

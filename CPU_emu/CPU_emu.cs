@@ -20,6 +20,8 @@ namespace CPU_emulator
         const int EM_GETSCROLLPOS = WM_USER + 221;
         const int EM_SETSCROLLPOS = WM_USER + 222;
 
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+
         [DllImport("User32.dll")]
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
 
@@ -38,8 +40,39 @@ namespace CPU_emulator
             Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
-
+            Cpu.OnBreak += Cpu_OnBreak;
+                        
             Cpu.Reset();
+            
+        }
+
+        private void Cpu_OnBreak(object sender, EventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnBreak);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                stopwatch.Stop();
+                SetToolStripElapsedTime();
+                toolStripStatusLabelBRK.Text = "BRK";
+                toolStripStatusLabelBRK.ForeColor = Color.Red;
+            }
+
+        }
+
+        private void SetToolStripElapsedTime(bool reset = false)
+        {
+            if (reset)
+            {
+                toolStripStatusElapsedTime.Text = string.Empty;
+            }
+            else
+            {
+                toolStripStatusElapsedTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
+            }
             
         }
 
@@ -130,18 +163,18 @@ namespace CPU_emulator
                 if ((i % 16) == 0 && i > 0)
                 {
                     //sbmem.Append("\n" + "<" + i.ToString("X4") + "> ");
-                    sbmem.Append("\n" );
+                    sbmem.Append("\n");
                     sblinenum.Append("\n" + "<" + i.ToString("X4") + "> ");
                 }
-                                               
+
                 sbmem.Append(data[i].ToString("X2") + separator);
             }
-            
+
             richTextBoxMem.Text = sbmem.ToString();
             richTextBoxLineNum.Text = sblinenum.ToString();
 
             int separatorLength = separator.Length;
-            
+
             int PCposition = (int)Cpu.PC;
             int PClinecorrection = PCposition / 16;
             int PCselStart = (PCposition * 2) + (PCposition * separatorLength) + PClinecorrection;
@@ -173,7 +206,7 @@ namespace CPU_emulator
             richTextBoxMem.SelectionColor = Color.Lime;
             richTextBoxMem.SelectionBackColor = Color.Black;
 
-            
+
         }
 
         private void Cpu_onFlagsUpdate(object sender, EventArgs e)
@@ -204,48 +237,43 @@ namespace CPU_emulator
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonStart_Click(object sender, EventArgs e)
         {
+            stopwatch.Reset();
+            stopwatch.Start();
             Cpu.Start();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonStop_Click(object sender, EventArgs e)
         {
+            stopwatch.Stop();
+            SetToolStripElapsedTime();
             Cpu.Stop(); 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void buttonReset_Click(object sender, EventArgs e)
         {
-            //SetCpuInitialPC();
             Cpu.Reset();
+            stopwatch.Reset();
+            SetToolStripElapsedTime(true);
+            toolStripStatusLabelBRK.Text = string.Empty;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) //StepMode
         {
             if (checkBox1.Checked)
             {
-                button1.Text = "Step";
+                buttonStart.Text = "Step";
                 checkBoxSlowDown.Checked = false;
             }
             else
             {
-                button1.Text = "Start";
+                buttonStart.Text = "Start";
             }
 
             Cpu.SteppingMode = checkBox1.Checked;
         }
         
-        private void SetCpuInitialPC()
-        {
-            uint pc = (uint)Int32.Parse(textBoxInitialPC.Text, System.Globalization.NumberStyles.HexNumber);
-            Cpu.SetPC(pc);
-        }
-
-        private void textBoxInitialPC_TextChanged(object sender, EventArgs e)
-        {
-            //SetCpuInitialPC();
-        }
-
         private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cb = sender as CheckBox;
@@ -275,6 +303,14 @@ namespace CPU_emulator
 
             SendMessage(richTextBoxMem.Handle, EM_SETSCROLLPOS, 0, ref pt);
         }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEditor fe = new FormEditor(Cpu);
+            fe.ShowDialog();
+        }
+
+        
     }
 
     //public static class FormInvokeExtension
