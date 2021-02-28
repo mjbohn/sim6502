@@ -34,7 +34,7 @@ namespace CPU_emulator
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
-            this.groupBoxButtons = new System.Windows.Forms.GroupBox();
+            this.groupBoxFlags = new System.Windows.Forms.GroupBox();
             this.checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxOverflowFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxBreakFlag = new System.Windows.Forms.CheckBox();
@@ -64,14 +64,11 @@ namespace CPU_emulator
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkBoxLiveMem = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
-            this.groupBoxButtons.SuspendLayout();
+            this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -115,22 +112,22 @@ namespace CPU_emulator
             this.checkBoxCarryFlag.Text = "Carry [C]";
             this.checkBoxCarryFlag.UseVisualStyleBackColor = true;
             // 
-            // groupBoxButtons
+            // groupBoxFlags
             // 
-            this.groupBoxButtons.Controls.Add(this.checkBoxNegativFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxOverflowFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxBreakFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxDecimalModeFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxIntDisableFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxZeroFlag);
-            this.groupBoxButtons.Controls.Add(this.checkBoxCarryFlag);
-            this.groupBoxButtons.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxButtons.Location = new System.Drawing.Point(12, 27);
-            this.groupBoxButtons.Name = "groupBoxButtons";
-            this.groupBoxButtons.Size = new System.Drawing.Size(165, 225);
-            this.groupBoxButtons.TabIndex = 2;
-            this.groupBoxButtons.TabStop = false;
-            this.groupBoxButtons.Text = "Flags";
+            this.groupBoxFlags.Controls.Add(this.checkBoxNegativFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxOverflowFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxBreakFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxDecimalModeFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxIntDisableFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxZeroFlag);
+            this.groupBoxFlags.Controls.Add(this.checkBoxCarryFlag);
+            this.groupBoxFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxFlags.Location = new System.Drawing.Point(12, 27);
+            this.groupBoxFlags.Name = "groupBoxFlags";
+            this.groupBoxFlags.Size = new System.Drawing.Size(162, 223);
+            this.groupBoxFlags.TabIndex = 2;
+            this.groupBoxFlags.TabStop = false;
+            this.groupBoxFlags.Text = "Flags";
             // 
             // checkBoxNegativFlag
             // 
@@ -224,8 +221,8 @@ namespace CPU_emulator
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(6, 19);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(344, 69);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -258,7 +255,7 @@ namespace CPU_emulator
             this.groupBox1.Controls.Add(this.textBoxRegA);
             this.groupBox1.Controls.Add(this.labelRegA);
             this.groupBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(183, 27);
+            this.groupBox1.Location = new System.Drawing.Point(193, 27);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(135, 117);
             this.groupBox1.TabIndex = 6;
@@ -332,9 +329,9 @@ namespace CPU_emulator
             this.groupBox2.Controls.Add(this.textBoxPC);
             this.groupBox2.Controls.Add(this.labelPC);
             this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(183, 150);
+            this.groupBox2.Location = new System.Drawing.Point(193, 150);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(135, 102);
+            this.groupBox2.Size = new System.Drawing.Size(135, 100);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
@@ -380,7 +377,7 @@ namespace CPU_emulator
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(6, 45);
+            this.button2.Location = new System.Drawing.Point(344, 98);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 8;
@@ -390,7 +387,7 @@ namespace CPU_emulator
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(6, 71);
+            this.button3.Location = new System.Drawing.Point(431, 98);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 9;
@@ -401,10 +398,9 @@ namespace CPU_emulator
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox1.Location = new System.Drawing.Point(87, 19);
+            this.checkBox1.Location = new System.Drawing.Point(344, 36);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(91, 20);
+            this.checkBox1.Size = new System.Drawing.Size(68, 17);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Stepping";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -421,7 +417,7 @@ namespace CPU_emulator
             // textBoxInitialPC
             // 
             this.textBoxInitialPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxInitialPC.Location = new System.Drawing.Point(192, 301);
+            this.textBoxInitialPC.Location = new System.Drawing.Point(365, 204);
             this.textBoxInitialPC.Name = "textBoxInitialPC";
             this.textBoxInitialPC.Size = new System.Drawing.Size(100, 23);
             this.textBoxInitialPC.TabIndex = 12;
@@ -433,7 +429,7 @@ namespace CPU_emulator
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(192, 285);
+            this.label1.Location = new System.Drawing.Point(365, 188);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 13;
@@ -442,10 +438,9 @@ namespace CPU_emulator
             // checkBoxSlowDown
             // 
             this.checkBoxSlowDown.AutoSize = true;
-            this.checkBoxSlowDown.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxSlowDown.Location = new System.Drawing.Point(87, 45);
+            this.checkBoxSlowDown.Location = new System.Drawing.Point(438, 36);
             this.checkBoxSlowDown.Name = "checkBoxSlowDown";
-            this.checkBoxSlowDown.Size = new System.Drawing.Size(59, 20);
+            this.checkBoxSlowDown.Size = new System.Drawing.Size(49, 17);
             this.checkBoxSlowDown.TabIndex = 14;
             this.checkBoxSlowDown.Text = "Slow";
             this.checkBoxSlowDown.UseVisualStyleBackColor = true;
@@ -478,48 +473,23 @@ namespace CPU_emulator
             this.richTextBoxLineNum.Text = "";
             this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.checkBoxLiveMem);
-            this.groupBox3.Controls.Add(this.button1);
-            this.groupBox3.Controls.Add(this.button2);
-            this.groupBox3.Controls.Add(this.checkBoxSlowDown);
-            this.groupBox3.Controls.Add(this.button3);
-            this.groupBox3.Controls.Add(this.checkBox1);
-            this.groupBox3.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(324, 27);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(193, 225);
-            this.groupBox3.TabIndex = 16;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Start/Stop";
-            // 
-            // checkBoxLiveMem
-            // 
-            this.checkBoxLiveMem.AutoSize = true;
-            this.checkBoxLiveMem.Checked = true;
-            this.checkBoxLiveMem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLiveMem.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxLiveMem.Location = new System.Drawing.Point(87, 70);
-            this.checkBoxLiveMem.Name = "checkBoxLiveMem";
-            this.checkBoxLiveMem.Size = new System.Drawing.Size(83, 20);
-            this.checkBoxLiveMem.TabIndex = 15;
-            this.checkBoxLiveMem.Text = "LiveMem";
-            this.checkBoxLiveMem.UseVisualStyleBackColor = true;
-            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1345, 849);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.checkBoxSlowDown);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.textBoxInitialPC);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.groupBoxButtons);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.groupBoxFlags);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -529,15 +499,13 @@ namespace CPU_emulator
             this.Text = "CPU emu";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBoxButtons.ResumeLayout(false);
-            this.groupBoxButtons.PerformLayout();
+            this.groupBoxFlags.ResumeLayout(false);
+            this.groupBoxFlags.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -549,7 +517,7 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.CheckBox checkBoxCarryFlag;
-        private System.Windows.Forms.GroupBox groupBoxButtons;
+        private System.Windows.Forms.GroupBox groupBoxFlags;
         private System.Windows.Forms.CheckBox checkBoxZeroFlag;
         private System.Windows.Forms.CheckBox checkBoxDecimalModeFlag;
         private System.Windows.Forms.CheckBox checkBoxIntDisableFlag;
@@ -579,8 +547,6 @@ namespace CPU_emulator
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBoxLineNum;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.CheckBox checkBoxLiveMem;
     }
 }
 
