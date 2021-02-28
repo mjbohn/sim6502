@@ -67,8 +67,8 @@ namespace CPU_emulator
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBoxLineNum = new System.Windows.Forms.RichTextBox();
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.checkBoxLiveMemory = new System.Windows.Forms.CheckBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -248,7 +248,7 @@ namespace CPU_emulator
             this.buttonStart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStart.Location = new System.Drawing.Point(6, 23);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(170, 23);
+            this.buttonStart.Size = new System.Drawing.Size(158, 23);
             this.buttonStart.TabIndex = 4;
             this.buttonStart.TabStop = false;
             this.buttonStart.Text = "Start";
@@ -403,7 +403,7 @@ namespace CPU_emulator
             this.buttonStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStop.Location = new System.Drawing.Point(6, 52);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(170, 23);
+            this.buttonStop.Size = new System.Drawing.Size(158, 23);
             this.buttonStop.TabIndex = 8;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
@@ -414,7 +414,7 @@ namespace CPU_emulator
             this.buttonReset.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonReset.Location = new System.Drawing.Point(6, 81);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(170, 23);
+            this.buttonReset.Size = new System.Drawing.Size(158, 23);
             this.buttonReset.TabIndex = 9;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
@@ -485,7 +485,7 @@ namespace CPU_emulator
             this.richTextBoxLineNum.ReadOnly = true;
             this.richTextBoxLineNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.richTextBoxLineNum.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxLineNum.Size = new System.Drawing.Size(117, 795);
+            this.richTextBoxLineNum.Size = new System.Drawing.Size(114, 795);
             this.richTextBoxLineNum.TabIndex = 6;
             this.richTextBoxLineNum.Text = "";
             this.richTextBoxLineNum.VScroll += new System.EventHandler(this.richTextBoxLineNum_VScroll);
@@ -501,21 +501,10 @@ namespace CPU_emulator
             this.groupBoxStartStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxStartStop.Location = new System.Drawing.Point(321, 13);
             this.groupBoxStartStop.Name = "groupBoxStartStop";
-            this.groupBoxStartStop.Size = new System.Drawing.Size(182, 223);
+            this.groupBoxStartStop.Size = new System.Drawing.Size(169, 223);
             this.groupBoxStartStop.TabIndex = 16;
             this.groupBoxStartStop.TabStop = false;
             this.groupBoxStartStop.Text = "Start/Stop";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.groupBoxStartStop);
-            this.panel2.Controls.Add(this.groupBoxFlags);
-            this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(0, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(518, 797);
-            this.panel2.TabIndex = 16;
             // 
             // checkBoxLiveMemory
             // 
@@ -528,6 +517,18 @@ namespace CPU_emulator
             this.checkBoxLiveMemory.TabIndex = 15;
             this.checkBoxLiveMemory.Text = "LiveMem";
             this.checkBoxLiveMemory.UseVisualStyleBackColor = true;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.groupBox2);
+            this.panel2.Controls.Add(this.groupBoxStartStop);
+            this.panel2.Controls.Add(this.groupBoxFlags);
+            this.panel2.Controls.Add(this.groupBox1);
+            this.panel2.Location = new System.Drawing.Point(12, 28);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(506, 797);
+            this.panel2.TabIndex = 16;
             // 
             // CPU_emu
             // 

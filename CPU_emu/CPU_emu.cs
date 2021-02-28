@@ -242,8 +242,11 @@ namespace CPU_emulator
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            stopwatch.Reset();
-            stopwatch.Start();
+            if (!checkBoxSlowDown.Checked)
+            {
+                stopwatch.Reset();
+                stopwatch.Start(); 
+            }
             Cpu.Start();
         }
 
