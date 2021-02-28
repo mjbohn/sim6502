@@ -37,6 +37,7 @@ namespace CPU_emulator
             // 
             // DGVmemory
             // 
+            this.DGVmemory.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -47,14 +48,14 @@ namespace CPU_emulator
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DGVmemory.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.DGVmemory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVmemory.Location = new System.Drawing.Point(12, 12);
+            this.DGVmemory.Location = new System.Drawing.Point(71, 116);
             this.DGVmemory.Name = "DGVmemory";
-            this.DGVmemory.Size = new System.Drawing.Size(1135, 593);
+            this.DGVmemory.Size = new System.Drawing.Size(1080, 600);
             this.DGVmemory.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1057, 611);
+            this.button1.Location = new System.Drawing.Point(350, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -66,7 +67,7 @@ namespace CPU_emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1159, 646);
+            this.ClientSize = new System.Drawing.Size(1159, 721);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DGVmemory);
             this.MinimizeBox = false;

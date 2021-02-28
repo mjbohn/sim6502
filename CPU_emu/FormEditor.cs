@@ -24,10 +24,16 @@ namespace CPU_emulator
                
         private void button1_Click(object sender, EventArgs e)
         {
+            DataGridViewCellStyle style = DGVmemory.ColumnHeadersDefaultCellStyle;
+            style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            style.BackColor = Color.LightYellow;
+
+            //DGVmemory.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
 
             for (int i = 0; i < 16; i++)
             {
                 DGVmemory.Columns.Add("c" + i.ToString("X2"), i.ToString("X"));
+                DGVmemory.Columns[i].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
 
             foreach (DataGridViewColumn column in DGVmemory.Columns)
@@ -37,9 +43,6 @@ namespace CPU_emulator
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 
             }
-
-            DataGridViewCellStyle style = DGVmemory.ColumnHeadersDefaultCellStyle;
-            style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
             DGVmemory.RowHeadersWidth = 75;
 
@@ -51,7 +54,7 @@ namespace CPU_emulator
                        
             for (int i = 0; i < Data.Length; i+=16)
             {
-                var index = DGVmemory.Rows.Add();
+                var index = DGVmemory.Rows.Add(); 
                 for (int j = 0; j < 16; j++)
                 {
                     DGVmemory.Rows[index].Cells[j].Value = Data[i+j].ToString("X2");
@@ -62,7 +65,7 @@ namespace CPU_emulator
 
             }
 
-                        
+                       
         }
     }
 }
