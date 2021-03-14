@@ -527,7 +527,7 @@ namespace CPU_emulator
             this.panel2.Controls.Add(this.groupBox1);
             this.panel2.Location = new System.Drawing.Point(12, 28);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(506, 797);
+            this.panel2.Size = new System.Drawing.Size(506, 795);
             this.panel2.TabIndex = 16;
             // 
             // CPU_emu

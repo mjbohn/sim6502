@@ -26,7 +26,7 @@ namespace CPU_emulator
         static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
 
 
-        private delegate void CpuEventCallback(object sender, EventArgs e);
+        private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
         public CPU_emu()
         {
@@ -76,17 +76,17 @@ namespace CPU_emulator
             
         }
 
-        private void Cpu_OnPCgtThenMaxMem(object sender, EventArgs e)
+        private void Cpu_OnPCgtThenMaxMem(object sender, CPUEventArgs e)
         {
             throw new NotImplementedException();
         }
 
-        private void Cpu_OnRefreshGraphics(object sender, EventArgs e)
+        private void Cpu_OnRefreshGraphics(object sender, CPUEventArgs e)
         {
             this.Refresh();
         }
 
-        private void Cpu_OnProgramCounterUpdate(object sender, EventArgs e)
+        private void Cpu_OnProgramCounterUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -95,13 +95,13 @@ namespace CPU_emulator
             }
             else
             {
-                textBoxPC.Text = Cpu.PC.ToString("X4");
-                FillRichTextBox(Cpu.ReadMemory());
+                textBoxPC.Text = e.PC.ToString("X4");
+                FillRichTextBox(e.Memory);
             }
                         
         }
 
-        private void Cpu_OnStackPointerUpdate(object sender, EventArgs e)
+        private void Cpu_OnStackPointerUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -110,13 +110,13 @@ namespace CPU_emulator
             }
             else
             {
-                textBoxSP.Text = Cpu.SP.ToString("X4");
-                FillRichTextBox(Cpu.ReadMemory());
+                textBoxSP.Text = e.SP.ToString("X4");
+                FillRichTextBox(e.Memory);
             }
             
         }
 
-        private void Cpu_OnRegisterUpdate(object sender, EventArgs e)
+        private void Cpu_OnRegisterUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -125,15 +125,14 @@ namespace CPU_emulator
             }
             else
             {
-                textBoxRegA.Text = Cpu.A.ToString("X2");
-                textBoxRegX.Text = Cpu.X.ToString("X2");
-                textBoxRegY.Text = Cpu.Y.ToString("X2");
-                //textBoxRegA.Refresh();
+                textBoxRegA.Text = e.A.ToString("X2");
+                textBoxRegX.Text = e.X.ToString("X2");
+                textBoxRegY.Text = e.Y.ToString("X2");
             }
             
         }
 
-        private void Cpu_OnMemoryUpdate(object sender, EventArgs e)
+        private void Cpu_OnMemoryUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -142,7 +141,7 @@ namespace CPU_emulator
             }
             else
             {
-                FillRichTextBox(Cpu.ReadMemory());
+                FillRichTextBox(e.Memory);
             }
             
         }
@@ -212,7 +211,7 @@ namespace CPU_emulator
 
         }
 
-        private void Cpu_onFlagsUpdate(object sender, EventArgs e)
+        private void Cpu_onFlagsUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
             {
@@ -221,16 +220,16 @@ namespace CPU_emulator
             }
             else
             {
-                GetCpuFlags();
+                DisplayFlags(e.Flags);
             }
                        
         }
 
-        private void GetCpuFlags()
+        private void DisplayFlags(IDictionary<string, bool> flags)
         {
             foreach (CheckBox checkBox in groupBoxFlags.Controls)
             {
-                checkBox.Checked = Cpu.flags[checkBox.Tag.ToString()];
+                checkBox.Checked = flags[checkBox.Tag.ToString()];
             }
 
         }
@@ -319,26 +318,5 @@ namespace CPU_emulator
         
     }
 
-    //public static class FormInvokeExtension
-    //{
-    //    static public void UIThreadAsync(this Control control, Action code)
-    //    {
-    //        if (control.InvokeRequired)
-    //        {
-    //            control.BeginInvoke(code);
-    //            return;
-    //        }
-    //        code.Invoke();
-    //    }
-
-    //    static public void UIThreadSync(this Control control, Action code)
-    //    {
-    //        if (control.InvokeRequired)
-    //        {
-    //            control.Invoke(code);
-    //            return;
-    //        }
-    //        code.Invoke();
-    //    }
-    //}
+    
 }

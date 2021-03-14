@@ -43,13 +43,13 @@ namespace CPU_emulator
         //public uint PC { get => pC; set => pC = value; }
         //public uint InitialPC { get => _initialPC; set => _initialPC = value; }
 
-        public event EventHandler OnFlagsUpdate;
-		public event EventHandler OnMemoryUpdate;
-		public event EventHandler OnRegisterUpdate;
-		public event EventHandler OnProgramCounterUpdate;
-		public event EventHandler OnStackPointerUpdate;
-		public event EventHandler OnPCoverflow;
-		public event EventHandler OnBreak;
+        public event EventHandler<CPUEventArgs> OnFlagsUpdate;
+		public event EventHandler<CPUEventArgs> OnMemoryUpdate;
+		public event EventHandler<CPUEventArgs> OnRegisterUpdate;
+		public event EventHandler<CPUEventArgs> OnProgramCounterUpdate;
+		public event EventHandler<CPUEventArgs> OnStackPointerUpdate;
+		public event EventHandler<CPUEventArgs> OnPCoverflow;
+		public event EventHandler<CPUEventArgs> OnBreak;
 		
 		public CPU() 
 		{
@@ -80,7 +80,7 @@ namespace CPU_emulator
 			// set all status flags to false
 			flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
 
-			OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
+			OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
 
 			ResetMemory();
 
@@ -106,7 +106,7 @@ namespace CPU_emulator
             Data[PC + 14] = 0x68;
             Data[PC + 15] = 0x68;
 
-            OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+            OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
         }
 
 		public void Start()
@@ -130,7 +130,7 @@ namespace CPU_emulator
 				{
 					case OC_BRK:
 						ExitRequested = true;
-						OnBreak?.Invoke(this, EventArgs.Empty);
+						OnBreak?.Invoke(this, new CPUEventArgs(this));
 						break;
 					case OC_LDA_IM: // Load Accumulator immidiate
                         b_tmp = FetchByte(ref cycles);
@@ -160,7 +160,7 @@ namespace CPU_emulator
 				}
 				if (PC >= MAX_MEM)
 				{
-					OnPCoverflow?.Invoke(this, EventArgs.Empty);
+					OnPCoverflow?.Invoke(this, new CPUEventArgs(this));
 					break;
 				}
 
@@ -205,7 +205,7 @@ namespace CPU_emulator
         {
 			flags["Z"] = (register == 0);
 			flags["N"] = (register & NegativeFlagBit) > 0;
-			OnFlagsUpdate?.Invoke(this, EventArgs.Empty);
+			OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 
         private byte FetchByte(ref ulong cycles)
@@ -219,7 +219,7 @@ namespace CPU_emulator
 		private void WriteByteToMemory(byte b,ushort address)
         {
 			Data[address] = b;
-			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+			OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 
 		private byte ReadByteFromMemory(ushort address)
@@ -244,32 +244,33 @@ namespace CPU_emulator
 		private void SetSP(ushort value)
 		{
 			SP = value;
-			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+			OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		private void IncrementSP()
 		{
 			SP++;
-			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+			OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		private void DecrementSP()
 		{
 			SP--;
-			OnStackPointerUpdate?.Invoke(this, EventArgs.Empty);
+			OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		public void SetPC(uint value)
 		{
 			PC = value;
-			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+			OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this)
+				);
 		}
 		public void IncrementPC()
 		{
 			PC++;
-			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+			OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		public void DecrementPC()
 		{
 			PC--;
-			OnProgramCounterUpdate?.Invoke(this, EventArgs.Empty);
+			OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		public void SetRegister(string regname, byte value)
 		{
@@ -287,7 +288,7 @@ namespace CPU_emulator
 				default:
 					break;
 			}
-			OnRegisterUpdate?.Invoke(this, EventArgs.Empty);
+			OnRegisterUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		public void ResetMemory()
 		{
@@ -298,7 +299,8 @@ namespace CPU_emulator
 
 			SetVectors();
 
-			OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+			//OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
+			OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
 		public byte[] ReadMemory()
 		{
@@ -306,5 +308,39 @@ namespace CPU_emulator
 		}
 
 
+	}
+
+	public class CPUEventArgs : EventArgs
+	{
+		CPU cpu = new CPU();
+
+		public string Message { get; set; }
+		public byte[] Memory { get; set; }
+		public uint PC { get; set; }
+		public ushort SP { get; set; }
+		public byte A { get; set; }
+		public byte X { get; set; }
+		public byte Y { get; set; }
+		public IDictionary<string, bool> Flags { get; set; }
+
+		public CPUEventArgs(CPU cpu)
+        {
+			this.cpu = cpu;
+			SetProperties();
+        }
+
+  
+		private void SetProperties()
+		{
+			Memory = cpu.ReadMemory();
+			PC = cpu.PC;
+			SP = cpu.SP;
+			A = cpu.A;
+			X = cpu.X;
+			Y = cpu.Y;
+			Flags = cpu.flags;
+		}
+
+		
 	}
 }
