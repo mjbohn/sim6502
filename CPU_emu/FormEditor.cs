@@ -55,7 +55,6 @@ namespace CPU_emulator
                 
             }
 
-            //for (int i = 0; i < Data.Length; i+=16)
             for (int i = startAddress; i < endAddress; i+=16)
             {
                 var index = DGVmemory.Rows.Add(); 
@@ -65,7 +64,8 @@ namespace CPU_emulator
                     DGVmemory.Rows[index].HeaderCell.Value = i.ToString("X3");
                 }
             }
-                                   
+
+            
         }
 
         private void contextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
