@@ -69,6 +69,7 @@ namespace CPU_emulator
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
             this.checkBoxLiveMemory = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -521,6 +522,7 @@ namespace CPU_emulator
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBoxStartStop);
             this.panel2.Controls.Add(this.groupBoxFlags);
@@ -529,6 +531,16 @@ namespace CPU_emulator
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(506, 795);
             this.panel2.TabIndex = 16;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(180, 380);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // CPU_emu
             // 
@@ -605,6 +617,7 @@ namespace CPU_emulator
         private System.Windows.Forms.GroupBox groupBoxStartStop;
         private System.Windows.Forms.CheckBox checkBoxLiveMemory;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

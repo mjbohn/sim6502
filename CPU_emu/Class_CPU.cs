@@ -101,12 +101,27 @@ namespace CPU_emulator
             Data[PC + 9] = 0xA9;
             Data[PC + 10] = 0xae;
             Data[PC + 11] = 0x48;
-			Data[PC + 12] = 0x68;
-			Data[PC + 13] = 0x68;
-            Data[PC + 14] = 0x68;
-            Data[PC + 15] = 0x68;
 
-            OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
+			Data[PC + 12] = 0x48;
+			Data[PC + 13] = 0x48;
+            Data[PC + 14] = 0x48;
+            Data[PC + 15] = 0x48;
+
+			Data[PC + 16] = 0x48;
+			Data[PC + 17] = 0x48;
+			Data[PC + 18] = 0x48;
+			Data[PC + 19] = 0x48;
+
+			Data[PC + 20] = 0x48;
+			Data[PC + 21] = 0x48;
+			Data[PC + 22] = 0x48;
+			Data[PC + 23] = 0x48;
+			Data[PC + 24] = 0x48;
+			Data[PC + 25] = 0x48;
+			Data[PC + 26] = 0x48;
+			Data[PC + 27] = 0x48;
+
+			OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
         }
 
 		public void Start()

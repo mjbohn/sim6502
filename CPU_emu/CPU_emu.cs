@@ -28,6 +28,8 @@ namespace CPU_emulator
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
+        private MemoryWatchForm MWFstack = null;
+
         public CPU_emu()
         {
             //CheckForIllegalCrossThreadCalls = false;
@@ -315,7 +317,36 @@ namespace CPU_emulator
             fe.ShowDialog();
         }
 
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            if (!FormExists("Stack"))
+            {
+                MWFstack = new MemoryWatchForm(0x100, 0x1FF, this.Cpu)
+                {
+                    Text = "Stack-Watch",
+                    Tag = "stack"
+                };
+                
+            }
+
+            MWFstack.Show();
+        }
+
+        private bool FormExists(string tagname)
+        {
+            bool ret = false;
+
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Tag != null && form.Tag.ToString() == tagname)
+                {
+                    ret = true;
+                }
+            }
+
+            return ret;
+        }
     }
 
     
