@@ -45,7 +45,7 @@ namespace CPU_emulator
             this.richTextBoxLineNum.ReadOnly = true;
             this.richTextBoxLineNum.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.richTextBoxLineNum.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBoxLineNum.Size = new System.Drawing.Size(86, 397);
+            this.richTextBoxLineNum.Size = new System.Drawing.Size(61, 291);
             this.richTextBoxLineNum.TabIndex = 7;
             this.richTextBoxLineNum.Text = "";
             // 
@@ -57,11 +57,11 @@ namespace CPU_emulator
             this.richTextBoxMem.BackColor = System.Drawing.Color.Silver;
             this.richTextBoxMem.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxMem.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBoxMem.Location = new System.Drawing.Point(86, 0);
+            this.richTextBoxMem.Location = new System.Drawing.Point(61, 0);
             this.richTextBoxMem.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.richTextBoxMem.Name = "richTextBoxMem";
             this.richTextBoxMem.ReadOnly = true;
-            this.richTextBoxMem.Size = new System.Drawing.Size(622, 397);
+            this.richTextBoxMem.Size = new System.Drawing.Size(573, 291);
             this.richTextBoxMem.TabIndex = 8;
             this.richTextBoxMem.Text = "";
             // 
@@ -69,12 +69,14 @@ namespace CPU_emulator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(708, 397);
+            this.ClientSize = new System.Drawing.Size(634, 291);
             this.Controls.Add(this.richTextBoxMem);
             this.Controls.Add(this.richTextBoxLineNum);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "MemoryWatchForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Stack";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MemoryWatchForm_FormClosing);
             this.Load += new System.EventHandler(this.MemoryWatchForm_Load);

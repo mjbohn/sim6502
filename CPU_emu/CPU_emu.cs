@@ -262,6 +262,7 @@ namespace CPU_emulator
             }
 
             MWFstack.Show();
+            MWFstack.Focus();
         }
 
         private void zeropageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -277,6 +278,7 @@ namespace CPU_emulator
             }
 
             MWFzeropage.Show();
+            MWFzeropage.Focus();
         }
     }
 

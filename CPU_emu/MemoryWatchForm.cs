@@ -132,8 +132,7 @@ namespace CPU_emulator
                     break;
             }
             
-
-                      
+                   
 
             // PC Marker
             richTextBoxMem.SelectionStart = PCselStart;
@@ -152,5 +151,7 @@ namespace CPU_emulator
             
             //e.Cancel = true;
         }
+
+        
     }
 }
