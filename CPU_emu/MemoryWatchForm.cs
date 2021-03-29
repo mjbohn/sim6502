@@ -142,15 +142,15 @@ namespace CPU_emulator
             richTextBoxMem.SelectionBackColor = Color.Yellow;
             //richTextBoxMem.SelectionFont = new Font("Courier New", 9 ,FontStyle.Bold);
 
-            
-
-            //this.Refresh();
         }
 
         private void MemoryWatchForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.Hide();
-            e.Cancel = true;
+            //this.Hide();
+            Cpu.OnMemoryUpdate -= Cpu_OnMemoryUpdate;
+            Cpu.OnStackPointerUpdate -= Cpu_OnStackPointerUpdate;
+            
+            //e.Cancel = true;
         }
     }
 }
