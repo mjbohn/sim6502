@@ -28,7 +28,7 @@ namespace CPU_emulator
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
-        private MemoryWatchForm MWFstack = null;
+        private MemoryWatchForm MWFstack, MWFzeropage = null;
 
         public CPU_emu()
         {
@@ -317,35 +317,49 @@ namespace CPU_emulator
             fe.ShowDialog();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
-            if (!FormExists("Stack"))
-            {
-                MWFstack = new MemoryWatchForm(0x100, 0x1FF, this.Cpu)
-                {
-                    Text = "Stack-Watch",
-                    Tag = "stack"
-                };
-                
-            }
-
-            MWFstack.Show();
-        }
-
         private bool FormExists(string tagname)
         {
             bool ret = false;
 
             foreach (Form form in Application.OpenForms)
             {
-                if (form.Tag != null && form.Tag.ToString() == tagname)
+                if (form.Tag != null && form.Tag.ToString().ToUpper() == tagname.ToUpper())
                 {
                     ret = true;
                 }
             }
 
             return ret;
+        }
+
+        private void stackToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormExists("stack"))
+            {
+                MWFstack = new MemoryWatchForm(0x100, 0x1FF, this.Cpu)
+                {
+                    Text = "Stack-Watch",
+                    Tag = "stack"
+                };
+
+            }
+
+            MWFstack.Show();
+        }
+
+        private void zeropageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormExists("zeropage"))
+            {
+                MWFzeropage = new MemoryWatchForm(0x0, 0x0FF, this.Cpu)
+                {
+                    Text = "ZeroPage-Watch",
+                    Tag = "zeropage"
+                };
+
+            }
+
+            MWFzeropage.Show();
         }
     }
 

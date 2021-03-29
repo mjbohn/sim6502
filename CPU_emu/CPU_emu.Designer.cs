@@ -35,6 +35,10 @@ namespace CPU_emulator
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.watchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.stackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zeropageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.memrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
             this.groupBoxFlags = new System.Windows.Forms.GroupBox();
             this.checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
@@ -69,7 +73,6 @@ namespace CPU_emulator
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
             this.checkBoxLiveMemory = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -84,7 +87,8 @@ namespace CPU_emulator
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
-            this.memoryToolStripMenuItem});
+            this.memoryToolStripMenuItem,
+            this.watchToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1345, 24);
@@ -121,6 +125,36 @@ namespace CPU_emulator
             this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // watchToolStripMenuItem
+            // 
+            this.watchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stackToolStripMenuItem,
+            this.zeropageToolStripMenuItem,
+            this.memrangeToolStripMenuItem});
+            this.watchToolStripMenuItem.Name = "watchToolStripMenuItem";
+            this.watchToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.watchToolStripMenuItem.Text = "Watch";
+            // 
+            // stackToolStripMenuItem
+            // 
+            this.stackToolStripMenuItem.Name = "stackToolStripMenuItem";
+            this.stackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.stackToolStripMenuItem.Text = "Stack";
+            this.stackToolStripMenuItem.Click += new System.EventHandler(this.stackToolStripMenuItem_Click);
+            // 
+            // zeropageToolStripMenuItem
+            // 
+            this.zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
+            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.zeropageToolStripMenuItem.Text = "Zeropage";
+            this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.zeropageToolStripMenuItem_Click);
+            // 
+            // memrangeToolStripMenuItem
+            // 
+            this.memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
+            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.memrangeToolStripMenuItem.Text = "Memrange";
             // 
             // checkBoxCarryFlag
             // 
@@ -522,7 +556,6 @@ namespace CPU_emulator
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.groupBox2);
             this.panel2.Controls.Add(this.groupBoxStartStop);
             this.panel2.Controls.Add(this.groupBoxFlags);
@@ -531,16 +564,6 @@ namespace CPU_emulator
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(506, 795);
             this.panel2.TabIndex = 16;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(180, 380);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // CPU_emu
             // 
@@ -617,7 +640,10 @@ namespace CPU_emulator
         private System.Windows.Forms.GroupBox groupBoxStartStop;
         private System.Windows.Forms.CheckBox checkBoxLiveMemory;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem watchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem stackToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zeropageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem memrangeToolStripMenuItem;
     }
 }
 

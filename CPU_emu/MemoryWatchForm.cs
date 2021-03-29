@@ -111,12 +111,17 @@ namespace CPU_emulator
             richTextBoxMem.SelectionStart = 0;
             richTextBoxMem.SelectionLength = richTextBoxMem.Text.Length;
 
-            switch (this.Tag.ToString())
+            switch (this.Tag.ToString().ToUpper())
             {
-                case "stack":
+                case "STACK":
                     richTextBoxMem.SelectionBackColor = Color.LightCoral;
+                    // SP Marker
+                    richTextBoxMem.SelectionStart = SPselStart;
+                    richTextBoxMem.SelectionLength = 2;
+                    richTextBoxMem.SelectionColor = Color.Lime;
+                    richTextBoxMem.SelectionBackColor = Color.Black;
                     break;
-                case "zeropage":
+                case "ZEROPAGE":
                     richTextBoxMem.SelectionBackColor = Color.MediumPurple;
                     break;
                 default:
@@ -133,13 +138,9 @@ namespace CPU_emulator
             richTextBoxMem.SelectionBackColor = Color.Yellow;
             //richTextBoxMem.SelectionFont = new Font("Courier New", 9 ,FontStyle.Bold);
 
-            // SP Marker
-            richTextBoxMem.SelectionStart = SPselStart;
-            richTextBoxMem.SelectionLength = 2;
-            richTextBoxMem.SelectionColor = Color.Lime;
-            richTextBoxMem.SelectionBackColor = Color.Black;
+            
 
-            this.Refresh();
+            //this.Refresh();
         }
 
         private void MemoryWatchForm_FormClosing(object sender, FormClosingEventArgs e)
