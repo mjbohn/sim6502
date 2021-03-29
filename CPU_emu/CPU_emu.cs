@@ -22,10 +22,6 @@ namespace CPU_emulator
 
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
 
-        [DllImport("User32.dll")]
-        static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
-
-
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
         private MemoryWatchForm MWFstack, MWFzeropage = null;
@@ -48,6 +44,9 @@ namespace CPU_emulator
             
         }
 
+
+
+        #region CpuEventHandling
         private void Cpu_OnBreak(object sender, EventArgs e)
         {
             if (InvokeRequired)
@@ -98,7 +97,6 @@ namespace CPU_emulator
             else
             {
                 textBoxPC.Text = e.PC.ToString("X4");
-                FillRichTextBox(e.Memory);
             }
                         
         }
@@ -113,7 +111,6 @@ namespace CPU_emulator
             else
             {
                 textBoxSP.Text = e.SP.ToString("X4");
-                FillRichTextBox(e.Memory);
             }
             
         }
@@ -143,76 +140,11 @@ namespace CPU_emulator
             }
             else
             {
-                FillRichTextBox(e.Memory);
+                
             }
             
         }
-
-        private void FillRichTextBox(byte[] data)
-        {
-            if (checkBoxLiveMemory.Checked)
-            {
-                StringBuilder sbmem = new StringBuilder();
-                StringBuilder sblinenum = new StringBuilder();
-                string separator = " | ";
-
-                for (int i = 0; i < data.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        //sbmem.Append("<" + i.ToString("X4") + "> ");
-                        sblinenum.Append("<" + i.ToString("X4") + "> ");
-                    }
-                    if ((i % 16) == 0 && i > 0)
-                    {
-                        //sbmem.Append("\n" + "<" + i.ToString("X4") + "> ");
-                        sbmem.Append("\n");
-                        sblinenum.Append("\n" + "<" + i.ToString("X4") + "> ");
-                    }
-
-                    sbmem.Append(data[i].ToString("X2") + separator);
-                }
-
-                richTextBoxMem.Text = sbmem.ToString();
-                richTextBoxLineNum.Text = sblinenum.ToString();
-
-                int separatorLength = separator.Length;
-
-                int PCposition = (int)Cpu.PC;
-                int PClinecorrection = PCposition / 16;
-                int PCselStart = (PCposition * 2) + (PCposition * separatorLength) + PClinecorrection;
-
-                int SPposition = (int)Cpu.SP;
-                int SPlinecorrection = SPposition / 16;
-                int SPselStart = (SPposition * 2) + (SPposition * separatorLength) + SPlinecorrection;
-
-                //ZeroPage Marker
-                richTextBoxMem.SelectionStart = 0;
-                richTextBoxMem.SelectionLength = 1295;
-                richTextBoxMem.SelectionBackColor = Color.MediumPurple;
-
-                //Stack Marker
-                richTextBoxMem.SelectionStart = 1296;
-                richTextBoxMem.SelectionLength = 1295;
-                richTextBoxMem.SelectionBackColor = Color.LightCoral;
-
-                // PC Marker
-                richTextBoxMem.SelectionStart = PCselStart;
-                richTextBoxMem.SelectionLength = 2;
-                richTextBoxMem.SelectionColor = Color.Red;
-                richTextBoxMem.SelectionBackColor = Color.Yellow;
-                //richTextBoxMem.SelectionFont = new Font("Courier New", 9 ,FontStyle.Bold);
-
-                // SP Marker
-                richTextBoxMem.SelectionStart = SPselStart;
-                richTextBoxMem.SelectionLength = 2;
-                richTextBoxMem.SelectionColor = Color.Lime;
-                richTextBoxMem.SelectionBackColor = Color.Black; 
-            }
-
-
-        }
-
+               
         private void Cpu_onFlagsUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
@@ -226,6 +158,9 @@ namespace CPU_emulator
             }
                        
         }
+
+        #endregion
+
 
         private void DisplayFlags(IDictionary<string, bool> flags)
         {
@@ -291,24 +226,6 @@ namespace CPU_emulator
             }
 
             Cpu.SlowDown = cb.Checked;
-        }
-
-        private void richTextBoxMem_VScroll(object sender, EventArgs e)
-        {
-            Point pt = new Point();
-
-            SendMessage(richTextBoxMem.Handle, EM_GETSCROLLPOS, 0, ref pt);
-
-            SendMessage(richTextBoxLineNum.Handle, EM_SETSCROLLPOS, 0, ref pt);
-        }
-
-        private void richTextBoxLineNum_VScroll(object sender, EventArgs e)
-        {
-            Point pt = new Point();
-
-            SendMessage(richTextBoxLineNum.Handle, EM_GETSCROLLPOS, 0, ref pt);
-
-            SendMessage(richTextBoxMem.Handle, EM_SETSCROLLPOS, 0, ref pt);
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)

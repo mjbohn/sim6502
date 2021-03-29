@@ -18,10 +18,13 @@ namespace CPU_emulator
         CPU Cpu;
         private uint _startAddress;
         private uint _endAddress;
+        
         public uint StartAddress { get => _startAddress; set => _startAddress = value; }
         public uint EndAddress { get => _endAddress; set => _endAddress = value; }
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
+      
+        #region Constructors
         public MemoryWatchForm(CPU cpu)
         {
             InitializeComponent();
@@ -31,19 +34,19 @@ namespace CPU_emulator
             Cpu.OnStackPointerUpdate += Cpu_OnStackPointerUpdate;
                                    
         }
-
-        
-
         public MemoryWatchForm(uint startAddress, uint endAddress, CPU cpu) : this(cpu)
         {
             StartAddress = startAddress;
             EndAddress = endAddress;
         }
+        #endregion
+        
         private void MemoryWatchForm_Load(object sender, EventArgs e)
         {
             FillRichTextBox(Cpu.ReadMemory());
         }
-
+     
+        #region CpuEventHandling
         private void Cpu_OnMemoryUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
@@ -69,7 +72,8 @@ namespace CPU_emulator
                 FillRichTextBox(e.Memory);
             }
         }
-
+        #endregion
+        
         private void FillRichTextBox(byte[] memory)
         {
             StringBuilder sbmem = new StringBuilder();
