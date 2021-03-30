@@ -46,6 +46,8 @@ namespace CPU_emulator
             Cpu.OnBreak += Cpu_OnBreak;
                         
             Cpu.Reset();
+
+            
             
         }
 
@@ -271,8 +273,16 @@ namespace CPU_emulator
 
             }
 
+            MWFstack.LocationChanged += MWFstack_LocationChanged;
+            MWFstack.Location = config.MwfStackLocation;
             MWFstack.Show();
             MWFstack.Focus();
+        }
+
+        private void MWFstack_LocationChanged(object sender, EventArgs e)
+        {
+            Form f = sender as Form;
+            config.MwfStackLocation = f.Location;
         }
 
         private void zeropageToolStripMenuItem_Click(object sender, EventArgs e)
@@ -287,9 +297,18 @@ namespace CPU_emulator
 
             }
 
+            MWFzeropage.LocationChanged += MWFzeropage_LocationChanged;
+            MWFzeropage.Location = config.MwfZeropageLocation;
             MWFzeropage.Show();
             MWFzeropage.Focus();
         }
+
+        private void MWFzeropage_LocationChanged(object sender, EventArgs e)
+        {
+            Form f = sender as Form;
+            config.MwfZeropageLocation = f.Location;
+        }
+
         private void memrangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("memrange"))
@@ -302,8 +321,16 @@ namespace CPU_emulator
 
             }
 
+            MWFmemrange.LocationChanged += MWFmemrange_LocationChanged;
+            MWFmemrange.Location = config.MwfMemoryRangeLocation;
             MWFmemrange.Show();
             MWFmemrange.Focus();
+        }
+
+        private void MWFmemrange_LocationChanged(object sender, EventArgs e)
+        {
+            Form f = sender as Form;
+            config.MwfMemoryRangeLocation = f.Location;
         }
 
 

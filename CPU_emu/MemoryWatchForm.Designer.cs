@@ -171,6 +171,7 @@ namespace CPU_emulator
             this.MaximizeBox = false;
             this.Name = "MemoryWatchForm";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Stack";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MemoryWatchForm_FormClosing);
             this.Load += new System.EventHandler(this.MemoryWatchForm_Load);
