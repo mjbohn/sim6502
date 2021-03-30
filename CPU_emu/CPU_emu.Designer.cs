@@ -68,7 +68,6 @@ namespace CPU_emulator
             this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
-            this.checkBoxLiveMemory = new System.Windows.Forms.CheckBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
@@ -135,22 +134,23 @@ namespace CPU_emulator
             // stackToolStripMenuItem
             // 
             this.stackToolStripMenuItem.Name = "stackToolStripMenuItem";
-            this.stackToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.stackToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.stackToolStripMenuItem.Text = "Stack";
             this.stackToolStripMenuItem.Click += new System.EventHandler(this.stackToolStripMenuItem_Click);
             // 
             // zeropageToolStripMenuItem
             // 
             this.zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
-            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zeropageToolStripMenuItem.Text = "Zeropage";
             this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.zeropageToolStripMenuItem_Click);
             // 
             // memrangeToolStripMenuItem
             // 
             this.memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
-            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
-            this.memrangeToolStripMenuItem.Text = "Memrange";
+            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.memrangeToolStripMenuItem.Text = "Memory Range";
+            this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.memrangeToolStripMenuItem_Click);
             // 
             // checkBoxCarryFlag
             // 
@@ -482,7 +482,6 @@ namespace CPU_emulator
             // 
             // groupBoxStartStop
             // 
-            this.groupBoxStartStop.Controls.Add(this.checkBoxLiveMemory);
             this.groupBoxStartStop.Controls.Add(this.buttonStart);
             this.groupBoxStartStop.Controls.Add(this.buttonStop);
             this.groupBoxStartStop.Controls.Add(this.checkBoxSlowDown);
@@ -495,18 +494,6 @@ namespace CPU_emulator
             this.groupBoxStartStop.TabIndex = 16;
             this.groupBoxStartStop.TabStop = false;
             this.groupBoxStartStop.Text = "Start/Stop";
-            // 
-            // checkBoxLiveMemory
-            // 
-            this.checkBoxLiveMemory.AutoSize = true;
-            this.checkBoxLiveMemory.Checked = true;
-            this.checkBoxLiveMemory.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLiveMemory.Location = new System.Drawing.Point(6, 169);
-            this.checkBoxLiveMemory.Name = "checkBoxLiveMemory";
-            this.checkBoxLiveMemory.Size = new System.Drawing.Size(91, 20);
-            this.checkBoxLiveMemory.TabIndex = 15;
-            this.checkBoxLiveMemory.Text = "LiveMem";
-            this.checkBoxLiveMemory.UseVisualStyleBackColor = true;
             // 
             // panel2
             // 
@@ -588,7 +575,6 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusElapsedTime;
         private System.Windows.Forms.GroupBox groupBoxStartStop;
-        private System.Windows.Forms.CheckBox checkBoxLiveMemory;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.ToolStripMenuItem watchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stackToolStripMenuItem;

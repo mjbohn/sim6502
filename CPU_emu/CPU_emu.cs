@@ -24,7 +24,7 @@ namespace CPU_emulator
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
-        private MemoryWatchForm MWFstack, MWFzeropage = null;
+        private MemoryWatchForm MWFstack, MWFzeropage, MWFmemrange = null;
 
         public CPU_emu()
         {
@@ -249,6 +249,7 @@ namespace CPU_emulator
             return ret;
         }
 
+        #region Watch-Menu Dropdown
         private void stackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("stack"))
@@ -280,7 +281,27 @@ namespace CPU_emulator
             MWFzeropage.Show();
             MWFzeropage.Focus();
         }
+
+        private void memrangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!FormExists("memrange"))
+            {
+                MWFmemrange = new MemoryWatchForm(this.Cpu)
+                {
+                    Text = "MemoryRange-Watch",
+                    Tag = "memrange"
+                };
+
+            }
+
+            MWFmemrange.Show();
+            MWFmemrange.Focus();
+        }
+
+
+        #endregion
+
     }
 
-    
+
 }
