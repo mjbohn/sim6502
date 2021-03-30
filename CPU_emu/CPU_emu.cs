@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -25,6 +28,8 @@ namespace CPU_emulator
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
 
         private MemoryWatchForm MWFstack, MWFzeropage, MWFmemrange = null;
+
+        private ConfigSettings config = new ConfigSettings();
 
         public CPU_emu()
         {
@@ -201,9 +206,9 @@ namespace CPU_emulator
             toolStripStatusLabelBRK.Text = string.Empty;
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e) //StepMode
+        private void checkBoxStepping_CheckedChanged(object sender, EventArgs e) //StepMode
         {
-            if (checkBox1.Checked)
+            if (checkBoxStepping.Checked)
             {
                 buttonStart.Text = "Step";
                 checkBoxSlowDown.Checked = false;
@@ -213,8 +218,11 @@ namespace CPU_emulator
                 buttonStart.Text = "Start";
             }
 
-            Cpu.SteppingMode = checkBox1.Checked;
+            Cpu.SteppingMode = checkBoxStepping.Checked;
+            config.Stepping = checkBoxStepping.Checked;
         }
+
+
         
         private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
         {
@@ -222,10 +230,11 @@ namespace CPU_emulator
             
             if (cb.Checked)
             {
-                checkBox1.Checked = false;
+                checkBoxStepping.Checked = false;
             }
 
             Cpu.SlowDown = cb.Checked;
+            config.Slow = cb.Checked;
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -281,7 +290,6 @@ namespace CPU_emulator
             MWFzeropage.Show();
             MWFzeropage.Focus();
         }
-
         private void memrangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("memrange"))
@@ -300,6 +308,27 @@ namespace CPU_emulator
 
 
         #endregion
+
+
+        private void CPU_emu_Load(object sender, EventArgs e)
+        {
+            if (File.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"))
+            {
+                config = JsonConvert.DeserializeObject<ConfigSettings>(File.ReadAllText(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"));
+                ApplyConfigsettings();
+            }
+        }
+
+        private void ApplyConfigsettings()
+        {
+            checkBoxSlowDown.Checked = config.Slow;
+            checkBoxStepping.Checked = config.Stepping;
+        }
+
+        private void CPU_emu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            File.WriteAllText(Application.StartupPath + Path.DirectorySeparatorChar + "config.json", JsonConvert.SerializeObject(config));
+        }
 
     }
 

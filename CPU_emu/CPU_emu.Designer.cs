@@ -62,7 +62,7 @@ namespace CPU_emulator
             this.labelPC = new System.Windows.Forms.Label();
             this.buttonStop = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxStepping = new System.Windows.Forms.CheckBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
@@ -134,21 +134,21 @@ namespace CPU_emulator
             // stackToolStripMenuItem
             // 
             this.stackToolStripMenuItem.Name = "stackToolStripMenuItem";
-            this.stackToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.stackToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.stackToolStripMenuItem.Text = "Stack";
             this.stackToolStripMenuItem.Click += new System.EventHandler(this.stackToolStripMenuItem_Click);
             // 
             // zeropageToolStripMenuItem
             // 
             this.zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
-            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.zeropageToolStripMenuItem.Text = "Zeropage";
             this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.zeropageToolStripMenuItem_Click);
             // 
             // memrangeToolStripMenuItem
             // 
             this.memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
-            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.memrangeToolStripMenuItem.Text = "Memory Range";
             this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.memrangeToolStripMenuItem_Click);
             // 
@@ -437,16 +437,16 @@ namespace CPU_emulator
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
-            // checkBox1
+            // checkBoxStepping
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 118);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(90, 20);
-            this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "Stepping";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBoxStepping.AutoSize = true;
+            this.checkBoxStepping.Location = new System.Drawing.Point(6, 118);
+            this.checkBoxStepping.Name = "checkBoxStepping";
+            this.checkBoxStepping.Size = new System.Drawing.Size(90, 20);
+            this.checkBoxStepping.TabIndex = 10;
+            this.checkBoxStepping.Text = "Stepping";
+            this.checkBoxStepping.UseVisualStyleBackColor = true;
+            this.checkBoxStepping.CheckedChanged += new System.EventHandler(this.checkBoxStepping_CheckedChanged);
             // 
             // statusStrip1
             // 
@@ -486,7 +486,7 @@ namespace CPU_emulator
             this.groupBoxStartStop.Controls.Add(this.buttonStop);
             this.groupBoxStartStop.Controls.Add(this.checkBoxSlowDown);
             this.groupBoxStartStop.Controls.Add(this.buttonReset);
-            this.groupBoxStartStop.Controls.Add(this.checkBox1);
+            this.groupBoxStartStop.Controls.Add(this.checkBoxStepping);
             this.groupBoxStartStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBoxStartStop.Location = new System.Drawing.Point(321, 13);
             this.groupBoxStartStop.Name = "groupBoxStartStop";
@@ -521,6 +521,8 @@ namespace CPU_emulator
             this.Name = "CPU_emu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CPU emu";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CPU_emu_FormClosing);
+            this.Load += new System.EventHandler(this.CPU_emu_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBoxFlags.ResumeLayout(false);
@@ -567,7 +569,7 @@ namespace CPU_emulator
         private System.Windows.Forms.Label labelSP;
         private System.Windows.Forms.Button buttonStop;
         private System.Windows.Forms.Button buttonReset;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxStepping;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.CheckBox checkBoxSlowDown;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBRK;
