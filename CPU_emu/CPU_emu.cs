@@ -405,7 +405,7 @@ namespace CPU_emulator
             MWFstack.LocationChanged += MWFstack_LocationChanged;
             MWFstack.Location = config.MwfStackLocation;
             MWFstack.Show();
-            MWFstack.Focus();
+            this.Focus();
         }
 
         private void MWFstack_LocationChanged(object sender, EventArgs e)
@@ -429,7 +429,7 @@ namespace CPU_emulator
             MWFzeropage.LocationChanged += MWFzeropage_LocationChanged;
             MWFzeropage.Location = config.MwfZeropageLocation;
             MWFzeropage.Show();
-            MWFzeropage.Focus();
+            this.Focus();
         }
 
         private void MWFzeropage_LocationChanged(object sender, EventArgs e)
@@ -453,7 +453,7 @@ namespace CPU_emulator
             MWFmemrange.LocationChanged += MWFmemrange_LocationChanged;
             MWFmemrange.Location = config.MwfMemoryRangeLocation;
             MWFmemrange.Show();
-            MWFmemrange.Focus();
+            this.Focus();
         }
 
         private void MWFmemrange_LocationChanged(object sender, EventArgs e)
