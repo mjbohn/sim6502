@@ -124,7 +124,7 @@ namespace CPU_emulator
             this.toolStripMenuItemOpenFile.Size = new System.Drawing.Size(195, 22);
             this.toolStripMenuItemOpenFile.Text = "open program";
             this.toolStripMenuItemOpenFile.ToolTipText = "Load program from file";
-            this.toolStripMenuItemOpenFile.Click += new System.EventHandler(this.toolStripMenuItemOpenFile_Click);
+            this.toolStripMenuItemOpenFile.Click += new System.EventHandler(this.ToolStripMenuItemOpenFile_Click);
             // 
             // toolStripMenuItemSaveFile
             // 
@@ -134,7 +134,7 @@ namespace CPU_emulator
             this.toolStripMenuItemSaveFile.Size = new System.Drawing.Size(195, 22);
             this.toolStripMenuItemSaveFile.Text = "save program";
             this.toolStripMenuItemSaveFile.ToolTipText = "Save program to file";
-            this.toolStripMenuItemSaveFile.Click += new System.EventHandler(this.toolStripMenuItemSaveFile_Click);
+            this.toolStripMenuItemSaveFile.Click += new System.EventHandler(this.ToolStripMenuItemSaveFile_Click);
             // 
             // toolStripSeparator1
             // 
@@ -147,7 +147,7 @@ namespace CPU_emulator
             this.ToolStripMenuItemClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
             this.ToolStripMenuItemClose.Size = new System.Drawing.Size(195, 22);
             this.ToolStripMenuItemClose.Text = "&Close";
-            this.ToolStripMenuItemClose.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.ToolStripMenuItemClose.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
             // memoryToolStripMenuItem
             // 
@@ -167,7 +167,7 @@ namespace CPU_emulator
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -180,7 +180,7 @@ namespace CPU_emulator
             this.dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.dumpToFileToolStripMenuItem.Text = "dump to file";
             this.dumpToFileToolStripMenuItem.ToolTipText = "Dump whole memory to file";
-            this.dumpToFileToolStripMenuItem.Click += new System.EventHandler(this.dumpToFileToolStripMenuItem_Click);
+            this.dumpToFileToolStripMenuItem.Click += new System.EventHandler(this.DumpToFileToolStripMenuItem_Click);
             // 
             // loadFromDumpToolStripMenuItem
             // 
@@ -188,7 +188,7 @@ namespace CPU_emulator
             this.loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.loadFromDumpToolStripMenuItem.Text = "load from dump";
             this.loadFromDumpToolStripMenuItem.ToolTipText = "Load dumpfile into memory";
-            this.loadFromDumpToolStripMenuItem.Click += new System.EventHandler(this.loadFromDumpToolStripMenuItem_Click);
+            this.loadFromDumpToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDumpToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -200,7 +200,7 @@ namespace CPU_emulator
             this.eraseToolStripMenuItem.Name = "eraseToolStripMenuItem";
             this.eraseToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.eraseToolStripMenuItem.Text = "erase";
-            this.eraseToolStripMenuItem.Click += new System.EventHandler(this.eraseToolStripMenuItem_Click);
+            this.eraseToolStripMenuItem.Click += new System.EventHandler(this.EraseToolStripMenuItem_Click);
             // 
             // watchToolStripMenuItem
             // 
@@ -217,21 +217,21 @@ namespace CPU_emulator
             this.stackToolStripMenuItem.Name = "stackToolStripMenuItem";
             this.stackToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.stackToolStripMenuItem.Text = "Stack";
-            this.stackToolStripMenuItem.Click += new System.EventHandler(this.stackToolStripMenuItem_Click);
+            this.stackToolStripMenuItem.Click += new System.EventHandler(this.StackToolStripMenuItem_Click);
             // 
             // zeropageToolStripMenuItem
             // 
             this.zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
             this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.zeropageToolStripMenuItem.Text = "Zeropage";
-            this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.zeropageToolStripMenuItem_Click);
+            this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.ZeropageToolStripMenuItem_Click);
             // 
             // memrangeToolStripMenuItem
             // 
             this.memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
             this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.memrangeToolStripMenuItem.Text = "Memory Range";
-            this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.memrangeToolStripMenuItem_Click);
+            this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.MemrangeToolStripMenuItem_Click);
             // 
             // checkBoxCarryFlag
             // 
@@ -365,7 +365,7 @@ namespace CPU_emulator
             this.buttonStart.TabStop = false;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
             // groupBox1
             // 
@@ -505,7 +505,7 @@ namespace CPU_emulator
             this.buttonStop.TabIndex = 8;
             this.buttonStop.Text = "Stop";
             this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
+            this.buttonStop.Click += new System.EventHandler(this.ButtonStop_Click);
             // 
             // buttonReset
             // 
@@ -516,7 +516,7 @@ namespace CPU_emulator
             this.buttonReset.TabIndex = 9;
             this.buttonReset.Text = "Reset";
             this.buttonReset.UseVisualStyleBackColor = true;
-            this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
+            this.buttonReset.Click += new System.EventHandler(this.ButtonReset_Click);
             // 
             // checkBoxStepping
             // 
@@ -527,7 +527,7 @@ namespace CPU_emulator
             this.checkBoxStepping.TabIndex = 10;
             this.checkBoxStepping.Text = "Stepping";
             this.checkBoxStepping.UseVisualStyleBackColor = true;
-            this.checkBoxStepping.CheckedChanged += new System.EventHandler(this.checkBoxStepping_CheckedChanged);
+            this.checkBoxStepping.CheckedChanged += new System.EventHandler(this.CheckBoxStepping_CheckedChanged);
             // 
             // statusStrip1
             // 
@@ -568,7 +568,7 @@ namespace CPU_emulator
             this.checkBoxSlowDown.TabIndex = 14;
             this.checkBoxSlowDown.Text = "Slow";
             this.checkBoxSlowDown.UseVisualStyleBackColor = true;
-            this.checkBoxSlowDown.CheckedChanged += new System.EventHandler(this.checkBoxSlowDown_CheckedChanged);
+            this.checkBoxSlowDown.CheckedChanged += new System.EventHandler(this.CheckBoxSlowDown_CheckedChanged);
             // 
             // groupBoxStartStop
             // 
@@ -607,7 +607,7 @@ namespace CPU_emulator
             this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
             this.toolStripMenuItemSettings.Size = new System.Drawing.Size(195, 22);
             this.toolStripMenuItemSettings.Text = "&Settings";
-            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.toolStripMenuItemSettings_Click);
+            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.ToolStripMenuItemSettings_Click);
             // 
             // CPU_emu
             // 

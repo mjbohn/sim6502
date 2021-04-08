@@ -110,8 +110,8 @@ namespace CPU_emulator
             this.toolStripTextBoxStartAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxStartAddress.Name = "toolStripTextBoxStartAddress";
             this.toolStripTextBoxStartAddress.Size = new System.Drawing.Size(100, 25);
-            this.toolStripTextBoxStartAddress.Enter += new System.EventHandler(this.toolStripTextBoxStartAddress_Enter);
-            this.toolStripTextBoxStartAddress.TextChanged += new System.EventHandler(this.toolStripTextBoxStartAddress_TextChanged);
+            this.toolStripTextBoxStartAddress.Enter += new System.EventHandler(this.ToolStripTextBoxStartAddress_Enter);
+            this.toolStripTextBoxStartAddress.TextChanged += new System.EventHandler(this.ToolStripTextBoxStartAddress_TextChanged);
             // 
             // toolStripSeparator1
             // 
@@ -129,8 +129,8 @@ namespace CPU_emulator
             this.toolStripTextBoxEndAddress.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxEndAddress.Name = "toolStripTextBoxEndAddress";
             this.toolStripTextBoxEndAddress.Size = new System.Drawing.Size(100, 25);
-            this.toolStripTextBoxEndAddress.Enter += new System.EventHandler(this.toolStripTextBoxEndAddress_Enter);
-            this.toolStripTextBoxEndAddress.TextChanged += new System.EventHandler(this.toolStripTextBoxEndAddress_TextChanged);
+            this.toolStripTextBoxEndAddress.Enter += new System.EventHandler(this.ToolStripTextBoxEndAddress_Enter);
+            this.toolStripTextBoxEndAddress.TextChanged += new System.EventHandler(this.ToolStripTextBoxEndAddress_TextChanged);
             // 
             // toolStripSeparator2
             // 
@@ -146,7 +146,7 @@ namespace CPU_emulator
             this.toolStripButtonLoad.Name = "toolStripButtonLoad";
             this.toolStripButtonLoad.Size = new System.Drawing.Size(34, 22);
             this.toolStripButtonLoad.Text = "load";
-            this.toolStripButtonLoad.Click += new System.EventHandler(this.toolStripButtonLoad_Click);
+            this.toolStripButtonLoad.Click += new System.EventHandler(this.ToolStripButtonLoad_Click);
             // 
             // toolStripButtonCancel
             // 
@@ -157,7 +157,7 @@ namespace CPU_emulator
             this.toolStripButtonCancel.Name = "toolStripButtonCancel";
             this.toolStripButtonCancel.Size = new System.Drawing.Size(45, 22);
             this.toolStripButtonCancel.Text = "cancel";
-            this.toolStripButtonCancel.Click += new System.EventHandler(this.toolStripButtonCancel_Click);
+            this.toolStripButtonCancel.Click += new System.EventHandler(this.ToolStripButtonCancel_Click);
             // 
             // MemoryWatchForm
             // 

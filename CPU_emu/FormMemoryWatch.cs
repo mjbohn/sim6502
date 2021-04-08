@@ -205,12 +205,12 @@ namespace CPU_emulator
 
         #endregion
 
-        private void toolStripTextBoxStartAddress_Enter(object sender, EventArgs e)
+        private void ToolStripTextBoxStartAddress_Enter(object sender, EventArgs e)
         {
             SaveStartAndEndAddresses();
         }
 
-        private void toolStripTextBoxEndAddress_Enter(object sender, EventArgs e)
+        private void ToolStripTextBoxEndAddress_Enter(object sender, EventArgs e)
         {
             SaveStartAndEndAddresses();
         }
@@ -228,21 +228,21 @@ namespace CPU_emulator
             }
         }
 
-        private void toolStripTextBoxStartAddress_TextChanged(object sender, EventArgs e)
+        private void ToolStripTextBoxStartAddress_TextChanged(object sender, EventArgs e)
         {
             StartAddress = Convert.ToUInt32(toolStripTextBoxStartAddress.Text.ToString(), 16);
             toolStripButtonLoad.Enabled = true;
             toolStripButtonCancel.Enabled = true;
         }
 
-        private void toolStripTextBoxEndAddress_TextChanged(object sender, EventArgs e)
+        private void ToolStripTextBoxEndAddress_TextChanged(object sender, EventArgs e)
         {
             EndAddress = Convert.ToUInt32(toolStripTextBoxEndAddress.Text.ToString(), 16);
             toolStripButtonLoad.Enabled = true;
             toolStripButtonCancel.Enabled = true;
         }
 
-        private void toolStripButtonCancel_Click(object sender, EventArgs e)
+        private void ToolStripButtonCancel_Click(object sender, EventArgs e)
         {
             if (_startAddressSave > -1)
             {
@@ -259,7 +259,7 @@ namespace CPU_emulator
             toolStripButtonCancel.Enabled = false;
         }
 
-        private void toolStripButtonLoad_Click(object sender, EventArgs e)
+        private void ToolStripButtonLoad_Click(object sender, EventArgs e)
         {
             FillRichTextBox(Cpu.ReadMemory());
             _startAddressSave = -1;

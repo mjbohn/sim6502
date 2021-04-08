@@ -270,6 +270,7 @@ namespace CPU_emulator
 			return LoByte |= HiByte;
         }
 
+		// Stackpointer SP
 		private void SetSP(ushort value)
 		{
 			SP = value;
@@ -285,6 +286,8 @@ namespace CPU_emulator
 			SP--;
 			OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
+		
+		// Programcounter PC
 		public void SetPC(uint value)
 		{
 			PC = value;
@@ -301,6 +304,8 @@ namespace CPU_emulator
 			PC--;
 			OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
 		}
+		
+		
 		public void SetRegister(string regname, byte value)
 		{
 			switch (regname)

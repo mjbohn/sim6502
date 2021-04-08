@@ -1,16 +1,10 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -18,11 +12,7 @@ namespace CPU_emulator
 {
     public partial class CPU_emu : Form
     {
-        CPU Cpu ;
-
-        const int WM_USER = 0x400;
-        const int EM_GETSCROLLPOS = WM_USER + 221;
-        const int EM_SETSCROLLPOS = WM_USER + 222;
+        CPU Cpu;
 
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
 
@@ -36,7 +26,7 @@ namespace CPU_emulator
         {
             //CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
-            
+
             Cpu = new CPU();
             Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
             Cpu.OnMemoryUpdate += Cpu_OnMemoryUpdate;
@@ -45,11 +35,9 @@ namespace CPU_emulator
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
             Cpu.OnBreak += Cpu_OnBreak;
-                        
+
             Cpu.Reset();
 
-            
-            
         }
 
 
@@ -82,7 +70,7 @@ namespace CPU_emulator
             {
                 toolStripStatusElapsedTime.Text = stopwatch.ElapsedMilliseconds.ToString() + " ms";
             }
-            
+
         }
 
         private void Cpu_OnPCgtThenMaxMem(object sender, CPUEventArgs e)
@@ -100,13 +88,13 @@ namespace CPU_emulator
             if (InvokeRequired)
             {
                 CpuEventCallback cb = new CpuEventCallback(Cpu_OnProgramCounterUpdate);
-                this.Invoke(cb,new object[] {sender ,e });
+                this.Invoke(cb, new object[] { sender, e });
             }
             else
             {
                 textBoxPC.Text = e.PC.ToString("X4");
             }
-                        
+
         }
 
         private void Cpu_OnStackPointerUpdate(object sender, CPUEventArgs e)
@@ -120,7 +108,7 @@ namespace CPU_emulator
             {
                 textBoxSP.Text = e.SP.ToString("X4");
             }
-            
+
         }
 
         private void Cpu_OnRegisterUpdate(object sender, CPUEventArgs e)
@@ -136,7 +124,7 @@ namespace CPU_emulator
                 textBoxRegX.Text = e.X.ToString("X2");
                 textBoxRegY.Text = e.Y.ToString("X2");
             }
-            
+
         }
 
         private void Cpu_OnMemoryUpdate(object sender, CPUEventArgs e)
@@ -148,11 +136,11 @@ namespace CPU_emulator
             }
             else
             {
-                
+
             }
-            
+
         }
-               
+
         private void Cpu_onFlagsUpdate(object sender, CPUEventArgs e)
         {
             if (InvokeRequired)
@@ -164,7 +152,7 @@ namespace CPU_emulator
             {
                 DisplayFlags(e.Flags);
             }
-                       
+
         }
 
         #endregion
@@ -178,29 +166,29 @@ namespace CPU_emulator
             }
 
         }
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void ButtonStart_Click(object sender, EventArgs e)
         {
             if (!checkBoxSlowDown.Checked)
             {
                 stopwatch.Reset();
-                stopwatch.Start(); 
+                stopwatch.Start();
             }
             Cpu.Start();
         }
-        private void buttonStop_Click(object sender, EventArgs e)
+        private void ButtonStop_Click(object sender, EventArgs e)
         {
             stopwatch.Stop();
             SetToolStripElapsedTime();
-            Cpu.Stop(); 
+            Cpu.Stop();
         }
-        private void buttonReset_Click(object sender, EventArgs e)
+        private void ButtonReset_Click(object sender, EventArgs e)
         {
             Cpu.Reset();
             stopwatch.Reset();
             SetToolStripElapsedTime(true);
             toolStripStatusLabelBRK.Text = string.Empty;
         }
-        private void checkBoxStepping_CheckedChanged(object sender, EventArgs e) //StepMode
+        private void CheckBoxStepping_CheckedChanged(object sender, EventArgs e) //StepMode
         {
             if (checkBoxStepping.Checked)
             {
@@ -215,10 +203,10 @@ namespace CPU_emulator
             Cpu.SteppingMode = checkBoxStepping.Checked;
             config.Stepping = checkBoxStepping.Checked;
         }
-        private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxSlowDown_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cb = sender as CheckBox;
-            
+
             if (cb.Checked)
             {
                 checkBoxStepping.Checked = false;
@@ -241,43 +229,43 @@ namespace CPU_emulator
 
             return ret;
         }
-    
+
 
         #region File Menu
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void toolStripMenuItemOpenFile_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemOpenFile_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void toolStripMenuItemSaveFile_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemSaveFile_Click(object sender, EventArgs e)
         {
-            
+
         }
 
-        private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
+        private void ToolStripMenuItemSettings_Click(object sender, EventArgs e)
         {
             Form PropertyForm = new FormConfigSettings(ref config);
             PropertyForm.StartPosition = FormStartPosition.CenterParent;
 
             PropertyForm.ShowDialog();
-            
+
         }
         #endregion
 
         #region Memory Menu
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormEditor fe = new FormEditor(Cpu);
             fe.ShowDialog();
         }
 
-        private void dumpToFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DumpToFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             saveFileDialog1.InitialDirectory = Application.StartupPath;
             saveFileDialog1.Title = "Save Memory";
@@ -293,7 +281,7 @@ namespace CPU_emulator
 
         private void SaveMemoryToFile(string fileName)
         {
-            FileStream fs= null;
+            FileStream fs = null;
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Maximum = 64;
             toolStripProgressBar1.Visible = true;
@@ -323,8 +311,8 @@ namespace CPU_emulator
             }
         }
 
-        
-        private void loadFromDumpToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void LoadFromDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Application.StartupPath;
             openFileDialog1.Title = "Load Memordump from file";
@@ -368,7 +356,7 @@ namespace CPU_emulator
                     MessageBox.Show(ErrorMessage.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (Exception  e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UseWaitCursor = false;
@@ -381,24 +369,24 @@ namespace CPU_emulator
                 toolStripProgressBar1.Visible = false;
             }
 
-           
+
 
         }
 
-        private void eraseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EraseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string msg = "Are you sure you want to clear memory?";
-            if (MessageBox.Show(msg,"Attention",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes )
+            if (MessageBox.Show(msg, "Attention", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Cpu.ResetMemory();
-            }           
+            }
         }
 
 
         #endregion
 
         #region Watch-Menu 
-        private void stackToolStripMenuItem_Click(object sender, EventArgs e)
+        private void StackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("stack"))
             {
@@ -422,7 +410,7 @@ namespace CPU_emulator
             config.MwfStackLocation = f.Location;
         }
 
-        private void zeropageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ZeropageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("zeropage"))
             {
@@ -446,7 +434,7 @@ namespace CPU_emulator
             config.MwfZeropageLocation = f.Location;
         }
 
-        private void memrangeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MemrangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("memrange"))
             {

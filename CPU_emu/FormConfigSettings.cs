@@ -12,26 +12,17 @@ namespace CPU_emulator
 {
     public partial class FormConfigSettings : Form
     {
-        private ConfigSettings _config;
-        
-
+       
         public FormConfigSettings(ref ConfigSettings config)
         {
             InitializeComponent();
             
-            propertyGrid1.SelectedObject = config;
+            configPropertyGrid.SelectedObject = config;
         }
 
-        public ConfigSettings Config { get => _config; set => _config = value; }
-       
-        private void FormConfigSettings_Load(object sender, EventArgs e)
+        private void ResetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            propertyGrid1.ResetSelectedProperty();
+            configPropertyGrid.ResetSelectedProperty();
         }
     }
 }
