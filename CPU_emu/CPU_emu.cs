@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -177,12 +178,6 @@ namespace CPU_emulator
             }
 
         }
-
-        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void buttonStart_Click(object sender, EventArgs e)
         {
             if (!checkBoxSlowDown.Checked)
@@ -192,14 +187,12 @@ namespace CPU_emulator
             }
             Cpu.Start();
         }
-
         private void buttonStop_Click(object sender, EventArgs e)
         {
             stopwatch.Stop();
             SetToolStripElapsedTime();
             Cpu.Stop(); 
         }
-
         private void buttonReset_Click(object sender, EventArgs e)
         {
             Cpu.Reset();
@@ -207,7 +200,6 @@ namespace CPU_emulator
             SetToolStripElapsedTime(true);
             toolStripStatusLabelBRK.Text = string.Empty;
         }
-
         private void checkBoxStepping_CheckedChanged(object sender, EventArgs e) //StepMode
         {
             if (checkBoxStepping.Checked)
@@ -223,9 +215,6 @@ namespace CPU_emulator
             Cpu.SteppingMode = checkBoxStepping.Checked;
             config.Stepping = checkBoxStepping.Checked;
         }
-
-
-        
         private void checkBoxSlowDown_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox cb = sender as CheckBox;
@@ -238,13 +227,6 @@ namespace CPU_emulator
             Cpu.SlowDown = cb.Checked;
             config.Slow = cb.Checked;
         }
-
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FormEditor fe = new FormEditor(Cpu);
-            fe.ShowDialog();
-        }
-
         private bool FormExists(string tagname)
         {
             bool ret = false;
@@ -259,8 +241,155 @@ namespace CPU_emulator
 
             return ret;
         }
+    
 
-        #region Watch-Menu Dropdown
+        #region File Menu
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void toolStripMenuItemOpenFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripMenuItemSaveFile_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        #endregion
+
+        #region Memory Menu
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormEditor fe = new FormEditor(Cpu);
+            fe.ShowDialog();
+        }
+
+        private void dumpToFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = Application.StartupPath;
+            saveFileDialog1.Title = "Save Memory";
+            saveFileDialog1.DefaultExt = "hex";
+            saveFileDialog1.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                SaveMemoryToFile(saveFileDialog1.FileName);
+            }
+        }
+
+        private void SaveMemoryToFile(string fileName)
+        {
+            FileStream fs= null;
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Maximum = 64;
+            toolStripProgressBar1.Visible = true;
+            StreamWriter sw = new StreamWriter(fileName);
+
+            UseWaitCursor = true;
+
+            try
+            {
+                fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+                fs.Write(Cpu.Memory, 0, Cpu.Memory.Length);
+                fs.Close();
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UseWaitCursor = false;
+                throw;
+                throw;
+            }
+            finally
+            {
+                fs.Dispose();
+                UseWaitCursor = false;
+                toolStripProgressBar1.Visible = false;
+            }
+        }
+
+        
+        private void loadFromDumpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = Application.StartupPath;
+            openFileDialog1.Title = "Load Memordump from file";
+            openFileDialog1.DefaultExt = "hex";
+            openFileDialog1.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemoryFromFile(openFileDialog1.FileName);
+            }
+        }
+
+        private void LoadMemoryFromFile(string fileName)
+        {
+            toolStripProgressBar1.Value = 0;
+            toolStripProgressBar1.Maximum = 64;
+            toolStripProgressBar1.Visible = true;
+            UseWaitCursor = true;
+
+            FileStream fs = null;
+            byte[] mem = null;
+
+            try
+            {
+                fs = File.OpenRead(fileName);
+                Debug.Print(fs.Length.ToString());
+                Debug.Print(Cpu.Memory.Length.ToString());
+                if (fs.Length <= Cpu.Memory.Length)
+                {
+                    mem = new byte[fs.Length];
+                    fs.Read(mem, 0, (int)fs.Length);
+                    fs.Close();
+                    Cpu.Memory = mem;
+                }
+                else
+                {
+                    StringBuilder ErrorMessage = new StringBuilder();
+                    ErrorMessage.AppendLine("File is too large");
+                    ErrorMessage.AppendLine("File has " + fs.Length.ToString() + "bytes.");
+                    ErrorMessage.AppendLine("Max allowed size is  " + Cpu.Memory.Length.ToString() + " bytes.");
+
+                    MessageBox.Show(ErrorMessage.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception  e)
+            {
+                MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UseWaitCursor = false;
+                throw;
+            }
+            finally
+            {
+                fs.Dispose();
+                UseWaitCursor = false;
+                toolStripProgressBar1.Visible = false;
+            }
+
+           
+
+        }
+
+        private void eraseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string msg = "Are you sure you want to clear memory?";
+            if (MessageBox.Show(msg,"Attention",MessageBoxButtons.YesNo,MessageBoxIcon.Question) == DialogResult.Yes )
+            {
+                Cpu.ResetMemory();
+            }           
+        }
+
+
+        #endregion
+
+        #region Watch-Menu 
         private void stackToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (!FormExists("stack"))
@@ -336,7 +465,6 @@ namespace CPU_emulator
 
         #endregion
 
-
         private void CPU_emu_Load(object sender, EventArgs e)
         {
             if (File.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"))
@@ -346,6 +474,7 @@ namespace CPU_emulator
             }
         }
 
+        
         private void ApplyConfigsettings()
         {
             checkBoxSlowDown.Checked = config.Slow;

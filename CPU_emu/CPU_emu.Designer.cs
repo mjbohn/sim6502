@@ -32,9 +32,14 @@ namespace CPU_emulator
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CPU_emu));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemSaveFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadFromDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.watchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zeropageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,9 +71,15 @@ namespace CPU_emulator
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.eraseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -93,23 +104,56 @@ namespace CPU_emulator
             // dateiToolStripMenuItem
             // 
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.beendenToolStripMenuItem});
+            this.toolStripMenuItemOpenFile,
+            this.toolStripMenuItemSaveFile,
+            this.toolStripSeparator1,
+            this.ToolStripMenuItemClose});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
             this.dateiToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.dateiToolStripMenuItem.Text = "File";
             // 
-            // beendenToolStripMenuItem
+            // toolStripMenuItemOpenFile
             // 
-            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
-            this.beendenToolStripMenuItem.Text = "close";
-            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            this.toolStripMenuItemOpenFile.Enabled = false;
+            this.toolStripMenuItemOpenFile.Name = "toolStripMenuItemOpenFile";
+            this.toolStripMenuItemOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.toolStripMenuItemOpenFile.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItemOpenFile.Text = "open program";
+            this.toolStripMenuItemOpenFile.ToolTipText = "Load program from file";
+            this.toolStripMenuItemOpenFile.Click += new System.EventHandler(this.toolStripMenuItemOpenFile_Click);
+            // 
+            // toolStripMenuItemSaveFile
+            // 
+            this.toolStripMenuItemSaveFile.Enabled = false;
+            this.toolStripMenuItemSaveFile.Name = "toolStripMenuItemSaveFile";
+            this.toolStripMenuItemSaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.toolStripMenuItemSaveFile.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItemSaveFile.Text = "save program";
+            this.toolStripMenuItemSaveFile.ToolTipText = "Save program to file";
+            this.toolStripMenuItemSaveFile.Click += new System.EventHandler(this.toolStripMenuItemSaveFile_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(192, 6);
+            // 
+            // ToolStripMenuItemClose
+            // 
+            this.ToolStripMenuItemClose.Name = "ToolStripMenuItemClose";
+            this.ToolStripMenuItemClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.ToolStripMenuItemClose.Size = new System.Drawing.Size(195, 22);
+            this.ToolStripMenuItemClose.Text = "close";
+            this.ToolStripMenuItemClose.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // memoryToolStripMenuItem
             // 
             this.memoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem});
+            this.editToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.dumpToFileToolStripMenuItem,
+            this.loadFromDumpToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.eraseToolStripMenuItem});
             this.memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
             this.memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.memoryToolStripMenuItem.Text = "Memory";
@@ -117,9 +161,25 @@ namespace CPU_emulator
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
+            // 
+            // dumpToFileToolStripMenuItem
+            // 
+            this.dumpToFileToolStripMenuItem.Name = "dumpToFileToolStripMenuItem";
+            this.dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.dumpToFileToolStripMenuItem.Text = "dump to file";
+            this.dumpToFileToolStripMenuItem.ToolTipText = "Dump whole memory to file";
+            this.dumpToFileToolStripMenuItem.Click += new System.EventHandler(this.dumpToFileToolStripMenuItem_Click);
+            // 
+            // loadFromDumpToolStripMenuItem
+            // 
+            this.loadFromDumpToolStripMenuItem.Name = "loadFromDumpToolStripMenuItem";
+            this.loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadFromDumpToolStripMenuItem.Text = "load from dump";
+            this.loadFromDumpToolStripMenuItem.ToolTipText = "Load dumpfile into memory";
+            this.loadFromDumpToolStripMenuItem.Click += new System.EventHandler(this.loadFromDumpToolStripMenuItem_Click);
             // 
             // watchToolStripMenuItem
             // 
@@ -452,7 +512,8 @@ namespace CPU_emulator
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelBRK,
-            this.toolStripStatusElapsedTime});
+            this.toolStripStatusElapsedTime,
+            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 509);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(554, 22);
@@ -468,6 +529,14 @@ namespace CPU_emulator
             // 
             this.toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
             this.toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
+            this.toolStripProgressBar1.Step = 1;
+            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.toolStripProgressBar1.Visible = false;
             // 
             // checkBoxSlowDown
             // 
@@ -507,6 +576,23 @@ namespace CPU_emulator
             this.panel2.Size = new System.Drawing.Size(530, 478);
             this.panel2.TabIndex = 16;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // eraseToolStripMenuItem
+            // 
+            this.eraseToolStripMenuItem.Name = "eraseToolStripMenuItem";
+            this.eraseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.eraseToolStripMenuItem.Text = "erase";
+            this.eraseToolStripMenuItem.Click += new System.EventHandler(this.eraseToolStripMenuItem_Click);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -545,7 +631,7 @@ namespace CPU_emulator
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItemClose;
         private System.Windows.Forms.CheckBox checkBoxCarryFlag;
         private System.Windows.Forms.GroupBox groupBoxFlags;
         private System.Windows.Forms.CheckBox checkBoxZeroFlag;
@@ -582,6 +668,17 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem stackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zeropageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem memrangeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemOpenFile;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSaveFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ToolStripMenuItem dumpToFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadFromDumpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem eraseToolStripMenuItem;
     }
 }
 

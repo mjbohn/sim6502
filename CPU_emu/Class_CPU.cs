@@ -40,6 +40,20 @@ namespace CPU_emulator
         public bool SteppingMode { get => _SteppingMode; set => _SteppingMode = value; }
         public bool ExitRequested { get => _ExitRequested; set => _ExitRequested = value; }
         public ulong InterruptPeriod { get => _InterruptPeriod; set => _InterruptPeriod = value; }
+        public byte[] Memory
+		{
+			get
+			{
+				return Data;
+			}
+
+			set
+			{
+				Data = value;
+				OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
+			}
+		}
+
         //public uint PC { get => pC; set => pC = value; }
         //public uint InitialPC { get => _initialPC; set => _initialPC = value; }
 
