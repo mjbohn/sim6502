@@ -59,6 +59,12 @@
       <DependentUpon>CPU_emu.cs</DependentUpon>
     </Compile>
     <Compile Include="CPU_emu.opcodes.cs" />
+    <Compile Include="FormConfigSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConfigSettings.Designer.cs">
+      <DependentUpon>FormConfigSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEditor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CPU_emu.resx">
       <DependentUpon>CPU_emu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConfigSettings.resx">
+      <DependentUpon>FormConfigSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditor.resx">
       <DependentUpon>FormEditor.cs</DependentUpon>

@@ -259,6 +259,14 @@ namespace CPU_emulator
             
         }
 
+        private void toolStripMenuItemSettings_Click(object sender, EventArgs e)
+        {
+            Form PropertyForm = new FormConfigSettings(ref config);
+            PropertyForm.StartPosition = FormStartPosition.CenterParent;
+
+            PropertyForm.ShowDialog();
+            
+        }
         #endregion
 
         #region Memory Menu
@@ -474,7 +482,6 @@ namespace CPU_emulator
             }
         }
 
-        
         private void ApplyConfigsettings()
         {
             checkBoxSlowDown.Checked = config.Slow;
