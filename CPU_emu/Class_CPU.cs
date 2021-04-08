@@ -238,7 +238,7 @@ namespace CPU_emulator
 		}
 
         private byte FetchByte(ref ulong cycles)
-		{
+        {
 			byte data = Data[PC];
 			IncrementPC();
 			cycles--;

@@ -36,6 +36,8 @@ namespace CPU_emulator
             this.toolStripMenuItemSaveFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -80,8 +82,7 @@ namespace CPU_emulator
             this.panel2 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxInstruction = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -148,6 +149,18 @@ namespace CPU_emulator
             this.ToolStripMenuItemClose.Size = new System.Drawing.Size(195, 22);
             this.ToolStripMenuItemClose.Text = "&Close";
             this.ToolStripMenuItemClose.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(192, 6);
+            // 
+            // toolStripMenuItemSettings
+            // 
+            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItemSettings.Text = "&Settings";
+            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.ToolStripMenuItemSettings_Click);
             // 
             // memoryToolStripMenuItem
             // 
@@ -445,6 +458,7 @@ namespace CPU_emulator
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBoxInstruction);
             this.groupBox2.Controls.Add(this.textBoxSP);
             this.groupBox2.Controls.Add(this.labelSP);
             this.groupBox2.Controls.Add(this.textBoxPC);
@@ -452,13 +466,13 @@ namespace CPU_emulator
             this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(180, 136);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(135, 100);
+            this.groupBox2.Size = new System.Drawing.Size(135, 139);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
             // textBoxSP
             // 
-            this.textBoxSP.Location = new System.Drawing.Point(38, 51);
+            this.textBoxSP.Location = new System.Drawing.Point(38, 110);
             this.textBoxSP.Name = "textBoxSP";
             this.textBoxSP.ReadOnly = true;
             this.textBoxSP.Size = new System.Drawing.Size(58, 23);
@@ -469,7 +483,7 @@ namespace CPU_emulator
             // labelSP
             // 
             this.labelSP.AutoSize = true;
-            this.labelSP.Location = new System.Drawing.Point(6, 54);
+            this.labelSP.Location = new System.Drawing.Point(6, 113);
             this.labelSP.Name = "labelSP";
             this.labelSP.Size = new System.Drawing.Size(26, 16);
             this.labelSP.TabIndex = 8;
@@ -489,7 +503,7 @@ namespace CPU_emulator
             // labelPC
             // 
             this.labelPC.AutoSize = true;
-            this.labelPC.Location = new System.Drawing.Point(6, 25);
+            this.labelPC.Location = new System.Drawing.Point(5, 39);
             this.labelPC.Name = "labelPC";
             this.labelPC.Size = new System.Drawing.Size(27, 16);
             this.labelPC.TabIndex = 6;
@@ -597,17 +611,15 @@ namespace CPU_emulator
             this.panel2.Size = new System.Drawing.Size(530, 478);
             this.panel2.TabIndex = 16;
             // 
-            // toolStripSeparator4
+            // textBoxInstruction
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(192, 6);
-            // 
-            // toolStripMenuItemSettings
-            // 
-            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(195, 22);
-            this.toolStripMenuItemSettings.Text = "&Settings";
-            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.ToolStripMenuItemSettings_Click);
+            this.textBoxInstruction.Location = new System.Drawing.Point(38, 48);
+            this.textBoxInstruction.Name = "textBoxInstruction";
+            this.textBoxInstruction.ReadOnly = true;
+            this.textBoxInstruction.Size = new System.Drawing.Size(58, 23);
+            this.textBoxInstruction.TabIndex = 10;
+            this.textBoxInstruction.Text = "FF";
+            this.textBoxInstruction.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CPU_emu
             // 
@@ -697,6 +709,7 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem eraseToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
+        private System.Windows.Forms.TextBox textBoxInstruction;
     }
 }
 

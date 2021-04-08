@@ -93,6 +93,7 @@ namespace CPU_emulator
             else
             {
                 textBoxPC.Text = e.PC.ToString("X4");
+                textBoxInstruction.Text = e.Memory[e.PC].ToString("X2");
             }
 
         }
@@ -468,6 +469,8 @@ namespace CPU_emulator
                 config = JsonConvert.DeserializeObject<ConfigSettings>(File.ReadAllText(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"));
                 ApplyConfigsettings();
             }
+
+            textBoxInstruction.Text = Cpu.Memory[Cpu.PC].ToString("X2");
         }
 
         private void ApplyConfigsettings()
