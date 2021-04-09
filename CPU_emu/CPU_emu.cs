@@ -108,6 +108,7 @@ namespace CPU_emulator
             else
             {
                 textBoxSP.Text = e.SP.ToString("X4");
+                textBoxStackValue.Text = e.Memory[e.SP].ToString("X2");
             }
 
         }

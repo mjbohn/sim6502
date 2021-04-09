@@ -66,6 +66,7 @@ namespace CPU_emulator
             this.textBoxRegA = new System.Windows.Forms.TextBox();
             this.labelRegA = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxInstruction = new System.Windows.Forms.TextBox();
             this.textBoxSP = new System.Windows.Forms.TextBox();
             this.labelSP = new System.Windows.Forms.Label();
             this.textBoxPC = new System.Windows.Forms.TextBox();
@@ -82,7 +83,7 @@ namespace CPU_emulator
             this.panel2 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.textBoxInstruction = new System.Windows.Forms.TextBox();
+            this.textBoxStackValue = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -458,6 +459,7 @@ namespace CPU_emulator
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.textBoxStackValue);
             this.groupBox2.Controls.Add(this.textBoxInstruction);
             this.groupBox2.Controls.Add(this.textBoxSP);
             this.groupBox2.Controls.Add(this.labelSP);
@@ -466,13 +468,23 @@ namespace CPU_emulator
             this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(180, 136);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(135, 139);
+            this.groupBox2.Size = new System.Drawing.Size(135, 165);
             this.groupBox2.TabIndex = 7;
             this.groupBox2.TabStop = false;
             // 
+            // textBoxInstruction
+            // 
+            this.textBoxInstruction.Location = new System.Drawing.Point(38, 48);
+            this.textBoxInstruction.Name = "textBoxInstruction";
+            this.textBoxInstruction.ReadOnly = true;
+            this.textBoxInstruction.Size = new System.Drawing.Size(58, 23);
+            this.textBoxInstruction.TabIndex = 10;
+            this.textBoxInstruction.Text = "FF";
+            this.textBoxInstruction.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // textBoxSP
             // 
-            this.textBoxSP.Location = new System.Drawing.Point(38, 110);
+            this.textBoxSP.Location = new System.Drawing.Point(38, 94);
             this.textBoxSP.Name = "textBoxSP";
             this.textBoxSP.ReadOnly = true;
             this.textBoxSP.Size = new System.Drawing.Size(58, 23);
@@ -483,7 +495,7 @@ namespace CPU_emulator
             // labelSP
             // 
             this.labelSP.AutoSize = true;
-            this.labelSP.Location = new System.Drawing.Point(6, 113);
+            this.labelSP.Location = new System.Drawing.Point(5, 110);
             this.labelSP.Name = "labelSP";
             this.labelSP.Size = new System.Drawing.Size(26, 16);
             this.labelSP.TabIndex = 8;
@@ -611,15 +623,15 @@ namespace CPU_emulator
             this.panel2.Size = new System.Drawing.Size(530, 478);
             this.panel2.TabIndex = 16;
             // 
-            // textBoxInstruction
+            // textBoxStackValue
             // 
-            this.textBoxInstruction.Location = new System.Drawing.Point(38, 48);
-            this.textBoxInstruction.Name = "textBoxInstruction";
-            this.textBoxInstruction.ReadOnly = true;
-            this.textBoxInstruction.Size = new System.Drawing.Size(58, 23);
-            this.textBoxInstruction.TabIndex = 10;
-            this.textBoxInstruction.Text = "FF";
-            this.textBoxInstruction.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxStackValue.Location = new System.Drawing.Point(38, 123);
+            this.textBoxStackValue.Name = "textBoxStackValue";
+            this.textBoxStackValue.ReadOnly = true;
+            this.textBoxStackValue.Size = new System.Drawing.Size(58, 23);
+            this.textBoxStackValue.TabIndex = 11;
+            this.textBoxStackValue.Text = "FF";
+            this.textBoxStackValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // CPU_emu
             // 
@@ -710,6 +722,7 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
         private System.Windows.Forms.TextBox textBoxInstruction;
+        private System.Windows.Forms.TextBox textBoxStackValue;
     }
 }
 
