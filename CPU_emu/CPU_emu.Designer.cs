@@ -49,6 +49,9 @@ namespace CPU_emulator
             this.stackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zeropageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.memrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemStyleTXT = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemStyleLED = new System.Windows.Forms.ToolStripMenuItem();
             this.checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
             this.groupBoxFlags = new System.Windows.Forms.GroupBox();
             this.checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
@@ -58,14 +61,15 @@ namespace CPU_emulator
             this.checkBoxIntDisableFlag = new System.Windows.Forms.CheckBox();
             this.checkBoxZeroFlag = new System.Windows.Forms.CheckBox();
             this.buttonStart = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBoxRegisters = new System.Windows.Forms.GroupBox();
             this.textBoxRegY = new System.Windows.Forms.TextBox();
             this.labelRegY = new System.Windows.Forms.Label();
             this.textBoxRegX = new System.Windows.Forms.TextBox();
             this.labelRegX = new System.Windows.Forms.Label();
             this.textBoxRegA = new System.Windows.Forms.TextBox();
             this.labelRegA = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxPCSP = new System.Windows.Forms.GroupBox();
+            this.textBoxStackValue = new System.Windows.Forms.TextBox();
             this.textBoxInstruction = new System.Windows.Forms.TextBox();
             this.textBoxSP = new System.Windows.Forms.TextBox();
             this.labelSP = new System.Windows.Forms.Label();
@@ -80,17 +84,37 @@ namespace CPU_emulator
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.groupBoxLedPC = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.groupBoxLedRegs = new System.Windows.Forms.GroupBox();
+            this.groupBoxRegY = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.groupRegA = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.groupBoxRegX = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegmentArray1 = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegment1 = new DmitryBrant.CustomControls.SevenSegment();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.textBoxStackValue = new System.Windows.Forms.TextBox();
+            this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxRegisters.SuspendLayout();
+            this.groupBoxPCSP.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.groupBoxStartStop.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panelMain.SuspendLayout();
+            this.groupBoxLedPC.SuspendLayout();
+            this.groupBoxLedRegs.SuspendLayout();
+            this.groupBoxRegY.SuspendLayout();
+            this.groupRegA.SuspendLayout();
+            this.groupBoxRegX.SuspendLayout();
+            this.groupBoxLedSP.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -98,10 +122,11 @@ namespace CPU_emulator
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dateiToolStripMenuItem,
             this.memoryToolStripMenuItem,
-            this.watchToolStripMenuItem});
+            this.watchToolStripMenuItem,
+            this.styleToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(554, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1135, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -247,6 +272,33 @@ namespace CPU_emulator
             this.memrangeToolStripMenuItem.Text = "Memory Range";
             this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.MemrangeToolStripMenuItem_Click);
             // 
+            // styleToolStripMenuItem
+            // 
+            this.styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemStyleTXT,
+            this.toolStripMenuItemStyleLED});
+            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
+            this.styleToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.styleToolStripMenuItem.Text = "&Style";
+            // 
+            // toolStripMenuItemStyleTXT
+            // 
+            this.toolStripMenuItemStyleTXT.Checked = true;
+            this.toolStripMenuItemStyleTXT.CheckOnClick = true;
+            this.toolStripMenuItemStyleTXT.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.toolStripMenuItemStyleTXT.Name = "toolStripMenuItemStyleTXT";
+            this.toolStripMenuItemStyleTXT.Size = new System.Drawing.Size(94, 22);
+            this.toolStripMenuItemStyleTXT.Text = "TXT";
+            this.toolStripMenuItemStyleTXT.Click += new System.EventHandler(this.toolStripMenuItemStyleTXT_Click);
+            // 
+            // toolStripMenuItemStyleLED
+            // 
+            this.toolStripMenuItemStyleLED.CheckOnClick = true;
+            this.toolStripMenuItemStyleLED.Name = "toolStripMenuItemStyleLED";
+            this.toolStripMenuItemStyleLED.Size = new System.Drawing.Size(94, 22);
+            this.toolStripMenuItemStyleLED.Text = "LED";
+            this.toolStripMenuItemStyleLED.Click += new System.EventHandler(this.toolStripMenuItemStyleLED_Click);
+            // 
             // checkBoxCarryFlag
             // 
             this.checkBoxCarryFlag.AutoCheck = false;
@@ -381,21 +433,21 @@ namespace CPU_emulator
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
             // 
-            // groupBox1
+            // groupBoxRegisters
             // 
-            this.groupBox1.Controls.Add(this.textBoxRegY);
-            this.groupBox1.Controls.Add(this.labelRegY);
-            this.groupBox1.Controls.Add(this.textBoxRegX);
-            this.groupBox1.Controls.Add(this.labelRegX);
-            this.groupBox1.Controls.Add(this.textBoxRegA);
-            this.groupBox1.Controls.Add(this.labelRegA);
-            this.groupBox1.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(180, 13);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(135, 117);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Registers";
+            this.groupBoxRegisters.Controls.Add(this.textBoxRegY);
+            this.groupBoxRegisters.Controls.Add(this.labelRegY);
+            this.groupBoxRegisters.Controls.Add(this.textBoxRegX);
+            this.groupBoxRegisters.Controls.Add(this.labelRegX);
+            this.groupBoxRegisters.Controls.Add(this.textBoxRegA);
+            this.groupBoxRegisters.Controls.Add(this.labelRegA);
+            this.groupBoxRegisters.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRegisters.Location = new System.Drawing.Point(180, 13);
+            this.groupBoxRegisters.Name = "groupBoxRegisters";
+            this.groupBoxRegisters.Size = new System.Drawing.Size(135, 117);
+            this.groupBoxRegisters.TabIndex = 6;
+            this.groupBoxRegisters.TabStop = false;
+            this.groupBoxRegisters.Text = "Registers";
             // 
             // textBoxRegY
             // 
@@ -457,20 +509,30 @@ namespace CPU_emulator
             this.labelRegA.Text = "A";
             this.labelRegA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupBox2
+            // groupBoxPCSP
             // 
-            this.groupBox2.Controls.Add(this.textBoxStackValue);
-            this.groupBox2.Controls.Add(this.textBoxInstruction);
-            this.groupBox2.Controls.Add(this.textBoxSP);
-            this.groupBox2.Controls.Add(this.labelSP);
-            this.groupBox2.Controls.Add(this.textBoxPC);
-            this.groupBox2.Controls.Add(this.labelPC);
-            this.groupBox2.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(180, 136);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(135, 165);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
+            this.groupBoxPCSP.Controls.Add(this.textBoxStackValue);
+            this.groupBoxPCSP.Controls.Add(this.textBoxInstruction);
+            this.groupBoxPCSP.Controls.Add(this.textBoxSP);
+            this.groupBoxPCSP.Controls.Add(this.labelSP);
+            this.groupBoxPCSP.Controls.Add(this.textBoxPC);
+            this.groupBoxPCSP.Controls.Add(this.labelPC);
+            this.groupBoxPCSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxPCSP.Location = new System.Drawing.Point(180, 136);
+            this.groupBoxPCSP.Name = "groupBoxPCSP";
+            this.groupBoxPCSP.Size = new System.Drawing.Size(135, 165);
+            this.groupBoxPCSP.TabIndex = 7;
+            this.groupBoxPCSP.TabStop = false;
+            // 
+            // textBoxStackValue
+            // 
+            this.textBoxStackValue.Location = new System.Drawing.Point(38, 123);
+            this.textBoxStackValue.Name = "textBoxStackValue";
+            this.textBoxStackValue.ReadOnly = true;
+            this.textBoxStackValue.Size = new System.Drawing.Size(58, 23);
+            this.textBoxStackValue.TabIndex = 11;
+            this.textBoxStackValue.Text = "FF";
+            this.textBoxStackValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxInstruction
             // 
@@ -563,7 +625,7 @@ namespace CPU_emulator
             this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 509);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(554, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1135, 22);
             this.statusStrip1.TabIndex = 11;
             // 
             // toolStripStatusLabelBRK
@@ -611,34 +673,257 @@ namespace CPU_emulator
             this.groupBoxStartStop.TabStop = false;
             this.groupBoxStartStop.Text = "Start/Stop";
             // 
-            // panel2
+            // panelMain
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.groupBoxStartStop);
-            this.panel2.Controls.Add(this.groupBoxFlags);
-            this.panel2.Controls.Add(this.groupBox1);
-            this.panel2.Location = new System.Drawing.Point(12, 28);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(530, 478);
-            this.panel2.TabIndex = 16;
+            this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMain.Controls.Add(this.sevenSegmentArray1);
+            this.panelMain.Controls.Add(this.sevenSegment1);
+            this.panelMain.Controls.Add(this.groupBoxStartStop);
+            this.panelMain.Controls.Add(this.groupBoxFlags);
+            this.panelMain.Controls.Add(this.groupBoxRegisters);
+            this.panelMain.Controls.Add(this.groupBoxPCSP);
+            this.panelMain.Location = new System.Drawing.Point(12, 28);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(530, 478);
+            this.panelMain.TabIndex = 16;
             // 
-            // textBoxStackValue
+            // groupBoxLedPC
             // 
-            this.textBoxStackValue.Location = new System.Drawing.Point(38, 123);
-            this.textBoxStackValue.Name = "textBoxStackValue";
-            this.textBoxStackValue.ReadOnly = true;
-            this.textBoxStackValue.Size = new System.Drawing.Size(58, 23);
-            this.textBoxStackValue.TabIndex = 11;
-            this.textBoxStackValue.Text = "FF";
-            this.textBoxStackValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.groupBoxLedPC.Controls.Add(this.sevenSegmentPC);
+            this.groupBoxLedPC.Controls.Add(this.sevenSegmentPCvalue);
+            this.groupBoxLedPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxLedPC.Location = new System.Drawing.Point(595, 182);
+            this.groupBoxLedPC.Name = "groupBoxLedPC";
+            this.groupBoxLedPC.Size = new System.Drawing.Size(270, 135);
+            this.groupBoxLedPC.TabIndex = 23;
+            this.groupBoxLedPC.TabStop = false;
+            this.groupBoxLedPC.Text = "Programcounter";
+            this.groupBoxLedPC.Visible = false;
+            // 
+            // sevenSegmentPC
+            // 
+            this.sevenSegmentPC.ArrayCount = 4;
+            this.sevenSegmentPC.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentPC.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentPC.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentPC.DecimalShow = true;
+            this.sevenSegmentPC.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentPC.ElementWidth = 8;
+            this.sevenSegmentPC.ItalicFactor = 0F;
+            this.sevenSegmentPC.Location = new System.Drawing.Point(11, 36);
+            this.sevenSegmentPC.Name = "sevenSegmentPC";
+            this.sevenSegmentPC.Size = new System.Drawing.Size(128, 64);
+            this.sevenSegmentPC.TabIndex = 18;
+            this.sevenSegmentPC.TabStop = false;
+            this.sevenSegmentPC.Value = "0200";
+            // 
+            // sevenSegmentPCvalue
+            // 
+            this.sevenSegmentPCvalue.ArrayCount = 2;
+            this.sevenSegmentPCvalue.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentPCvalue.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentPCvalue.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentPCvalue.DecimalShow = true;
+            this.sevenSegmentPCvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentPCvalue.ElementWidth = 8;
+            this.sevenSegmentPCvalue.ItalicFactor = 0F;
+            this.sevenSegmentPCvalue.Location = new System.Drawing.Point(147, 36);
+            this.sevenSegmentPCvalue.Name = "sevenSegmentPCvalue";
+            this.sevenSegmentPCvalue.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentPCvalue.TabIndex = 18;
+            this.sevenSegmentPCvalue.TabStop = false;
+            this.sevenSegmentPCvalue.Value = "55";
+            // 
+            // groupBoxLedRegs
+            // 
+            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegY);
+            this.groupBoxLedRegs.Controls.Add(this.groupRegA);
+            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegX);
+            this.groupBoxLedRegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBoxLedRegs.Location = new System.Drawing.Point(595, 41);
+            this.groupBoxLedRegs.Name = "groupBoxLedRegs";
+            this.groupBoxLedRegs.Size = new System.Drawing.Size(270, 135);
+            this.groupBoxLedRegs.TabIndex = 22;
+            this.groupBoxLedRegs.TabStop = false;
+            this.groupBoxLedRegs.Visible = false;
+            // 
+            // groupBoxRegY
+            // 
+            this.groupBoxRegY.Controls.Add(this.sevenSegmentRegY);
+            this.groupBoxRegY.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRegY.Location = new System.Drawing.Point(177, 12);
+            this.groupBoxRegY.Name = "groupBoxRegY";
+            this.groupBoxRegY.Size = new System.Drawing.Size(88, 117);
+            this.groupBoxRegY.TabIndex = 21;
+            this.groupBoxRegY.TabStop = false;
+            this.groupBoxRegY.Text = "Reg Y";
+            // 
+            // sevenSegmentRegY
+            // 
+            this.sevenSegmentRegY.ArrayCount = 2;
+            this.sevenSegmentRegY.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegY.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegY.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegY.DecimalShow = true;
+            this.sevenSegmentRegY.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegY.ElementWidth = 8;
+            this.sevenSegmentRegY.ItalicFactor = 0F;
+            this.sevenSegmentRegY.Location = new System.Drawing.Point(6, 32);
+            this.sevenSegmentRegY.Name = "sevenSegmentRegY";
+            this.sevenSegmentRegY.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegY.TabIndex = 21;
+            this.sevenSegmentRegY.TabStop = false;
+            this.sevenSegmentRegY.Value = "00";
+            // 
+            // groupRegA
+            // 
+            this.groupRegA.Controls.Add(this.sevenSegmentRegA);
+            this.groupRegA.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupRegA.Location = new System.Drawing.Point(7, 12);
+            this.groupRegA.Name = "groupRegA";
+            this.groupRegA.Size = new System.Drawing.Size(79, 117);
+            this.groupRegA.TabIndex = 19;
+            this.groupRegA.TabStop = false;
+            this.groupRegA.Text = "Reg A";
+            // 
+            // sevenSegmentRegA
+            // 
+            this.sevenSegmentRegA.ArrayCount = 2;
+            this.sevenSegmentRegA.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegA.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegA.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegA.DecimalShow = true;
+            this.sevenSegmentRegA.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegA.ElementWidth = 8;
+            this.sevenSegmentRegA.ItalicFactor = 0F;
+            this.sevenSegmentRegA.Location = new System.Drawing.Point(6, 31);
+            this.sevenSegmentRegA.Name = "sevenSegmentRegA";
+            this.sevenSegmentRegA.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegA.TabIndex = 17;
+            this.sevenSegmentRegA.TabStop = false;
+            this.sevenSegmentRegA.Value = "00";
+            // 
+            // groupBoxRegX
+            // 
+            this.groupBoxRegX.Controls.Add(this.sevenSegmentRegX);
+            this.groupBoxRegX.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRegX.Location = new System.Drawing.Point(92, 12);
+            this.groupBoxRegX.Name = "groupBoxRegX";
+            this.groupBoxRegX.Size = new System.Drawing.Size(79, 117);
+            this.groupBoxRegX.TabIndex = 20;
+            this.groupBoxRegX.TabStop = false;
+            this.groupBoxRegX.Text = "Reg X";
+            // 
+            // sevenSegmentRegX
+            // 
+            this.sevenSegmentRegX.ArrayCount = 2;
+            this.sevenSegmentRegX.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegX.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegX.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegX.DecimalShow = true;
+            this.sevenSegmentRegX.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegX.ElementWidth = 8;
+            this.sevenSegmentRegX.ItalicFactor = 0F;
+            this.sevenSegmentRegX.Location = new System.Drawing.Point(6, 33);
+            this.sevenSegmentRegX.Name = "sevenSegmentRegX";
+            this.sevenSegmentRegX.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegX.TabIndex = 19;
+            this.sevenSegmentRegX.TabStop = false;
+            this.sevenSegmentRegX.Value = "00";
+            // 
+            // sevenSegmentArray1
+            // 
+            this.sevenSegmentArray1.ArrayCount = 4;
+            this.sevenSegmentArray1.ColorBackground = System.Drawing.Color.DarkGray;
+            this.sevenSegmentArray1.ColorDark = System.Drawing.Color.DarkGray;
+            this.sevenSegmentArray1.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentArray1.DecimalShow = true;
+            this.sevenSegmentArray1.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentArray1.ElementWidth = 10;
+            this.sevenSegmentArray1.ItalicFactor = 0F;
+            this.sevenSegmentArray1.Location = new System.Drawing.Point(362, 251);
+            this.sevenSegmentArray1.Name = "sevenSegmentArray1";
+            this.sevenSegmentArray1.Size = new System.Drawing.Size(128, 64);
+            this.sevenSegmentArray1.TabIndex = 21;
+            this.sevenSegmentArray1.TabStop = false;
+            this.sevenSegmentArray1.Value = "ABCD";
+            // 
+            // sevenSegment1
+            // 
+            this.sevenSegment1.ColonOn = false;
+            this.sevenSegment1.ColonShow = false;
+            this.sevenSegment1.ColorBackground = System.Drawing.Color.DarkGray;
+            this.sevenSegment1.ColorDark = System.Drawing.Color.DimGray;
+            this.sevenSegment1.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegment1.CustomPattern = 0;
+            this.sevenSegment1.DecimalOn = false;
+            this.sevenSegment1.DecimalShow = true;
+            this.sevenSegment1.ElementWidth = 10;
+            this.sevenSegment1.ItalicFactor = 0F;
+            this.sevenSegment1.Location = new System.Drawing.Point(458, 332);
+            this.sevenSegment1.Name = "sevenSegment1";
+            this.sevenSegment1.Padding = new System.Windows.Forms.Padding(4);
+            this.sevenSegment1.Size = new System.Drawing.Size(32, 64);
+            this.sevenSegment1.TabIndex = 20;
+            this.sevenSegment1.TabStop = false;
+            this.sevenSegment1.Value = null;
+            // 
+            // groupBoxLedSP
+            // 
+            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSP);
+            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSPvalue);
+            this.groupBoxLedSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxLedSP.Location = new System.Drawing.Point(595, 323);
+            this.groupBoxLedSP.Name = "groupBoxLedSP";
+            this.groupBoxLedSP.Size = new System.Drawing.Size(270, 135);
+            this.groupBoxLedSP.TabIndex = 24;
+            this.groupBoxLedSP.TabStop = false;
+            this.groupBoxLedSP.Text = "Stackpointer";
+            this.groupBoxLedSP.Visible = false;
+            // 
+            // sevenSegmentSP
+            // 
+            this.sevenSegmentSP.ArrayCount = 4;
+            this.sevenSegmentSP.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentSP.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentSP.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentSP.DecimalShow = true;
+            this.sevenSegmentSP.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentSP.ElementWidth = 8;
+            this.sevenSegmentSP.ItalicFactor = 0F;
+            this.sevenSegmentSP.Location = new System.Drawing.Point(11, 36);
+            this.sevenSegmentSP.Name = "sevenSegmentSP";
+            this.sevenSegmentSP.Size = new System.Drawing.Size(128, 64);
+            this.sevenSegmentSP.TabIndex = 18;
+            this.sevenSegmentSP.TabStop = false;
+            this.sevenSegmentSP.Value = "01ff";
+            // 
+            // sevenSegmentSPvalue
+            // 
+            this.sevenSegmentSPvalue.ArrayCount = 2;
+            this.sevenSegmentSPvalue.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentSPvalue.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentSPvalue.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentSPvalue.DecimalShow = true;
+            this.sevenSegmentSPvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentSPvalue.ElementWidth = 8;
+            this.sevenSegmentSPvalue.ItalicFactor = 0F;
+            this.sevenSegmentSPvalue.Location = new System.Drawing.Point(147, 36);
+            this.sevenSegmentSPvalue.Name = "sevenSegmentSPvalue";
+            this.sevenSegmentSPvalue.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentSPvalue.TabIndex = 18;
+            this.sevenSegmentSPvalue.TabStop = false;
+            this.sevenSegmentSPvalue.Value = "55";
             // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(554, 531);
-            this.Controls.Add(this.panel2);
+            this.ClientSize = new System.Drawing.Size(1135, 531);
+            this.Controls.Add(this.groupBoxLedSP);
+            this.Controls.Add(this.groupBoxLedPC);
+            this.Controls.Add(this.panelMain);
+            this.Controls.Add(this.groupBoxLedRegs);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -653,15 +938,21 @@ namespace CPU_emulator
             this.menuStrip1.PerformLayout();
             this.groupBoxFlags.ResumeLayout(false);
             this.groupBoxFlags.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupBoxRegisters.ResumeLayout(false);
+            this.groupBoxRegisters.PerformLayout();
+            this.groupBoxPCSP.ResumeLayout(false);
+            this.groupBoxPCSP.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.groupBoxStartStop.ResumeLayout(false);
             this.groupBoxStartStop.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.panelMain.ResumeLayout(false);
+            this.groupBoxLedPC.ResumeLayout(false);
+            this.groupBoxLedRegs.ResumeLayout(false);
+            this.groupBoxRegY.ResumeLayout(false);
+            this.groupRegA.ResumeLayout(false);
+            this.groupBoxRegX.ResumeLayout(false);
+            this.groupBoxLedSP.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -681,14 +972,14 @@ namespace CPU_emulator
         private System.Windows.Forms.CheckBox checkBoxNegativFlag;
         private System.Windows.Forms.CheckBox checkBoxOverflowFlag;
         private System.Windows.Forms.Button buttonStart;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxRegisters;
         private System.Windows.Forms.TextBox textBoxRegA;
         private System.Windows.Forms.Label labelRegA;
         private System.Windows.Forms.TextBox textBoxRegY;
         private System.Windows.Forms.Label labelRegY;
         private System.Windows.Forms.TextBox textBoxRegX;
         private System.Windows.Forms.Label labelRegX;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxPCSP;
         private System.Windows.Forms.TextBox textBoxPC;
         private System.Windows.Forms.Label labelPC;
         private System.Windows.Forms.TextBox textBoxSP;
@@ -703,7 +994,7 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusElapsedTime;
         private System.Windows.Forms.GroupBox groupBoxStartStop;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.ToolStripMenuItem watchToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zeropageToolStripMenuItem;
@@ -723,6 +1014,24 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSettings;
         private System.Windows.Forms.TextBox textBoxInstruction;
         private System.Windows.Forms.TextBox textBoxStackValue;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentRegA;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentRegY;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentRegX;
+        private System.Windows.Forms.GroupBox groupRegA;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentArray1;
+        private DmitryBrant.CustomControls.SevenSegment sevenSegment1;
+        private System.Windows.Forms.ToolStripMenuItem styleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStyleTXT;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemStyleLED;
+        private System.Windows.Forms.GroupBox groupBoxRegX;
+        private System.Windows.Forms.GroupBox groupBoxRegY;
+        private System.Windows.Forms.GroupBox groupBoxLedRegs;
+        private System.Windows.Forms.GroupBox groupBoxLedPC;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentPC;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentPCvalue;
+        private System.Windows.Forms.GroupBox groupBoxLedSP;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentSP;
+        private DmitryBrant.CustomControls.SevenSegmentArray sevenSegmentSPvalue;
     }
 }
 

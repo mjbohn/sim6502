@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CPU_emulator
 {
@@ -16,7 +17,10 @@ namespace CPU_emulator
         private Point _mwfStackLocation;
         private Point _mwfZeropageLocation;
         private Point _mwfMemoryRangeLocation;
-
+        private Color _sevenSegBackgroundColor;
+        private Color _sevenSegDarkColor;
+        private Color _sevenSegLightColor;
+        
         [ReadOnly(true)]
         [Description("")]
         [Category("CPU")]
@@ -47,5 +51,23 @@ namespace CPU_emulator
         [DisplayName("MemoryRange window position")]
         [DefaultValue(typeof(Point), "1250,350")]
         public Point MwfMemoryRangeLocation { get => _mwfMemoryRangeLocation; set => _mwfMemoryRangeLocation = value; }
+
+
+        [Description("LED background color")]
+        [Category("LED colors")]
+        [DisplayName("LED background color")]
+        public Color SevenSegBackgroundColor { get => _sevenSegBackgroundColor; set => _sevenSegBackgroundColor = value; }
+
+        [Description("LED dark color")]
+        [Category("LED colors")]
+        [DisplayName("LED dark color")]
+        public Color SevenSegDarkColor { get => _sevenSegDarkColor; set => _sevenSegDarkColor = value; }
+
+        [Description("LED light color")]
+        [Category("LED colors")]
+        [DisplayName("LED light color")]
+        public Color SevenSegLightColor { get => _sevenSegLightColor; set => _sevenSegLightColor = value; }
     }
+
+    
 }

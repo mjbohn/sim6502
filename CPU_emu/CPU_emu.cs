@@ -94,6 +94,9 @@ namespace CPU_emulator
             {
                 textBoxPC.Text = e.PC.ToString("X4");
                 textBoxInstruction.Text = e.Memory[e.PC].ToString("X2");
+
+                sevenSegmentPC.Value = e.PC.ToString("X4");
+                sevenSegmentPCvalue.Value = e.Memory[e.PC].ToString("X2");
             }
 
         }
@@ -108,7 +111,10 @@ namespace CPU_emulator
             else
             {
                 textBoxSP.Text = e.SP.ToString("X4");
+                sevenSegmentSP.Value = e.SP.ToString("X4");
+
                 textBoxStackValue.Text = e.Memory[e.SP].ToString("X2");
+                sevenSegmentSPvalue.Value = e.Memory[e.SP].ToString("X2");
             }
 
         }
@@ -122,9 +128,14 @@ namespace CPU_emulator
             }
             else
             {
-                textBoxRegA.Text = e.A.ToString("X2");
-                textBoxRegX.Text = e.X.ToString("X2");
-                textBoxRegY.Text = e.Y.ToString("X2");
+                textBoxRegA.Text = e.A.ToString("X2"); 
+                sevenSegmentRegA.Value = e.A.ToString("X2");
+
+                textBoxRegX.Text = e.X.ToString("X2"); 
+                sevenSegmentRegX.Value = e.X.ToString("X2");
+
+                textBoxRegY.Text = e.Y.ToString("X2"); 
+                sevenSegmentRegY.Value = e.Y.ToString("X2");
             }
 
         }
@@ -232,7 +243,7 @@ namespace CPU_emulator
             return ret;
         }
 
-
+        private enum DisplayStyle { TXT,LED};
         #region File Menu
         private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -463,6 +474,49 @@ namespace CPU_emulator
 
         #endregion
 
+        #region Style-Menu
+        private void toolStripMenuItemStyleTXT_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItemStyleLED.Checked = false;
+            SetDisplayControlsVisibility(DisplayStyle.TXT);
+        }
+
+        private void toolStripMenuItemStyleLED_Click(object sender, EventArgs e)
+        {
+            toolStripMenuItemStyleTXT.Checked = false;
+            SetDisplayControlsVisibility(DisplayStyle.LED);
+        }
+
+        private void SetDisplayControlsVisibility(DisplayStyle style)
+        {
+            switch (style)
+            {
+                case DisplayStyle.TXT:
+                    groupBoxPCSP.Visible = true;
+                    groupBoxFlags.Visible = true;
+                    groupBoxRegisters.Visible = true;
+
+                    groupBoxLedRegs.Visible = false;
+                    groupBoxLedPC.Visible = false;
+                    groupBoxLedSP.Visible = false;
+                    break;
+                case DisplayStyle.LED:
+                    groupBoxPCSP.Visible = false;
+                    groupBoxFlags.Visible = false;
+                    groupBoxRegisters.Visible = false;
+
+                    groupBoxLedRegs.Visible = true;
+                    groupBoxLedPC.Visible = true;
+                    groupBoxLedSP.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+       
+        #endregion
+
         private void CPU_emu_Load(object sender, EventArgs e)
         {
             if (File.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"))
@@ -471,8 +525,20 @@ namespace CPU_emulator
                 ApplyConfigsettings();
             }
 
-            textBoxInstruction.Text = Cpu.Memory[Cpu.PC].ToString("X2");
+            this.Size = new Size(570, 570);
+
+            groupBoxLedRegs.Parent = panelMain;
+            groupBoxLedRegs.Location = new Point(3, 15);
+            groupBoxLedRegs.BringToFront();
+
+            groupBoxLedPC.Parent = panelMain;
+            groupBoxLedPC.Location = new Point(3, 160);
+
+            groupBoxLedSP.Parent = panelMain;
+            groupBoxLedSP.Location = new Point(3, 300);
         }
+
+       
 
         private void ApplyConfigsettings()
         {

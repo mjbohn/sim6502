@@ -83,6 +83,7 @@ namespace CPU_emulator
             ushort tmpPC = ReadWordFromMemory(ResetVector);
 
             ResetMemory();
+            
 
             SetPC(tmpPC);
             SetSP(0x01FF);
@@ -96,11 +97,11 @@ namespace CPU_emulator
             // set all status flags to false
             flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
 
-            OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
-
-            //ResetMemory();
-
             LoadInlineTestProg();
+
+            OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
+            OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
+
         }
 
         private void LoadInlineTestProg()

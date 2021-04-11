@@ -79,6 +79,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SevenSegment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SevenSegmentArray.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <EmbeddedResource Include="CPU_emu.resx">
       <DependentUpon>CPU_emu.cs</DependentUpon>
     </EmbeddedResource>
