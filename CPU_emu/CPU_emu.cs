@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bulb;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -176,6 +177,15 @@ namespace CPU_emulator
             foreach (CheckBox checkBox in groupBoxFlags.Controls)
             {
                 checkBox.Checked = flags[checkBox.Tag.ToString()];
+            }
+
+            foreach (Control c in groupBoxLedFlags.Controls)
+            {
+                if (c.GetType() == typeof(LedBulb))
+                {
+                    LedBulb lb = c as LedBulb;
+                    lb.On = flags[lb.Tag.ToString()];
+                }
             }
 
         }
@@ -499,6 +509,7 @@ namespace CPU_emulator
                     groupBoxLedRegs.Visible = false;
                     groupBoxLedPC.Visible = false;
                     groupBoxLedSP.Visible = false;
+                    groupBoxLedFlags.Visible = false;
                     break;
                 case DisplayStyle.LED:
                     groupBoxPCSP.Visible = false;
@@ -508,6 +519,7 @@ namespace CPU_emulator
                     groupBoxLedRegs.Visible = true;
                     groupBoxLedPC.Visible = true;
                     groupBoxLedSP.Visible = true;
+                    groupBoxLedFlags.Visible = true;
                     break;
                 default:
                     break;
@@ -536,10 +548,12 @@ namespace CPU_emulator
 
             groupBoxLedSP.Parent = panelMain;
             groupBoxLedSP.Location = new Point(3, 300);
+
+            groupBoxLedFlags.Parent = panelMain;
+            groupBoxLedFlags.Location = new Point(320, 215);
         }
 
-       
-
+      
         private void ApplyConfigsettings()
         {
             checkBoxSlowDown.Checked = config.Slow;
