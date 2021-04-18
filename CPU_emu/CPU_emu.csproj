@@ -77,6 +77,12 @@
     <Compile Include="FormMemoryWatch.Designer.cs">
       <DependentUpon>FormMemoryWatch.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormSetAddress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSetAddress.Designer.cs">
+      <DependentUpon>FormSetAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="LedBulb.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -99,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMemoryWatch.resx">
       <DependentUpon>FormMemoryWatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSetAddress.resx">
+      <DependentUpon>FormSetAddress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

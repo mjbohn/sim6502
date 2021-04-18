@@ -115,6 +115,8 @@ namespace CPU_emulator
             this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
             this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBoxRegisters.SuspendLayout();
@@ -210,6 +212,8 @@ namespace CPU_emulator
             this.dumpToFileToolStripMenuItem,
             this.loadFromDumpToolStripMenuItem,
             this.toolStripSeparator3,
+            this.toolStripMenuItem1,
+            this.toolStripSeparator5,
             this.eraseToolStripMenuItem});
             this.memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
             this.memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
@@ -218,19 +222,19 @@ namespace CPU_emulator
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // dumpToFileToolStripMenuItem
             // 
             this.dumpToFileToolStripMenuItem.Name = "dumpToFileToolStripMenuItem";
-            this.dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.dumpToFileToolStripMenuItem.Text = "dump to file";
             this.dumpToFileToolStripMenuItem.ToolTipText = "Dump whole memory to file";
             this.dumpToFileToolStripMenuItem.Click += new System.EventHandler(this.DumpToFileToolStripMenuItem_Click);
@@ -238,7 +242,7 @@ namespace CPU_emulator
             // loadFromDumpToolStripMenuItem
             // 
             this.loadFromDumpToolStripMenuItem.Name = "loadFromDumpToolStripMenuItem";
-            this.loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadFromDumpToolStripMenuItem.Text = "load from dump";
             this.loadFromDumpToolStripMenuItem.ToolTipText = "Load dumpfile into memory";
             this.loadFromDumpToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDumpToolStripMenuItem_Click);
@@ -246,12 +250,12 @@ namespace CPU_emulator
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(158, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // eraseToolStripMenuItem
             // 
             this.eraseToolStripMenuItem.Name = "eraseToolStripMenuItem";
-            this.eraseToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.eraseToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.eraseToolStripMenuItem.Text = "erase";
             this.eraseToolStripMenuItem.Click += new System.EventHandler(this.EraseToolStripMenuItem_Click);
             // 
@@ -1083,6 +1087,18 @@ namespace CPU_emulator
             this.sevenSegmentSPvalue.TabStop = false;
             this.sevenSegmentSPvalue.Value = "55";
             // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.toolStripMenuItem1.Text = "set address";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1216,6 +1232,8 @@ namespace CPU_emulator
         private System.Windows.Forms.Label label2;
         private Bulb.LedBulb ledBulbFzero;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
     }
 }
 

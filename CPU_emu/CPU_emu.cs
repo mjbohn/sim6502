@@ -396,6 +396,12 @@ namespace CPU_emulator
 
         }
 
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Form f = new FormSetAddress(ref Cpu);
+            f.ShowDialog();
+        }
+
         private void EraseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string msg = "Are you sure you want to clear memory?";

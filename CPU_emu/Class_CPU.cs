@@ -106,7 +106,7 @@ namespace CPU_emulator
 
         private void LoadInlineTestProg()
         {
-            Data[PC] = 0xA9;
+            Data[PC] = 0xA5;
             Data[PC + 1] = 0x0b;
             Data[PC + 2] = 0x48;
             Data[PC + 3] = 0xA9;
@@ -177,6 +177,11 @@ namespace CPU_emulator
                         b_tmp = FetchByte(ref cycles);
                         SetRegister("A", b_tmp);
                         SetZeroAndNegativeFlags(A); 
+                        break;
+                    case OC_LDA_ZP: // Load Accumulator zeropage
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("A", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(A);
                         break;
                     case OC_PHA: // Push Accumulator on Stack
                         PushByteToStack(A,ref cycles);
@@ -257,7 +262,7 @@ namespace CPU_emulator
             return data;
         }
 
-        private void WriteByteToMemory(byte b,ushort address)
+        public void WriteByteToMemory(byte b,ushort address)
         {
             Data[address] = b;
             OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
@@ -303,8 +308,7 @@ namespace CPU_emulator
         public void SetPC(uint value)
         {
             PC = value;
-            OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this)
-                );
+            OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
         }
         public void IncrementPC()
         {
