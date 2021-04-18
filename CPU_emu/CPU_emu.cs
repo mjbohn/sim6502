@@ -308,8 +308,7 @@ namespace CPU_emulator
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Maximum = 64;
             toolStripProgressBar1.Visible = true;
-            StreamWriter sw = new StreamWriter(fileName);
-
+            
             UseWaitCursor = true;
 
             try
@@ -321,9 +320,9 @@ namespace CPU_emulator
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n---\n" , "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UseWaitCursor = false;
-                throw;
                 throw;
             }
             finally

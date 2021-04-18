@@ -89,7 +89,7 @@ namespace CPU_emulator
             SetSP(0x01FF);
 
             SetRegister("A", 0);
-            SetRegister("X", 0);
+            SetRegister("X", 15);
             SetRegister("Y", 0);
             InterruptPeriod = 1000;
             ExitRequested = false;
@@ -106,7 +106,7 @@ namespace CPU_emulator
 
         private void LoadInlineTestProg()
         {
-            Data[PC] = 0xA5;
+            Data[PC] = 0xB5;
             Data[PC + 1] = 0x0b;
             Data[PC + 2] = 0x48;
             Data[PC + 3] = 0xA9;
@@ -180,6 +180,12 @@ namespace CPU_emulator
                         break;
                     case OC_LDA_ZP: // Load Accumulator zeropage
                         b_tmp = FetchByte(ref cycles);
+                        SetRegister("A", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(A);
+                        break;
+                    case OC_LDA_ZPX: // Load Accumulator zeropage X
+                        b_tmp = FetchByte(ref cycles);
+                        b_tmp += X;
                         SetRegister("A", ReadByteFromMemory(b_tmp));
                         SetZeroAndNegativeFlags(A);
                         break;

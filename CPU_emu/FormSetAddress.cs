@@ -29,7 +29,14 @@ namespace CPU_emulator
 
         private void textBoxData_TextChanged(object sender, EventArgs e)
         {
-            _data= Convert.ToByte(textBoxData.Text, 16);
+            if (textBoxData.Text!= String.Empty)
+            {
+                _data = Convert.ToByte(textBoxData.Text, 16); 
+            }
+            else
+            {
+                _data = 0;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
