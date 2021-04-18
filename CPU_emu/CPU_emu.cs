@@ -553,9 +553,15 @@ namespace CPU_emulator
             groupBoxLedFlags.Location = new Point(320, 215);
         }
 
-      
+        private void CPU_emu_LocationChanged(object sender, EventArgs e)
+        {
+            Form f = sender as Form;
+            config.MainFormLocation = f.Location;
+        }
+
         private void ApplyConfigsettings()
         {
+            this.Location = config.MainFormLocation;
             checkBoxSlowDown.Checked = config.Slow;
             checkBoxStepping.Checked = config.Stepping;
         }

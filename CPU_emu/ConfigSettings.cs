@@ -17,6 +17,7 @@ namespace CPU_emulator
         private Point _mwfStackLocation;
         private Point _mwfZeropageLocation;
         private Point _mwfMemoryRangeLocation;
+        private Point _mainFormLocation;
         private Color _sevenSegBackgroundColor;
         private Color _sevenSegDarkColor;
         private Color _sevenSegLightColor;
@@ -67,6 +68,11 @@ namespace CPU_emulator
         [Category("LED colors")]
         [DisplayName("LED light color")]
         public Color SevenSegLightColor { get => _sevenSegLightColor; set => _sevenSegLightColor = value; }
+
+        [Description("Main window position")]
+        //[DisplayName("Main window position")]
+        //[DefaultValue(typeof(Point), "1250,350")]
+        public Point MainFormLocation { get => _mainFormLocation; set => _mainFormLocation = value; }
     }
 
     
