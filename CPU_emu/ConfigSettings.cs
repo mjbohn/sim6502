@@ -15,6 +15,7 @@ namespace CPU_emulator
         private bool _stepping;
         private bool _slow;
         private Point _mwfStackLocation;
+        private bool _showStackOnStartUP, _showZeroPageOnstartUp, _showMemoryRangeOnStartUp;
         private Point _mwfZeropageLocation;
         private Point _mwfMemoryRangeLocation;
         private Point _mainFormLocation;
@@ -71,8 +72,23 @@ namespace CPU_emulator
 
         [Description("Main window position")]
         //[DisplayName("Main window position")]
-        //[DefaultValue(typeof(Point), "1250,350")]
+        [DefaultValue(typeof(Point), "660,75")]
         public Point MainFormLocation { get => _mainFormLocation; set => _mainFormLocation = value; }
+
+        [Category("Memory")]
+        [DisplayName("Show stack window on startup")]
+        [DefaultValue(false)]
+        public bool ShowStackOnStartUP { get => _showStackOnStartUP; set => _showStackOnStartUP = value; }
+
+        [Category("Memory")]
+        [DisplayName("Show zeropage window on startup")]
+        [DefaultValue(false)]
+        public bool ShowZeroPageOnstartUp { get => _showZeroPageOnstartUp; set => _showZeroPageOnstartUp = value; }
+
+        [Category("Memory")]
+        [DisplayName("Show memory-range window on startup")]
+        [DefaultValue(false)]
+        public bool ShowMemoryRangeOnStartUp { get => _showMemoryRangeOnStartUp; set => _showMemoryRangeOnStartUp = value; }
     }
 
     

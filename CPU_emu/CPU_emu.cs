@@ -420,7 +420,7 @@ namespace CPU_emulator
             {
                 MWFstack = new MemoryWatchForm(0x100, 0x1FF, this.Cpu)
                 {
-                    Text = "Stack-Watch",
+                    Text = "Stack",
                     Tag = "stack"
                 };
 
@@ -444,7 +444,7 @@ namespace CPU_emulator
             {
                 MWFzeropage = new MemoryWatchForm(0x0, 0x0FF, this.Cpu)
                 {
-                    Text = "ZeroPage-Watch",
+                    Text = "ZeroPage",
                     Tag = "zeropage"
                 };
 
@@ -468,7 +468,7 @@ namespace CPU_emulator
             {
                 MWFmemrange = new MemoryWatchForm(this.Cpu)
                 {
-                    Text = "MemoryRange-Watch",
+                    Text = "Memory-Range",
                     Tag = "memrange"
                 };
 
@@ -485,7 +485,6 @@ namespace CPU_emulator
             Form f = sender as Form;
             config.MwfMemoryRangeLocation = f.Location;
         }
-
 
         #endregion
 
@@ -544,6 +543,31 @@ namespace CPU_emulator
 
             this.Size = new Size(570, 570);
 
+            PositionLedControls();
+
+            ShowMemoryWindows();
+        }
+
+        private void ShowMemoryWindows()
+        {
+            if (config.ShowStackOnStartUP)
+            {
+                StackToolStripMenuItem_Click(null, EventArgs.Empty);
+            }
+
+            if (config.ShowMemoryRangeOnStartUp)
+            {
+                MemrangeToolStripMenuItem_Click(null, EventArgs.Empty);
+            }
+
+            if (config.ShowZeroPageOnstartUp)
+            {
+                ZeropageToolStripMenuItem_Click(null, EventArgs.Empty);
+            }
+        }
+
+        private void PositionLedControls()
+        {
             groupBoxLedRegs.Parent = panelMain;
             groupBoxLedRegs.Location = new Point(3, 15);
             groupBoxLedRegs.BringToFront();
