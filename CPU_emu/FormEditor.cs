@@ -80,6 +80,7 @@ namespace CPU_emulator
             }
 
             _dataChanged = false;
+            buttonSave.Enabled = false;
         }
 
         private void ContextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
@@ -99,7 +100,9 @@ namespace CPU_emulator
             byte[] data = new byte[endAddress - startAddress];
             int offset = 0;
 
-            for (int i = 0; i < DGVmemory.Rows.Count-1; i++)
+            buttonSave.Enabled = false;
+
+            for (int i = 0; i <= DGVmemory.Rows.Count-1; i++)
             {
                 for (int j = 0; j < 16; j++)
                 {
@@ -111,12 +114,12 @@ namespace CPU_emulator
 
             CPU.UpdateMemoryRange(data, startAddress);
             _dataChanged = false;
+            LoadDatagrid();
 
         }
 
         private void DGVmemory_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            
             DataGridViewCell dc = null;
 
             DataGridView dgv = sender as DataGridView;
@@ -130,6 +133,8 @@ namespace CPU_emulator
                 dc.Style.BackColor = Color.Yellow;
                 _dataChanged = true;
             }
+
+            buttonSave.Enabled = _dataChanged;
         }
 
         private void FormEditor_FormClosing(object sender, FormClosingEventArgs e)
@@ -138,6 +143,28 @@ namespace CPU_emulator
             {
                 e.Cancel = true;
             }
+        }
+
+        private void DGVmemory_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            
+            bool parsed = int.TryParse(e.FormattedValue.ToString(), System.Globalization.NumberStyles.HexNumber, null, out int value);
+
+            if ( !parsed
+                || value < 0 
+                || value > 255)
+            {
+                e.Cancel = true;
+                dgv.Rows[e.RowIndex].ErrorText = "Value must be hexvalue between 00 and FF";
+            }
+        }
+
+        private void DGVmemory_CellValidated(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            dgv.Rows[e.RowIndex].ErrorText = String.Empty;
+            dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToUpper().PadLeft(2,'0');
         }
     }
 }
