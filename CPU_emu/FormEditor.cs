@@ -15,6 +15,7 @@ namespace CPU_emulator
     {
         private CPU CPU;
         private byte[] Data;
+        private bool _dataChanged = false;
 
         public FormEditor(CPU Cpu)
         {
@@ -25,16 +26,28 @@ namespace CPU_emulator
 
         private void ButtonLoadRange_Click(object sender, EventArgs e)
         {
-            DGVmemory.Rows.Clear();DGVmemory.Columns.Clear();
-            
+
+            if (_dataChanged && (MessageBox.Show("Discard changes and reload?", "There are unsaved changes!", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.Cancel))
+            {
+                return;
+            }
+
+            LoadDatagrid();
+
+        }
+
+        private void LoadDatagrid()
+        {
+            DGVmemory.Rows.Clear(); DGVmemory.Columns.Clear();
+
             int startAddress = (int)numericUpDown_StartAddress.Value;
             int endAddress = (int)numericUpDown_EndAddress.Value;
-            
-            
+
+
             DataGridViewCellStyle style = DGVmemory.ColumnHeadersDefaultCellStyle;
             style.Alignment = DataGridViewContentAlignment.MiddleCenter;
             style.BackColor = Color.LightYellow;
-                        
+
             for (int i = 0; i < 16; i++)
             {
                 DGVmemory.Columns.Add("c" + i.ToString("X2"), i.ToString("X"));
@@ -53,20 +66,20 @@ namespace CPU_emulator
             foreach (DataGridViewColumn column in DGVmemory.Columns)
             {
                 column.Width = 60;
-                
+
             }
 
-            for (int i = startAddress; i < endAddress; i+=16)
+            for (int i = startAddress; i < endAddress; i += 16)
             {
-                var index = DGVmemory.Rows.Add(); 
+                var index = DGVmemory.Rows.Add();
                 for (int j = 0; j < 16; j++)
                 {
-                    DGVmemory.Rows[index].Cells[j].Value = Data[i+j].ToString("X2");
+                    DGVmemory.Rows[index].Cells[j].Value = Data[i + j].ToString("X2");
                     DGVmemory.Rows[index].HeaderCell.Value = i.ToString("X3");
                 }
             }
 
-            
+            _dataChanged = false;
         }
 
         private void ContextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
@@ -97,7 +110,34 @@ namespace CPU_emulator
             }
 
             CPU.UpdateMemoryRange(data, startAddress);
+            _dataChanged = false;
 
+        }
+
+        private void DGVmemory_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            DataGridViewCell dc = null;
+
+            DataGridView dgv = sender as DataGridView;
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+               dc = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex]; 
+            }
+
+            if (dc != null && dc.IsInEditMode)
+            {
+                dc.Style.BackColor = Color.Yellow;
+                _dataChanged = true;
+            }
+        }
+
+        private void FormEditor_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_dataChanged && (MessageBox.Show("Discard changes and close?","There are unsaved changes!",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning)== DialogResult.Cancel))
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
