@@ -363,7 +363,15 @@ namespace CPU_emulator
             return Data;
         }
 
+        internal void UpdateMemoryRange(byte[] data, int startAddress)
+        {
+            for (int i = 0; i < data.Length; i++)
+            {
+                Memory[startAddress + i] = data[i];
+            }
 
+            OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
+        }
     }
 
     public class CPUEventArgs : EventArgs

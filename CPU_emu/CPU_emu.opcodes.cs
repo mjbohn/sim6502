@@ -19,5 +19,7 @@ namespace CPU_emulator
             OC_PHA    = 0x48,
             OC_PLA    = 0x68
             ;
+
+      
     }
 }

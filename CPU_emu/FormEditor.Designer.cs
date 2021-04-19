@@ -34,17 +34,18 @@ namespace CPU_emulator
             this.DGVmemory = new System.Windows.Forms.DataGridView();
             this.buttonLoadRange = new System.Windows.Forms.Button();
             this.numericUpDown_StartAddress = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown_EndAddress = new System.Windows.Forms.NumericUpDown();
-            this.labelStartAddress = new System.Windows.Forms.Label();
-            this.labelEndAddress = new System.Windows.Forms.Label();
             this.contextMenuStartAddress = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuSetStartAdrToZero = new System.Windows.Forms.ToolStripMenuItem();
+            this.numericUpDown_EndAddress = new System.Windows.Forms.NumericUpDown();
             this.contextMenuEndAdress = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuSetStartAdrToMax = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelStartAddress = new System.Windows.Forms.Label();
+            this.labelEndAddress = new System.Windows.Forms.Label();
+            this.buttonSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVmemory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_StartAddress)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).BeginInit();
             this.contextMenuStartAddress.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).BeginInit();
             this.contextMenuEndAdress.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -73,9 +74,9 @@ namespace CPU_emulator
             this.buttonLoadRange.Name = "buttonLoadRange";
             this.buttonLoadRange.Size = new System.Drawing.Size(212, 23);
             this.buttonLoadRange.TabIndex = 2;
-            this.buttonLoadRange.Text = "Load Range";
+            this.buttonLoadRange.Text = "Load";
             this.buttonLoadRange.UseVisualStyleBackColor = true;
-            this.buttonLoadRange.Click += new System.EventHandler(this.buttonLoadRange_Click);
+            this.buttonLoadRange.Click += new System.EventHandler(this.ButtonLoadRange_Click);
             // 
             // numericUpDown_StartAddress
             // 
@@ -99,10 +100,24 @@ namespace CPU_emulator
             this.numericUpDown_StartAddress.TabIndex = 3;
             this.numericUpDown_StartAddress.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDown_StartAddress.Value = new decimal(new int[] {
-            256,
+            512,
             0,
             0,
             0});
+            // 
+            // contextMenuStartAddress
+            // 
+            this.contextMenuStartAddress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuSetStartAdrToZero});
+            this.contextMenuStartAddress.Name = "contextMenuStartAddress";
+            this.contextMenuStartAddress.Size = new System.Drawing.Size(114, 26);
+            // 
+            // contextMenuSetStartAdrToZero
+            // 
+            this.contextMenuSetStartAdrToZero.Name = "contextMenuSetStartAdrToZero";
+            this.contextMenuSetStartAdrToZero.Size = new System.Drawing.Size(113, 22);
+            this.contextMenuSetStartAdrToZero.Text = "Set to 0";
+            this.contextMenuSetStartAdrToZero.Click += new System.EventHandler(this.ContextMenuSetStartAdrToZero_Click);
             // 
             // numericUpDown_EndAddress
             // 
@@ -131,6 +146,20 @@ namespace CPU_emulator
             0,
             0});
             // 
+            // contextMenuEndAdress
+            // 
+            this.contextMenuEndAdress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuSetStartAdrToMax});
+            this.contextMenuEndAdress.Name = "contextMenuStartAddress";
+            this.contextMenuEndAdress.Size = new System.Drawing.Size(131, 26);
+            // 
+            // contextMenuSetStartAdrToMax
+            // 
+            this.contextMenuSetStartAdrToMax.Name = "contextMenuSetStartAdrToMax";
+            this.contextMenuSetStartAdrToMax.Size = new System.Drawing.Size(130, 22);
+            this.contextMenuSetStartAdrToMax.Text = "Set to max";
+            this.contextMenuSetStartAdrToMax.Click += new System.EventHandler(this.ContextMenuSetStartAdrToMax_Click);
+            // 
             // labelStartAddress
             // 
             this.labelStartAddress.AutoSize = true;
@@ -151,39 +180,23 @@ namespace CPU_emulator
             this.labelEndAddress.TabIndex = 6;
             this.labelEndAddress.Text = "End Address";
             // 
-            // contextMenuStartAddress
+            // buttonSave
             // 
-            this.contextMenuStartAddress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextMenuSetStartAdrToZero});
-            this.contextMenuStartAddress.Name = "contextMenuStartAddress";
-            this.contextMenuStartAddress.Size = new System.Drawing.Size(114, 26);
-            // 
-            // contextMenuSetStartAdrToZero
-            // 
-            this.contextMenuSetStartAdrToZero.Name = "contextMenuSetStartAdrToZero";
-            this.contextMenuSetStartAdrToZero.Size = new System.Drawing.Size(113, 22);
-            this.contextMenuSetStartAdrToZero.Text = "Set to 0";
-            this.contextMenuSetStartAdrToZero.Click += new System.EventHandler(this.contextMenuSetStartAdrToZero_Click);
-            // 
-            // contextMenuEndAdress
-            // 
-            this.contextMenuEndAdress.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.contextMenuSetStartAdrToMax});
-            this.contextMenuEndAdress.Name = "contextMenuStartAddress";
-            this.contextMenuEndAdress.Size = new System.Drawing.Size(181, 48);
-            // 
-            // contextMenuSetStartAdrToMax
-            // 
-            this.contextMenuSetStartAdrToMax.Name = "contextMenuSetStartAdrToMax";
-            this.contextMenuSetStartAdrToMax.Size = new System.Drawing.Size(180, 22);
-            this.contextMenuSetStartAdrToMax.Text = "Set to max";
-            this.contextMenuSetStartAdrToMax.Click += new System.EventHandler(this.contextMenuSetStartAdrToMax_Click);
+            this.buttonSave.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSave.Location = new System.Drawing.Point(230, 686);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(212, 23);
+            this.buttonSave.TabIndex = 7;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // FormEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1159, 721);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.labelEndAddress);
             this.Controls.Add(this.labelStartAddress);
             this.Controls.Add(this.numericUpDown_EndAddress);
@@ -199,8 +212,8 @@ namespace CPU_emulator
             this.Text = "Editor";
             ((System.ComponentModel.ISupportInitialize)(this.DGVmemory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_StartAddress)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).EndInit();
             this.contextMenuStartAddress.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_EndAddress)).EndInit();
             this.contextMenuEndAdress.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -218,5 +231,6 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem contextMenuSetStartAdrToZero;
         private System.Windows.Forms.ContextMenuStrip contextMenuEndAdress;
         private System.Windows.Forms.ToolStripMenuItem contextMenuSetStartAdrToMax;
+        private System.Windows.Forms.Button buttonSave;
     }
 }

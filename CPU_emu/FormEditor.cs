@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,7 @@ namespace CPU_emulator
             Data = CPU.ReadMemory();
         }
 
-        private void buttonLoadRange_Click(object sender, EventArgs e)
+        private void ButtonLoadRange_Click(object sender, EventArgs e)
         {
             DGVmemory.Rows.Clear();DGVmemory.Columns.Clear();
             
@@ -68,14 +69,35 @@ namespace CPU_emulator
             
         }
 
-        private void contextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
+        private void ContextMenuSetStartAdrToZero_Click(object sender, EventArgs e)
         {
             numericUpDown_StartAddress.Value = 0;
         }
 
-        private void contextMenuSetStartAdrToMax_Click(object sender, EventArgs e)
+        private void ContextMenuSetStartAdrToMax_Click(object sender, EventArgs e)
         {
             numericUpDown_EndAddress.Value = 0xffff;
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            int startAddress = (int)numericUpDown_StartAddress.Value;
+            int endAddress = (int)numericUpDown_EndAddress.Value;
+            byte[] data = new byte[endAddress - startAddress];
+            int offset = 0;
+
+            for (int i = 0; i < DGVmemory.Rows.Count-1; i++)
+            {
+                for (int j = 0; j < 16; j++)
+                {
+                    data[offset] = Convert.ToByte( DGVmemory.Rows[i].Cells[j].Value.ToString(),16 );
+                    
+                    offset++;
+                }
+            }
+
+            CPU.UpdateMemoryRange(data, startAddress);
+
         }
     }
 }
