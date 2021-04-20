@@ -25,7 +25,7 @@ namespace CPU_emulator
         private ulong _InterruptPeriod;
         private bool _ExitRequested;
         private bool _SteppingMode;
-
+        private ulong cycles;
         private const uint MAX_MEM = 1024 * 64;
         private byte[] Data = new byte[MAX_MEM];
 
@@ -89,7 +89,7 @@ namespace CPU_emulator
             SetSP(0x01FF);
 
             SetRegister("A", 0);
-            SetRegister("X", 15);
+            SetRegister("X", 0);
             SetRegister("Y", 0);
             InterruptPeriod = 1000;
             ExitRequested = false;
@@ -161,7 +161,7 @@ namespace CPU_emulator
 
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
-            ulong cycles = InterruptPeriod;
+            cycles = InterruptPeriod;
             byte b_tmp = 0;
 
             while (CpuIsRunning)
@@ -178,6 +178,16 @@ namespace CPU_emulator
                         SetRegister("A", b_tmp);
                         SetZeroAndNegativeFlags(A); 
                         break;
+                    case OC_LDX_IM:
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("X", b_tmp);
+                        SetZeroAndNegativeFlags(X);
+                        break;
+                    case OC_LDY_IM:
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("Y", b_tmp);
+                        SetZeroAndNegativeFlags(Y);
+                        break;
                     case OC_LDA_ZP: // Load Accumulator zeropage
                         b_tmp = FetchByte(ref cycles);
                         SetRegister("A", ReadByteFromMemory(b_tmp));
@@ -188,6 +198,9 @@ namespace CPU_emulator
                         b_tmp += X;
                         SetRegister("A", ReadByteFromMemory(b_tmp));
                         SetZeroAndNegativeFlags(A);
+                        break;
+                    case CO_JMP_ABS:
+                        PC = AddrAbsolute();
                         break;
                     case OC_PHA: // Push Accumulator on Stack
                         PushByteToStack(A,ref cycles);
@@ -230,6 +243,11 @@ namespace CPU_emulator
             }
         }
 
+        private uint AddrAbsolute()
+        {
+            return FetchWord(ref cycles);
+        }
+
         private byte PullByteFromStack(ref ulong cycles)
         {
             IncrementSP();
@@ -266,6 +284,17 @@ namespace CPU_emulator
             IncrementPC();
             cycles--;
             return data;
+        }
+
+        private ushort FetchWord(ref ulong cycles)
+        {
+            ushort LoByte = ReadByteFromMemory((ushort)PC);
+            PC++;
+            ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
+
+            cycles -= 2;
+
+            return LoByte |= HiByte;
         }
 
         public void WriteByteToMemory(byte b,ushort address)
