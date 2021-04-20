@@ -82,9 +82,6 @@ namespace CPU_emulator
         {
             ushort tmpPC = ReadWordFromMemory(ResetVector);
 
-            ResetMemory();
-            
-
             SetPC(tmpPC);
             SetSP(0x01FF);
 
@@ -97,7 +94,7 @@ namespace CPU_emulator
             // set all status flags to false
             flags["C"] = flags["Z"] = flags["I"] = flags["D"] = flags["B"] = flags["V"] = flags["N"] = false;
 
-            LoadInlineTestProg();
+            //LoadInlineTestProg();
 
             OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
             OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
@@ -173,32 +170,59 @@ namespace CPU_emulator
                         ExitRequested = true;
                         OnBreak?.Invoke(this, new CPUEventArgs(this));
                         break;
-                    case OC_LDA_IM: // Load Accumulator immidiate
+                        
+                    case OC_LDA_IM: // Load Accumulator immidiate A9
                         b_tmp = FetchByte(ref cycles);
                         SetRegister("A", b_tmp);
                         SetZeroAndNegativeFlags(A); 
                         break;
-                    case OC_LDX_IM:
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("X", b_tmp);
-                        SetZeroAndNegativeFlags(X);
-                        break;
-                    case OC_LDY_IM:
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("Y", b_tmp);
-                        SetZeroAndNegativeFlags(Y);
-                        break;
-                    case OC_LDA_ZP: // Load Accumulator zeropage
+                    case OC_LDA_ZP: // Load Accumulator zeropage A5
                         b_tmp = FetchByte(ref cycles);
                         SetRegister("A", ReadByteFromMemory(b_tmp));
                         SetZeroAndNegativeFlags(A);
                         break;
-                    case OC_LDA_ZPX: // Load Accumulator zeropage X
+                    case OC_LDA_ZPX: // Load Accumulator zeropage X B5
                         b_tmp = FetchByte(ref cycles);
                         b_tmp += X;
                         SetRegister("A", ReadByteFromMemory(b_tmp));
                         SetZeroAndNegativeFlags(A);
                         break;
+
+                    case OC_LDX_IM: // Load X immidiate A2
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("X", b_tmp);
+                        SetZeroAndNegativeFlags(X);
+                        break;
+                    case OC_LDX_ZP: // Load X zeropage A6
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("X", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(X);
+                        break;
+                    case OC_LDX_ZPY: // Load X zeropage Y B6
+                        b_tmp = FetchByte(ref cycles);
+                        b_tmp += Y;
+                        SetRegister("X", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(X);
+                        break;
+
+                    case OC_LDY_IM: // Load Y immidiate A0
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("Y", b_tmp);
+                        SetZeroAndNegativeFlags(Y);
+                        break;
+                    case OC_LDY_ZP: // Load Y zeropage A4
+                        b_tmp = FetchByte(ref cycles);
+                        SetRegister("Y", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(Y);
+                        break;
+                    case OC_LDY_ZPX: // Load Y zeropage X B4
+                        b_tmp = FetchByte(ref cycles);
+                        b_tmp += X;
+                        SetRegister("Y", ReadByteFromMemory(b_tmp));
+                        SetZeroAndNegativeFlags(Y);
+                        break;
+
+
                     case CO_JMP_ABS:
                         PC = AddrAbsolute();
                         break;
@@ -384,7 +408,6 @@ namespace CPU_emulator
 
             SetVectors();
 
-            //OnMemoryUpdate?.Invoke(this, EventArgs.Empty);
             OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
         }
         public byte[] ReadMemory()
