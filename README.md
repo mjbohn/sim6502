@@ -44,3 +44,7 @@ CO_JMP_ABS = 0x4C,
 ***Stack  
 OC_PHA    = 0x48,  
 OC_PLA    = 0x68  
+
+Any comments, ideas, critics? Drop me a line or open an [issue](https://github.com/mjbohn/sim6502/issues).  
+
+
