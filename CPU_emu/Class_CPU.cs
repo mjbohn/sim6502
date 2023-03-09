@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -156,89 +157,107 @@ namespace CPU_emulator
             CpuRunner.RunWorkerAsync();
         }
 
+        public void cmd_A9()
+        {
+            MessageBox.Show("A9");
+            //b_tmp = FetchByte(ref cycles);
+            SetRegister("A", FetchByte(ref cycles));
+            SetZeroAndNegativeFlags(A);
+        }
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             cycles = InterruptPeriod;
             byte b_tmp = 0;
+            Type thisType = this.GetType();
 
+            
             while (CpuIsRunning)
             {
                 byte instruction = FetchByte(ref cycles);
-                switch (instruction)
+                string cmd = "cmd_" + instruction.ToString("X2").ToUpper();
+                MethodInfo theMethod2Call = thisType.GetMethod(cmd);
+                if (theMethod2Call != null)
                 {
-                    case OC_BRK:
-                        ExitRequested = true;
-                        OnBreak?.Invoke(this, new CPUEventArgs(this));
-                        break;
-                        
-                    case OC_LDA_IM: // Load Accumulator immidiate A9
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("A", b_tmp);
-                        SetZeroAndNegativeFlags(A); 
-                        break;
-                    case OC_LDA_ZP: // Load Accumulator zeropage A5
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("A", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(A);
-                        break;
-                    case OC_LDA_ZPX: // Load Accumulator zeropage X B5
-                        b_tmp = FetchByte(ref cycles);
-                        b_tmp += X;
-                        SetRegister("A", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(A);
-                        break;
-
-                    case OC_LDX_IM: // Load X immidiate A2
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("X", b_tmp);
-                        SetZeroAndNegativeFlags(X);
-                        break;
-                    case OC_LDX_ZP: // Load X zeropage A6
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("X", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(X);
-                        break;
-                    case OC_LDX_ZPY: // Load X zeropage Y B6
-                        b_tmp = FetchByte(ref cycles);
-                        b_tmp += Y;
-                        SetRegister("X", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(X);
-                        break;
-
-                    case OC_LDY_IM: // Load Y immidiate A0
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("Y", b_tmp);
-                        SetZeroAndNegativeFlags(Y);
-                        break;
-                    case OC_LDY_ZP: // Load Y zeropage A4
-                        b_tmp = FetchByte(ref cycles);
-                        SetRegister("Y", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(Y);
-                        break;
-                    case OC_LDY_ZPX: // Load Y zeropage X B4
-                        b_tmp = FetchByte(ref cycles);
-                        b_tmp += X;
-                        SetRegister("Y", ReadByteFromMemory(b_tmp));
-                        SetZeroAndNegativeFlags(Y);
-                        break;
-
-
-                    case CO_JMP_ABS:
-                        PC = AddrAbsolute();
-                        break;
-                    case OC_PHA: // Push Accumulator on Stack
-                        PushByteToStack(A,ref cycles);
-                        break;
-                    case OC_PLA: // Pull Accumulator from Stack
-                        b_tmp = PullByteFromStack(ref cycles);
-                        SetRegister("A", b_tmp);
-                        SetZeroAndNegativeFlags(A);
-                        break;
-                    default:
-                        
-                        break;
+                    theMethod2Call.Invoke(this, new object[] { });
                 }
                 
+
+                #region switch_cmd
+                //switch (instruction)
+                //{
+                //    case OC_BRK:
+                //        ExitRequested = true;
+                //        OnBreak?.Invoke(this, new CPUEventArgs(this));
+                //        break;
+
+                //    case OC_LDA_IM: // Load Accumulator immidiate A9
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("A", b_tmp);
+                //        SetZeroAndNegativeFlags(A); 
+                //        break;
+                //    case OC_LDA_ZP: // Load Accumulator zeropage A5
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("A", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(A);
+                //        break;
+                //    case OC_LDA_ZPX: // Load Accumulator zeropage X B5
+                //        b_tmp = FetchByte(ref cycles);
+                //        b_tmp += X;
+                //        SetRegister("A", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(A);
+                //        break;
+
+                //    case OC_LDX_IM: // Load X immidiate A2
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("X", b_tmp);
+                //        SetZeroAndNegativeFlags(X);
+                //        break;
+                //    case OC_LDX_ZP: // Load X zeropage A6
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("X", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(X);
+                //        break;
+                //    case OC_LDX_ZPY: // Load X zeropage Y B6
+                //        b_tmp = FetchByte(ref cycles);
+                //        b_tmp += Y;
+                //        SetRegister("X", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(X);
+                //        break;
+
+                //    case OC_LDY_IM: // Load Y immidiate A0
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("Y", b_tmp);
+                //        SetZeroAndNegativeFlags(Y);
+                //        break;
+                //    case OC_LDY_ZP: // Load Y zeropage A4
+                //        b_tmp = FetchByte(ref cycles);
+                //        SetRegister("Y", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(Y);
+                //        break;
+                //    case OC_LDY_ZPX: // Load Y zeropage X B4
+                //        b_tmp = FetchByte(ref cycles);
+                //        b_tmp += X;
+                //        SetRegister("Y", ReadByteFromMemory(b_tmp));
+                //        SetZeroAndNegativeFlags(Y);
+                //        break;
+
+
+                //    case CO_JMP_ABS:
+                //        PC = AddrAbsolute();
+                //        break;
+                //    case OC_PHA: // Push Accumulator on Stack
+                //        PushByteToStack(A,ref cycles);
+                //        break;
+                //    case OC_PLA: // Pull Accumulator from Stack
+                //        b_tmp = PullByteFromStack(ref cycles);
+                //        SetRegister("A", b_tmp);
+                //        SetZeroAndNegativeFlags(A);
+                //        break;
+                //    default:
+
+                //        break;
+                //}
+                #endregion
                 if (_SteppingMode)
                 {
                     break;
