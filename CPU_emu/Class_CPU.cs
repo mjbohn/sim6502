@@ -157,13 +157,7 @@ namespace CPU_emulator
             CpuRunner.RunWorkerAsync();
         }
 
-        public void cmd_A9()
-        {
-            MessageBox.Show("A9");
-            //b_tmp = FetchByte(ref cycles);
-            SetRegister("A", FetchByte(ref cycles));
-            SetZeroAndNegativeFlags(A);
-        }
+        
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             cycles = InterruptPeriod;
@@ -174,11 +168,19 @@ namespace CPU_emulator
             while (CpuIsRunning)
             {
                 byte instruction = FetchByte(ref cycles);
-                string cmd = "cmd_" + instruction.ToString("X2").ToUpper();
+
+                // Build methon name form 'Cmd' + opcode
+                string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
+                
                 MethodInfo theMethod2Call = thisType.GetMethod(cmd);
+                // Chec if method Cmd_<opcode> exists
                 if (theMethod2Call != null)
                 {
                     theMethod2Call.Invoke(this, new object[] { });
+                }
+                else
+                {
+                    MessageBox.Show(string.Format("Method {0} not found!", cmd),"Error!",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 
 
@@ -190,16 +192,8 @@ namespace CPU_emulator
                 //        OnBreak?.Invoke(this, new CPUEventArgs(this));
                 //        break;
 
-                //    case OC_LDA_IM: // Load Accumulator immidiate A9
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("A", b_tmp);
-                //        SetZeroAndNegativeFlags(A); 
-                //        break;
-                //    case OC_LDA_ZP: // Load Accumulator zeropage A5
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("A", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(A);
-                //        break;
+                
+                
                 //    case OC_LDA_ZPX: // Load Accumulator zeropage X B5
                 //        b_tmp = FetchByte(ref cycles);
                 //        b_tmp += X;
