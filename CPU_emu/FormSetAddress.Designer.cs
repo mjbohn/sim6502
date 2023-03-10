@@ -188,7 +188,6 @@ namespace CPU_emulator
             // 
             // FormSetAddress
             // 
-            this.AcceptButton = this.buttonSet;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(278, 149);

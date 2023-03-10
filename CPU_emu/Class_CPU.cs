@@ -194,29 +194,10 @@ namespace CPU_emulator
 
                 
                 
-                //    case OC_LDA_ZPX: // Load Accumulator zeropage X B5
-                //        b_tmp = FetchByte(ref cycles);
-                //        b_tmp += X;
-                //        SetRegister("A", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(A);
-                //        break;
-
-                //    case OC_LDX_IM: // Load X immidiate A2
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("X", b_tmp);
-                //        SetZeroAndNegativeFlags(X);
-                //        break;
-                //    case OC_LDX_ZP: // Load X zeropage A6
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("X", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(X);
-                //        break;
-                //    case OC_LDX_ZPY: // Load X zeropage Y B6
-                //        b_tmp = FetchByte(ref cycles);
-                //        b_tmp += Y;
-                //        SetRegister("X", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(X);
-                //        break;
+                
+               
+                
+                
 
                 //    case OC_LDY_IM: // Load Y immidiate A0
                 //        b_tmp = FetchByte(ref cycles);

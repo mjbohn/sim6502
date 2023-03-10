@@ -22,6 +22,17 @@ namespace CPU_emulator
             this._cpu = cpu;
         }
 
+        protected override bool ProcessDialogKey(Keys keyData)
+        {
+            if (Form.ModifierKeys == Keys.None && keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+
+            return base.ProcessDialogKey(keyData);
+        }
+
         private void textBoxAddress_TextChanged(object sender, EventArgs e)
         {
             _address= Convert.ToUInt32(textBoxAddress.Text, 16);

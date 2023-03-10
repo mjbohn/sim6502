@@ -5,13 +5,16 @@ namespace CPU_emulator
 {
     public partial class CPU
     {
+        #region BRK
         // BREAK
         public void Cmd_00()
         {
             ExitRequested = true;
             OnBreak?.Invoke(this, new CPUEventArgs(this));
         }
+        #endregion
 
+        #region LDA
         // Load Accumulator immidiate A9
         public void Cmd_A9()
         {
@@ -29,20 +32,39 @@ namespace CPU_emulator
         // Load Accumulator zeropage X B5
         public void Cmd_B5()
         {
-            byte b_tmp = 0;
-            b_tmp = FetchByte(ref cycles); // Get ZP address
+            byte b_tmp = FetchByte(ref cycles);
             b_tmp += X; // add regX to address
             SetRegister("A", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(A);
         }
+        #endregion
 
-        //    case OC_LDA_ZPX: // 
-        //        b_tmp = FetchByte(ref cycles);
-        //        b_tmp += X;
-        //        SetRegister("A", ReadByteFromMemory(b_tmp));
-        //        SetZeroAndNegativeFlags(A);
-        //        break;
+        #region LDX
+        // Load X immidiate A2
+        public void Cmd_A2()
+        {
+            byte b_tmp = FetchByte(ref cycles);
+            SetRegister("X", b_tmp);
+            SetZeroAndNegativeFlags(X);
+        }
 
+        // Load X zeropage A6
+        public void Cmd_A6()
+        {
+            byte b_tmp = FetchByte(ref cycles);
+            SetRegister("X", ReadByteFromMemory(b_tmp));
+            SetZeroAndNegativeFlags(X);
+        }
 
+        // Load X zeropage Y B6
+        public void Cmd_B6()
+        {
+            byte b_tmp = FetchByte(ref cycles); // Get ZP address
+            b_tmp += Y; // add regY to address
+            SetRegister("X", ReadByteFromMemory(b_tmp));
+            SetZeroAndNegativeFlags(X);
+        }
+        
+        #endregion
     }
 }
