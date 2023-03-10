@@ -166,5 +166,10 @@ namespace CPU_emulator
             dgv.Rows[e.RowIndex].ErrorText = String.Empty;
             dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString().ToUpper().PadLeft(2,'0');
         }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
