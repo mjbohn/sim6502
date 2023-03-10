@@ -26,8 +26,21 @@ namespace CPU_emulator
             SetZeroAndNegativeFlags(A);
         }
 
-        //    case OC_LDA_ZP: // Load Accumulator zeropage A5
+        // Load Accumulator zeropage X B5
+        public void Cmd_B5()
+        {
+            byte b_tmp = 0;
+            b_tmp = FetchByte(ref cycles); // Get ZP address
+            b_tmp += X; // add regX to address
+            SetRegister("A", ReadByteFromMemory(b_tmp));
+            SetZeroAndNegativeFlags(A);
+        }
 
+        //    case OC_LDA_ZPX: // 
+        //        b_tmp = FetchByte(ref cycles);
+        //        b_tmp += X;
+        //        SetRegister("A", ReadByteFromMemory(b_tmp));
+        //        SetZeroAndNegativeFlags(A);
         //        break;
 
 

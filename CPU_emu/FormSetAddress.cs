@@ -43,5 +43,27 @@ namespace CPU_emulator
         {
             _cpu.WriteByteToMemory(_data, (ushort)_address);
         }
+
+        private void FormSetAddress_Load(object sender, EventArgs e)
+        {
+            textBoxDataRegA.Text = _cpu.A.ToString("X2");
+            textBoxDataRegX.Text = _cpu.X.ToString("X2");
+            textBoxDataRegY.Text = _cpu.Y.ToString("X2");
+        }
+
+        private void buttonSetRegA_Click(object sender, EventArgs e)
+        {
+            _cpu.SetRegister("A", Convert.ToByte(textBoxDataRegA.Text, 16));
+        }
+
+        private void buttonSetRegX_Click(object sender, EventArgs e)
+        {
+            _cpu.SetRegister("X", Convert.ToByte(textBoxDataRegX.Text, 16));
+        }
+
+        private void buttonSetRegY_Click(object sender, EventArgs e)
+        {
+            _cpu.SetRegister("Y", Convert.ToByte(textBoxDataRegY.Text, 16));
+        }
     }
 }
