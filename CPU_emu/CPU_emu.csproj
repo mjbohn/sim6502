@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Class_CPU.cs" />
     <Compile Include="ConfigSettings.cs" />
+    <Compile Include="CPU_emu.CMD_Methods.cs" />
     <Compile Include="CPU_emu.cs">
       <SubType>Form</SubType>
     </Compile>

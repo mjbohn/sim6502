@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30907.101
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPU_emu", "CPU_emu\CPU_emu.csproj", "{455D0CE4-B7E7-4BA1-9491-F97ED5EB2BC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPU_emu.nUnitTests", "CPU_emuTests\CPU_emu.nUnitTests.csproj", "{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{455D0CE4-B7E7-4BA1-9491-F97ED5EB2BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{455D0CE4-B7E7-4BA1-9491-F97ED5EB2BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{455D0CE4-B7E7-4BA1-9491-F97ED5EB2BC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
