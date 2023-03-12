@@ -170,11 +170,11 @@ namespace CPU_emulator
             {
                 byte instruction = FetchByte(ref cycles);
 
-                // Build methon name form 'Cmd' + opcode
+                // Build method name from 'Cmd' + opcode
                 string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
                 
                 MethodInfo theMethod2Call = thisType.GetMethod(cmd);
-                // Chec if method Cmd_<opcode> exists
+                // Check if method Cmd_<opcode> exists
                 if (theMethod2Call != null)
                 {
                     theMethod2Call.Invoke(this, new object[] { });
