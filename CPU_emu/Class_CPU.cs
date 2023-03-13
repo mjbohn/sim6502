@@ -290,6 +290,7 @@ namespace CPU_emulator
             ExitRequested = true;
         }
 
+        //UT
         private void SetZeroAndNegativeFlags(byte register)
         {
             flags["Z"] = (register == 0);
@@ -342,6 +343,7 @@ namespace CPU_emulator
         }
 
         // Stackpointer SP
+        //UT
         private void SetSP(ushort value)
         {
             SP = value;
@@ -357,8 +359,9 @@ namespace CPU_emulator
             SP--;
             OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
         }
-        
+
         // Programcounter PC
+        //UT
         public void SetPC(uint value)
         {
             PC = value;
@@ -375,7 +378,7 @@ namespace CPU_emulator
             OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
         }
         
-        
+        //UT
         public void SetRegister(string regname, byte value)
         {
             switch (regname)
@@ -394,6 +397,7 @@ namespace CPU_emulator
             }
             OnRegisterUpdate?.Invoke(this, new CPUEventArgs(this));
         }
+        //UT
         public void ResetMemory()
         {
             for (int i = 0; i < MAX_MEM; i++)

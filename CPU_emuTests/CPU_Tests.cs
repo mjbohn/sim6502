@@ -63,6 +63,20 @@ namespace CPU_emulator
             Assert.That(cpu.flags["V"], Is.False);
             Assert.That(cpu.flags["N"], Is.False);
 
+            // TODO: Check events from PC and flags update
+        }
+
+        [TestCase(0xff, ExpectedResult = new bool[] { false, true })]
+        [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
+        public bool[] Test_SetZeroAndNegativeFlags(byte b)
+        {
+            bool[] result = new bool[2];
+            GetPrivateMethod("SetZeroAndNegativeFlags",cpu).Invoke(cpu,new object[] {b});
+            
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+
+            return result;
         }
 
         #region fetch data
@@ -78,6 +92,68 @@ namespace CPU_emulator
 
             Assert.That(GetPrivateMethod("FetchByte",cpu).Invoke(cpu,new object[] {cyc}), Is.EqualTo(0xff));
             Assert.That(cpu.PC, Is.EqualTo(201));
+
+        }
+
+        #endregion
+
+        #region ProgramCounterTest
+        [Test]
+        public void Test_SetPC() 
+        {
+            cpu.SetPC(0x200);
+            Assert.That(cpu.PC, Is.EqualTo(0x200));
+            // TODO: Test OnProgramCounterUpdate
+        }
+
+        [Test] 
+        public void Test_IncrementPC()
+        {
+            cpu.SetPC(0x200);
+            cpu.IncrementPC();
+            Assert.That(cpu.PC, Is.EqualTo(0x201));
+            // TODO: Test OnProgramCounterUpdate
+
+        }
+
+        [Test]
+        public void Test_DecrementPC()
+        {
+            cpu.SetPC(0x201);
+            cpu.DecrementPC();
+            Assert.That(cpu.PC, Is.EqualTo(0x200));
+            // TODO: Test OnProgramCounterUpdate
+
+        }
+
+        #endregion
+
+        #region StackPointerTest
+        [Test]
+        public void Test_SetSP()
+        {
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
+            Assert.That(cpu.SP, Is.EqualTo(0x01ff));
+            // TODO: Test OnStackPointerUpdate
+        }
+
+        [Test]
+        public void Test_IncrementSP()
+        {
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fe });
+            GetPrivateMethod("IncrementSP", cpu).Invoke(cpu, null);
+            Assert.That(cpu.SP, Is.EqualTo(0x01ff));
+            // TODO: Test OnStackPointerUpdate
+
+        }
+
+        [Test]
+        public void Test_DecrementSP()
+        {
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
+            GetPrivateMethod("DecrementSP", cpu).Invoke(cpu, null);
+            Assert.That(cpu.SP, Is.EqualTo(0x01fe));
+            // TODO: Test OnStackPointerUpdate
 
         }
 
