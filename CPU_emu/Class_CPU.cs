@@ -188,36 +188,8 @@ namespace CPU_emulator
                 #region switch_cmd
                 //switch (instruction)
                 //{
-                //    case OC_BRK:
-                //        ExitRequested = true;
-                //        OnBreak?.Invoke(this, new CPUEventArgs(this));
-                //        break;
-
                 
                 
-                
-               
-                
-                
-
-                //    case OC_LDY_IM: // Load Y immidiate A0
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("Y", b_tmp);
-                //        SetZeroAndNegativeFlags(Y);
-                //        break;
-                //    case OC_LDY_ZP: // Load Y zeropage A4
-                //        b_tmp = FetchByte(ref cycles);
-                //        SetRegister("Y", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(Y);
-                //        break;
-                //    case OC_LDY_ZPX: // Load Y zeropage X B4
-                //        b_tmp = FetchByte(ref cycles);
-                //        b_tmp += X;
-                //        SetRegister("Y", ReadByteFromMemory(b_tmp));
-                //        SetZeroAndNegativeFlags(Y);
-                //        break;
-
-
                 //    case CO_JMP_ABS:
                 //        PC = AddrAbsolute();
                 //        break;
