@@ -201,6 +201,7 @@ namespace CPU_emulator
         {
             cpu = new CPU();
         }
+        #region LDA
 
         [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }),Category("CPU test"), TestOf("Cmd Test")]
         [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
@@ -238,5 +239,7 @@ namespace CPU_emulator
             return result;
 
         }
+
+        #endregion
     }
 }
