@@ -208,9 +208,28 @@ namespace CPU_emulator
         {
             object[] result = new object[3];
 
-            cpu.WriteByteToMemory(b, 200);
-            cpu.SetPC(200);
+            cpu.WriteByteToMemory(b, 0x200);
+            cpu.SetPC(0x200);
             cpu.Cmd_A9();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.A;
+
+            return result;
+
+        }
+
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }), Category("CPU test"), TestOf("Cmd Test")]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A5_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x01); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A5();
 
             result[0] = cpu.flags["Z"];
             result[1] = cpu.flags["N"];
