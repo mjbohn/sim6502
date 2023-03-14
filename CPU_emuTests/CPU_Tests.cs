@@ -15,7 +15,7 @@ namespace CPU_emulator
         }
         #region set registers
         [Test]
-        public void Test_SetRegister_A()
+        public void SetRegister_A_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("A", value);
@@ -24,7 +24,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_SetRegister_X()
+        public void SetRegister_X_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("X", value);
@@ -33,7 +33,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_SetRegister_Y()
+        public void SetRegister_Y_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("Y", value);
@@ -43,7 +43,7 @@ namespace CPU_emulator
         #endregion
 
         [Test]
-        public void Test_Reset()
+        public void Reset_Test()
         {
             
             cpu.Reset();
@@ -68,7 +68,7 @@ namespace CPU_emulator
 
         [TestCase(0xff, ExpectedResult = new bool[] { false, true })]
         [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
-        public bool[] Test_SetZeroAndNegativeFlags(byte b)
+        public bool[] SetZeroAndNegativeFlags_Test(byte b)
         {
             bool[] result = new bool[2];
             GetPrivateMethod("SetZeroAndNegativeFlags",cpu).Invoke(cpu,new object[] {b});
@@ -81,7 +81,7 @@ namespace CPU_emulator
 
         #region fetch data
         [Test]
-        public void Test_FetchByte()
+        public void FetchByte_Test()
         {
             byte value = 0xff;
             ulong cyc = 100;
@@ -99,7 +99,7 @@ namespace CPU_emulator
 
         #region ProgramCounterTest
         [Test]
-        public void Test_SetPC() 
+        public void SetPC_Test() 
         {
             cpu.SetPC(0x200);
             Assert.That(cpu.PC, Is.EqualTo(0x200));
@@ -107,7 +107,7 @@ namespace CPU_emulator
         }
 
         [Test] 
-        public void Test_IncrementPC()
+        public void IncrementPC_Test()
         {
             cpu.SetPC(0x200);
             cpu.IncrementPC();
@@ -117,7 +117,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_DecrementPC()
+        public void DecrementPC_Test()
         {
             cpu.SetPC(0x201);
             cpu.DecrementPC();
@@ -130,7 +130,7 @@ namespace CPU_emulator
 
         #region StackPointerTest
         [Test]
-        public void Test_SetSP()
+        public void SetSP_Test()
         {
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
             Assert.That(cpu.SP, Is.EqualTo(0x01ff));
@@ -138,7 +138,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_IncrementSP()
+        public void IncrementSP_Test()
         {
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fe });
             GetPrivateMethod("IncrementSP", cpu).Invoke(cpu, null);
@@ -148,7 +148,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_DecrementSP()
+        public void DecrementSP_Test()
         {
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
             GetPrivateMethod("DecrementSP", cpu).Invoke(cpu, null);

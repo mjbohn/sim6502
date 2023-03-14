@@ -24,8 +24,8 @@ namespace CPU_emulator
             OC_LDY_ZPX = 0xB4,
 
             // JMP
-            CO_JMP_ABS = 0x4C,
-            CO_JMP_IND = 0x6C,
+            OC_JMP_ABS = 0x4C,
+            OC_JMP_IND = 0x6C,
 
             // Stack
             OC_PHA    = 0x48,
