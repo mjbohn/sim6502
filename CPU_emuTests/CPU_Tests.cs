@@ -177,16 +177,32 @@ namespace CPU_emulator
         #endregion
     }
 
-    //public class CPU_Tests2
-    //{
-    //    private CPU cpu;
+    public class CPU_Command_Tests
+    {
+        private CPU cpu;
 
-    //    [SetUp] 
-    //    public void SetUp() 
-    //    {
-    //        cpu= new CPU();    
-    //    }
+        [SetUp]
+        public void SetUp()
+        {
+            cpu = new CPU();
+        }
 
-        
-    //}
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }),Category("CPU test"), TestOf("Cmd Test")]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A9_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 200);
+            cpu.SetPC(200);
+            cpu.Cmd_A9();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.A;
+
+            return result;
+
+        }
+    }
 }
