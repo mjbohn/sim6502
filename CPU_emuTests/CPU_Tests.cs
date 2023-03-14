@@ -42,6 +42,7 @@ namespace CPU_emulator
         }
         #endregion
 
+        #region misc
         [Test]
         public void Reset_Test()
         {
@@ -66,6 +67,19 @@ namespace CPU_emulator
             // TODO: Check events from PC and flags update
         }
 
+        [Test]
+        public void SetVectors_Test() 
+        {
+            GetPrivateMethod("SetVectors", cpu).Invoke(cpu, null);
+            byte[] memory = cpu.ReadMemory();
+
+            Assert.That(memory[0xFFFC], Is.EqualTo(0x00));
+            Assert.That(memory[0xFFFD], Is.EqualTo(0x02));
+        }
+
+        #endregion
+
+        #region set flags
         [TestCase(0xff, ExpectedResult = new bool[] { false, true })]
         [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
         public bool[] SetZeroAndNegativeFlags_Test(byte b)
@@ -78,6 +92,7 @@ namespace CPU_emulator
 
             return result;
         }
+        #endregion
 
         #region fetch data
         [Test]
