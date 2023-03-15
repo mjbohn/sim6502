@@ -117,18 +117,49 @@ namespace CPU_emulator
         [Test]
         public void SetPC_Test() 
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.SetPC(0x200);
             Assert.That(cpu.PC, Is.EqualTo(0x200));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x200));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
         }
 
         [Test] 
         public void IncrementPC_Test()
         {
             cpu.SetPC(0x200);
+
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.IncrementPC();
             Assert.That(cpu.PC, Is.EqualTo(0x201));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x201));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
@@ -136,9 +167,25 @@ namespace CPU_emulator
         public void DecrementPC_Test()
         {
             cpu.SetPC(0x201);
+
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.DecrementPC();
             Assert.That(cpu.PC, Is.EqualTo(0x200));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x200));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
