@@ -1,6 +1,7 @@
 
 using System.Reflection;
 
+
 namespace CPU_emulator 
 {
     [TestFixture]
@@ -147,28 +148,76 @@ namespace CPU_emulator
         [Test]
         public void SetSP_Test()
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
             Assert.That(cpu.SP, Is.EqualTo(0x01ff));
-            // TODO: Test OnStackPointerUpdate
+            
+            if (cpuea != null) 
+            { 
+                Assert.That(cpuea.SP, Is.EqualTo(0x01ff));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
+            
         }
 
         [Test]
         public void IncrementSP_Test()
         {
-            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fe });
+            ushort? expectedSPfromEventargs = null;
+
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fc });
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                expectedSPfromEventargs = e.SP;
+            };
+                        
             GetPrivateMethod("IncrementSP", cpu).Invoke(cpu, null);
-            Assert.That(cpu.SP, Is.EqualTo(0x01ff));
-            // TODO: Test OnStackPointerUpdate
+            Assert.That(cpu.SP, Is.EqualTo(0x01fd));
+
+            if (expectedSPfromEventargs != null)
+            {
+                Assert.That(expectedSPfromEventargs, Is.EqualTo(0x01fd));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
         [Test]
         public void DecrementSP_Test()
         {
+            ushort? expectedSPfromEventargs = null;
+
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                expectedSPfromEventargs = e.SP;
+            };
+
             GetPrivateMethod("DecrementSP", cpu).Invoke(cpu, null);
             Assert.That(cpu.SP, Is.EqualTo(0x01fe));
-            // TODO: Test OnStackPointerUpdate
+
+            if (expectedSPfromEventargs != null)
+            {
+                Assert.That(expectedSPfromEventargs, Is.EqualTo(0x01fe));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
