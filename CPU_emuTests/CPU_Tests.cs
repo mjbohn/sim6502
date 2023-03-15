@@ -85,9 +85,40 @@ namespace CPU_emulator
         [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
         public bool[] SetZeroAndNegativeFlags_Test(byte b)
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnFlagsUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             bool[] result = new bool[2];
             GetPrivateMethod("SetZeroAndNegativeFlags",cpu).Invoke(cpu,new object[] {b});
-            
+
+            if (cpuea != null)
+            {
+                switch (b)
+                {
+                    case 0xff:
+                        Assert.That(cpuea.Flags["Z"], Is.EqualTo(false));
+                        Assert.That(cpuea.Flags["N"], Is.EqualTo(true));
+                        break;
+                    case 0x00:
+                        Assert.That(cpuea.Flags["Z"], Is.EqualTo(true));
+                        Assert.That(cpuea.Flags["N"], Is.EqualTo(false));
+                        break;
+
+                    default:
+                        break;
+                }
+
+                
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
+
             result[0] = cpu.flags["Z"];
             result[1] = cpu.flags["N"];
 
