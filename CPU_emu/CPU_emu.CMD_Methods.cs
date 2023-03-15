@@ -64,7 +64,35 @@ namespace CPU_emulator
             SetRegister("X", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(X);
         }
-        
+
+        #endregion
+
+        #region LDY
+        // Load Y immidiate A0
+        public void Cmd_A0()
+        {
+            byte b_tmp = FetchByte(ref cycles);
+            SetRegister("Y", b_tmp);
+            SetZeroAndNegativeFlags(Y);
+        }
+
+        // Load Y zeropage A4
+        public void Cmd_A4()
+        {
+            byte b_tmp = FetchByte(ref cycles);
+            SetRegister("Y", ReadByteFromMemory(b_tmp));
+            SetZeroAndNegativeFlags(Y);
+        }
+
+        // Load Y zeropage X B4
+        public void Cmd_B4()
+        {
+            byte b_tmp = FetchByte(ref cycles); // Get ZP address
+            b_tmp += X; // add regX to address
+            SetRegister("Y", ReadByteFromMemory(b_tmp));
+            SetZeroAndNegativeFlags(Y);
+        }
+
         #endregion
     }
 }

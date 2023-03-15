@@ -1,6 +1,7 @@
 
 using System.Reflection;
 
+
 namespace CPU_emulator 
 {
     [TestFixture]
@@ -15,7 +16,7 @@ namespace CPU_emulator
         }
         #region set registers
         [Test]
-        public void Test_SetRegister_A()
+        public void SetRegister_A_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("A", value);
@@ -24,7 +25,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_SetRegister_X()
+        public void SetRegister_X_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("X", value);
@@ -33,7 +34,7 @@ namespace CPU_emulator
         }
 
         [Test]
-        public void Test_SetRegister_Y()
+        public void SetRegister_Y_Test()
         {
             byte value = 0xff;
             cpu.SetRegister("Y", value);
@@ -42,8 +43,9 @@ namespace CPU_emulator
         }
         #endregion
 
+        #region misc
         [Test]
-        public void Test_Reset()
+        public void Reset_Test()
         {
             
             cpu.Reset();
@@ -66,22 +68,67 @@ namespace CPU_emulator
             // TODO: Check events from PC and flags update
         }
 
+        [Test]
+        public void SetVectors_Test() 
+        {
+            GetPrivateMethod("SetVectors", cpu).Invoke(cpu, null);
+            byte[] memory = cpu.ReadMemory();
+
+            Assert.That(memory[0xFFFC], Is.EqualTo(0x00));
+            Assert.That(memory[0xFFFD], Is.EqualTo(0x02));
+        }
+
+        #endregion
+
+        #region set flags
         [TestCase(0xff, ExpectedResult = new bool[] { false, true })]
         [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
-        public bool[] Test_SetZeroAndNegativeFlags(byte b)
+        public bool[] SetZeroAndNegativeFlags_Test(byte b)
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnFlagsUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             bool[] result = new bool[2];
             GetPrivateMethod("SetZeroAndNegativeFlags",cpu).Invoke(cpu,new object[] {b});
-            
+
+            if (cpuea != null)
+            {
+                switch (b)
+                {
+                    case 0xff:
+                        Assert.That(cpuea.Flags["Z"], Is.EqualTo(false));
+                        Assert.That(cpuea.Flags["N"], Is.EqualTo(true));
+                        break;
+                    case 0x00:
+                        Assert.That(cpuea.Flags["Z"], Is.EqualTo(true));
+                        Assert.That(cpuea.Flags["N"], Is.EqualTo(false));
+                        break;
+
+                    default:
+                        break;
+                }
+
+                
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
+
             result[0] = cpu.flags["Z"];
             result[1] = cpu.flags["N"];
 
             return result;
         }
+        #endregion
 
         #region fetch data
         [Test]
-        public void Test_FetchByte()
+        public void FetchByte_Test()
         {
             byte value = 0xff;
             ulong cyc = 100;
@@ -99,30 +146,77 @@ namespace CPU_emulator
 
         #region ProgramCounterTest
         [Test]
-        public void Test_SetPC() 
+        public void SetPC_Test() 
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.SetPC(0x200);
             Assert.That(cpu.PC, Is.EqualTo(0x200));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x200));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
         }
 
         [Test] 
-        public void Test_IncrementPC()
+        public void IncrementPC_Test()
         {
             cpu.SetPC(0x200);
+
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.IncrementPC();
             Assert.That(cpu.PC, Is.EqualTo(0x201));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x201));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
         [Test]
-        public void Test_DecrementPC()
+        public void DecrementPC_Test()
         {
             cpu.SetPC(0x201);
+
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnProgramCounterUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             cpu.DecrementPC();
             Assert.That(cpu.PC, Is.EqualTo(0x200));
-            // TODO: Test OnProgramCounterUpdate
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.PC, Is.EqualTo(0x200));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
@@ -130,30 +224,78 @@ namespace CPU_emulator
 
         #region StackPointerTest
         [Test]
-        public void Test_SetSP()
+        public void SetSP_Test()
         {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
             Assert.That(cpu.SP, Is.EqualTo(0x01ff));
-            // TODO: Test OnStackPointerUpdate
+            
+            if (cpuea != null) 
+            { 
+                Assert.That(cpuea.SP, Is.EqualTo(0x01ff));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
+            
         }
 
         [Test]
-        public void Test_IncrementSP()
+        public void IncrementSP_Test()
         {
-            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fe });
+            ushort? expectedSPfromEventargs = null;
+
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01fc });
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                expectedSPfromEventargs = e.SP;
+            };
+                        
             GetPrivateMethod("IncrementSP", cpu).Invoke(cpu, null);
-            Assert.That(cpu.SP, Is.EqualTo(0x01ff));
-            // TODO: Test OnStackPointerUpdate
+            Assert.That(cpu.SP, Is.EqualTo(0x01fd));
+
+            if (expectedSPfromEventargs != null)
+            {
+                Assert.That(expectedSPfromEventargs, Is.EqualTo(0x01fd));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
         [Test]
-        public void Test_DecrementSP()
+        public void DecrementSP_Test()
         {
+            ushort? expectedSPfromEventargs = null;
+
             GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                expectedSPfromEventargs = e.SP;
+            };
+
             GetPrivateMethod("DecrementSP", cpu).Invoke(cpu, null);
             Assert.That(cpu.SP, Is.EqualTo(0x01fe));
-            // TODO: Test OnStackPointerUpdate
+
+            if (expectedSPfromEventargs != null)
+            {
+                Assert.That(expectedSPfromEventargs, Is.EqualTo(0x01fe));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
 
         }
 
@@ -177,16 +319,54 @@ namespace CPU_emulator
         #endregion
     }
 
-    //public class CPU_Tests2
-    //{
-    //    private CPU cpu;
+    public class CPU_Command_Tests
+    {
+        private CPU cpu;
 
-    //    [SetUp] 
-    //    public void SetUp() 
-    //    {
-    //        cpu= new CPU();    
-    //    }
+        [SetUp]
+        public void SetUp()
+        {
+            cpu = new CPU();
+        }
+        #region LDA
 
-        
-    //}
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }),Category("CPU test"), TestOf("Cmd Test")]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A9_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A9();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.A;
+
+            return result;
+
+        }
+
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }), Category("CPU test"), TestOf("Cmd Test")]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A5_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x01); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A5();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.A;
+
+            return result;
+
+        }
+
+        #endregion
+    }
 }
