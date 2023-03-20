@@ -2,10 +2,12 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
@@ -262,12 +264,51 @@ namespace CPU_emulator
 
         private void ToolStripMenuItemOpenFile_Click(object sender, EventArgs e)
         {
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Title = "Load Program from file";
+            openFileDialog.DefaultExt = "hex";
+            openFileDialog.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
 
+            
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFileDialog.FileName;
+                string byteString = File.ReadAllText(filename);
+                string[] bytes = byteString.Split(' ');
+                toolStripProgressBar1.Value = 0;
+                toolStripProgressBar1.Maximum = bytes.Length;
+                toolStripProgressBar1.Visible = true;
+
+
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    int b = Convert.ToInt32(bytes[i], 16);
+                    Cpu.WriteByteToMemory((byte)b, (ushort)(0x200 + i));
+                    toolStripProgressBar1.Increment(1);
+                }
+
+                toolStripProgressBar1.Visible=false;
+
+                
+            }
         }
 
         private void ToolStripMenuItemSaveFile_Click(object sender, EventArgs e)
         {
+            saveFileDialog.InitialDirectory = Application.StartupPath.ToString();
+            saveFileDialog.Title = "Save Program to File";
+            saveFileDialog.DefaultExt = "hex";
+            saveFileDialog.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
+            saveFileDialog.RestoreDirectory = true;
 
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filename = saveFileDialog.FileName;
+                string byteString = BitConverter.ToString(Cpu.ReadMemory(), 0x200, 0x200);
+                byteString = byteString.Replace("-", " ");
+                                
+                File.WriteAllText(filename, byteString);
+            }
         }
 
         private void ToolStripMenuItemSettings_Click(object sender, EventArgs e)
@@ -290,15 +331,15 @@ namespace CPU_emulator
 
         private void DumpToFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.InitialDirectory = Application.StartupPath;
-            saveFileDialog1.Title = "Save Memory";
-            saveFileDialog1.DefaultExt = "hex";
-            saveFileDialog1.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
-            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog.InitialDirectory = Application.StartupPath;
+            saveFileDialog.Title = "Save Memorydump to File";
+            saveFileDialog.DefaultExt = "dmp";
+            saveFileDialog.Filter = "Dump files (*.dmp)|*.dmp|All files (*.*)|*.*";
+            saveFileDialog.RestoreDirectory = true;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SaveMemoryToFile(saveFileDialog1.FileName);
+                SaveMemoryToFile(saveFileDialog.FileName);
             }
         }
 
@@ -321,7 +362,7 @@ namespace CPU_emulator
             catch (Exception e)
             {
                 MessageBox.Show(e.Message + "\n---\n" , "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
                 UseWaitCursor = false;
                 throw;
             }
@@ -336,13 +377,14 @@ namespace CPU_emulator
 
         private void LoadFromDumpToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Application.StartupPath;
-            openFileDialog1.Title = "Load Memordump from file";
-            openFileDialog1.DefaultExt = "hex";
-            openFileDialog1.Filter = "Hex files (*.hex)|*.hex|All files (*.*)|*.*";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Title = "Load Memorydump from file";
+            openFileDialog.DefaultExt = "dmp";
+            openFileDialog.Filter = "Dump files (*.dmp)|*.dmp|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                LoadMemoryFromFile(openFileDialog1.FileName);
+                LoadMemoryFromFile(openFileDialog.FileName);
             }
         }
 
@@ -359,8 +401,8 @@ namespace CPU_emulator
             try
             {
                 fs = File.OpenRead(fileName);
-                Debug.Print(fs.Length.ToString());
-                Debug.Print(Cpu.Memory.Length.ToString());
+                //Debug.Print(fs.Length.ToString());
+                //Debug.Print(Cpu.Memory.Length.ToString());
                 if (fs.Length <= Cpu.Memory.Length)
                 {
                     mem = new byte[fs.Length];
@@ -587,7 +629,7 @@ namespace CPU_emulator
             Form f = sender as Form;
             config.MainFormLocation = f.Location;
         }
-
+                
         private void ApplyConfigsettings()
         {
             this.Location = config.MainFormLocation;
