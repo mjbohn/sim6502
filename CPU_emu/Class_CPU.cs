@@ -162,7 +162,7 @@ namespace CPU_emulator
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
             cycles = InterruptPeriod;
-            byte b_tmp = 0;
+            
             Type thisType = this.GetType();
 
             
@@ -183,29 +183,7 @@ namespace CPU_emulator
                 {
                     MessageBox.Show(string.Format("Method {0} not found!", cmd),"Error!",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
-                
-
-                #region switch_cmd
-                //switch (instruction)
-                //{
-                
-                
-                //    case CO_JMP_ABS:
-                //        PC = AddrAbsolute();
-                //        break;
-                //    case OC_PHA: // Push Accumulator on Stack
-                //        PushByteToStack(A,ref cycles);
-                //        break;
-                //    case OC_PLA: // Pull Accumulator from Stack
-                //        b_tmp = PullByteFromStack(ref cycles);
-                //        SetRegister("A", b_tmp);
-                //        SetZeroAndNegativeFlags(A);
-                //        break;
-                //    default:
-
-                //        break;
-                //}
-                #endregion
+                                                
                 if (_SteppingMode)
                 {
                     break;

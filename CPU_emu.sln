@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.33424.131
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPU_emu", "CPU_emu\CPU_emu.csproj", "{455D0CE4-B7E7-4BA1-9491-F97ED5EB2BC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CPU_emu.nUnitTests", "CPU_emuTests\CPU_emu.nUnitTests.csproj", "{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CPU_emu.nUnitTests", "CPU_emuTests\CPU_emu.nUnitTests.csproj", "{E8DDA188-FF7C-4E92-AFE9-6A192A3538BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
