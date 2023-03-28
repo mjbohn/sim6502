@@ -233,12 +233,12 @@ namespace CPU_emulator
                 cpuea = e;
             };
 
-            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01ff });
-            Assert.That(cpu.SP, Is.EqualTo(0x01ff));
+            GetPrivateMethod("SetSP", cpu).Invoke(cpu, new object[] { (ushort)0x01e0 });
+            Assert.That(cpu.SP, Is.EqualTo(0x01e0));
             
             if (cpuea != null) 
             { 
-                Assert.That(cpuea.SP, Is.EqualTo(0x01ff));
+                Assert.That(cpuea.SP, Is.EqualTo(0x01e0));
             }
             else
             {
@@ -514,6 +514,40 @@ namespace CPU_emulator
 
         }
 
+
+        #endregion
+
+        #region push pull
+
+        // Test Push Accumulator on Stack
+        [Test]
+        public void Cmd_48_Test()
+        {
+            CPUEventArgs? cpuea = null;
+
+            cpu.OnStackPointerUpdate += delegate (object? sender, CPUEventArgs e)
+            {
+                cpuea = e;
+            };
+
+            cpu.Reset();
+            cpu.SetRegister("A", 0x42);
+            cpu.Cmd_48();
+
+            Assert.That(cpu.SP, Is.EqualTo(0x01fe));
+
+            if (cpuea != null)
+            {
+                Assert.That(cpuea.SP, Is.EqualTo(0x01fe));
+            }
+            else
+            {
+                Assert.Fail("Event not triggered");
+            }
+
+            Assert.That(cpu.Memory[0x01ff], Is.EqualTo(0x42));
+
+        }
 
         #endregion
     }
