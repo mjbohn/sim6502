@@ -89,34 +89,34 @@ namespace CPU_emulator
             this.panelMain = new System.Windows.Forms.Panel();
             this.groupBoxLedFlags = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.ledBulbFnegativ = new Bulb.LedBulb();
             this.label6 = new System.Windows.Forms.Label();
+            this.ledBulbFoverflow = new Bulb.LedBulb();
             this.label5 = new System.Windows.Forms.Label();
+            this.ledBulbFbreak = new Bulb.LedBulb();
             this.label4 = new System.Windows.Forms.Label();
+            this.ledBulbFdecimalmode = new Bulb.LedBulb();
             this.label3 = new System.Windows.Forms.Label();
+            this.ledBulbFintdisable = new Bulb.LedBulb();
             this.label2 = new System.Windows.Forms.Label();
+            this.ledBulbFzero = new Bulb.LedBulb();
             this.label1 = new System.Windows.Forms.Label();
+            this.ledBulbFcarry = new Bulb.LedBulb();
             this.groupBoxLedPC = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupBoxLedRegs = new System.Windows.Forms.GroupBox();
             this.groupBoxRegY = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupRegA = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupBoxRegX = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
             this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.ledBulbFnegativ = new Bulb.LedBulb();
-            this.ledBulbFoverflow = new Bulb.LedBulb();
-            this.ledBulbFbreak = new Bulb.LedBulb();
-            this.ledBulbFdecimalmode = new Bulb.LedBulb();
-            this.ledBulbFintdisable = new Bulb.LedBulb();
-            this.ledBulbFzero = new Bulb.LedBulb();
-            this.ledBulbFcarry = new Bulb.LedBulb();
-            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBoxRegisters.SuspendLayout();
@@ -752,6 +752,18 @@ namespace CPU_emulator
             this.label7.Text = "Negativ  [N]";
             this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFnegativ
+            // 
+            this.ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFnegativ.Color = System.Drawing.Color.Red;
+            this.ledBulbFnegativ.Location = new System.Drawing.Point(6, 205);
+            this.ledBulbFnegativ.Name = "ledBulbFnegativ";
+            this.ledBulbFnegativ.On = false;
+            this.ledBulbFnegativ.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFnegativ.TabIndex = 34;
+            this.ledBulbFnegativ.Tag = "N";
+            this.ledBulbFnegativ.Text = "ledBulb1";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -763,6 +775,18 @@ namespace CPU_emulator
             this.label6.Tag = "";
             this.label6.Text = "Overflow [V]";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFoverflow
+            // 
+            this.ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFoverflow.Color = System.Drawing.Color.Red;
+            this.ledBulbFoverflow.Location = new System.Drawing.Point(6, 178);
+            this.ledBulbFoverflow.Name = "ledBulbFoverflow";
+            this.ledBulbFoverflow.On = false;
+            this.ledBulbFoverflow.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFoverflow.TabIndex = 32;
+            this.ledBulbFoverflow.Tag = "V";
+            this.ledBulbFoverflow.Text = "ledBulb1";
             // 
             // label5
             // 
@@ -776,6 +800,18 @@ namespace CPU_emulator
             this.label5.Text = "Break [B]";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFbreak
+            // 
+            this.ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFbreak.Color = System.Drawing.Color.Red;
+            this.ledBulbFbreak.Location = new System.Drawing.Point(6, 148);
+            this.ledBulbFbreak.Name = "ledBulbFbreak";
+            this.ledBulbFbreak.On = false;
+            this.ledBulbFbreak.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFbreak.TabIndex = 30;
+            this.ledBulbFbreak.Tag = "B";
+            this.ledBulbFbreak.Text = "ledBulb1";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -787,6 +823,18 @@ namespace CPU_emulator
             this.label4.Tag = "";
             this.label4.Text = "DecimalMode [D]";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFdecimalmode
+            // 
+            this.ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
+            this.ledBulbFdecimalmode.Location = new System.Drawing.Point(6, 118);
+            this.ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
+            this.ledBulbFdecimalmode.On = false;
+            this.ledBulbFdecimalmode.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFdecimalmode.TabIndex = 28;
+            this.ledBulbFdecimalmode.Tag = "D";
+            this.ledBulbFdecimalmode.Text = "ledBulb1";
             // 
             // label3
             // 
@@ -800,6 +848,18 @@ namespace CPU_emulator
             this.label3.Text = "intDisable  [I]";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFintdisable
+            // 
+            this.ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFintdisable.Color = System.Drawing.Color.Red;
+            this.ledBulbFintdisable.Location = new System.Drawing.Point(6, 88);
+            this.ledBulbFintdisable.Name = "ledBulbFintdisable";
+            this.ledBulbFintdisable.On = false;
+            this.ledBulbFintdisable.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFintdisable.TabIndex = 26;
+            this.ledBulbFintdisable.Tag = "I";
+            this.ledBulbFintdisable.Text = "ledBulb1";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -812,6 +872,18 @@ namespace CPU_emulator
             this.label2.Text = "Zero  [Z]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFzero
+            // 
+            this.ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFzero.Color = System.Drawing.Color.Red;
+            this.ledBulbFzero.Location = new System.Drawing.Point(6, 58);
+            this.ledBulbFzero.Name = "ledBulbFzero";
+            this.ledBulbFzero.On = false;
+            this.ledBulbFzero.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFzero.TabIndex = 24;
+            this.ledBulbFzero.Tag = "Z";
+            this.ledBulbFzero.Text = "ledBulb1";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -822,6 +894,18 @@ namespace CPU_emulator
             this.label1.TabIndex = 23;
             this.label1.Text = "Carry [C]";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFcarry
+            // 
+            this.ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFcarry.Color = System.Drawing.Color.Red;
+            this.ledBulbFcarry.Location = new System.Drawing.Point(6, 28);
+            this.ledBulbFcarry.Name = "ledBulbFcarry";
+            this.ledBulbFcarry.On = false;
+            this.ledBulbFcarry.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFcarry.TabIndex = 22;
+            this.ledBulbFcarry.Tag = "C";
+            this.ledBulbFcarry.Text = "ledBulb1";
             // 
             // groupBoxLedPC
             // 
@@ -835,6 +919,40 @@ namespace CPU_emulator
             this.groupBoxLedPC.TabStop = false;
             this.groupBoxLedPC.Text = "Programcounter";
             this.groupBoxLedPC.Visible = false;
+            // 
+            // sevenSegmentPC
+            // 
+            this.sevenSegmentPC.ArrayCount = 4;
+            this.sevenSegmentPC.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentPC.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentPC.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentPC.DecimalShow = true;
+            this.sevenSegmentPC.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentPC.ElementWidth = 8;
+            this.sevenSegmentPC.ItalicFactor = 0F;
+            this.sevenSegmentPC.Location = new System.Drawing.Point(11, 36);
+            this.sevenSegmentPC.Name = "sevenSegmentPC";
+            this.sevenSegmentPC.Size = new System.Drawing.Size(128, 64);
+            this.sevenSegmentPC.TabIndex = 18;
+            this.sevenSegmentPC.TabStop = false;
+            this.sevenSegmentPC.Value = "0200";
+            // 
+            // sevenSegmentPCvalue
+            // 
+            this.sevenSegmentPCvalue.ArrayCount = 2;
+            this.sevenSegmentPCvalue.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentPCvalue.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentPCvalue.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentPCvalue.DecimalShow = true;
+            this.sevenSegmentPCvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentPCvalue.ElementWidth = 8;
+            this.sevenSegmentPCvalue.ItalicFactor = 0F;
+            this.sevenSegmentPCvalue.Location = new System.Drawing.Point(147, 36);
+            this.sevenSegmentPCvalue.Name = "sevenSegmentPCvalue";
+            this.sevenSegmentPCvalue.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentPCvalue.TabIndex = 18;
+            this.sevenSegmentPCvalue.TabStop = false;
+            this.sevenSegmentPCvalue.Value = "55";
             // 
             // groupBoxLedRegs
             // 
@@ -860,6 +978,23 @@ namespace CPU_emulator
             this.groupBoxRegY.TabStop = false;
             this.groupBoxRegY.Text = "Reg Y";
             // 
+            // sevenSegmentRegY
+            // 
+            this.sevenSegmentRegY.ArrayCount = 2;
+            this.sevenSegmentRegY.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegY.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegY.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegY.DecimalShow = true;
+            this.sevenSegmentRegY.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegY.ElementWidth = 8;
+            this.sevenSegmentRegY.ItalicFactor = 0F;
+            this.sevenSegmentRegY.Location = new System.Drawing.Point(6, 32);
+            this.sevenSegmentRegY.Name = "sevenSegmentRegY";
+            this.sevenSegmentRegY.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegY.TabIndex = 21;
+            this.sevenSegmentRegY.TabStop = false;
+            this.sevenSegmentRegY.Value = "00";
+            // 
             // groupRegA
             // 
             this.groupRegA.Controls.Add(this.sevenSegmentRegA);
@@ -871,6 +1006,23 @@ namespace CPU_emulator
             this.groupRegA.TabStop = false;
             this.groupRegA.Text = "Reg A";
             // 
+            // sevenSegmentRegA
+            // 
+            this.sevenSegmentRegA.ArrayCount = 2;
+            this.sevenSegmentRegA.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegA.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegA.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegA.DecimalShow = true;
+            this.sevenSegmentRegA.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegA.ElementWidth = 8;
+            this.sevenSegmentRegA.ItalicFactor = 0F;
+            this.sevenSegmentRegA.Location = new System.Drawing.Point(6, 31);
+            this.sevenSegmentRegA.Name = "sevenSegmentRegA";
+            this.sevenSegmentRegA.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegA.TabIndex = 17;
+            this.sevenSegmentRegA.TabStop = false;
+            this.sevenSegmentRegA.Value = "00";
+            // 
             // groupBoxRegX
             // 
             this.groupBoxRegX.Controls.Add(this.sevenSegmentRegX);
@@ -881,6 +1033,23 @@ namespace CPU_emulator
             this.groupBoxRegX.TabIndex = 20;
             this.groupBoxRegX.TabStop = false;
             this.groupBoxRegX.Text = "Reg X";
+            // 
+            // sevenSegmentRegX
+            // 
+            this.sevenSegmentRegX.ArrayCount = 2;
+            this.sevenSegmentRegX.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentRegX.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentRegX.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentRegX.DecimalShow = true;
+            this.sevenSegmentRegX.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentRegX.ElementWidth = 8;
+            this.sevenSegmentRegX.ItalicFactor = 0F;
+            this.sevenSegmentRegX.Location = new System.Drawing.Point(6, 33);
+            this.sevenSegmentRegX.Name = "sevenSegmentRegX";
+            this.sevenSegmentRegX.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentRegX.TabIndex = 19;
+            this.sevenSegmentRegX.TabStop = false;
+            this.sevenSegmentRegX.Value = "00";
             // 
             // saveFileDialog
             // 
@@ -934,175 +1103,6 @@ namespace CPU_emulator
             this.sevenSegmentSPvalue.TabStop = false;
             this.sevenSegmentSPvalue.Value = "55";
             // 
-            // sevenSegmentPC
-            // 
-            this.sevenSegmentPC.ArrayCount = 4;
-            this.sevenSegmentPC.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentPC.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentPC.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentPC.DecimalShow = true;
-            this.sevenSegmentPC.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentPC.ElementWidth = 8;
-            this.sevenSegmentPC.ItalicFactor = 0F;
-            this.sevenSegmentPC.Location = new System.Drawing.Point(11, 36);
-            this.sevenSegmentPC.Name = "sevenSegmentPC";
-            this.sevenSegmentPC.Size = new System.Drawing.Size(128, 64);
-            this.sevenSegmentPC.TabIndex = 18;
-            this.sevenSegmentPC.TabStop = false;
-            this.sevenSegmentPC.Value = "0200";
-            // 
-            // sevenSegmentPCvalue
-            // 
-            this.sevenSegmentPCvalue.ArrayCount = 2;
-            this.sevenSegmentPCvalue.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentPCvalue.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentPCvalue.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentPCvalue.DecimalShow = true;
-            this.sevenSegmentPCvalue.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentPCvalue.ElementWidth = 8;
-            this.sevenSegmentPCvalue.ItalicFactor = 0F;
-            this.sevenSegmentPCvalue.Location = new System.Drawing.Point(147, 36);
-            this.sevenSegmentPCvalue.Name = "sevenSegmentPCvalue";
-            this.sevenSegmentPCvalue.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentPCvalue.TabIndex = 18;
-            this.sevenSegmentPCvalue.TabStop = false;
-            this.sevenSegmentPCvalue.Value = "55";
-            // 
-            // ledBulbFnegativ
-            // 
-            this.ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFnegativ.Color = System.Drawing.Color.Red;
-            this.ledBulbFnegativ.Location = new System.Drawing.Point(6, 205);
-            this.ledBulbFnegativ.Name = "ledBulbFnegativ";
-            this.ledBulbFnegativ.On = false;
-            this.ledBulbFnegativ.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFnegativ.TabIndex = 34;
-            this.ledBulbFnegativ.Tag = "N";
-            this.ledBulbFnegativ.Text = "ledBulb1";
-            // 
-            // ledBulbFoverflow
-            // 
-            this.ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFoverflow.Color = System.Drawing.Color.Red;
-            this.ledBulbFoverflow.Location = new System.Drawing.Point(6, 178);
-            this.ledBulbFoverflow.Name = "ledBulbFoverflow";
-            this.ledBulbFoverflow.On = false;
-            this.ledBulbFoverflow.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFoverflow.TabIndex = 32;
-            this.ledBulbFoverflow.Tag = "V";
-            this.ledBulbFoverflow.Text = "ledBulb1";
-            // 
-            // ledBulbFbreak
-            // 
-            this.ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFbreak.Color = System.Drawing.Color.Red;
-            this.ledBulbFbreak.Location = new System.Drawing.Point(6, 148);
-            this.ledBulbFbreak.Name = "ledBulbFbreak";
-            this.ledBulbFbreak.On = false;
-            this.ledBulbFbreak.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFbreak.TabIndex = 30;
-            this.ledBulbFbreak.Tag = "B";
-            this.ledBulbFbreak.Text = "ledBulb1";
-            // 
-            // ledBulbFdecimalmode
-            // 
-            this.ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
-            this.ledBulbFdecimalmode.Location = new System.Drawing.Point(6, 118);
-            this.ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
-            this.ledBulbFdecimalmode.On = false;
-            this.ledBulbFdecimalmode.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFdecimalmode.TabIndex = 28;
-            this.ledBulbFdecimalmode.Tag = "D";
-            this.ledBulbFdecimalmode.Text = "ledBulb1";
-            // 
-            // ledBulbFintdisable
-            // 
-            this.ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFintdisable.Color = System.Drawing.Color.Red;
-            this.ledBulbFintdisable.Location = new System.Drawing.Point(6, 88);
-            this.ledBulbFintdisable.Name = "ledBulbFintdisable";
-            this.ledBulbFintdisable.On = false;
-            this.ledBulbFintdisable.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFintdisable.TabIndex = 26;
-            this.ledBulbFintdisable.Tag = "I";
-            this.ledBulbFintdisable.Text = "ledBulb1";
-            // 
-            // ledBulbFzero
-            // 
-            this.ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFzero.Color = System.Drawing.Color.Red;
-            this.ledBulbFzero.Location = new System.Drawing.Point(6, 58);
-            this.ledBulbFzero.Name = "ledBulbFzero";
-            this.ledBulbFzero.On = false;
-            this.ledBulbFzero.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFzero.TabIndex = 24;
-            this.ledBulbFzero.Tag = "Z";
-            this.ledBulbFzero.Text = "ledBulb1";
-            // 
-            // ledBulbFcarry
-            // 
-            this.ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFcarry.Color = System.Drawing.Color.Red;
-            this.ledBulbFcarry.Location = new System.Drawing.Point(6, 28);
-            this.ledBulbFcarry.Name = "ledBulbFcarry";
-            this.ledBulbFcarry.On = false;
-            this.ledBulbFcarry.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFcarry.TabIndex = 22;
-            this.ledBulbFcarry.Tag = "C";
-            this.ledBulbFcarry.Text = "ledBulb1";
-            // 
-            // sevenSegmentRegY
-            // 
-            this.sevenSegmentRegY.ArrayCount = 2;
-            this.sevenSegmentRegY.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegY.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegY.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegY.DecimalShow = true;
-            this.sevenSegmentRegY.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegY.ElementWidth = 8;
-            this.sevenSegmentRegY.ItalicFactor = 0F;
-            this.sevenSegmentRegY.Location = new System.Drawing.Point(6, 32);
-            this.sevenSegmentRegY.Name = "sevenSegmentRegY";
-            this.sevenSegmentRegY.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegY.TabIndex = 21;
-            this.sevenSegmentRegY.TabStop = false;
-            this.sevenSegmentRegY.Value = "00";
-            // 
-            // sevenSegmentRegA
-            // 
-            this.sevenSegmentRegA.ArrayCount = 2;
-            this.sevenSegmentRegA.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegA.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegA.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegA.DecimalShow = true;
-            this.sevenSegmentRegA.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegA.ElementWidth = 8;
-            this.sevenSegmentRegA.ItalicFactor = 0F;
-            this.sevenSegmentRegA.Location = new System.Drawing.Point(6, 31);
-            this.sevenSegmentRegA.Name = "sevenSegmentRegA";
-            this.sevenSegmentRegA.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegA.TabIndex = 17;
-            this.sevenSegmentRegA.TabStop = false;
-            this.sevenSegmentRegA.Value = "00";
-            // 
-            // sevenSegmentRegX
-            // 
-            this.sevenSegmentRegX.ArrayCount = 2;
-            this.sevenSegmentRegX.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegX.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegX.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegX.DecimalShow = true;
-            this.sevenSegmentRegX.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegX.ElementWidth = 8;
-            this.sevenSegmentRegX.ItalicFactor = 0F;
-            this.sevenSegmentRegX.Location = new System.Drawing.Point(6, 33);
-            this.sevenSegmentRegX.Name = "sevenSegmentRegX";
-            this.sevenSegmentRegX.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegX.TabIndex = 19;
-            this.sevenSegmentRegX.TabStop = false;
-            this.sevenSegmentRegX.Value = "00";
-            // 
             // CPU_emu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1119,7 +1119,7 @@ namespace CPU_emulator
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CPU_emu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CPU emu";
+            this.Text = "Sim6502";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CPU_emu_FormClosing);
             this.Load += new System.EventHandler(this.CPU_emu_Load);
             this.LocationChanged += new System.EventHandler(this.CPU_emu_LocationChanged);

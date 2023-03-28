@@ -329,8 +329,8 @@ namespace CPU_emulator
             cpu = new CPU();
         }
         #region LDA
-
-        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }),Category("CPU test"), TestOf("Cmd Test")]
+        // Test Load Accumulator immidiate A9
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
         [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
         public object[] Cmd_A9_Test(byte b)
         {
@@ -347,8 +347,9 @@ namespace CPU_emulator
             return result;
 
         }
-
-        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }), Category("CPU test"), TestOf("Cmd Test")]
+        
+        // Test Load Accumulator zeropage A5
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
         [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
         public object[] Cmd_A5_Test(byte b)
         {
@@ -367,7 +368,8 @@ namespace CPU_emulator
 
         }
 
-        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff }), Category("CPU test"), TestOf("Cmd Test")]
+        // Load Accumulator zeropage X B5
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
         [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
         public object[] Cmd_B5_Test(byte b)
         {
@@ -385,6 +387,133 @@ namespace CPU_emulator
             return result;
 
         }
+
+        #endregion
+
+        #region LDX
+
+        // Test Load X immidiate A2
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A2_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A2();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.X;
+
+            return result;
+
+        }
+
+        // Test Load X zeropage A6
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A6_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x01); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A6();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.X;
+
+            return result;
+
+        }
+
+        // Load X zeropage Y B6
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_B6_Test(byte b)
+        {
+            object[] result = new object[3];
+            cpu.SetRegister("Y", 0x06);
+            cpu.WriteByteToMemory(b, 0x07); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_B6();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.X;
+
+            return result;
+
+        }
+
+        #endregion
+
+        #region LDY
+
+        // Test Load Y immidiate A0
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A0_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A0();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.Y;
+
+            return result;
+
+        }
+
+        // Test Load Y zeropage A4
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_A4_Test(byte b)
+        {
+            object[] result = new object[3];
+
+            cpu.WriteByteToMemory(b, 0x01); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_A4();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.Y;
+
+            return result;
+
+        }
+
+        // Load Y zeropage X B4
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        public object[] Cmd_B4_Test(byte b)
+        {
+            object[] result = new object[3];
+            cpu.SetRegister("X", 0x06);
+            cpu.WriteByteToMemory(b, 0x07); // set byte on zeropage adr. 0x01
+            cpu.WriteByteToMemory(0x01, 0x200);
+            cpu.SetPC(0x200);
+            cpu.Cmd_B4();
+
+            result[0] = cpu.flags["Z"];
+            result[1] = cpu.flags["N"];
+            result[2] = cpu.Y;
+
+            return result;
+
+        }
+
 
         #endregion
     }
