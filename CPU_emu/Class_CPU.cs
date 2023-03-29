@@ -74,7 +74,7 @@ namespace CPU_emulator
 
         private void SetVectors()
         {
-            //Data[0xFFFC] = 0x00; Data[0xFFFD] = 0x20;
+            // Reset-Vector
             WriteByteToMemory(0x00, 0xFFFC);
             WriteByteToMemory(0x02, 0xFFFD);
 

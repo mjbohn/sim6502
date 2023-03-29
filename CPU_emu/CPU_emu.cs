@@ -405,7 +405,7 @@ namespace CPU_emulator
                 //Debug.Print(Cpu.Memory.Length.ToString());
                 if (fs.Length <= Cpu.Memory.Length)
                 {
-                    mem = new byte[fs.Length];
+                    mem = new byte[Cpu.Memory.Length];
                     fs.Read(mem, 0, (int)fs.Length);
                     fs.Close();
                     Cpu.Memory = mem;
