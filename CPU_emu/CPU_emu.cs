@@ -256,7 +256,9 @@ namespace CPU_emulator
         }
 
         private enum DisplayStyle { TXT,LED};
+
         #region File Menu
+
         private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();

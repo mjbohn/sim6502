@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,7 +23,10 @@ namespace CPU_emulator
         private Color _sevenSegBackgroundColor;
         private Color _sevenSegDarkColor;
         private Color _sevenSegLightColor;
-        
+
+        private int _kernalStartAdress;
+        private int _basicStarAddress;
+              
         [ReadOnly(true)]
         [Description("")]
         [Category("CPU")]
@@ -89,6 +93,16 @@ namespace CPU_emulator
         [DisplayName("Show memory-range window on startup")]
         [DefaultValue(false)]
         public bool ShowMemoryRangeOnStartUp { get => _showMemoryRangeOnStartUp; set => _showMemoryRangeOnStartUp = value; }
+        
+        [Category("Memory")]
+        [DisplayName("Start of KERNAL ROM")]
+        [DefaultValue(57344)]
+        public int KernalStartAdress { get => _kernalStartAdress; set => _kernalStartAdress = value; }
+               
+        [Category("Memory")]
+        [DisplayName("Start of BASIC ROM")]
+        [DefaultValue(40960)]
+        public int BasicStarAddress { get => _basicStarAddress; set => _basicStarAddress = value; }
     }
 
     
