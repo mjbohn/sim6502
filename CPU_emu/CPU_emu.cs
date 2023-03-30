@@ -20,6 +20,7 @@ namespace CPU_emulator
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
+        private delegate void PropertyChangedEventCallback(object sender, PropertyChangedEventArgs e);
 
         private MemoryWatchForm MWFstack, MWFzeropage, MWFmemrange = null;
 
@@ -41,6 +42,22 @@ namespace CPU_emulator
 
             Cpu.Reset();
 
+            // config.OnPropertyChanged gets initialized @ CPU_emu_Load() due to race conditions
+
+        }
+
+        private void Config_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                PropertyChangedEventCallback cb = new PropertyChangedEventCallback(Config_OnPropertyChanged);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                SetStatusStripLabels();
+            }
+            
         }
 
 
@@ -256,7 +273,9 @@ namespace CPU_emulator
         }
 
         private enum DisplayStyle { TXT,LED};
+
         #region File Menu
+
         private void CloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
@@ -283,7 +302,7 @@ namespace CPU_emulator
                 for (int i = 0; i < bytes.Length; i++)
                 {
                     int b = Convert.ToInt32(bytes[i], 16);
-                    Cpu.WriteByteToMemory((byte)b, (ushort)(0x200 + i));
+                    Cpu.WriteByteToMemory((byte)b, (ushort)(config.ProgramStartAdress + i));
                     toolStripProgressBar1.Increment(1);
                 }
 
@@ -390,13 +409,18 @@ namespace CPU_emulator
 
         private void LoadMemoryFromFile(string fileName)
         {
+            LoadMemoryFromFile(fileName, 0);
+        }
+
+        private void LoadMemoryFromFile(string fileName,int insertIndex)
+        {
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Maximum = 64;
             toolStripProgressBar1.Visible = true;
             UseWaitCursor = true;
 
             FileStream fs = null;
-            byte[] mem = null;
+            byte[] mem, tmpCpuMem = null;
 
             try
             {
@@ -406,9 +430,15 @@ namespace CPU_emulator
                 if (fs.Length <= Cpu.Memory.Length)
                 {
                     mem = new byte[fs.Length];
+                    tmpCpuMem = new byte[Cpu.Memory.Length];
+
                     fs.Read(mem, 0, (int)fs.Length);
                     fs.Close();
-                    Cpu.Memory = mem;
+                    
+                    Array.Copy(mem,0,tmpCpuMem,insertIndex,mem.Length);
+
+                    // have to set Cpu.Memory this way, to get the update mempra event triggered
+                    Cpu.Memory = tmpCpuMem;
                 }
                 else
                 {
@@ -588,6 +618,8 @@ namespace CPU_emulator
             PositionLedControls();
 
             ShowMemoryWindows();
+
+            config.OnPropertyChanged += Config_OnPropertyChanged;
         }
 
         private void ShowMemoryWindows()
@@ -635,6 +667,13 @@ namespace CPU_emulator
             this.Location = config.MainFormLocation;
             checkBoxSlowDown.Checked = config.Slow;
             checkBoxStepping.Checked = config.Stepping;
+            SetStatusStripLabels();
+        }
+
+        private void SetStatusStripLabels()
+        {
+            toolStripStatusLabelKernal.Text = "0x" + config.KernalStartAdress.ToString("X");
+            toolStripStatusLabelBasic.Text = "0x" + config.BasicStartAddress.ToString("X");
         }
 
         private void CPU_emu_FormClosing(object sender, FormClosingEventArgs e)

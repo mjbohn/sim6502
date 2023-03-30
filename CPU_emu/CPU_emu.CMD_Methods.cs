@@ -94,5 +94,15 @@ namespace CPU_emulator
         }
 
         #endregion
+
+        #region stack push pull
+
+        // Push Accumulator on Stack
+        public void Cmd_48()
+        {
+            PushByteToStack(A,ref cycles);
+        }
+
+        #endregion
     }
 }

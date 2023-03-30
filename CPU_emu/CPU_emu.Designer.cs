@@ -103,6 +103,10 @@ namespace CPU_emulator
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
             this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
@@ -651,7 +655,11 @@ namespace CPU_emulator
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelBRK,
             this.toolStripStatusElapsedTime,
-            this.toolStripProgressBar1});
+            this.toolStripProgressBar1,
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabelKernal,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabelBasic});
             this.statusStrip1.Location = new System.Drawing.Point(0, 509);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1135, 22);
@@ -900,6 +908,30 @@ namespace CPU_emulator
             this.groupBoxLedSP.Text = "Stackpointer";
             this.groupBoxLedSP.Visible = false;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
+            this.toolStripStatusLabel1.Text = "KERNAL: ";
+            // 
+            // toolStripStatusLabelKernal
+            // 
+            this.toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
+            this.toolStripStatusLabelKernal.Size = new System.Drawing.Size(25, 17);
+            this.toolStripStatusLabelKernal.Text = "0x0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
+            this.toolStripStatusLabel2.Text = "BASIC: ";
+            // 
+            // toolStripStatusLabelBasic
+            // 
+            this.toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
+            this.toolStripStatusLabelBasic.Size = new System.Drawing.Size(25, 17);
+            this.toolStripStatusLabelBasic.Text = "0x0";
+            // 
             // sevenSegmentSP
             // 
             this.sevenSegmentSP.ArrayCount = 4;
@@ -1119,7 +1151,7 @@ namespace CPU_emulator
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "CPU_emu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CPU emu";
+            this.Text = "Sim6502";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CPU_emu_FormClosing);
             this.Load += new System.EventHandler(this.CPU_emu_Load);
             this.LocationChanged += new System.EventHandler(this.CPU_emu_LocationChanged);
@@ -1238,6 +1270,10 @@ namespace CPU_emulator
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelKernal;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBasic;
     }
 }
 
