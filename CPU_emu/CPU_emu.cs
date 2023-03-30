@@ -285,7 +285,7 @@ namespace CPU_emulator
                 for (int i = 0; i < bytes.Length; i++)
                 {
                     int b = Convert.ToInt32(bytes[i], 16);
-                    Cpu.WriteByteToMemory((byte)b, (ushort)(0x200 + i));
+                    Cpu.WriteByteToMemory((byte)b, (ushort)(config.ProgramStartAdress + i));
                     toolStripProgressBar1.Increment(1);
                 }
 
@@ -392,13 +392,18 @@ namespace CPU_emulator
 
         private void LoadMemoryFromFile(string fileName)
         {
+            LoadMemoryFromFile(fileName, 0);
+        }
+
+        private void LoadMemoryFromFile(string fileName,int insertIndex)
+        {
             toolStripProgressBar1.Value = 0;
             toolStripProgressBar1.Maximum = 64;
             toolStripProgressBar1.Visible = true;
             UseWaitCursor = true;
 
             FileStream fs = null;
-            byte[] mem = null;
+            byte[] mem, tmpCpuMem = null;
 
             try
             {
@@ -407,10 +412,16 @@ namespace CPU_emulator
                 //Debug.Print(Cpu.Memory.Length.ToString());
                 if (fs.Length <= Cpu.Memory.Length)
                 {
-                    mem = new byte[Cpu.Memory.Length];
+                    mem = new byte[fs.Length];
+                    tmpCpuMem = new byte[Cpu.Memory.Length];
+
                     fs.Read(mem, 0, (int)fs.Length);
                     fs.Close();
-                    Cpu.Memory = mem;
+                    
+                    Array.Copy(mem,0,tmpCpuMem,insertIndex,mem.Length);
+
+                    // have to set Cpu.Memory this way, to get the update mempra event triggered
+                    Cpu.Memory = tmpCpuMem;
                 }
                 else
                 {
