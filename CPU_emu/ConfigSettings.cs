@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Forms;
 namespace CPU_emulator
 {
     [DefaultProperty("Stepping")]
-    public class ConfigSettings
+    public class ConfigSettings 
     {
         private bool _stepping;
         private bool _slow;
@@ -28,7 +30,16 @@ namespace CPU_emulator
         private int _kernalStartAdress;
         private int _basicStartAddress;
         private int _programStartAdress;
-              
+        private int _charRomStartAddress;
+
+
+
+
+        public event EventHandler<PropertyChangedEventArgs> OnPropertyChanged;
+        
+
+        #region properties
+
         [ReadOnly(true)]
         [Description("")]
         [Category("CPU")]
@@ -101,19 +112,54 @@ namespace CPU_emulator
         [DisplayName("Start of KERNAL ROM")]
         [TypeConverter(typeof(HexConverter))]
         [DefaultValue(0xE000)]
-        public int KernalStartAdress { get => _kernalStartAdress; set => _kernalStartAdress = value; }
+        public int KernalStartAdress 
+        { 
+            get => _kernalStartAdress; 
+            set
+            {
+                _kernalStartAdress = value;
+                OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BasicStartAddress)));
+            }
+        }
                
         [Category("Memory")]
         [DisplayName("Start of BASIC ROM")]
         [TypeConverter(typeof(HexConverter))]
         [DefaultValue(0xA000)]
-        public int BasicStarAddress { get => _basicStartAddress; set => _basicStartAddress = value; }
+        public int BasicStartAddress
+        {
+            get => _basicStartAddress;
+            set
+            {
+                _basicStartAddress = value;
+                OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BasicStartAddress)));
+            }
+        }
+
+        [Category("Memory")]
+        [DisplayName("Start of CHAR ROM")]
+        [TypeConverter(typeof(HexConverter))]
+        [DefaultValue(0xD000)]
+        public int CharRomStartAddress
+        {
+            get => _charRomStartAddress;
+            set
+            {
+                _charRomStartAddress = value;
+                OnPropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(BasicStartAddress)));
+            }
+        }
 
         [Category("Memory")]
         [DisplayName("Start of program space")]
+        [Description("For experimental asm-progs")]
         [TypeConverter(typeof(HexConverter))]
         [DefaultValue(0x200)]
         public int ProgramStartAdress { get => _programStartAdress; set => _programStartAdress = value; }
+
+        #endregion
+
+        
     }
 
     public class HexConverter : TypeConverter

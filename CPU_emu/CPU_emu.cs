@@ -20,6 +20,7 @@ namespace CPU_emulator
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
 
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
+        private delegate void PropertyChangedEventCallback(object sender, PropertyChangedEventArgs e);
 
         private MemoryWatchForm MWFstack, MWFzeropage, MWFmemrange = null;
 
@@ -41,6 +42,22 @@ namespace CPU_emulator
 
             Cpu.Reset();
 
+            // config.OnPropertyChanged gets initialized @ CPU_emu_Load() due to race conditions
+
+        }
+
+        private void Config_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                PropertyChangedEventCallback cb = new PropertyChangedEventCallback(Config_OnPropertyChanged);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                SetStatusStripLabels();
+            }
+            
         }
 
 
@@ -601,6 +618,8 @@ namespace CPU_emulator
             PositionLedControls();
 
             ShowMemoryWindows();
+
+            config.OnPropertyChanged += Config_OnPropertyChanged;
         }
 
         private void ShowMemoryWindows()
@@ -648,6 +667,13 @@ namespace CPU_emulator
             this.Location = config.MainFormLocation;
             checkBoxSlowDown.Checked = config.Slow;
             checkBoxStepping.Checked = config.Stepping;
+            SetStatusStripLabels();
+        }
+
+        private void SetStatusStripLabels()
+        {
+            toolStripStatusLabelKernal.Text = "0x" + config.KernalStartAdress.ToString("X");
+            toolStripStatusLabelBasic.Text = "0x" + config.BasicStartAddress.ToString("X");
         }
 
         private void CPU_emu_FormClosing(object sender, FormClosingEventArgs e)
