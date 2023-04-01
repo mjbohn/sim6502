@@ -44,6 +44,10 @@ namespace CPU_emulator
             this.dumpToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadFromDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.loadKernalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadCharRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadBasicRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.eraseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,43 +88,43 @@ namespace CPU_emulator
             this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
             this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
             this.panelMain = new System.Windows.Forms.Panel();
             this.groupBoxLedFlags = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.ledBulbFnegativ = new Bulb.LedBulb();
             this.label6 = new System.Windows.Forms.Label();
+            this.ledBulbFoverflow = new Bulb.LedBulb();
             this.label5 = new System.Windows.Forms.Label();
+            this.ledBulbFbreak = new Bulb.LedBulb();
             this.label4 = new System.Windows.Forms.Label();
+            this.ledBulbFdecimalmode = new Bulb.LedBulb();
             this.label3 = new System.Windows.Forms.Label();
+            this.ledBulbFintdisable = new Bulb.LedBulb();
             this.label2 = new System.Windows.Forms.Label();
+            this.ledBulbFzero = new Bulb.LedBulb();
             this.label1 = new System.Windows.Forms.Label();
+            this.ledBulbFcarry = new Bulb.LedBulb();
             this.groupBoxLedPC = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
+            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupBoxLedRegs = new System.Windows.Forms.GroupBox();
             this.groupBoxRegY = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupRegA = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.groupBoxRegX = new System.Windows.Forms.GroupBox();
+            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
             this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.ledBulbFnegativ = new Bulb.LedBulb();
-            this.ledBulbFoverflow = new Bulb.LedBulb();
-            this.ledBulbFbreak = new Bulb.LedBulb();
-            this.ledBulbFdecimalmode = new Bulb.LedBulb();
-            this.ledBulbFintdisable = new Bulb.LedBulb();
-            this.ledBulbFzero = new Bulb.LedBulb();
-            this.ledBulbFcarry = new Bulb.LedBulb();
-            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
             this.menuStrip1.SuspendLayout();
             this.groupBoxFlags.SuspendLayout();
             this.groupBoxRegisters.SuspendLayout();
@@ -214,6 +218,10 @@ namespace CPU_emulator
             this.dumpToFileToolStripMenuItem,
             this.loadFromDumpToolStripMenuItem,
             this.toolStripSeparator3,
+            this.loadKernalToolStripMenuItem,
+            this.loadCharRomToolStripMenuItem,
+            this.loadBasicRomToolStripMenuItem,
+            this.toolStripSeparator6,
             this.toolStripMenuItem1,
             this.toolStripSeparator5,
             this.eraseToolStripMenuItem});
@@ -253,6 +261,32 @@ namespace CPU_emulator
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(198, 6);
+            // 
+            // loadKernalToolStripMenuItem
+            // 
+            this.loadKernalToolStripMenuItem.Name = "loadKernalToolStripMenuItem";
+            this.loadKernalToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.loadKernalToolStripMenuItem.Text = "load Kernal ROM";
+            this.loadKernalToolStripMenuItem.Click += new System.EventHandler(this.loadKernalToolStripMenuItem_Click);
+            // 
+            // loadCharRomToolStripMenuItem
+            // 
+            this.loadCharRomToolStripMenuItem.Name = "loadCharRomToolStripMenuItem";
+            this.loadCharRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.loadCharRomToolStripMenuItem.Text = "load Character ROM";
+            this.loadCharRomToolStripMenuItem.Click += new System.EventHandler(this.loadCharRomToolStripMenuItem_Click);
+            // 
+            // loadBasicRomToolStripMenuItem
+            // 
+            this.loadBasicRomToolStripMenuItem.Name = "loadBasicRomToolStripMenuItem";
+            this.loadBasicRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.loadBasicRomToolStripMenuItem.Text = "load Basic ROM";
+            this.loadBasicRomToolStripMenuItem.Click += new System.EventHandler(this.loadBasicRomToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(198, 6);
             // 
             // toolStripMenuItem1
             // 
@@ -684,6 +718,30 @@ namespace CPU_emulator
             this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.toolStripProgressBar1.Visible = false;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
+            this.toolStripStatusLabel1.Text = "KERNAL: ";
+            // 
+            // toolStripStatusLabelKernal
+            // 
+            this.toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
+            this.toolStripStatusLabelKernal.Size = new System.Drawing.Size(25, 17);
+            this.toolStripStatusLabelKernal.Text = "0x0";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
+            this.toolStripStatusLabel2.Text = "BASIC: ";
+            // 
+            // toolStripStatusLabelBasic
+            // 
+            this.toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
+            this.toolStripStatusLabelBasic.Size = new System.Drawing.Size(25, 17);
+            this.toolStripStatusLabelBasic.Text = "0x0";
+            // 
             // checkBoxSlowDown
             // 
             this.checkBoxSlowDown.AutoSize = true;
@@ -760,6 +818,18 @@ namespace CPU_emulator
             this.label7.Text = "Negativ  [N]";
             this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFnegativ
+            // 
+            this.ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFnegativ.Color = System.Drawing.Color.Red;
+            this.ledBulbFnegativ.Location = new System.Drawing.Point(6, 205);
+            this.ledBulbFnegativ.Name = "ledBulbFnegativ";
+            this.ledBulbFnegativ.On = false;
+            this.ledBulbFnegativ.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFnegativ.TabIndex = 34;
+            this.ledBulbFnegativ.Tag = "N";
+            this.ledBulbFnegativ.Text = "ledBulb1";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -771,6 +841,18 @@ namespace CPU_emulator
             this.label6.Tag = "";
             this.label6.Text = "Overflow [V]";
             this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFoverflow
+            // 
+            this.ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFoverflow.Color = System.Drawing.Color.Red;
+            this.ledBulbFoverflow.Location = new System.Drawing.Point(6, 178);
+            this.ledBulbFoverflow.Name = "ledBulbFoverflow";
+            this.ledBulbFoverflow.On = false;
+            this.ledBulbFoverflow.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFoverflow.TabIndex = 32;
+            this.ledBulbFoverflow.Tag = "V";
+            this.ledBulbFoverflow.Text = "ledBulb1";
             // 
             // label5
             // 
@@ -784,6 +866,18 @@ namespace CPU_emulator
             this.label5.Text = "Break [B]";
             this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFbreak
+            // 
+            this.ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFbreak.Color = System.Drawing.Color.Red;
+            this.ledBulbFbreak.Location = new System.Drawing.Point(6, 148);
+            this.ledBulbFbreak.Name = "ledBulbFbreak";
+            this.ledBulbFbreak.On = false;
+            this.ledBulbFbreak.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFbreak.TabIndex = 30;
+            this.ledBulbFbreak.Tag = "B";
+            this.ledBulbFbreak.Text = "ledBulb1";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -795,6 +889,18 @@ namespace CPU_emulator
             this.label4.Tag = "";
             this.label4.Text = "DecimalMode [D]";
             this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFdecimalmode
+            // 
+            this.ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
+            this.ledBulbFdecimalmode.Location = new System.Drawing.Point(6, 118);
+            this.ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
+            this.ledBulbFdecimalmode.On = false;
+            this.ledBulbFdecimalmode.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFdecimalmode.TabIndex = 28;
+            this.ledBulbFdecimalmode.Tag = "D";
+            this.ledBulbFdecimalmode.Text = "ledBulb1";
             // 
             // label3
             // 
@@ -808,6 +914,18 @@ namespace CPU_emulator
             this.label3.Text = "intDisable  [I]";
             this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFintdisable
+            // 
+            this.ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFintdisable.Color = System.Drawing.Color.Red;
+            this.ledBulbFintdisable.Location = new System.Drawing.Point(6, 88);
+            this.ledBulbFintdisable.Name = "ledBulbFintdisable";
+            this.ledBulbFintdisable.On = false;
+            this.ledBulbFintdisable.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFintdisable.TabIndex = 26;
+            this.ledBulbFintdisable.Tag = "I";
+            this.ledBulbFintdisable.Text = "ledBulb1";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -820,6 +938,18 @@ namespace CPU_emulator
             this.label2.Text = "Zero  [Z]";
             this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // ledBulbFzero
+            // 
+            this.ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFzero.Color = System.Drawing.Color.Red;
+            this.ledBulbFzero.Location = new System.Drawing.Point(6, 58);
+            this.ledBulbFzero.Name = "ledBulbFzero";
+            this.ledBulbFzero.On = false;
+            this.ledBulbFzero.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFzero.TabIndex = 24;
+            this.ledBulbFzero.Tag = "Z";
+            this.ledBulbFzero.Text = "ledBulb1";
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -830,6 +960,18 @@ namespace CPU_emulator
             this.label1.TabIndex = 23;
             this.label1.Text = "Carry [C]";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // ledBulbFcarry
+            // 
+            this.ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
+            this.ledBulbFcarry.Color = System.Drawing.Color.Red;
+            this.ledBulbFcarry.Location = new System.Drawing.Point(6, 28);
+            this.ledBulbFcarry.Name = "ledBulbFcarry";
+            this.ledBulbFcarry.On = false;
+            this.ledBulbFcarry.Size = new System.Drawing.Size(25, 30);
+            this.ledBulbFcarry.TabIndex = 22;
+            this.ledBulbFcarry.Tag = "C";
+            this.ledBulbFcarry.Text = "ledBulb1";
             // 
             // groupBoxLedPC
             // 
@@ -843,128 +985,6 @@ namespace CPU_emulator
             this.groupBoxLedPC.TabStop = false;
             this.groupBoxLedPC.Text = "Programcounter";
             this.groupBoxLedPC.Visible = false;
-            // 
-            // groupBoxLedRegs
-            // 
-            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegY);
-            this.groupBoxLedRegs.Controls.Add(this.groupRegA);
-            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegX);
-            this.groupBoxLedRegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBoxLedRegs.Location = new System.Drawing.Point(595, 41);
-            this.groupBoxLedRegs.Name = "groupBoxLedRegs";
-            this.groupBoxLedRegs.Size = new System.Drawing.Size(270, 135);
-            this.groupBoxLedRegs.TabIndex = 22;
-            this.groupBoxLedRegs.TabStop = false;
-            this.groupBoxLedRegs.Visible = false;
-            // 
-            // groupBoxRegY
-            // 
-            this.groupBoxRegY.Controls.Add(this.sevenSegmentRegY);
-            this.groupBoxRegY.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxRegY.Location = new System.Drawing.Point(177, 12);
-            this.groupBoxRegY.Name = "groupBoxRegY";
-            this.groupBoxRegY.Size = new System.Drawing.Size(88, 117);
-            this.groupBoxRegY.TabIndex = 21;
-            this.groupBoxRegY.TabStop = false;
-            this.groupBoxRegY.Text = "Reg Y";
-            // 
-            // groupRegA
-            // 
-            this.groupRegA.Controls.Add(this.sevenSegmentRegA);
-            this.groupRegA.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupRegA.Location = new System.Drawing.Point(7, 12);
-            this.groupRegA.Name = "groupRegA";
-            this.groupRegA.Size = new System.Drawing.Size(79, 117);
-            this.groupRegA.TabIndex = 19;
-            this.groupRegA.TabStop = false;
-            this.groupRegA.Text = "Reg A";
-            // 
-            // groupBoxRegX
-            // 
-            this.groupBoxRegX.Controls.Add(this.sevenSegmentRegX);
-            this.groupBoxRegX.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxRegX.Location = new System.Drawing.Point(92, 12);
-            this.groupBoxRegX.Name = "groupBoxRegX";
-            this.groupBoxRegX.Size = new System.Drawing.Size(79, 117);
-            this.groupBoxRegX.TabIndex = 20;
-            this.groupBoxRegX.TabStop = false;
-            this.groupBoxRegX.Text = "Reg X";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "hex";
-            this.saveFileDialog.Filter = "HexFiles|*.hex|all files|*.*";
-            // 
-            // groupBoxLedSP
-            // 
-            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSP);
-            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSPvalue);
-            this.groupBoxLedSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxLedSP.Location = new System.Drawing.Point(595, 323);
-            this.groupBoxLedSP.Name = "groupBoxLedSP";
-            this.groupBoxLedSP.Size = new System.Drawing.Size(270, 135);
-            this.groupBoxLedSP.TabIndex = 24;
-            this.groupBoxLedSP.TabStop = false;
-            this.groupBoxLedSP.Text = "Stackpointer";
-            this.groupBoxLedSP.Visible = false;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
-            this.toolStripStatusLabel1.Text = "KERNAL: ";
-            // 
-            // toolStripStatusLabelKernal
-            // 
-            this.toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
-            this.toolStripStatusLabelKernal.Size = new System.Drawing.Size(25, 17);
-            this.toolStripStatusLabelKernal.Text = "0x0";
-            // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
-            this.toolStripStatusLabel2.Text = "BASIC: ";
-            // 
-            // toolStripStatusLabelBasic
-            // 
-            this.toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
-            this.toolStripStatusLabelBasic.Size = new System.Drawing.Size(25, 17);
-            this.toolStripStatusLabelBasic.Text = "0x0";
-            // 
-            // sevenSegmentSP
-            // 
-            this.sevenSegmentSP.ArrayCount = 4;
-            this.sevenSegmentSP.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentSP.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentSP.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentSP.DecimalShow = true;
-            this.sevenSegmentSP.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentSP.ElementWidth = 8;
-            this.sevenSegmentSP.ItalicFactor = 0F;
-            this.sevenSegmentSP.Location = new System.Drawing.Point(11, 36);
-            this.sevenSegmentSP.Name = "sevenSegmentSP";
-            this.sevenSegmentSP.Size = new System.Drawing.Size(128, 64);
-            this.sevenSegmentSP.TabIndex = 18;
-            this.sevenSegmentSP.TabStop = false;
-            this.sevenSegmentSP.Value = "01ff";
-            // 
-            // sevenSegmentSPvalue
-            // 
-            this.sevenSegmentSPvalue.ArrayCount = 2;
-            this.sevenSegmentSPvalue.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentSPvalue.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentSPvalue.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentSPvalue.DecimalShow = true;
-            this.sevenSegmentSPvalue.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentSPvalue.ElementWidth = 8;
-            this.sevenSegmentSPvalue.ItalicFactor = 0F;
-            this.sevenSegmentSPvalue.Location = new System.Drawing.Point(147, 36);
-            this.sevenSegmentSPvalue.Name = "sevenSegmentSPvalue";
-            this.sevenSegmentSPvalue.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentSPvalue.TabIndex = 18;
-            this.sevenSegmentSPvalue.TabStop = false;
-            this.sevenSegmentSPvalue.Value = "55";
             // 
             // sevenSegmentPC
             // 
@@ -1000,89 +1020,29 @@ namespace CPU_emulator
             this.sevenSegmentPCvalue.TabStop = false;
             this.sevenSegmentPCvalue.Value = "55";
             // 
-            // ledBulbFnegativ
+            // groupBoxLedRegs
             // 
-            this.ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFnegativ.Color = System.Drawing.Color.Red;
-            this.ledBulbFnegativ.Location = new System.Drawing.Point(6, 205);
-            this.ledBulbFnegativ.Name = "ledBulbFnegativ";
-            this.ledBulbFnegativ.On = false;
-            this.ledBulbFnegativ.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFnegativ.TabIndex = 34;
-            this.ledBulbFnegativ.Tag = "N";
-            this.ledBulbFnegativ.Text = "ledBulb1";
+            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegY);
+            this.groupBoxLedRegs.Controls.Add(this.groupRegA);
+            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegX);
+            this.groupBoxLedRegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.groupBoxLedRegs.Location = new System.Drawing.Point(595, 41);
+            this.groupBoxLedRegs.Name = "groupBoxLedRegs";
+            this.groupBoxLedRegs.Size = new System.Drawing.Size(270, 135);
+            this.groupBoxLedRegs.TabIndex = 22;
+            this.groupBoxLedRegs.TabStop = false;
+            this.groupBoxLedRegs.Visible = false;
             // 
-            // ledBulbFoverflow
+            // groupBoxRegY
             // 
-            this.ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFoverflow.Color = System.Drawing.Color.Red;
-            this.ledBulbFoverflow.Location = new System.Drawing.Point(6, 178);
-            this.ledBulbFoverflow.Name = "ledBulbFoverflow";
-            this.ledBulbFoverflow.On = false;
-            this.ledBulbFoverflow.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFoverflow.TabIndex = 32;
-            this.ledBulbFoverflow.Tag = "V";
-            this.ledBulbFoverflow.Text = "ledBulb1";
-            // 
-            // ledBulbFbreak
-            // 
-            this.ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFbreak.Color = System.Drawing.Color.Red;
-            this.ledBulbFbreak.Location = new System.Drawing.Point(6, 148);
-            this.ledBulbFbreak.Name = "ledBulbFbreak";
-            this.ledBulbFbreak.On = false;
-            this.ledBulbFbreak.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFbreak.TabIndex = 30;
-            this.ledBulbFbreak.Tag = "B";
-            this.ledBulbFbreak.Text = "ledBulb1";
-            // 
-            // ledBulbFdecimalmode
-            // 
-            this.ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
-            this.ledBulbFdecimalmode.Location = new System.Drawing.Point(6, 118);
-            this.ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
-            this.ledBulbFdecimalmode.On = false;
-            this.ledBulbFdecimalmode.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFdecimalmode.TabIndex = 28;
-            this.ledBulbFdecimalmode.Tag = "D";
-            this.ledBulbFdecimalmode.Text = "ledBulb1";
-            // 
-            // ledBulbFintdisable
-            // 
-            this.ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFintdisable.Color = System.Drawing.Color.Red;
-            this.ledBulbFintdisable.Location = new System.Drawing.Point(6, 88);
-            this.ledBulbFintdisable.Name = "ledBulbFintdisable";
-            this.ledBulbFintdisable.On = false;
-            this.ledBulbFintdisable.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFintdisable.TabIndex = 26;
-            this.ledBulbFintdisable.Tag = "I";
-            this.ledBulbFintdisable.Text = "ledBulb1";
-            // 
-            // ledBulbFzero
-            // 
-            this.ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFzero.Color = System.Drawing.Color.Red;
-            this.ledBulbFzero.Location = new System.Drawing.Point(6, 58);
-            this.ledBulbFzero.Name = "ledBulbFzero";
-            this.ledBulbFzero.On = false;
-            this.ledBulbFzero.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFzero.TabIndex = 24;
-            this.ledBulbFzero.Tag = "Z";
-            this.ledBulbFzero.Text = "ledBulb1";
-            // 
-            // ledBulbFcarry
-            // 
-            this.ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFcarry.Color = System.Drawing.Color.Red;
-            this.ledBulbFcarry.Location = new System.Drawing.Point(6, 28);
-            this.ledBulbFcarry.Name = "ledBulbFcarry";
-            this.ledBulbFcarry.On = false;
-            this.ledBulbFcarry.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFcarry.TabIndex = 22;
-            this.ledBulbFcarry.Tag = "C";
-            this.ledBulbFcarry.Text = "ledBulb1";
+            this.groupBoxRegY.Controls.Add(this.sevenSegmentRegY);
+            this.groupBoxRegY.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRegY.Location = new System.Drawing.Point(177, 12);
+            this.groupBoxRegY.Name = "groupBoxRegY";
+            this.groupBoxRegY.Size = new System.Drawing.Size(88, 117);
+            this.groupBoxRegY.TabIndex = 21;
+            this.groupBoxRegY.TabStop = false;
+            this.groupBoxRegY.Text = "Reg Y";
             // 
             // sevenSegmentRegY
             // 
@@ -1101,6 +1061,17 @@ namespace CPU_emulator
             this.sevenSegmentRegY.TabStop = false;
             this.sevenSegmentRegY.Value = "00";
             // 
+            // groupRegA
+            // 
+            this.groupRegA.Controls.Add(this.sevenSegmentRegA);
+            this.groupRegA.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupRegA.Location = new System.Drawing.Point(7, 12);
+            this.groupRegA.Name = "groupRegA";
+            this.groupRegA.Size = new System.Drawing.Size(79, 117);
+            this.groupRegA.TabIndex = 19;
+            this.groupRegA.TabStop = false;
+            this.groupRegA.Text = "Reg A";
+            // 
             // sevenSegmentRegA
             // 
             this.sevenSegmentRegA.ArrayCount = 2;
@@ -1118,6 +1089,17 @@ namespace CPU_emulator
             this.sevenSegmentRegA.TabStop = false;
             this.sevenSegmentRegA.Value = "00";
             // 
+            // groupBoxRegX
+            // 
+            this.groupBoxRegX.Controls.Add(this.sevenSegmentRegX);
+            this.groupBoxRegX.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxRegX.Location = new System.Drawing.Point(92, 12);
+            this.groupBoxRegX.Name = "groupBoxRegX";
+            this.groupBoxRegX.Size = new System.Drawing.Size(79, 117);
+            this.groupBoxRegX.TabIndex = 20;
+            this.groupBoxRegX.TabStop = false;
+            this.groupBoxRegX.Text = "Reg X";
+            // 
             // sevenSegmentRegX
             // 
             this.sevenSegmentRegX.ArrayCount = 2;
@@ -1134,6 +1116,58 @@ namespace CPU_emulator
             this.sevenSegmentRegX.TabIndex = 19;
             this.sevenSegmentRegX.TabStop = false;
             this.sevenSegmentRegX.Value = "00";
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "hex";
+            this.saveFileDialog.Filter = "HexFiles|*.hex|all files|*.*";
+            // 
+            // groupBoxLedSP
+            // 
+            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSP);
+            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSPvalue);
+            this.groupBoxLedSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxLedSP.Location = new System.Drawing.Point(595, 323);
+            this.groupBoxLedSP.Name = "groupBoxLedSP";
+            this.groupBoxLedSP.Size = new System.Drawing.Size(270, 135);
+            this.groupBoxLedSP.TabIndex = 24;
+            this.groupBoxLedSP.TabStop = false;
+            this.groupBoxLedSP.Text = "Stackpointer";
+            this.groupBoxLedSP.Visible = false;
+            // 
+            // sevenSegmentSP
+            // 
+            this.sevenSegmentSP.ArrayCount = 4;
+            this.sevenSegmentSP.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentSP.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentSP.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentSP.DecimalShow = true;
+            this.sevenSegmentSP.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentSP.ElementWidth = 8;
+            this.sevenSegmentSP.ItalicFactor = 0F;
+            this.sevenSegmentSP.Location = new System.Drawing.Point(11, 36);
+            this.sevenSegmentSP.Name = "sevenSegmentSP";
+            this.sevenSegmentSP.Size = new System.Drawing.Size(128, 64);
+            this.sevenSegmentSP.TabIndex = 18;
+            this.sevenSegmentSP.TabStop = false;
+            this.sevenSegmentSP.Value = "01ff";
+            // 
+            // sevenSegmentSPvalue
+            // 
+            this.sevenSegmentSPvalue.ArrayCount = 2;
+            this.sevenSegmentSPvalue.ColorBackground = System.Drawing.Color.Black;
+            this.sevenSegmentSPvalue.ColorDark = System.Drawing.Color.DarkRed;
+            this.sevenSegmentSPvalue.ColorLight = System.Drawing.Color.Red;
+            this.sevenSegmentSPvalue.DecimalShow = true;
+            this.sevenSegmentSPvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            this.sevenSegmentSPvalue.ElementWidth = 8;
+            this.sevenSegmentSPvalue.ItalicFactor = 0F;
+            this.sevenSegmentSPvalue.Location = new System.Drawing.Point(147, 36);
+            this.sevenSegmentSPvalue.Name = "sevenSegmentSPvalue";
+            this.sevenSegmentSPvalue.Size = new System.Drawing.Size(64, 64);
+            this.sevenSegmentSPvalue.TabIndex = 18;
+            this.sevenSegmentSPvalue.TabStop = false;
+            this.sevenSegmentSPvalue.Value = "55";
             // 
             // CPU_emu
             // 
@@ -1274,6 +1308,10 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelKernal;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelBasic;
+        private System.Windows.Forms.ToolStripMenuItem loadKernalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadCharRomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem loadBasicRomToolStripMenuItem;
     }
 }
 
