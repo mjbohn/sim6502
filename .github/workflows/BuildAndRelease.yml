@@ -10,6 +10,11 @@ on:
         description: 'Release-Tag (z. B. v1.2.3)'
         required: true
         type: string
+      branch:
+        description: 'Branch (optional, Standard: master)'
+        required: false
+        default: 'master'
+        type: string
 
 jobs:
   call-reusable:
@@ -19,3 +24,4 @@ jobs:
       project_path: 'CPU_emu'
       zip_name: 'sim6502.zip'
       configuration: 'Release'
+      branch: ${{ inputs.branch }}
