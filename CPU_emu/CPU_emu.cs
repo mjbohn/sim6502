@@ -56,6 +56,7 @@ namespace CPU_emulator
             else
             {
                 SetStatusStripLabels();
+                SetMenuLabels();
             }
             
         }
@@ -407,6 +408,38 @@ namespace CPU_emulator
             }
         }
 
+        private void loadKernalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Title = "Load Kernal File";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemoryFromFile(openFileDialog.FileName,config.KernalStartAdress);
+            }
+        }
+
+        private void loadCharRomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Title = "Load Character ROM";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemoryFromFile(openFileDialog.FileName, config.CharRomStartAddress);
+            }
+        }
+
+        private void loadBasicRomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.InitialDirectory = Application.StartupPath;
+            openFileDialog.Title = "Load Basic ROM";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                LoadMemoryFromFile(openFileDialog.FileName, config.BasicStartAddress);
+            }
+        }
         private void LoadMemoryFromFile(string fileName)
         {
             LoadMemoryFromFile(fileName, 0);
@@ -431,13 +464,14 @@ namespace CPU_emulator
                 {
                     mem = new byte[fs.Length];
                     tmpCpuMem = new byte[Cpu.Memory.Length];
+                    tmpCpuMem = Cpu.Memory;
 
                     fs.Read(mem, 0, (int)fs.Length);
                     fs.Close();
                     
                     Array.Copy(mem,0,tmpCpuMem,insertIndex,mem.Length);
 
-                    // have to set Cpu.Memory this way, to get the update mempra event triggered
+                    // have to set Cpu.Memory this way, to get the update memory event triggered
                     Cpu.Memory = tmpCpuMem;
                 }
                 else
@@ -668,12 +702,20 @@ namespace CPU_emulator
             checkBoxSlowDown.Checked = config.Slow;
             checkBoxStepping.Checked = config.Stepping;
             SetStatusStripLabels();
+            SetMenuLabels();
         }
 
         private void SetStatusStripLabels()
         {
             toolStripStatusLabelKernal.Text = "0x" + config.KernalStartAdress.ToString("X");
             toolStripStatusLabelBasic.Text = "0x" + config.BasicStartAddress.ToString("X");
+        }
+
+        private void SetMenuLabels()
+        {
+            loadKernalToolStripMenuItem.Text = "load Kernal ROM 0x" + config.KernalStartAdress.ToString("X");
+            loadCharRomToolStripMenuItem.Text = "load Character ROM 0x" + config.CharRomStartAddress.ToString("X");
+            loadBasicRomToolStripMenuItem.Text= "load Basic ROM 0x" + config.BasicStartAddress.ToString("X");
         }
 
         private void CPU_emu_FormClosing(object sender, FormClosingEventArgs e)
