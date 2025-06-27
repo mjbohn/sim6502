@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CPU_emulator
 {
