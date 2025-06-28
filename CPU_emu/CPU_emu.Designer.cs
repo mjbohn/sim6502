@@ -30,1188 +30,1225 @@ namespace CPU_emulator
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CPU_emu));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemOpenFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemSaveFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.ToolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.dumpToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadFromDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.loadKernalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadCharRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadBasicRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.eraseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.watchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.stackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.zeropageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.memrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemStyleTXT = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemStyleLED = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
-            this.groupBoxFlags = new System.Windows.Forms.GroupBox();
-            this.checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
-            this.checkBoxOverflowFlag = new System.Windows.Forms.CheckBox();
-            this.checkBoxBreakFlag = new System.Windows.Forms.CheckBox();
-            this.checkBoxDecimalModeFlag = new System.Windows.Forms.CheckBox();
-            this.checkBoxIntDisableFlag = new System.Windows.Forms.CheckBox();
-            this.checkBoxZeroFlag = new System.Windows.Forms.CheckBox();
-            this.buttonStart = new System.Windows.Forms.Button();
-            this.groupBoxRegisters = new System.Windows.Forms.GroupBox();
-            this.textBoxRegY = new System.Windows.Forms.TextBox();
-            this.labelRegY = new System.Windows.Forms.Label();
-            this.textBoxRegX = new System.Windows.Forms.TextBox();
-            this.labelRegX = new System.Windows.Forms.Label();
-            this.textBoxRegA = new System.Windows.Forms.TextBox();
-            this.labelRegA = new System.Windows.Forms.Label();
-            this.groupBoxPCSP = new System.Windows.Forms.GroupBox();
-            this.textBoxStackValue = new System.Windows.Forms.TextBox();
-            this.textBoxInstruction = new System.Windows.Forms.TextBox();
-            this.textBoxSP = new System.Windows.Forms.TextBox();
-            this.labelSP = new System.Windows.Forms.Label();
-            this.textBoxPC = new System.Windows.Forms.TextBox();
-            this.labelPC = new System.Windows.Forms.Label();
-            this.buttonStop = new System.Windows.Forms.Button();
-            this.buttonReset = new System.Windows.Forms.Button();
-            this.checkBoxStepping = new System.Windows.Forms.CheckBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
-            this.checkBoxSlowDown = new System.Windows.Forms.CheckBox();
-            this.groupBoxStartStop = new System.Windows.Forms.GroupBox();
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.groupBoxLedFlags = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.ledBulbFnegativ = new Bulb.LedBulb();
-            this.label6 = new System.Windows.Forms.Label();
-            this.ledBulbFoverflow = new Bulb.LedBulb();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ledBulbFbreak = new Bulb.LedBulb();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ledBulbFdecimalmode = new Bulb.LedBulb();
-            this.label3 = new System.Windows.Forms.Label();
-            this.ledBulbFintdisable = new Bulb.LedBulb();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ledBulbFzero = new Bulb.LedBulb();
-            this.label1 = new System.Windows.Forms.Label();
-            this.ledBulbFcarry = new Bulb.LedBulb();
-            this.groupBoxLedPC = new System.Windows.Forms.GroupBox();
-            this.sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.groupBoxLedRegs = new System.Windows.Forms.GroupBox();
-            this.groupBoxRegY = new System.Windows.Forms.GroupBox();
-            this.sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.groupRegA = new System.Windows.Forms.GroupBox();
-            this.sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.groupBoxRegX = new System.Windows.Forms.GroupBox();
-            this.sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.groupBoxLedSP = new System.Windows.Forms.GroupBox();
-            this.sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
-            this.menuStrip1.SuspendLayout();
-            this.groupBoxFlags.SuspendLayout();
-            this.groupBoxRegisters.SuspendLayout();
-            this.groupBoxPCSP.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.groupBoxStartStop.SuspendLayout();
-            this.panelMain.SuspendLayout();
-            this.groupBoxLedFlags.SuspendLayout();
-            this.groupBoxLedPC.SuspendLayout();
-            this.groupBoxLedRegs.SuspendLayout();
-            this.groupBoxRegY.SuspendLayout();
-            this.groupRegA.SuspendLayout();
-            this.groupBoxRegX.SuspendLayout();
-            this.groupBoxLedSP.SuspendLayout();
-            this.SuspendLayout();
+            menuStrip1 = new System.Windows.Forms.MenuStrip();
+            dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemOpenFile = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemSaveFile = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            ToolStripMenuItemClose = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            memoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            dumpToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadFromDumpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            loadKernalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadCharRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            loadBasicRomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            eraseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            watchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            stackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            zeropageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            memrangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            styleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemStyleTXT = new System.Windows.Forms.ToolStripMenuItem();
+            toolStripMenuItemStyleLED = new System.Windows.Forms.ToolStripMenuItem();
+            checkBoxCarryFlag = new System.Windows.Forms.CheckBox();
+            groupBoxFlags = new System.Windows.Forms.GroupBox();
+            checkBoxNegativFlag = new System.Windows.Forms.CheckBox();
+            checkBoxOverflowFlag = new System.Windows.Forms.CheckBox();
+            checkBoxBreakFlag = new System.Windows.Forms.CheckBox();
+            checkBoxDecimalModeFlag = new System.Windows.Forms.CheckBox();
+            checkBoxIntDisableFlag = new System.Windows.Forms.CheckBox();
+            checkBoxZeroFlag = new System.Windows.Forms.CheckBox();
+            buttonStart = new System.Windows.Forms.Button();
+            groupBoxRegisters = new System.Windows.Forms.GroupBox();
+            textBoxRegY = new System.Windows.Forms.TextBox();
+            labelRegY = new System.Windows.Forms.Label();
+            textBoxRegX = new System.Windows.Forms.TextBox();
+            labelRegX = new System.Windows.Forms.Label();
+            textBoxRegA = new System.Windows.Forms.TextBox();
+            labelRegA = new System.Windows.Forms.Label();
+            groupBoxPCSP = new System.Windows.Forms.GroupBox();
+            textBoxStackValue = new System.Windows.Forms.TextBox();
+            textBoxInstruction = new System.Windows.Forms.TextBox();
+            textBoxSP = new System.Windows.Forms.TextBox();
+            labelSP = new System.Windows.Forms.Label();
+            textBoxPC = new System.Windows.Forms.TextBox();
+            labelPC = new System.Windows.Forms.Label();
+            buttonStop = new System.Windows.Forms.Button();
+            buttonReset = new System.Windows.Forms.Button();
+            checkBoxStepping = new System.Windows.Forms.CheckBox();
+            statusStrip1 = new System.Windows.Forms.StatusStrip();
+            toolStripStatusLabelBRK = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusElapsedTime = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
+            checkBoxSlowDown = new System.Windows.Forms.CheckBox();
+            groupBoxStartStop = new System.Windows.Forms.GroupBox();
+            panelMain = new System.Windows.Forms.Panel();
+            groupBoxLedFlags = new System.Windows.Forms.GroupBox();
+            label7 = new System.Windows.Forms.Label();
+            ledBulbFnegativ = new Bulb.LedBulb();
+            label6 = new System.Windows.Forms.Label();
+            ledBulbFoverflow = new Bulb.LedBulb();
+            label5 = new System.Windows.Forms.Label();
+            ledBulbFbreak = new Bulb.LedBulb();
+            label4 = new System.Windows.Forms.Label();
+            ledBulbFdecimalmode = new Bulb.LedBulb();
+            label3 = new System.Windows.Forms.Label();
+            ledBulbFintdisable = new Bulb.LedBulb();
+            label2 = new System.Windows.Forms.Label();
+            ledBulbFzero = new Bulb.LedBulb();
+            label1 = new System.Windows.Forms.Label();
+            ledBulbFcarry = new Bulb.LedBulb();
+            groupBoxLedPC = new System.Windows.Forms.GroupBox();
+            sevenSegmentPC = new DmitryBrant.CustomControls.SevenSegmentArray();
+            sevenSegmentPCvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
+            groupBoxLedRegs = new System.Windows.Forms.GroupBox();
+            groupBoxRegY = new System.Windows.Forms.GroupBox();
+            sevenSegmentRegY = new DmitryBrant.CustomControls.SevenSegmentArray();
+            groupRegA = new System.Windows.Forms.GroupBox();
+            sevenSegmentRegA = new DmitryBrant.CustomControls.SevenSegmentArray();
+            groupBoxRegX = new System.Windows.Forms.GroupBox();
+            sevenSegmentRegX = new DmitryBrant.CustomControls.SevenSegmentArray();
+            openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            groupBoxLedSP = new System.Windows.Forms.GroupBox();
+            sevenSegmentSP = new DmitryBrant.CustomControls.SevenSegmentArray();
+            sevenSegmentSPvalue = new DmitryBrant.CustomControls.SevenSegmentArray();
+            menuStrip1.SuspendLayout();
+            groupBoxFlags.SuspendLayout();
+            groupBoxRegisters.SuspendLayout();
+            groupBoxPCSP.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            groupBoxStartStop.SuspendLayout();
+            panelMain.SuspendLayout();
+            groupBoxLedFlags.SuspendLayout();
+            groupBoxLedPC.SuspendLayout();
+            groupBoxLedRegs.SuspendLayout();
+            groupBoxRegY.SuspendLayout();
+            groupRegA.SuspendLayout();
+            groupBoxRegX.SuspendLayout();
+            groupBoxLedSP.SuspendLayout();
+            SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem,
-            this.memoryToolStripMenuItem,
-            this.watchToolStripMenuItem,
-            this.styleToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1135, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { dateiToolStripMenuItem, memoryToolStripMenuItem, watchToolStripMenuItem, styleToolStripMenuItem });
+            menuStrip1.Location = new System.Drawing.Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            menuStrip1.Size = new System.Drawing.Size(1306, 24);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
             // 
             // dateiToolStripMenuItem
             // 
-            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemOpenFile,
-            this.toolStripMenuItemSaveFile,
-            this.toolStripSeparator1,
-            this.ToolStripMenuItemClose,
-            this.toolStripSeparator4,
-            this.toolStripMenuItemSettings});
-            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.dateiToolStripMenuItem.Text = "&File";
+            dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItemOpenFile, toolStripMenuItemSaveFile, toolStripSeparator1, ToolStripMenuItemClose, toolStripSeparator4, toolStripMenuItemSettings });
+            dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            dateiToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            dateiToolStripMenuItem.Text = "&File";
             // 
             // toolStripMenuItemOpenFile
             // 
-            this.toolStripMenuItemOpenFile.Name = "toolStripMenuItemOpenFile";
-            this.toolStripMenuItemOpenFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.toolStripMenuItemOpenFile.Size = new System.Drawing.Size(194, 22);
-            this.toolStripMenuItemOpenFile.Text = "Load program";
-            this.toolStripMenuItemOpenFile.ToolTipText = "Load program from file";
-            this.toolStripMenuItemOpenFile.Click += new System.EventHandler(this.ToolStripMenuItemOpenFile_Click);
+            toolStripMenuItemOpenFile.Name = "toolStripMenuItemOpenFile";
+            toolStripMenuItemOpenFile.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O;
+            toolStripMenuItemOpenFile.Size = new System.Drawing.Size(194, 22);
+            toolStripMenuItemOpenFile.Text = "Load program";
+            toolStripMenuItemOpenFile.ToolTipText = "Load program from file";
+            toolStripMenuItemOpenFile.Click += ToolStripMenuItemOpenFile_Click;
             // 
             // toolStripMenuItemSaveFile
             // 
-            this.toolStripMenuItemSaveFile.Name = "toolStripMenuItemSaveFile";
-            this.toolStripMenuItemSaveFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.toolStripMenuItemSaveFile.Size = new System.Drawing.Size(194, 22);
-            this.toolStripMenuItemSaveFile.Text = "Save program";
-            this.toolStripMenuItemSaveFile.ToolTipText = "Save program to file";
-            this.toolStripMenuItemSaveFile.Click += new System.EventHandler(this.ToolStripMenuItemSaveFile_Click);
+            toolStripMenuItemSaveFile.Name = "toolStripMenuItemSaveFile";
+            toolStripMenuItemSaveFile.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S;
+            toolStripMenuItemSaveFile.Size = new System.Drawing.Size(194, 22);
+            toolStripMenuItemSaveFile.Text = "Save program";
+            toolStripMenuItemSaveFile.ToolTipText = "Save program to file";
+            toolStripMenuItemSaveFile.Click += ToolStripMenuItemSaveFile_Click;
             // 
             // toolStripSeparator1
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new System.Drawing.Size(191, 6);
             // 
             // ToolStripMenuItemClose
             // 
-            this.ToolStripMenuItemClose.Name = "ToolStripMenuItemClose";
-            this.ToolStripMenuItemClose.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.ToolStripMenuItemClose.Size = new System.Drawing.Size(194, 22);
-            this.ToolStripMenuItemClose.Text = "&Close";
-            this.ToolStripMenuItemClose.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
+            ToolStripMenuItemClose.Name = "ToolStripMenuItemClose";
+            ToolStripMenuItemClose.ShortcutKeys = System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X;
+            ToolStripMenuItemClose.Size = new System.Drawing.Size(194, 22);
+            ToolStripMenuItemClose.Text = "&Close";
+            ToolStripMenuItemClose.Click += CloseToolStripMenuItem_Click;
             // 
             // toolStripSeparator4
             // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(191, 6);
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new System.Drawing.Size(191, 6);
             // 
             // toolStripMenuItemSettings
             // 
-            this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(194, 22);
-            this.toolStripMenuItemSettings.Text = "&Settings";
-            this.toolStripMenuItemSettings.Click += new System.EventHandler(this.ToolStripMenuItemSettings_Click);
+            toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
+            toolStripMenuItemSettings.Size = new System.Drawing.Size(194, 22);
+            toolStripMenuItemSettings.Text = "&Settings";
+            toolStripMenuItemSettings.Click += ToolStripMenuItemSettings_Click;
             // 
             // memoryToolStripMenuItem
             // 
-            this.memoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editToolStripMenuItem,
-            this.toolStripSeparator2,
-            this.dumpToFileToolStripMenuItem,
-            this.loadFromDumpToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.loadKernalToolStripMenuItem,
-            this.loadCharRomToolStripMenuItem,
-            this.loadBasicRomToolStripMenuItem,
-            this.toolStripSeparator6,
-            this.toolStripMenuItem1,
-            this.toolStripSeparator5,
-            this.eraseToolStripMenuItem});
-            this.memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
-            this.memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-            this.memoryToolStripMenuItem.Text = "&Memory";
+            memoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { editToolStripMenuItem, toolStripSeparator2, dumpToFileToolStripMenuItem, loadFromDumpToolStripMenuItem, toolStripSeparator3, loadKernalToolStripMenuItem, loadCharRomToolStripMenuItem, loadBasicRomToolStripMenuItem, toolStripSeparator6, toolStripMenuItem1, toolStripSeparator5, eraseToolStripMenuItem });
+            memoryToolStripMenuItem.Name = "memoryToolStripMenuItem";
+            memoryToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
+            memoryToolStripMenuItem.Text = "&Memory";
             // 
             // editToolStripMenuItem
             // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.editToolStripMenuItem.Text = "Edit";
-            this.editToolStripMenuItem.Click += new System.EventHandler(this.EditToolStripMenuItem_Click);
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            editToolStripMenuItem.Text = "Edit";
+            editToolStripMenuItem.Click += EditToolStripMenuItem_Click;
             // 
             // toolStripSeparator2
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new System.Drawing.Size(198, 6);
             // 
             // dumpToFileToolStripMenuItem
             // 
-            this.dumpToFileToolStripMenuItem.Name = "dumpToFileToolStripMenuItem";
-            this.dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.dumpToFileToolStripMenuItem.Text = "dump to file";
-            this.dumpToFileToolStripMenuItem.ToolTipText = "Dump whole memory to file";
-            this.dumpToFileToolStripMenuItem.Click += new System.EventHandler(this.DumpToFileToolStripMenuItem_Click);
+            dumpToFileToolStripMenuItem.Name = "dumpToFileToolStripMenuItem";
+            dumpToFileToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            dumpToFileToolStripMenuItem.Text = "dump to file";
+            dumpToFileToolStripMenuItem.ToolTipText = "Dump whole memory to file";
+            dumpToFileToolStripMenuItem.Click += DumpToFileToolStripMenuItem_Click;
             // 
             // loadFromDumpToolStripMenuItem
             // 
-            this.loadFromDumpToolStripMenuItem.Name = "loadFromDumpToolStripMenuItem";
-            this.loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.loadFromDumpToolStripMenuItem.Text = "load from dump";
-            this.loadFromDumpToolStripMenuItem.ToolTipText = "Load dumpfile into memory";
-            this.loadFromDumpToolStripMenuItem.Click += new System.EventHandler(this.LoadFromDumpToolStripMenuItem_Click);
+            loadFromDumpToolStripMenuItem.Name = "loadFromDumpToolStripMenuItem";
+            loadFromDumpToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            loadFromDumpToolStripMenuItem.Text = "load from dump";
+            loadFromDumpToolStripMenuItem.ToolTipText = "Load dumpfile into memory";
+            loadFromDumpToolStripMenuItem.Click += LoadFromDumpToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(198, 6);
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new System.Drawing.Size(198, 6);
             // 
             // loadKernalToolStripMenuItem
             // 
-            this.loadKernalToolStripMenuItem.Name = "loadKernalToolStripMenuItem";
-            this.loadKernalToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.loadKernalToolStripMenuItem.Text = "load Kernal ROM";
-            this.loadKernalToolStripMenuItem.Click += new System.EventHandler(this.loadKernalToolStripMenuItem_Click);
+            loadKernalToolStripMenuItem.Name = "loadKernalToolStripMenuItem";
+            loadKernalToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            loadKernalToolStripMenuItem.Text = "load Kernal ROM";
+            loadKernalToolStripMenuItem.Click += loadKernalToolStripMenuItem_Click;
             // 
             // loadCharRomToolStripMenuItem
             // 
-            this.loadCharRomToolStripMenuItem.Name = "loadCharRomToolStripMenuItem";
-            this.loadCharRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.loadCharRomToolStripMenuItem.Text = "load Character ROM";
-            this.loadCharRomToolStripMenuItem.Click += new System.EventHandler(this.loadCharRomToolStripMenuItem_Click);
+            loadCharRomToolStripMenuItem.Name = "loadCharRomToolStripMenuItem";
+            loadCharRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            loadCharRomToolStripMenuItem.Text = "load Character ROM";
+            loadCharRomToolStripMenuItem.Click += loadCharRomToolStripMenuItem_Click;
             // 
             // loadBasicRomToolStripMenuItem
             // 
-            this.loadBasicRomToolStripMenuItem.Name = "loadBasicRomToolStripMenuItem";
-            this.loadBasicRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.loadBasicRomToolStripMenuItem.Text = "load Basic ROM";
-            this.loadBasicRomToolStripMenuItem.Click += new System.EventHandler(this.loadBasicRomToolStripMenuItem_Click);
+            loadBasicRomToolStripMenuItem.Name = "loadBasicRomToolStripMenuItem";
+            loadBasicRomToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            loadBasicRomToolStripMenuItem.Text = "load Basic ROM";
+            loadBasicRomToolStripMenuItem.Click += loadBasicRomToolStripMenuItem_Click;
             // 
             // toolStripSeparator6
             // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(198, 6);
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new System.Drawing.Size(198, 6);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(201, 22);
-            this.toolStripMenuItem1.Text = "set address / register";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            toolStripMenuItem1.Size = new System.Drawing.Size(201, 22);
+            toolStripMenuItem1.Text = "set address / register";
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator5
             // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(198, 6);
+            toolStripSeparator5.Name = "toolStripSeparator5";
+            toolStripSeparator5.Size = new System.Drawing.Size(198, 6);
             // 
             // eraseToolStripMenuItem
             // 
-            this.eraseToolStripMenuItem.Name = "eraseToolStripMenuItem";
-            this.eraseToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.eraseToolStripMenuItem.Text = "erase";
-            this.eraseToolStripMenuItem.Click += new System.EventHandler(this.EraseToolStripMenuItem_Click);
+            eraseToolStripMenuItem.Name = "eraseToolStripMenuItem";
+            eraseToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            eraseToolStripMenuItem.Text = "erase";
+            eraseToolStripMenuItem.Click += EraseToolStripMenuItem_Click;
             // 
             // watchToolStripMenuItem
             // 
-            this.watchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stackToolStripMenuItem,
-            this.zeropageToolStripMenuItem,
-            this.memrangeToolStripMenuItem});
-            this.watchToolStripMenuItem.Name = "watchToolStripMenuItem";
-            this.watchToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.watchToolStripMenuItem.Text = "&Watch";
+            watchToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { stackToolStripMenuItem, zeropageToolStripMenuItem, memrangeToolStripMenuItem });
+            watchToolStripMenuItem.Name = "watchToolStripMenuItem";
+            watchToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            watchToolStripMenuItem.Text = "&Watch";
             // 
             // stackToolStripMenuItem
             // 
-            this.stackToolStripMenuItem.Name = "stackToolStripMenuItem";
-            this.stackToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.stackToolStripMenuItem.Text = "Stack";
-            this.stackToolStripMenuItem.Click += new System.EventHandler(this.StackToolStripMenuItem_Click);
+            stackToolStripMenuItem.Name = "stackToolStripMenuItem";
+            stackToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            stackToolStripMenuItem.Text = "Stack";
+            stackToolStripMenuItem.Click += StackToolStripMenuItem_Click;
             // 
             // zeropageToolStripMenuItem
             // 
-            this.zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
-            this.zeropageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.zeropageToolStripMenuItem.Text = "Zeropage";
-            this.zeropageToolStripMenuItem.Click += new System.EventHandler(this.ZeropageToolStripMenuItem_Click);
+            zeropageToolStripMenuItem.Name = "zeropageToolStripMenuItem";
+            zeropageToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            zeropageToolStripMenuItem.Text = "Zeropage";
+            zeropageToolStripMenuItem.Click += ZeropageToolStripMenuItem_Click;
             // 
             // memrangeToolStripMenuItem
             // 
-            this.memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
-            this.memrangeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.memrangeToolStripMenuItem.Text = "Memory Range";
-            this.memrangeToolStripMenuItem.Click += new System.EventHandler(this.MemrangeToolStripMenuItem_Click);
+            memrangeToolStripMenuItem.Name = "memrangeToolStripMenuItem";
+            memrangeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            memrangeToolStripMenuItem.Text = "Memory Range";
+            memrangeToolStripMenuItem.Click += MemrangeToolStripMenuItem_Click;
             // 
             // styleToolStripMenuItem
             // 
-            this.styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemStyleTXT,
-            this.toolStripMenuItemStyleLED});
-            this.styleToolStripMenuItem.Name = "styleToolStripMenuItem";
-            this.styleToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.styleToolStripMenuItem.Text = "&Style";
+            styleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripMenuItemStyleTXT, toolStripMenuItemStyleLED });
+            styleToolStripMenuItem.Name = "styleToolStripMenuItem";
+            styleToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            styleToolStripMenuItem.Text = "&Style";
             // 
             // toolStripMenuItemStyleTXT
             // 
-            this.toolStripMenuItemStyleTXT.Checked = true;
-            this.toolStripMenuItemStyleTXT.CheckOnClick = true;
-            this.toolStripMenuItemStyleTXT.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.toolStripMenuItemStyleTXT.Name = "toolStripMenuItemStyleTXT";
-            this.toolStripMenuItemStyleTXT.Size = new System.Drawing.Size(94, 22);
-            this.toolStripMenuItemStyleTXT.Text = "TXT";
-            this.toolStripMenuItemStyleTXT.Click += new System.EventHandler(this.toolStripMenuItemStyleTXT_Click);
+            toolStripMenuItemStyleTXT.Checked = true;
+            toolStripMenuItemStyleTXT.CheckOnClick = true;
+            toolStripMenuItemStyleTXT.CheckState = System.Windows.Forms.CheckState.Checked;
+            toolStripMenuItemStyleTXT.Name = "toolStripMenuItemStyleTXT";
+            toolStripMenuItemStyleTXT.Size = new System.Drawing.Size(95, 22);
+            toolStripMenuItemStyleTXT.Text = "TXT";
+            toolStripMenuItemStyleTXT.Click += toolStripMenuItemStyleTXT_Click;
             // 
             // toolStripMenuItemStyleLED
             // 
-            this.toolStripMenuItemStyleLED.CheckOnClick = true;
-            this.toolStripMenuItemStyleLED.Name = "toolStripMenuItemStyleLED";
-            this.toolStripMenuItemStyleLED.Size = new System.Drawing.Size(94, 22);
-            this.toolStripMenuItemStyleLED.Text = "LED";
-            this.toolStripMenuItemStyleLED.Click += new System.EventHandler(this.toolStripMenuItemStyleLED_Click);
+            toolStripMenuItemStyleLED.CheckOnClick = true;
+            toolStripMenuItemStyleLED.Name = "toolStripMenuItemStyleLED";
+            toolStripMenuItemStyleLED.Size = new System.Drawing.Size(95, 22);
+            toolStripMenuItemStyleLED.Text = "LED";
+            toolStripMenuItemStyleLED.Click += toolStripMenuItemStyleLED_Click;
             // 
             // checkBoxCarryFlag
             // 
-            this.checkBoxCarryFlag.AutoCheck = false;
-            this.checkBoxCarryFlag.AutoSize = true;
-            this.checkBoxCarryFlag.Checked = true;
-            this.checkBoxCarryFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxCarryFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxCarryFlag.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxCarryFlag.Name = "checkBoxCarryFlag";
-            this.checkBoxCarryFlag.Size = new System.Drawing.Size(98, 20);
-            this.checkBoxCarryFlag.TabIndex = 1;
-            this.checkBoxCarryFlag.Tag = "C";
-            this.checkBoxCarryFlag.Text = "Carry [C]";
-            this.checkBoxCarryFlag.UseVisualStyleBackColor = true;
+            checkBoxCarryFlag.AutoCheck = false;
+            checkBoxCarryFlag.AutoSize = true;
+            checkBoxCarryFlag.Checked = true;
+            checkBoxCarryFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxCarryFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxCarryFlag.Location = new System.Drawing.Point(7, 22);
+            checkBoxCarryFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxCarryFlag.Name = "checkBoxCarryFlag";
+            checkBoxCarryFlag.Size = new System.Drawing.Size(98, 20);
+            checkBoxCarryFlag.TabIndex = 1;
+            checkBoxCarryFlag.Tag = "C";
+            checkBoxCarryFlag.Text = "Carry [C]";
+            checkBoxCarryFlag.UseVisualStyleBackColor = true;
             // 
             // groupBoxFlags
             // 
-            this.groupBoxFlags.Controls.Add(this.checkBoxNegativFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxOverflowFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxBreakFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxDecimalModeFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxIntDisableFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxZeroFlag);
-            this.groupBoxFlags.Controls.Add(this.checkBoxCarryFlag);
-            this.groupBoxFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxFlags.Location = new System.Drawing.Point(12, 13);
-            this.groupBoxFlags.Name = "groupBoxFlags";
-            this.groupBoxFlags.Size = new System.Drawing.Size(162, 223);
-            this.groupBoxFlags.TabIndex = 2;
-            this.groupBoxFlags.TabStop = false;
-            this.groupBoxFlags.Text = "Flags";
+            groupBoxFlags.Controls.Add(checkBoxNegativFlag);
+            groupBoxFlags.Controls.Add(checkBoxOverflowFlag);
+            groupBoxFlags.Controls.Add(checkBoxBreakFlag);
+            groupBoxFlags.Controls.Add(checkBoxDecimalModeFlag);
+            groupBoxFlags.Controls.Add(checkBoxIntDisableFlag);
+            groupBoxFlags.Controls.Add(checkBoxZeroFlag);
+            groupBoxFlags.Controls.Add(checkBoxCarryFlag);
+            groupBoxFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxFlags.Location = new System.Drawing.Point(14, 15);
+            groupBoxFlags.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxFlags.Name = "groupBoxFlags";
+            groupBoxFlags.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxFlags.Size = new System.Drawing.Size(189, 257);
+            groupBoxFlags.TabIndex = 2;
+            groupBoxFlags.TabStop = false;
+            groupBoxFlags.Text = "Flags";
             // 
             // checkBoxNegativFlag
             // 
-            this.checkBoxNegativFlag.AutoCheck = false;
-            this.checkBoxNegativFlag.AutoSize = true;
-            this.checkBoxNegativFlag.Checked = true;
-            this.checkBoxNegativFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxNegativFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxNegativFlag.Location = new System.Drawing.Point(6, 175);
-            this.checkBoxNegativFlag.Name = "checkBoxNegativFlag";
-            this.checkBoxNegativFlag.Size = new System.Drawing.Size(122, 20);
-            this.checkBoxNegativFlag.TabIndex = 7;
-            this.checkBoxNegativFlag.Tag = "N";
-            this.checkBoxNegativFlag.Text = "Negativ  [N]";
-            this.checkBoxNegativFlag.UseVisualStyleBackColor = true;
+            checkBoxNegativFlag.AutoCheck = false;
+            checkBoxNegativFlag.AutoSize = true;
+            checkBoxNegativFlag.Checked = true;
+            checkBoxNegativFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxNegativFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxNegativFlag.Location = new System.Drawing.Point(7, 202);
+            checkBoxNegativFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxNegativFlag.Name = "checkBoxNegativFlag";
+            checkBoxNegativFlag.Size = new System.Drawing.Size(122, 20);
+            checkBoxNegativFlag.TabIndex = 7;
+            checkBoxNegativFlag.Tag = "N";
+            checkBoxNegativFlag.Text = "Negativ  [N]";
+            checkBoxNegativFlag.UseVisualStyleBackColor = true;
             // 
             // checkBoxOverflowFlag
             // 
-            this.checkBoxOverflowFlag.AutoCheck = false;
-            this.checkBoxOverflowFlag.AutoSize = true;
-            this.checkBoxOverflowFlag.Checked = true;
-            this.checkBoxOverflowFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxOverflowFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxOverflowFlag.Location = new System.Drawing.Point(6, 149);
-            this.checkBoxOverflowFlag.Name = "checkBoxOverflowFlag";
-            this.checkBoxOverflowFlag.Size = new System.Drawing.Size(122, 20);
-            this.checkBoxOverflowFlag.TabIndex = 6;
-            this.checkBoxOverflowFlag.Tag = "V";
-            this.checkBoxOverflowFlag.Text = "Overflow [V]";
-            this.checkBoxOverflowFlag.UseVisualStyleBackColor = true;
+            checkBoxOverflowFlag.AutoCheck = false;
+            checkBoxOverflowFlag.AutoSize = true;
+            checkBoxOverflowFlag.Checked = true;
+            checkBoxOverflowFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxOverflowFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxOverflowFlag.Location = new System.Drawing.Point(7, 172);
+            checkBoxOverflowFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxOverflowFlag.Name = "checkBoxOverflowFlag";
+            checkBoxOverflowFlag.Size = new System.Drawing.Size(122, 20);
+            checkBoxOverflowFlag.TabIndex = 6;
+            checkBoxOverflowFlag.Tag = "V";
+            checkBoxOverflowFlag.Text = "Overflow [V]";
+            checkBoxOverflowFlag.UseVisualStyleBackColor = true;
             // 
             // checkBoxBreakFlag
             // 
-            this.checkBoxBreakFlag.AutoCheck = false;
-            this.checkBoxBreakFlag.AutoSize = true;
-            this.checkBoxBreakFlag.Checked = true;
-            this.checkBoxBreakFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxBreakFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxBreakFlag.Location = new System.Drawing.Point(6, 123);
-            this.checkBoxBreakFlag.Name = "checkBoxBreakFlag";
-            this.checkBoxBreakFlag.Size = new System.Drawing.Size(98, 20);
-            this.checkBoxBreakFlag.TabIndex = 5;
-            this.checkBoxBreakFlag.Tag = "B";
-            this.checkBoxBreakFlag.Text = "Break [B]";
-            this.checkBoxBreakFlag.UseVisualStyleBackColor = true;
+            checkBoxBreakFlag.AutoCheck = false;
+            checkBoxBreakFlag.AutoSize = true;
+            checkBoxBreakFlag.Checked = true;
+            checkBoxBreakFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxBreakFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxBreakFlag.Location = new System.Drawing.Point(7, 142);
+            checkBoxBreakFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxBreakFlag.Name = "checkBoxBreakFlag";
+            checkBoxBreakFlag.Size = new System.Drawing.Size(98, 20);
+            checkBoxBreakFlag.TabIndex = 5;
+            checkBoxBreakFlag.Tag = "B";
+            checkBoxBreakFlag.Text = "Break [B]";
+            checkBoxBreakFlag.UseVisualStyleBackColor = true;
             // 
             // checkBoxDecimalModeFlag
             // 
-            this.checkBoxDecimalModeFlag.AutoCheck = false;
-            this.checkBoxDecimalModeFlag.AutoSize = true;
-            this.checkBoxDecimalModeFlag.Checked = true;
-            this.checkBoxDecimalModeFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxDecimalModeFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxDecimalModeFlag.Location = new System.Drawing.Point(6, 97);
-            this.checkBoxDecimalModeFlag.Name = "checkBoxDecimalModeFlag";
-            this.checkBoxDecimalModeFlag.Size = new System.Drawing.Size(146, 20);
-            this.checkBoxDecimalModeFlag.TabIndex = 4;
-            this.checkBoxDecimalModeFlag.Tag = "D";
-            this.checkBoxDecimalModeFlag.Text = "DecimalMode [D]";
-            this.checkBoxDecimalModeFlag.UseVisualStyleBackColor = true;
+            checkBoxDecimalModeFlag.AutoCheck = false;
+            checkBoxDecimalModeFlag.AutoSize = true;
+            checkBoxDecimalModeFlag.Checked = true;
+            checkBoxDecimalModeFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxDecimalModeFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxDecimalModeFlag.Location = new System.Drawing.Point(7, 112);
+            checkBoxDecimalModeFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxDecimalModeFlag.Name = "checkBoxDecimalModeFlag";
+            checkBoxDecimalModeFlag.Size = new System.Drawing.Size(146, 20);
+            checkBoxDecimalModeFlag.TabIndex = 4;
+            checkBoxDecimalModeFlag.Tag = "D";
+            checkBoxDecimalModeFlag.Text = "DecimalMode [D]";
+            checkBoxDecimalModeFlag.UseVisualStyleBackColor = true;
             // 
             // checkBoxIntDisableFlag
             // 
-            this.checkBoxIntDisableFlag.AutoCheck = false;
-            this.checkBoxIntDisableFlag.AutoSize = true;
-            this.checkBoxIntDisableFlag.Checked = true;
-            this.checkBoxIntDisableFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIntDisableFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxIntDisableFlag.Location = new System.Drawing.Point(6, 71);
-            this.checkBoxIntDisableFlag.Name = "checkBoxIntDisableFlag";
-            this.checkBoxIntDisableFlag.Size = new System.Drawing.Size(146, 20);
-            this.checkBoxIntDisableFlag.TabIndex = 3;
-            this.checkBoxIntDisableFlag.Tag = "I";
-            this.checkBoxIntDisableFlag.Text = "intDisable  [I]";
-            this.checkBoxIntDisableFlag.UseVisualStyleBackColor = true;
+            checkBoxIntDisableFlag.AutoCheck = false;
+            checkBoxIntDisableFlag.AutoSize = true;
+            checkBoxIntDisableFlag.Checked = true;
+            checkBoxIntDisableFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxIntDisableFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxIntDisableFlag.Location = new System.Drawing.Point(7, 82);
+            checkBoxIntDisableFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxIntDisableFlag.Name = "checkBoxIntDisableFlag";
+            checkBoxIntDisableFlag.Size = new System.Drawing.Size(146, 20);
+            checkBoxIntDisableFlag.TabIndex = 3;
+            checkBoxIntDisableFlag.Tag = "I";
+            checkBoxIntDisableFlag.Text = "intDisable  [I]";
+            checkBoxIntDisableFlag.UseVisualStyleBackColor = true;
             // 
             // checkBoxZeroFlag
             // 
-            this.checkBoxZeroFlag.AutoCheck = false;
-            this.checkBoxZeroFlag.AutoSize = true;
-            this.checkBoxZeroFlag.Checked = true;
-            this.checkBoxZeroFlag.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxZeroFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxZeroFlag.Location = new System.Drawing.Point(6, 45);
-            this.checkBoxZeroFlag.Name = "checkBoxZeroFlag";
-            this.checkBoxZeroFlag.Size = new System.Drawing.Size(98, 20);
-            this.checkBoxZeroFlag.TabIndex = 2;
-            this.checkBoxZeroFlag.Tag = "Z";
-            this.checkBoxZeroFlag.Text = "Zero  [Z]";
-            this.checkBoxZeroFlag.UseVisualStyleBackColor = true;
+            checkBoxZeroFlag.AutoCheck = false;
+            checkBoxZeroFlag.AutoSize = true;
+            checkBoxZeroFlag.Checked = true;
+            checkBoxZeroFlag.CheckState = System.Windows.Forms.CheckState.Checked;
+            checkBoxZeroFlag.Font = new System.Drawing.Font("Courier New", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            checkBoxZeroFlag.Location = new System.Drawing.Point(7, 52);
+            checkBoxZeroFlag.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxZeroFlag.Name = "checkBoxZeroFlag";
+            checkBoxZeroFlag.Size = new System.Drawing.Size(98, 20);
+            checkBoxZeroFlag.TabIndex = 2;
+            checkBoxZeroFlag.Tag = "Z";
+            checkBoxZeroFlag.Text = "Zero  [Z]";
+            checkBoxZeroFlag.UseVisualStyleBackColor = true;
             // 
             // buttonStart
             // 
-            this.buttonStart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStart.Location = new System.Drawing.Point(6, 23);
-            this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(158, 23);
-            this.buttonStart.TabIndex = 4;
-            this.buttonStart.TabStop = false;
-            this.buttonStart.Text = "Start";
-            this.buttonStart.UseVisualStyleBackColor = true;
-            this.buttonStart.Click += new System.EventHandler(this.ButtonStart_Click);
+            buttonStart.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            buttonStart.Location = new System.Drawing.Point(7, 27);
+            buttonStart.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonStart.Name = "buttonStart";
+            buttonStart.Size = new System.Drawing.Size(184, 27);
+            buttonStart.TabIndex = 4;
+            buttonStart.TabStop = false;
+            buttonStart.Text = "Start";
+            buttonStart.UseVisualStyleBackColor = true;
+            buttonStart.Click += ButtonStart_Click;
             // 
             // groupBoxRegisters
             // 
-            this.groupBoxRegisters.Controls.Add(this.textBoxRegY);
-            this.groupBoxRegisters.Controls.Add(this.labelRegY);
-            this.groupBoxRegisters.Controls.Add(this.textBoxRegX);
-            this.groupBoxRegisters.Controls.Add(this.labelRegX);
-            this.groupBoxRegisters.Controls.Add(this.textBoxRegA);
-            this.groupBoxRegisters.Controls.Add(this.labelRegA);
-            this.groupBoxRegisters.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxRegisters.Location = new System.Drawing.Point(180, 13);
-            this.groupBoxRegisters.Name = "groupBoxRegisters";
-            this.groupBoxRegisters.Size = new System.Drawing.Size(135, 117);
-            this.groupBoxRegisters.TabIndex = 6;
-            this.groupBoxRegisters.TabStop = false;
-            this.groupBoxRegisters.Text = "Registers";
+            groupBoxRegisters.Controls.Add(textBoxRegY);
+            groupBoxRegisters.Controls.Add(labelRegY);
+            groupBoxRegisters.Controls.Add(textBoxRegX);
+            groupBoxRegisters.Controls.Add(labelRegX);
+            groupBoxRegisters.Controls.Add(textBoxRegA);
+            groupBoxRegisters.Controls.Add(labelRegA);
+            groupBoxRegisters.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxRegisters.Location = new System.Drawing.Point(210, 15);
+            groupBoxRegisters.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegisters.Name = "groupBoxRegisters";
+            groupBoxRegisters.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegisters.Size = new System.Drawing.Size(158, 135);
+            groupBoxRegisters.TabIndex = 6;
+            groupBoxRegisters.TabStop = false;
+            groupBoxRegisters.Text = "Registers";
             // 
             // textBoxRegY
             // 
-            this.textBoxRegY.Location = new System.Drawing.Point(38, 78);
-            this.textBoxRegY.Name = "textBoxRegY";
-            this.textBoxRegY.ReadOnly = true;
-            this.textBoxRegY.Size = new System.Drawing.Size(58, 23);
-            this.textBoxRegY.TabIndex = 5;
-            this.textBoxRegY.Text = "FF";
-            this.textBoxRegY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxRegY.Location = new System.Drawing.Point(44, 90);
+            textBoxRegY.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxRegY.Name = "textBoxRegY";
+            textBoxRegY.ReadOnly = true;
+            textBoxRegY.Size = new System.Drawing.Size(67, 23);
+            textBoxRegY.TabIndex = 5;
+            textBoxRegY.Text = "FF";
+            textBoxRegY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelRegY
             // 
-            this.labelRegY.AutoSize = true;
-            this.labelRegY.Location = new System.Drawing.Point(6, 81);
-            this.labelRegY.Name = "labelRegY";
-            this.labelRegY.Size = new System.Drawing.Size(17, 16);
-            this.labelRegY.TabIndex = 4;
-            this.labelRegY.Text = "Y";
-            this.labelRegY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelRegY.AutoSize = true;
+            labelRegY.Location = new System.Drawing.Point(7, 93);
+            labelRegY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelRegY.Name = "labelRegY";
+            labelRegY.Size = new System.Drawing.Size(17, 16);
+            labelRegY.TabIndex = 4;
+            labelRegY.Text = "Y";
+            labelRegY.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxRegX
             // 
-            this.textBoxRegX.Location = new System.Drawing.Point(38, 49);
-            this.textBoxRegX.Name = "textBoxRegX";
-            this.textBoxRegX.ReadOnly = true;
-            this.textBoxRegX.Size = new System.Drawing.Size(58, 23);
-            this.textBoxRegX.TabIndex = 3;
-            this.textBoxRegX.Text = "FF";
-            this.textBoxRegX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxRegX.Location = new System.Drawing.Point(44, 57);
+            textBoxRegX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxRegX.Name = "textBoxRegX";
+            textBoxRegX.ReadOnly = true;
+            textBoxRegX.Size = new System.Drawing.Size(67, 23);
+            textBoxRegX.TabIndex = 3;
+            textBoxRegX.Text = "FF";
+            textBoxRegX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelRegX
             // 
-            this.labelRegX.AutoSize = true;
-            this.labelRegX.Location = new System.Drawing.Point(6, 52);
-            this.labelRegX.Name = "labelRegX";
-            this.labelRegX.Size = new System.Drawing.Size(16, 16);
-            this.labelRegX.TabIndex = 2;
-            this.labelRegX.Text = "X";
-            this.labelRegX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelRegX.AutoSize = true;
+            labelRegX.Location = new System.Drawing.Point(7, 60);
+            labelRegX.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelRegX.Name = "labelRegX";
+            labelRegX.Size = new System.Drawing.Size(16, 16);
+            labelRegX.TabIndex = 2;
+            labelRegX.Text = "X";
+            labelRegX.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxRegA
             // 
-            this.textBoxRegA.Location = new System.Drawing.Point(38, 20);
-            this.textBoxRegA.Name = "textBoxRegA";
-            this.textBoxRegA.ReadOnly = true;
-            this.textBoxRegA.Size = new System.Drawing.Size(58, 23);
-            this.textBoxRegA.TabIndex = 1;
-            this.textBoxRegA.Text = "FF";
-            this.textBoxRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxRegA.Location = new System.Drawing.Point(44, 23);
+            textBoxRegA.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxRegA.Name = "textBoxRegA";
+            textBoxRegA.ReadOnly = true;
+            textBoxRegA.Size = new System.Drawing.Size(67, 23);
+            textBoxRegA.TabIndex = 1;
+            textBoxRegA.Text = "FF";
+            textBoxRegA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelRegA
             // 
-            this.labelRegA.AutoSize = true;
-            this.labelRegA.Location = new System.Drawing.Point(6, 23);
-            this.labelRegA.Name = "labelRegA";
-            this.labelRegA.Size = new System.Drawing.Size(16, 16);
-            this.labelRegA.TabIndex = 0;
-            this.labelRegA.Text = "A";
-            this.labelRegA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelRegA.AutoSize = true;
+            labelRegA.Location = new System.Drawing.Point(7, 27);
+            labelRegA.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelRegA.Name = "labelRegA";
+            labelRegA.Size = new System.Drawing.Size(16, 16);
+            labelRegA.TabIndex = 0;
+            labelRegA.Text = "A";
+            labelRegA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBoxPCSP
             // 
-            this.groupBoxPCSP.Controls.Add(this.textBoxStackValue);
-            this.groupBoxPCSP.Controls.Add(this.textBoxInstruction);
-            this.groupBoxPCSP.Controls.Add(this.textBoxSP);
-            this.groupBoxPCSP.Controls.Add(this.labelSP);
-            this.groupBoxPCSP.Controls.Add(this.textBoxPC);
-            this.groupBoxPCSP.Controls.Add(this.labelPC);
-            this.groupBoxPCSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxPCSP.Location = new System.Drawing.Point(180, 136);
-            this.groupBoxPCSP.Name = "groupBoxPCSP";
-            this.groupBoxPCSP.Size = new System.Drawing.Size(135, 165);
-            this.groupBoxPCSP.TabIndex = 7;
-            this.groupBoxPCSP.TabStop = false;
+            groupBoxPCSP.Controls.Add(textBoxStackValue);
+            groupBoxPCSP.Controls.Add(textBoxInstruction);
+            groupBoxPCSP.Controls.Add(textBoxSP);
+            groupBoxPCSP.Controls.Add(labelSP);
+            groupBoxPCSP.Controls.Add(textBoxPC);
+            groupBoxPCSP.Controls.Add(labelPC);
+            groupBoxPCSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxPCSP.Location = new System.Drawing.Point(210, 157);
+            groupBoxPCSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxPCSP.Name = "groupBoxPCSP";
+            groupBoxPCSP.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxPCSP.Size = new System.Drawing.Size(158, 190);
+            groupBoxPCSP.TabIndex = 7;
+            groupBoxPCSP.TabStop = false;
             // 
             // textBoxStackValue
             // 
-            this.textBoxStackValue.Location = new System.Drawing.Point(38, 123);
-            this.textBoxStackValue.Name = "textBoxStackValue";
-            this.textBoxStackValue.ReadOnly = true;
-            this.textBoxStackValue.Size = new System.Drawing.Size(58, 23);
-            this.textBoxStackValue.TabIndex = 11;
-            this.textBoxStackValue.Text = "FF";
-            this.textBoxStackValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxStackValue.Location = new System.Drawing.Point(44, 142);
+            textBoxStackValue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxStackValue.Name = "textBoxStackValue";
+            textBoxStackValue.ReadOnly = true;
+            textBoxStackValue.Size = new System.Drawing.Size(67, 23);
+            textBoxStackValue.TabIndex = 11;
+            textBoxStackValue.Text = "FF";
+            textBoxStackValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxInstruction
             // 
-            this.textBoxInstruction.Location = new System.Drawing.Point(38, 48);
-            this.textBoxInstruction.Name = "textBoxInstruction";
-            this.textBoxInstruction.ReadOnly = true;
-            this.textBoxInstruction.Size = new System.Drawing.Size(58, 23);
-            this.textBoxInstruction.TabIndex = 10;
-            this.textBoxInstruction.Text = "FF";
-            this.textBoxInstruction.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxInstruction.Location = new System.Drawing.Point(44, 55);
+            textBoxInstruction.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxInstruction.Name = "textBoxInstruction";
+            textBoxInstruction.ReadOnly = true;
+            textBoxInstruction.Size = new System.Drawing.Size(67, 23);
+            textBoxInstruction.TabIndex = 10;
+            textBoxInstruction.Text = "FF";
+            textBoxInstruction.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBoxSP
             // 
-            this.textBoxSP.Location = new System.Drawing.Point(38, 94);
-            this.textBoxSP.Name = "textBoxSP";
-            this.textBoxSP.ReadOnly = true;
-            this.textBoxSP.Size = new System.Drawing.Size(58, 23);
-            this.textBoxSP.TabIndex = 9;
-            this.textBoxSP.Text = "FF";
-            this.textBoxSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxSP.Location = new System.Drawing.Point(44, 108);
+            textBoxSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxSP.Name = "textBoxSP";
+            textBoxSP.ReadOnly = true;
+            textBoxSP.Size = new System.Drawing.Size(67, 23);
+            textBoxSP.TabIndex = 9;
+            textBoxSP.Text = "FF";
+            textBoxSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelSP
             // 
-            this.labelSP.AutoSize = true;
-            this.labelSP.Location = new System.Drawing.Point(5, 110);
-            this.labelSP.Name = "labelSP";
-            this.labelSP.Size = new System.Drawing.Size(25, 16);
-            this.labelSP.TabIndex = 8;
-            this.labelSP.Text = "SP";
-            this.labelSP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelSP.AutoSize = true;
+            labelSP.Location = new System.Drawing.Point(6, 127);
+            labelSP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSP.Name = "labelSP";
+            labelSP.Size = new System.Drawing.Size(25, 16);
+            labelSP.TabIndex = 8;
+            labelSP.Text = "SP";
+            labelSP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxPC
             // 
-            this.textBoxPC.Location = new System.Drawing.Point(38, 22);
-            this.textBoxPC.Name = "textBoxPC";
-            this.textBoxPC.ReadOnly = true;
-            this.textBoxPC.Size = new System.Drawing.Size(58, 23);
-            this.textBoxPC.TabIndex = 7;
-            this.textBoxPC.Text = "FF";
-            this.textBoxPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            textBoxPC.Location = new System.Drawing.Point(44, 25);
+            textBoxPC.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxPC.Name = "textBoxPC";
+            textBoxPC.ReadOnly = true;
+            textBoxPC.Size = new System.Drawing.Size(67, 23);
+            textBoxPC.TabIndex = 7;
+            textBoxPC.Text = "FF";
+            textBoxPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // labelPC
             // 
-            this.labelPC.AutoSize = true;
-            this.labelPC.Location = new System.Drawing.Point(5, 39);
-            this.labelPC.Name = "labelPC";
-            this.labelPC.Size = new System.Drawing.Size(26, 16);
-            this.labelPC.TabIndex = 6;
-            this.labelPC.Text = "PC";
-            this.labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            labelPC.AutoSize = true;
+            labelPC.Location = new System.Drawing.Point(6, 45);
+            labelPC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelPC.Name = "labelPC";
+            labelPC.Size = new System.Drawing.Size(26, 16);
+            labelPC.TabIndex = 6;
+            labelPC.Text = "PC";
+            labelPC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // buttonStop
             // 
-            this.buttonStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonStop.Location = new System.Drawing.Point(6, 52);
-            this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(158, 23);
-            this.buttonStop.TabIndex = 8;
-            this.buttonStop.Text = "Stop";
-            this.buttonStop.UseVisualStyleBackColor = true;
-            this.buttonStop.Click += new System.EventHandler(this.ButtonStop_Click);
+            buttonStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            buttonStop.Location = new System.Drawing.Point(7, 60);
+            buttonStop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonStop.Name = "buttonStop";
+            buttonStop.Size = new System.Drawing.Size(184, 27);
+            buttonStop.TabIndex = 8;
+            buttonStop.Text = "Stop";
+            buttonStop.UseVisualStyleBackColor = true;
+            buttonStop.Click += ButtonStop_Click;
             // 
             // buttonReset
             // 
-            this.buttonReset.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonReset.Location = new System.Drawing.Point(6, 81);
-            this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(158, 23);
-            this.buttonReset.TabIndex = 9;
-            this.buttonReset.Text = "Reset";
-            this.buttonReset.UseVisualStyleBackColor = true;
-            this.buttonReset.Click += new System.EventHandler(this.ButtonReset_Click);
+            buttonReset.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            buttonReset.Location = new System.Drawing.Point(7, 93);
+            buttonReset.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new System.Drawing.Size(184, 27);
+            buttonReset.TabIndex = 9;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += ButtonReset_Click;
             // 
             // checkBoxStepping
             // 
-            this.checkBoxStepping.AutoSize = true;
-            this.checkBoxStepping.Location = new System.Drawing.Point(6, 118);
-            this.checkBoxStepping.Name = "checkBoxStepping";
-            this.checkBoxStepping.Size = new System.Drawing.Size(89, 20);
-            this.checkBoxStepping.TabIndex = 10;
-            this.checkBoxStepping.Text = "Stepping";
-            this.checkBoxStepping.UseVisualStyleBackColor = true;
-            this.checkBoxStepping.CheckedChanged += new System.EventHandler(this.CheckBoxStepping_CheckedChanged);
+            checkBoxStepping.AutoSize = true;
+            checkBoxStepping.Location = new System.Drawing.Point(7, 136);
+            checkBoxStepping.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxStepping.Name = "checkBoxStepping";
+            checkBoxStepping.Size = new System.Drawing.Size(89, 20);
+            checkBoxStepping.TabIndex = 10;
+            checkBoxStepping.Text = "Stepping";
+            checkBoxStepping.UseVisualStyleBackColor = true;
+            checkBoxStepping.CheckedChanged += CheckBoxStepping_CheckedChanged;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelBRK,
-            this.toolStripStatusElapsedTime,
-            this.toolStripProgressBar1,
-            this.toolStripStatusLabel1,
-            this.toolStripStatusLabelKernal,
-            this.toolStripStatusLabel2,
-            this.toolStripStatusLabelBasic});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1135, 22);
-            this.statusStrip1.TabIndex = 11;
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabelBRK, toolStripStatusElapsedTime, toolStripProgressBar1, toolStripStatusLabel1, toolStripStatusLabelKernal, toolStripStatusLabel2, toolStripStatusLabelBasic });
+            statusStrip1.Location = new System.Drawing.Point(0, 599);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            statusStrip1.Size = new System.Drawing.Size(1306, 22);
+            statusStrip1.TabIndex = 11;
             // 
             // toolStripStatusLabelBRK
             // 
-            this.toolStripStatusLabelBRK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
-            this.toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabelBRK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
+            toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusElapsedTime
             // 
-            this.toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
-            this.toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
+            toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripProgressBar1
             // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(200, 16);
-            this.toolStripProgressBar1.Step = 1;
-            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.toolStripProgressBar1.Visible = false;
+            toolStripProgressBar1.Name = "toolStripProgressBar1";
+            toolStripProgressBar1.Size = new System.Drawing.Size(233, 18);
+            toolStripProgressBar1.Step = 1;
+            toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            toolStripProgressBar1.Visible = false;
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
-            this.toolStripStatusLabel1.Text = "KERNAL: ";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
+            toolStripStatusLabel1.Text = "KERNAL: ";
             // 
             // toolStripStatusLabelKernal
             // 
-            this.toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
-            this.toolStripStatusLabelKernal.Size = new System.Drawing.Size(25, 17);
-            this.toolStripStatusLabelKernal.Text = "0x0";
+            toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
+            toolStripStatusLabelKernal.Size = new System.Drawing.Size(24, 17);
+            toolStripStatusLabelKernal.Text = "0x0";
             // 
             // toolStripStatusLabel2
             // 
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
-            this.toolStripStatusLabel2.Text = "BASIC: ";
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
+            toolStripStatusLabel2.Text = "BASIC: ";
             // 
             // toolStripStatusLabelBasic
             // 
-            this.toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
-            this.toolStripStatusLabelBasic.Size = new System.Drawing.Size(25, 17);
-            this.toolStripStatusLabelBasic.Text = "0x0";
+            toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
+            toolStripStatusLabelBasic.Size = new System.Drawing.Size(24, 17);
+            toolStripStatusLabelBasic.Text = "0x0";
             // 
             // checkBoxSlowDown
             // 
-            this.checkBoxSlowDown.AutoSize = true;
-            this.checkBoxSlowDown.Location = new System.Drawing.Point(6, 144);
-            this.checkBoxSlowDown.Name = "checkBoxSlowDown";
-            this.checkBoxSlowDown.Size = new System.Drawing.Size(59, 20);
-            this.checkBoxSlowDown.TabIndex = 14;
-            this.checkBoxSlowDown.Text = "Slow";
-            this.checkBoxSlowDown.UseVisualStyleBackColor = true;
-            this.checkBoxSlowDown.CheckedChanged += new System.EventHandler(this.CheckBoxSlowDown_CheckedChanged);
+            checkBoxSlowDown.AutoSize = true;
+            checkBoxSlowDown.Location = new System.Drawing.Point(7, 166);
+            checkBoxSlowDown.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            checkBoxSlowDown.Name = "checkBoxSlowDown";
+            checkBoxSlowDown.Size = new System.Drawing.Size(59, 20);
+            checkBoxSlowDown.TabIndex = 14;
+            checkBoxSlowDown.Text = "Slow";
+            checkBoxSlowDown.UseVisualStyleBackColor = true;
+            checkBoxSlowDown.CheckedChanged += CheckBoxSlowDown_CheckedChanged;
             // 
             // groupBoxStartStop
             // 
-            this.groupBoxStartStop.Controls.Add(this.buttonStart);
-            this.groupBoxStartStop.Controls.Add(this.buttonStop);
-            this.groupBoxStartStop.Controls.Add(this.checkBoxSlowDown);
-            this.groupBoxStartStop.Controls.Add(this.buttonReset);
-            this.groupBoxStartStop.Controls.Add(this.checkBoxStepping);
-            this.groupBoxStartStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxStartStop.Location = new System.Drawing.Point(321, 13);
-            this.groupBoxStartStop.Name = "groupBoxStartStop";
-            this.groupBoxStartStop.Size = new System.Drawing.Size(169, 195);
-            this.groupBoxStartStop.TabIndex = 16;
-            this.groupBoxStartStop.TabStop = false;
-            this.groupBoxStartStop.Text = "Start/Stop";
+            groupBoxStartStop.Controls.Add(buttonStart);
+            groupBoxStartStop.Controls.Add(buttonStop);
+            groupBoxStartStop.Controls.Add(checkBoxSlowDown);
+            groupBoxStartStop.Controls.Add(buttonReset);
+            groupBoxStartStop.Controls.Add(checkBoxStepping);
+            groupBoxStartStop.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxStartStop.Location = new System.Drawing.Point(374, 15);
+            groupBoxStartStop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxStartStop.Name = "groupBoxStartStop";
+            groupBoxStartStop.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxStartStop.Size = new System.Drawing.Size(197, 225);
+            groupBoxStartStop.TabIndex = 16;
+            groupBoxStartStop.TabStop = false;
+            groupBoxStartStop.Text = "Start/Stop";
             // 
             // panelMain
             // 
-            this.panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMain.Controls.Add(this.groupBoxLedFlags);
-            this.panelMain.Controls.Add(this.groupBoxStartStop);
-            this.panelMain.Controls.Add(this.groupBoxFlags);
-            this.panelMain.Controls.Add(this.groupBoxRegisters);
-            this.panelMain.Controls.Add(this.groupBoxPCSP);
-            this.panelMain.Location = new System.Drawing.Point(12, 28);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(530, 478);
-            this.panelMain.TabIndex = 16;
+            panelMain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            panelMain.Controls.Add(groupBoxStartStop);
+            panelMain.Controls.Add(groupBoxFlags);
+            panelMain.Controls.Add(groupBoxRegisters);
+            panelMain.Controls.Add(groupBoxPCSP);
+            panelMain.Location = new System.Drawing.Point(14, 32);
+            panelMain.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new System.Drawing.Size(618, 551);
+            panelMain.TabIndex = 16;
             // 
             // groupBoxLedFlags
             // 
-            this.groupBoxLedFlags.Controls.Add(this.label7);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFnegativ);
-            this.groupBoxLedFlags.Controls.Add(this.label6);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFoverflow);
-            this.groupBoxLedFlags.Controls.Add(this.label5);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFbreak);
-            this.groupBoxLedFlags.Controls.Add(this.label4);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFdecimalmode);
-            this.groupBoxLedFlags.Controls.Add(this.label3);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFintdisable);
-            this.groupBoxLedFlags.Controls.Add(this.label2);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFzero);
-            this.groupBoxLedFlags.Controls.Add(this.label1);
-            this.groupBoxLedFlags.Controls.Add(this.ledBulbFcarry);
-            this.groupBoxLedFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxLedFlags.Location = new System.Drawing.Point(320, 215);
-            this.groupBoxLedFlags.Name = "groupBoxLedFlags";
-            this.groupBoxLedFlags.Size = new System.Drawing.Size(200, 259);
-            this.groupBoxLedFlags.TabIndex = 23;
-            this.groupBoxLedFlags.TabStop = false;
-            this.groupBoxLedFlags.Text = "Flags";
-            this.groupBoxLedFlags.Visible = false;
+            groupBoxLedFlags.Controls.Add(label7);
+            groupBoxLedFlags.Controls.Add(ledBulbFnegativ);
+            groupBoxLedFlags.Controls.Add(label6);
+            groupBoxLedFlags.Controls.Add(ledBulbFoverflow);
+            groupBoxLedFlags.Controls.Add(label5);
+            groupBoxLedFlags.Controls.Add(ledBulbFbreak);
+            groupBoxLedFlags.Controls.Add(label4);
+            groupBoxLedFlags.Controls.Add(ledBulbFdecimalmode);
+            groupBoxLedFlags.Controls.Add(label3);
+            groupBoxLedFlags.Controls.Add(ledBulbFintdisable);
+            groupBoxLedFlags.Controls.Add(label2);
+            groupBoxLedFlags.Controls.Add(ledBulbFzero);
+            groupBoxLedFlags.Controls.Add(label1);
+            groupBoxLedFlags.Controls.Add(ledBulbFcarry);
+            groupBoxLedFlags.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxLedFlags.Location = new System.Drawing.Point(1060, 274);
+            groupBoxLedFlags.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedFlags.Name = "groupBoxLedFlags";
+            groupBoxLedFlags.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedFlags.Size = new System.Drawing.Size(233, 291);
+            groupBoxLedFlags.TabIndex = 23;
+            groupBoxLedFlags.TabStop = false;
+            groupBoxLedFlags.Text = "Flags";
+            groupBoxLedFlags.Visible = false;
             // 
             // label7
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(37, 208);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(103, 16);
-            this.label7.TabIndex = 35;
-            this.label7.Tag = "";
-            this.label7.Text = "Negativ  [N]";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label7.Location = new System.Drawing.Point(43, 240);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(103, 16);
+            label7.TabIndex = 35;
+            label7.Tag = "";
+            label7.Text = "Negativ  [N]";
+            label7.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFnegativ
             // 
-            this.ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFnegativ.Color = System.Drawing.Color.Red;
-            this.ledBulbFnegativ.Location = new System.Drawing.Point(6, 205);
-            this.ledBulbFnegativ.Name = "ledBulbFnegativ";
-            this.ledBulbFnegativ.On = false;
-            this.ledBulbFnegativ.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFnegativ.TabIndex = 34;
-            this.ledBulbFnegativ.Tag = "N";
-            this.ledBulbFnegativ.Text = "ledBulb1";
+            ledBulbFnegativ.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFnegativ.Color = System.Drawing.Color.Red;
+            ledBulbFnegativ.Location = new System.Drawing.Point(7, 237);
+            ledBulbFnegativ.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFnegativ.Name = "ledBulbFnegativ";
+            ledBulbFnegativ.On = false;
+            ledBulbFnegativ.Size = new System.Drawing.Size(29, 35);
+            ledBulbFnegativ.TabIndex = 34;
+            ledBulbFnegativ.Tag = "N";
+            ledBulbFnegativ.Text = "ledBulb1";
             // 
             // label6
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(37, 181);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 16);
-            this.label6.TabIndex = 33;
-            this.label6.Tag = "";
-            this.label6.Text = "Overflow [V]";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label6.Location = new System.Drawing.Point(43, 209);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(103, 16);
+            label6.TabIndex = 33;
+            label6.Tag = "";
+            label6.Text = "Overflow [V]";
+            label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFoverflow
             // 
-            this.ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFoverflow.Color = System.Drawing.Color.Red;
-            this.ledBulbFoverflow.Location = new System.Drawing.Point(6, 178);
-            this.ledBulbFoverflow.Name = "ledBulbFoverflow";
-            this.ledBulbFoverflow.On = false;
-            this.ledBulbFoverflow.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFoverflow.TabIndex = 32;
-            this.ledBulbFoverflow.Tag = "V";
-            this.ledBulbFoverflow.Text = "ledBulb1";
+            ledBulbFoverflow.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFoverflow.Color = System.Drawing.Color.Red;
+            ledBulbFoverflow.Location = new System.Drawing.Point(7, 205);
+            ledBulbFoverflow.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFoverflow.Name = "ledBulbFoverflow";
+            ledBulbFoverflow.On = false;
+            ledBulbFoverflow.Size = new System.Drawing.Size(29, 35);
+            ledBulbFoverflow.TabIndex = 32;
+            ledBulbFoverflow.Tag = "V";
+            ledBulbFoverflow.Text = "ledBulb1";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(37, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 16);
-            this.label5.TabIndex = 31;
-            this.label5.Tag = "";
-            this.label5.Text = "Break [B]";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label5.Location = new System.Drawing.Point(43, 174);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(79, 16);
+            label5.TabIndex = 31;
+            label5.Tag = "";
+            label5.Text = "Break [B]";
+            label5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFbreak
             // 
-            this.ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFbreak.Color = System.Drawing.Color.Red;
-            this.ledBulbFbreak.Location = new System.Drawing.Point(6, 148);
-            this.ledBulbFbreak.Name = "ledBulbFbreak";
-            this.ledBulbFbreak.On = false;
-            this.ledBulbFbreak.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFbreak.TabIndex = 30;
-            this.ledBulbFbreak.Tag = "B";
-            this.ledBulbFbreak.Text = "ledBulb1";
+            ledBulbFbreak.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFbreak.Color = System.Drawing.Color.Red;
+            ledBulbFbreak.Location = new System.Drawing.Point(7, 171);
+            ledBulbFbreak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFbreak.Name = "ledBulbFbreak";
+            ledBulbFbreak.On = false;
+            ledBulbFbreak.Size = new System.Drawing.Size(29, 35);
+            ledBulbFbreak.TabIndex = 30;
+            ledBulbFbreak.Tag = "B";
+            ledBulbFbreak.Text = "ledBulb1";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(37, 121);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 16);
-            this.label4.TabIndex = 29;
-            this.label4.Tag = "";
-            this.label4.Text = "DecimalMode [D]";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label4.Location = new System.Drawing.Point(43, 140);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(127, 16);
+            label4.TabIndex = 29;
+            label4.Tag = "";
+            label4.Text = "DecimalMode [D]";
+            label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFdecimalmode
             // 
-            this.ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
-            this.ledBulbFdecimalmode.Location = new System.Drawing.Point(6, 118);
-            this.ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
-            this.ledBulbFdecimalmode.On = false;
-            this.ledBulbFdecimalmode.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFdecimalmode.TabIndex = 28;
-            this.ledBulbFdecimalmode.Tag = "D";
-            this.ledBulbFdecimalmode.Text = "ledBulb1";
+            ledBulbFdecimalmode.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFdecimalmode.Color = System.Drawing.Color.Red;
+            ledBulbFdecimalmode.Location = new System.Drawing.Point(7, 136);
+            ledBulbFdecimalmode.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFdecimalmode.Name = "ledBulbFdecimalmode";
+            ledBulbFdecimalmode.On = false;
+            ledBulbFdecimalmode.Size = new System.Drawing.Size(29, 35);
+            ledBulbFdecimalmode.TabIndex = 28;
+            ledBulbFdecimalmode.Tag = "D";
+            ledBulbFdecimalmode.Text = "ledBulb1";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(38, 91);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(127, 16);
-            this.label3.TabIndex = 27;
-            this.label3.Tag = "";
-            this.label3.Text = "intDisable  [I]";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label3.Location = new System.Drawing.Point(44, 105);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(127, 16);
+            label3.TabIndex = 27;
+            label3.Tag = "";
+            label3.Text = "intDisable  [I]";
+            label3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFintdisable
             // 
-            this.ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFintdisable.Color = System.Drawing.Color.Red;
-            this.ledBulbFintdisable.Location = new System.Drawing.Point(6, 88);
-            this.ledBulbFintdisable.Name = "ledBulbFintdisable";
-            this.ledBulbFintdisable.On = false;
-            this.ledBulbFintdisable.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFintdisable.TabIndex = 26;
-            this.ledBulbFintdisable.Tag = "I";
-            this.ledBulbFintdisable.Text = "ledBulb1";
+            ledBulbFintdisable.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFintdisable.Color = System.Drawing.Color.Red;
+            ledBulbFintdisable.Location = new System.Drawing.Point(7, 102);
+            ledBulbFintdisable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFintdisable.Name = "ledBulbFintdisable";
+            ledBulbFintdisable.On = false;
+            ledBulbFintdisable.Size = new System.Drawing.Size(29, 35);
+            ledBulbFintdisable.TabIndex = 26;
+            ledBulbFintdisable.Tag = "I";
+            ledBulbFintdisable.Text = "ledBulb1";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(38, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 16);
-            this.label2.TabIndex = 25;
-            this.label2.Tag = "";
-            this.label2.Text = "Zero  [Z]";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label2.Location = new System.Drawing.Point(44, 70);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(79, 16);
+            label2.TabIndex = 25;
+            label2.Tag = "";
+            label2.Text = "Zero  [Z]";
+            label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFzero
             // 
-            this.ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFzero.Color = System.Drawing.Color.Red;
-            this.ledBulbFzero.Location = new System.Drawing.Point(6, 58);
-            this.ledBulbFzero.Name = "ledBulbFzero";
-            this.ledBulbFzero.On = false;
-            this.ledBulbFzero.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFzero.TabIndex = 24;
-            this.ledBulbFzero.Tag = "Z";
-            this.ledBulbFzero.Text = "ledBulb1";
+            ledBulbFzero.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFzero.Color = System.Drawing.Color.Red;
+            ledBulbFzero.Location = new System.Drawing.Point(7, 67);
+            ledBulbFzero.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFzero.Name = "ledBulbFzero";
+            ledBulbFzero.On = false;
+            ledBulbFzero.Size = new System.Drawing.Size(29, 35);
+            ledBulbFzero.TabIndex = 24;
+            ledBulbFzero.Tag = "Z";
+            ledBulbFzero.Text = "ledBulb1";
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(38, 31);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 16);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "Carry [C]";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            label1.Location = new System.Drawing.Point(44, 36);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(79, 16);
+            label1.TabIndex = 23;
+            label1.Text = "Carry [C]";
+            label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // ledBulbFcarry
             // 
-            this.ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
-            this.ledBulbFcarry.Color = System.Drawing.Color.Red;
-            this.ledBulbFcarry.Location = new System.Drawing.Point(6, 28);
-            this.ledBulbFcarry.Name = "ledBulbFcarry";
-            this.ledBulbFcarry.On = false;
-            this.ledBulbFcarry.Size = new System.Drawing.Size(25, 30);
-            this.ledBulbFcarry.TabIndex = 22;
-            this.ledBulbFcarry.Tag = "C";
-            this.ledBulbFcarry.Text = "ledBulb1";
+            ledBulbFcarry.BackColor = System.Drawing.Color.Transparent;
+            ledBulbFcarry.Color = System.Drawing.Color.Red;
+            ledBulbFcarry.Location = new System.Drawing.Point(7, 32);
+            ledBulbFcarry.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            ledBulbFcarry.Name = "ledBulbFcarry";
+            ledBulbFcarry.On = false;
+            ledBulbFcarry.Size = new System.Drawing.Size(29, 35);
+            ledBulbFcarry.TabIndex = 22;
+            ledBulbFcarry.Tag = "C";
+            ledBulbFcarry.Text = "ledBulb1";
             // 
             // groupBoxLedPC
             // 
-            this.groupBoxLedPC.Controls.Add(this.sevenSegmentPC);
-            this.groupBoxLedPC.Controls.Add(this.sevenSegmentPCvalue);
-            this.groupBoxLedPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxLedPC.Location = new System.Drawing.Point(595, 182);
-            this.groupBoxLedPC.Name = "groupBoxLedPC";
-            this.groupBoxLedPC.Size = new System.Drawing.Size(270, 135);
-            this.groupBoxLedPC.TabIndex = 23;
-            this.groupBoxLedPC.TabStop = false;
-            this.groupBoxLedPC.Text = "Programcounter";
-            this.groupBoxLedPC.Visible = false;
+            groupBoxLedPC.Controls.Add(sevenSegmentPC);
+            groupBoxLedPC.Controls.Add(sevenSegmentPCvalue);
+            groupBoxLedPC.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxLedPC.Location = new System.Drawing.Point(694, 265);
+            groupBoxLedPC.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedPC.Name = "groupBoxLedPC";
+            groupBoxLedPC.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedPC.Size = new System.Drawing.Size(315, 156);
+            groupBoxLedPC.TabIndex = 23;
+            groupBoxLedPC.TabStop = false;
+            groupBoxLedPC.Text = "Programcounter";
+            groupBoxLedPC.Visible = false;
             // 
             // sevenSegmentPC
             // 
-            this.sevenSegmentPC.ArrayCount = 4;
-            this.sevenSegmentPC.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentPC.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentPC.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentPC.DecimalShow = true;
-            this.sevenSegmentPC.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentPC.ElementWidth = 8;
-            this.sevenSegmentPC.ItalicFactor = 0F;
-            this.sevenSegmentPC.Location = new System.Drawing.Point(11, 36);
-            this.sevenSegmentPC.Name = "sevenSegmentPC";
-            this.sevenSegmentPC.Size = new System.Drawing.Size(128, 64);
-            this.sevenSegmentPC.TabIndex = 18;
-            this.sevenSegmentPC.TabStop = false;
-            this.sevenSegmentPC.Value = "0200";
+            sevenSegmentPC.ArrayCount = 4;
+            sevenSegmentPC.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentPC.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentPC.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentPC.DecimalShow = true;
+            sevenSegmentPC.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentPC.ElementWidth = 8;
+            sevenSegmentPC.ItalicFactor = 0F;
+            sevenSegmentPC.Location = new System.Drawing.Point(13, 42);
+            sevenSegmentPC.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentPC.Name = "sevenSegmentPC";
+            sevenSegmentPC.Size = new System.Drawing.Size(149, 74);
+            sevenSegmentPC.TabIndex = 18;
+            sevenSegmentPC.TabStop = false;
+            sevenSegmentPC.Value = "0200";
             // 
             // sevenSegmentPCvalue
             // 
-            this.sevenSegmentPCvalue.ArrayCount = 2;
-            this.sevenSegmentPCvalue.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentPCvalue.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentPCvalue.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentPCvalue.DecimalShow = true;
-            this.sevenSegmentPCvalue.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentPCvalue.ElementWidth = 8;
-            this.sevenSegmentPCvalue.ItalicFactor = 0F;
-            this.sevenSegmentPCvalue.Location = new System.Drawing.Point(147, 36);
-            this.sevenSegmentPCvalue.Name = "sevenSegmentPCvalue";
-            this.sevenSegmentPCvalue.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentPCvalue.TabIndex = 18;
-            this.sevenSegmentPCvalue.TabStop = false;
-            this.sevenSegmentPCvalue.Value = "55";
+            sevenSegmentPCvalue.ArrayCount = 2;
+            sevenSegmentPCvalue.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentPCvalue.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentPCvalue.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentPCvalue.DecimalShow = true;
+            sevenSegmentPCvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentPCvalue.ElementWidth = 8;
+            sevenSegmentPCvalue.ItalicFactor = 0F;
+            sevenSegmentPCvalue.Location = new System.Drawing.Point(172, 42);
+            sevenSegmentPCvalue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentPCvalue.Name = "sevenSegmentPCvalue";
+            sevenSegmentPCvalue.Size = new System.Drawing.Size(75, 74);
+            sevenSegmentPCvalue.TabIndex = 18;
+            sevenSegmentPCvalue.TabStop = false;
+            sevenSegmentPCvalue.Value = "55";
             // 
             // groupBoxLedRegs
             // 
-            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegY);
-            this.groupBoxLedRegs.Controls.Add(this.groupRegA);
-            this.groupBoxLedRegs.Controls.Add(this.groupBoxRegX);
-            this.groupBoxLedRegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBoxLedRegs.Location = new System.Drawing.Point(595, 41);
-            this.groupBoxLedRegs.Name = "groupBoxLedRegs";
-            this.groupBoxLedRegs.Size = new System.Drawing.Size(270, 135);
-            this.groupBoxLedRegs.TabIndex = 22;
-            this.groupBoxLedRegs.TabStop = false;
-            this.groupBoxLedRegs.Visible = false;
+            groupBoxLedRegs.Controls.Add(groupBoxRegY);
+            groupBoxLedRegs.Controls.Add(groupRegA);
+            groupBoxLedRegs.Controls.Add(groupBoxRegX);
+            groupBoxLedRegs.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            groupBoxLedRegs.Location = new System.Drawing.Point(694, 47);
+            groupBoxLedRegs.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedRegs.Name = "groupBoxLedRegs";
+            groupBoxLedRegs.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedRegs.Size = new System.Drawing.Size(315, 156);
+            groupBoxLedRegs.TabIndex = 22;
+            groupBoxLedRegs.TabStop = false;
+            groupBoxLedRegs.Visible = false;
             // 
             // groupBoxRegY
             // 
-            this.groupBoxRegY.Controls.Add(this.sevenSegmentRegY);
-            this.groupBoxRegY.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxRegY.Location = new System.Drawing.Point(177, 12);
-            this.groupBoxRegY.Name = "groupBoxRegY";
-            this.groupBoxRegY.Size = new System.Drawing.Size(88, 117);
-            this.groupBoxRegY.TabIndex = 21;
-            this.groupBoxRegY.TabStop = false;
-            this.groupBoxRegY.Text = "Reg Y";
+            groupBoxRegY.Controls.Add(sevenSegmentRegY);
+            groupBoxRegY.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxRegY.Location = new System.Drawing.Point(206, 14);
+            groupBoxRegY.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegY.Name = "groupBoxRegY";
+            groupBoxRegY.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegY.Size = new System.Drawing.Size(103, 135);
+            groupBoxRegY.TabIndex = 21;
+            groupBoxRegY.TabStop = false;
+            groupBoxRegY.Text = "Reg Y";
             // 
             // sevenSegmentRegY
             // 
-            this.sevenSegmentRegY.ArrayCount = 2;
-            this.sevenSegmentRegY.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegY.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegY.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegY.DecimalShow = true;
-            this.sevenSegmentRegY.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegY.ElementWidth = 8;
-            this.sevenSegmentRegY.ItalicFactor = 0F;
-            this.sevenSegmentRegY.Location = new System.Drawing.Point(6, 32);
-            this.sevenSegmentRegY.Name = "sevenSegmentRegY";
-            this.sevenSegmentRegY.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegY.TabIndex = 21;
-            this.sevenSegmentRegY.TabStop = false;
-            this.sevenSegmentRegY.Value = "00";
+            sevenSegmentRegY.ArrayCount = 2;
+            sevenSegmentRegY.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentRegY.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentRegY.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentRegY.DecimalShow = true;
+            sevenSegmentRegY.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentRegY.ElementWidth = 8;
+            sevenSegmentRegY.ItalicFactor = 0F;
+            sevenSegmentRegY.Location = new System.Drawing.Point(7, 37);
+            sevenSegmentRegY.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentRegY.Name = "sevenSegmentRegY";
+            sevenSegmentRegY.Size = new System.Drawing.Size(75, 74);
+            sevenSegmentRegY.TabIndex = 21;
+            sevenSegmentRegY.TabStop = false;
+            sevenSegmentRegY.Value = "00";
             // 
             // groupRegA
             // 
-            this.groupRegA.Controls.Add(this.sevenSegmentRegA);
-            this.groupRegA.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupRegA.Location = new System.Drawing.Point(7, 12);
-            this.groupRegA.Name = "groupRegA";
-            this.groupRegA.Size = new System.Drawing.Size(79, 117);
-            this.groupRegA.TabIndex = 19;
-            this.groupRegA.TabStop = false;
-            this.groupRegA.Text = "Reg A";
+            groupRegA.Controls.Add(sevenSegmentRegA);
+            groupRegA.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupRegA.Location = new System.Drawing.Point(8, 14);
+            groupRegA.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupRegA.Name = "groupRegA";
+            groupRegA.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupRegA.Size = new System.Drawing.Size(92, 135);
+            groupRegA.TabIndex = 19;
+            groupRegA.TabStop = false;
+            groupRegA.Text = "Reg A";
             // 
             // sevenSegmentRegA
             // 
-            this.sevenSegmentRegA.ArrayCount = 2;
-            this.sevenSegmentRegA.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegA.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegA.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegA.DecimalShow = true;
-            this.sevenSegmentRegA.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegA.ElementWidth = 8;
-            this.sevenSegmentRegA.ItalicFactor = 0F;
-            this.sevenSegmentRegA.Location = new System.Drawing.Point(6, 31);
-            this.sevenSegmentRegA.Name = "sevenSegmentRegA";
-            this.sevenSegmentRegA.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegA.TabIndex = 17;
-            this.sevenSegmentRegA.TabStop = false;
-            this.sevenSegmentRegA.Value = "00";
+            sevenSegmentRegA.ArrayCount = 2;
+            sevenSegmentRegA.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentRegA.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentRegA.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentRegA.DecimalShow = true;
+            sevenSegmentRegA.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentRegA.ElementWidth = 8;
+            sevenSegmentRegA.ItalicFactor = 0F;
+            sevenSegmentRegA.Location = new System.Drawing.Point(7, 36);
+            sevenSegmentRegA.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentRegA.Name = "sevenSegmentRegA";
+            sevenSegmentRegA.Size = new System.Drawing.Size(75, 74);
+            sevenSegmentRegA.TabIndex = 17;
+            sevenSegmentRegA.TabStop = false;
+            sevenSegmentRegA.Value = "00";
             // 
             // groupBoxRegX
             // 
-            this.groupBoxRegX.Controls.Add(this.sevenSegmentRegX);
-            this.groupBoxRegX.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxRegX.Location = new System.Drawing.Point(92, 12);
-            this.groupBoxRegX.Name = "groupBoxRegX";
-            this.groupBoxRegX.Size = new System.Drawing.Size(79, 117);
-            this.groupBoxRegX.TabIndex = 20;
-            this.groupBoxRegX.TabStop = false;
-            this.groupBoxRegX.Text = "Reg X";
+            groupBoxRegX.Controls.Add(sevenSegmentRegX);
+            groupBoxRegX.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxRegX.Location = new System.Drawing.Point(107, 14);
+            groupBoxRegX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegX.Name = "groupBoxRegX";
+            groupBoxRegX.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxRegX.Size = new System.Drawing.Size(92, 135);
+            groupBoxRegX.TabIndex = 20;
+            groupBoxRegX.TabStop = false;
+            groupBoxRegX.Text = "Reg X";
             // 
             // sevenSegmentRegX
             // 
-            this.sevenSegmentRegX.ArrayCount = 2;
-            this.sevenSegmentRegX.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentRegX.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentRegX.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentRegX.DecimalShow = true;
-            this.sevenSegmentRegX.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentRegX.ElementWidth = 8;
-            this.sevenSegmentRegX.ItalicFactor = 0F;
-            this.sevenSegmentRegX.Location = new System.Drawing.Point(6, 33);
-            this.sevenSegmentRegX.Name = "sevenSegmentRegX";
-            this.sevenSegmentRegX.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentRegX.TabIndex = 19;
-            this.sevenSegmentRegX.TabStop = false;
-            this.sevenSegmentRegX.Value = "00";
+            sevenSegmentRegX.ArrayCount = 2;
+            sevenSegmentRegX.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentRegX.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentRegX.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentRegX.DecimalShow = true;
+            sevenSegmentRegX.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentRegX.ElementWidth = 8;
+            sevenSegmentRegX.ItalicFactor = 0F;
+            sevenSegmentRegX.Location = new System.Drawing.Point(7, 38);
+            sevenSegmentRegX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentRegX.Name = "sevenSegmentRegX";
+            sevenSegmentRegX.Size = new System.Drawing.Size(75, 74);
+            sevenSegmentRegX.TabIndex = 19;
+            sevenSegmentRegX.TabStop = false;
+            sevenSegmentRegX.Value = "00";
             // 
             // saveFileDialog
             // 
-            this.saveFileDialog.DefaultExt = "hex";
-            this.saveFileDialog.Filter = "HexFiles|*.hex|all files|*.*";
+            saveFileDialog.DefaultExt = "hex";
+            saveFileDialog.Filter = "HexFiles|*.hex|all files|*.*";
             // 
             // groupBoxLedSP
             // 
-            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSP);
-            this.groupBoxLedSP.Controls.Add(this.sevenSegmentSPvalue);
-            this.groupBoxLedSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxLedSP.Location = new System.Drawing.Point(595, 323);
-            this.groupBoxLedSP.Name = "groupBoxLedSP";
-            this.groupBoxLedSP.Size = new System.Drawing.Size(270, 135);
-            this.groupBoxLedSP.TabIndex = 24;
-            this.groupBoxLedSP.TabStop = false;
-            this.groupBoxLedSP.Text = "Stackpointer";
-            this.groupBoxLedSP.Visible = false;
+            groupBoxLedSP.Controls.Add(sevenSegmentSP);
+            groupBoxLedSP.Controls.Add(sevenSegmentSPvalue);
+            groupBoxLedSP.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            groupBoxLedSP.Location = new System.Drawing.Point(694, 427);
+            groupBoxLedSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedSP.Name = "groupBoxLedSP";
+            groupBoxLedSP.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupBoxLedSP.Size = new System.Drawing.Size(315, 156);
+            groupBoxLedSP.TabIndex = 24;
+            groupBoxLedSP.TabStop = false;
+            groupBoxLedSP.Text = "Stackpointer";
+            groupBoxLedSP.Visible = false;
             // 
             // sevenSegmentSP
             // 
-            this.sevenSegmentSP.ArrayCount = 4;
-            this.sevenSegmentSP.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentSP.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentSP.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentSP.DecimalShow = true;
-            this.sevenSegmentSP.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentSP.ElementWidth = 8;
-            this.sevenSegmentSP.ItalicFactor = 0F;
-            this.sevenSegmentSP.Location = new System.Drawing.Point(11, 36);
-            this.sevenSegmentSP.Name = "sevenSegmentSP";
-            this.sevenSegmentSP.Size = new System.Drawing.Size(128, 64);
-            this.sevenSegmentSP.TabIndex = 18;
-            this.sevenSegmentSP.TabStop = false;
-            this.sevenSegmentSP.Value = "01ff";
+            sevenSegmentSP.ArrayCount = 4;
+            sevenSegmentSP.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentSP.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentSP.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentSP.DecimalShow = true;
+            sevenSegmentSP.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentSP.ElementWidth = 8;
+            sevenSegmentSP.ItalicFactor = 0F;
+            sevenSegmentSP.Location = new System.Drawing.Point(13, 42);
+            sevenSegmentSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentSP.Name = "sevenSegmentSP";
+            sevenSegmentSP.Size = new System.Drawing.Size(149, 74);
+            sevenSegmentSP.TabIndex = 18;
+            sevenSegmentSP.TabStop = false;
+            sevenSegmentSP.Value = "01ff";
             // 
             // sevenSegmentSPvalue
             // 
-            this.sevenSegmentSPvalue.ArrayCount = 2;
-            this.sevenSegmentSPvalue.ColorBackground = System.Drawing.Color.Black;
-            this.sevenSegmentSPvalue.ColorDark = System.Drawing.Color.DarkRed;
-            this.sevenSegmentSPvalue.ColorLight = System.Drawing.Color.Red;
-            this.sevenSegmentSPvalue.DecimalShow = true;
-            this.sevenSegmentSPvalue.ElementPadding = new System.Windows.Forms.Padding(4);
-            this.sevenSegmentSPvalue.ElementWidth = 8;
-            this.sevenSegmentSPvalue.ItalicFactor = 0F;
-            this.sevenSegmentSPvalue.Location = new System.Drawing.Point(147, 36);
-            this.sevenSegmentSPvalue.Name = "sevenSegmentSPvalue";
-            this.sevenSegmentSPvalue.Size = new System.Drawing.Size(64, 64);
-            this.sevenSegmentSPvalue.TabIndex = 18;
-            this.sevenSegmentSPvalue.TabStop = false;
-            this.sevenSegmentSPvalue.Value = "55";
+            sevenSegmentSPvalue.ArrayCount = 2;
+            sevenSegmentSPvalue.ColorBackground = System.Drawing.Color.Black;
+            sevenSegmentSPvalue.ColorDark = System.Drawing.Color.DarkRed;
+            sevenSegmentSPvalue.ColorLight = System.Drawing.Color.Red;
+            sevenSegmentSPvalue.DecimalShow = true;
+            sevenSegmentSPvalue.ElementPadding = new System.Windows.Forms.Padding(4);
+            sevenSegmentSPvalue.ElementWidth = 8;
+            sevenSegmentSPvalue.ItalicFactor = 0F;
+            sevenSegmentSPvalue.Location = new System.Drawing.Point(172, 42);
+            sevenSegmentSPvalue.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            sevenSegmentSPvalue.Name = "sevenSegmentSPvalue";
+            sevenSegmentSPvalue.Size = new System.Drawing.Size(75, 74);
+            sevenSegmentSPvalue.TabIndex = 18;
+            sevenSegmentSPvalue.TabStop = false;
+            sevenSegmentSPvalue.Value = "55";
             // 
             // CPU_emu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 531);
-            this.Controls.Add(this.groupBoxLedSP);
-            this.Controls.Add(this.groupBoxLedPC);
-            this.Controls.Add(this.panelMain);
-            this.Controls.Add(this.groupBoxLedRegs);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.menuStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
-            this.Name = "CPU_emu";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Sim6502";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CPU_emu_FormClosing);
-            this.Load += new System.EventHandler(this.CPU_emu_Load);
-            this.LocationChanged += new System.EventHandler(this.CPU_emu_LocationChanged);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.groupBoxFlags.ResumeLayout(false);
-            this.groupBoxFlags.PerformLayout();
-            this.groupBoxRegisters.ResumeLayout(false);
-            this.groupBoxRegisters.PerformLayout();
-            this.groupBoxPCSP.ResumeLayout(false);
-            this.groupBoxPCSP.PerformLayout();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.groupBoxStartStop.ResumeLayout(false);
-            this.groupBoxStartStop.PerformLayout();
-            this.panelMain.ResumeLayout(false);
-            this.groupBoxLedFlags.ResumeLayout(false);
-            this.groupBoxLedFlags.PerformLayout();
-            this.groupBoxLedPC.ResumeLayout(false);
-            this.groupBoxLedRegs.ResumeLayout(false);
-            this.groupBoxRegY.ResumeLayout(false);
-            this.groupRegA.ResumeLayout(false);
-            this.groupBoxRegX.ResumeLayout(false);
-            this.groupBoxLedSP.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1306, 621);
+            Controls.Add(groupBoxLedFlags);
+            Controls.Add(groupBoxLedSP);
+            Controls.Add(groupBoxLedPC);
+            Controls.Add(panelMain);
+            Controls.Add(groupBoxLedRegs);
+            Controls.Add(statusStrip1);
+            Controls.Add(menuStrip1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            MainMenuStrip = menuStrip1;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "CPU_emu";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "Sim6502";
+            FormClosing += CPU_emu_FormClosing;
+            Load += CPU_emu_Load;
+            LocationChanged += CPU_emu_LocationChanged;
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            groupBoxFlags.ResumeLayout(false);
+            groupBoxFlags.PerformLayout();
+            groupBoxRegisters.ResumeLayout(false);
+            groupBoxRegisters.PerformLayout();
+            groupBoxPCSP.ResumeLayout(false);
+            groupBoxPCSP.PerformLayout();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            groupBoxStartStop.ResumeLayout(false);
+            groupBoxStartStop.PerformLayout();
+            panelMain.ResumeLayout(false);
+            groupBoxLedFlags.ResumeLayout(false);
+            groupBoxLedFlags.PerformLayout();
+            groupBoxLedPC.ResumeLayout(false);
+            groupBoxLedRegs.ResumeLayout(false);
+            groupBoxRegY.ResumeLayout(false);
+            groupRegA.ResumeLayout(false);
+            groupBoxRegX.ResumeLayout(false);
+            groupBoxLedSP.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
