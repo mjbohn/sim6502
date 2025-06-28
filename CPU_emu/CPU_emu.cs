@@ -647,7 +647,7 @@ namespace CPU_emulator
                 ApplyConfigsettings();
             }
 
-            this.Size = new Size(570, 570);
+            this.Size = new Size(660, 660);
 
             PositionLedControls();
 
@@ -681,13 +681,13 @@ namespace CPU_emulator
             groupBoxLedRegs.BringToFront();
 
             groupBoxLedPC.Parent = panelMain;
-            groupBoxLedPC.Location = new Point(3, 160);
+            groupBoxLedPC.Location = new Point(3, 170);
 
             groupBoxLedSP.Parent = panelMain;
-            groupBoxLedSP.Location = new Point(3, 300);
+            groupBoxLedSP.Location = new Point(3, 325);
 
             groupBoxLedFlags.Parent = panelMain;
-            groupBoxLedFlags.Location = new Point(320, 215);
+            groupBoxLedFlags.Location = new Point(374, 251);
         }
 
         private void CPU_emu_LocationChanged(object sender, EventArgs e)
