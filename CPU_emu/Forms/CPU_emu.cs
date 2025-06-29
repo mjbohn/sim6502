@@ -25,6 +25,7 @@ namespace CPU_emulator
         private MemoryWatchForm MWFstack, MWFzeropage, MWFmemrange = null;
 
         private ConfigSettings config = new ConfigSettings();
+        private string _configFilePath = Application.StartupPath + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "config.json";
 
         public CPU_emu()
         {
@@ -641,9 +642,9 @@ namespace CPU_emulator
 
         private void CPU_emu_Load(object sender, EventArgs e)
         {
-            if (File.Exists(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"))
+            if (File.Exists(_configFilePath))
             {
-                config = JsonConvert.DeserializeObject<ConfigSettings>(File.ReadAllText(Application.StartupPath + Path.DirectorySeparatorChar + "config.json"));
+                config = JsonConvert.DeserializeObject<ConfigSettings>(File.ReadAllText(_configFilePath));
                 ApplyConfigsettings();
             }
 
@@ -720,7 +721,7 @@ namespace CPU_emulator
 
         private void CPU_emu_FormClosing(object sender, FormClosingEventArgs e)
         {
-            File.WriteAllText(Application.StartupPath + Path.DirectorySeparatorChar + "config.json", JsonConvert.SerializeObject(config));
+            File.WriteAllText(_configFilePath, JsonConvert.SerializeObject(config));
         }
 
     }
