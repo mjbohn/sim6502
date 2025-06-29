@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CPU_emu;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,9 +12,9 @@ using System.Windows.Forms;
 
 namespace CPU_emulator
 {
-    
 
-    public partial class MemoryWatchForm : Form
+
+    public partial class MemoryWatchForm : Form, IMemoryWatchForm
     {
         const int WM_USER = 0x400;
         const int EM_GETSCROLLPOS = WM_USER + 221;
@@ -35,7 +36,7 @@ namespace CPU_emulator
         private delegate void CpuEventCallback(object sender, CPUEventArgs e);
       
         #region Constructors
-        public MemoryWatchForm(CPU cpu)
+        public MemoryWatchForm(CPU cpu) 
         {
             InitializeComponent();
             Cpu = cpu;
