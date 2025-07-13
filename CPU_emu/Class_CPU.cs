@@ -62,6 +62,7 @@ namespace CPU_emulator
         public event EventHandler<CPUEventArgs> OnFlagsUpdate;
         public event EventHandler<CPUEventArgs> OnMemoryUpdate;
         public event EventHandler<CPUEventArgs> OnRegisterUpdate;
+        public event EventHandler<CPUEventArgs> OnCpuCycleIncrement;
         public event EventHandler<CPUEventArgs> OnProgramCounterUpdate;
         public event EventHandler<CPUEventArgs> OnStackPointerUpdate;
         public event EventHandler<CPUEventArgs> OnPCoverflow;
@@ -221,18 +222,18 @@ namespace CPU_emulator
         private byte PullByteFromStack(ref ulong CpuCycle)
         {
             IncrementSP();
-            CpuCycle++;
+            IncrementCpuCycle(1);
             byte b = ReadByteFromMemory(SP);
-            CpuCycle++;
+            IncrementCpuCycle(1);
             return b;
         }
 
         private void PushByteToStack(byte b,ref ulong CpuCycle)
         {
             WriteByteToMemory(b, SP);
-            CpuCycle++;
+            IncrementCpuCycle(1);
             DecrementSP();
-            CpuCycle++;
+            IncrementCpuCycle(1);
             
         }
 
@@ -253,7 +254,7 @@ namespace CPU_emulator
         {
             byte data = Data[PC];
             IncrementPC();
-            CpuCycle++;
+            IncrementCpuCycle(1);
             return data;
         }
 
@@ -263,7 +264,7 @@ namespace CPU_emulator
             PC++;
             ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
 
-            CpuCycle += 2;
+            IncrementCpuCycle(2);
 
             return LoByte |= HiByte;
         }
@@ -309,6 +310,12 @@ namespace CPU_emulator
         {
             SP--;
             OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
+        }
+
+        private void IncrementCpuCycle(ulong count)
+        {
+            _CpuCycle += count;
+            OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
         }
 
         // Programcounter PC
