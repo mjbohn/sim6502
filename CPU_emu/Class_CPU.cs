@@ -27,7 +27,7 @@ namespace CPU_emulator
         private ulong _InterruptPeriod;
         private bool _ExitRequested;
         private bool _SteppingMode;
-        private ulong cycles;
+        internal ulong _CpuCycle;
         private const uint MAX_MEM = 1024 * 64;
         private byte[] Data = new byte[MAX_MEM];
 
@@ -62,6 +62,7 @@ namespace CPU_emulator
         public event EventHandler<CPUEventArgs> OnFlagsUpdate;
         public event EventHandler<CPUEventArgs> OnMemoryUpdate;
         public event EventHandler<CPUEventArgs> OnRegisterUpdate;
+        public event EventHandler<CPUEventArgs> OnCpuCycleIncrement;
         public event EventHandler<CPUEventArgs> OnProgramCounterUpdate;
         public event EventHandler<CPUEventArgs> OnStackPointerUpdate;
         public event EventHandler<CPUEventArgs> OnPCoverflow;
@@ -100,6 +101,7 @@ namespace CPU_emulator
 
             OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
             OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
+            ResetCpuCycle();
 
         }
 
@@ -161,14 +163,14 @@ namespace CPU_emulator
         
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
-            cycles = InterruptPeriod;
+            //_CpuCycle = InterruptPeriod;
             
             Type thisType = this.GetType();
 
             
             while (CpuIsRunning)
             {
-                byte instruction = FetchByte(ref cycles);
+                byte instruction = FetchByte(ref _CpuCycle);
 
                 // Build method name from 'Cmd' + opcode
                 string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
@@ -198,10 +200,11 @@ namespace CPU_emulator
                     break;
                 }
 
-                if (cycles <= 0)
-                {
-                    cycles = InterruptPeriod;
-                }
+                //ToDo remove
+                //if (_CpuCycle <= 0)
+                //{
+                //    _CpuCycle = InterruptPeriod;
+                //}
 
                 if (SlowDown && !_SteppingMode)
                 {
@@ -214,24 +217,24 @@ namespace CPU_emulator
 
         private uint AddrAbsolute()
         {
-            return FetchWord(ref cycles);
+            return FetchWord(ref _CpuCycle);
         }
 
-        private byte PullByteFromStack(ref ulong cycles)
+        private byte PullByteFromStack(ref ulong CpuCycle)
         {
             IncrementSP();
-            cycles--;
+            IncrementCpuCycle(1);
             byte b = ReadByteFromMemory(SP);
-            cycles--;
+            IncrementCpuCycle(1);
             return b;
         }
 
-        private void PushByteToStack(byte b,ref ulong cycles)
+        private void PushByteToStack(byte b,ref ulong CpuCycle)
         {
             WriteByteToMemory(b, SP);
-            cycles--;
+            IncrementCpuCycle(1);
             DecrementSP();
-            cycles--;
+            IncrementCpuCycle(1);
             
         }
 
@@ -248,21 +251,21 @@ namespace CPU_emulator
             OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
         }
 
-        private byte FetchByte(ref ulong cycles)
+        private byte FetchByte(ref ulong CpuCycle)
         {
             byte data = Data[PC];
             IncrementPC();
-            cycles--;
+            IncrementCpuCycle(1);
             return data;
         }
 
-        private ushort FetchWord(ref ulong cycles)
+        private ushort FetchWord(ref ulong CpuCycle)
         {
             ushort LoByte = ReadByteFromMemory((ushort)PC);
             PC++;
             ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
 
-            cycles -= 2;
+            IncrementCpuCycle(2);
 
             return LoByte |= HiByte;
         }
@@ -308,6 +311,18 @@ namespace CPU_emulator
         {
             SP--;
             OnStackPointerUpdate?.Invoke(this, new CPUEventArgs(this));
+        }
+
+        private void IncrementCpuCycle(ulong count)
+        {
+            _CpuCycle += count;
+            OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
+        }
+
+        private void ResetCpuCycle()
+        {
+            _CpuCycle =0;
+            OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
         }
 
         // Programcounter PC
@@ -386,6 +401,7 @@ namespace CPU_emulator
         public byte A { get; set; }
         public byte X { get; set; }
         public byte Y { get; set; }
+        public ulong Cycles { get; set; }
         public IDictionary<string, bool> Flags { get; set; }
 
         public CPUEventArgs(CPU cpu)
@@ -404,6 +420,7 @@ namespace CPU_emulator
             X = cpu.X;
             Y = cpu.Y;
             Flags = cpu.flags;
+            Cycles = cpu._CpuCycle;
         }
 
         

@@ -40,12 +40,15 @@ namespace CPU_emulator
             Cpu.OnProgramCounterUpdate += Cpu_OnProgramCounterUpdate;
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
             Cpu.OnBreak += Cpu_OnBreak;
+            Cpu.OnCpuCycleIncrement += Cpu_OnCpuCycleIncrement;
 
             Cpu.Reset();
 
             // config.OnPropertyChanged gets initialized @ CPU_emu_Load() due to race conditions
 
         }
+
+       
 
         private void Config_OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -188,6 +191,19 @@ namespace CPU_emulator
                 DisplayFlags(e.Flags);
             }
 
+        }
+
+        private void Cpu_OnCpuCycleIncrement(object? sender, CPUEventArgs e)
+        {
+            if (InvokeRequired)
+            {
+                CpuEventCallback cb = new CpuEventCallback(Cpu_OnCpuCycleIncrement);
+                this.Invoke(cb, new object[] { sender, e });
+            }
+            else
+            {
+                toolStripStatusLabel3.Text = $"Cycles: {e.Cycles}";
+            }
         }
 
         #endregion
