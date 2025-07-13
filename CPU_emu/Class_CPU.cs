@@ -27,7 +27,7 @@ namespace CPU_emulator
         private ulong _InterruptPeriod;
         private bool _ExitRequested;
         private bool _SteppingMode;
-        private ulong cycles;
+        private ulong _CpuCycle;
         private const uint MAX_MEM = 1024 * 64;
         private byte[] Data = new byte[MAX_MEM];
 
@@ -161,14 +161,14 @@ namespace CPU_emulator
         
         private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
         {
-            cycles = InterruptPeriod;
+            //_CpuCycle = InterruptPeriod;
             
             Type thisType = this.GetType();
 
             
             while (CpuIsRunning)
             {
-                byte instruction = FetchByte(ref cycles);
+                byte instruction = FetchByte(ref _CpuCycle);
 
                 // Build method name from 'Cmd' + opcode
                 string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
@@ -198,10 +198,11 @@ namespace CPU_emulator
                     break;
                 }
 
-                if (cycles <= 0)
-                {
-                    cycles = InterruptPeriod;
-                }
+                //ToDo remove
+                //if (_CpuCycle <= 0)
+                //{
+                //    _CpuCycle = InterruptPeriod;
+                //}
 
                 if (SlowDown && !_SteppingMode)
                 {
@@ -214,24 +215,24 @@ namespace CPU_emulator
 
         private uint AddrAbsolute()
         {
-            return FetchWord(ref cycles);
+            return FetchWord(ref _CpuCycle);
         }
 
-        private byte PullByteFromStack(ref ulong cycles)
+        private byte PullByteFromStack(ref ulong CpuCycle)
         {
             IncrementSP();
-            cycles--;
+            CpuCycle++;
             byte b = ReadByteFromMemory(SP);
-            cycles--;
+            CpuCycle++;
             return b;
         }
 
-        private void PushByteToStack(byte b,ref ulong cycles)
+        private void PushByteToStack(byte b,ref ulong CpuCycle)
         {
             WriteByteToMemory(b, SP);
-            cycles--;
+            CpuCycle++;
             DecrementSP();
-            cycles--;
+            CpuCycle++;
             
         }
 
@@ -248,21 +249,21 @@ namespace CPU_emulator
             OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
         }
 
-        private byte FetchByte(ref ulong cycles)
+        private byte FetchByte(ref ulong CpuCycle)
         {
             byte data = Data[PC];
             IncrementPC();
-            cycles--;
+            CpuCycle++;
             return data;
         }
 
-        private ushort FetchWord(ref ulong cycles)
+        private ushort FetchWord(ref ulong CpuCycle)
         {
             ushort LoByte = ReadByteFromMemory((ushort)PC);
             PC++;
             ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
 
-            cycles -= 2;
+            CpuCycle += 2;
 
             return LoByte |= HiByte;
         }

@@ -18,21 +18,21 @@ namespace CPU_emulator
         // Load Accumulator immidiate A9
         public void Cmd_A9()
         {
-            SetRegister("A", FetchByte(ref cycles));
+            SetRegister("A", FetchByte(ref _CpuCycle));
             SetZeroAndNegativeFlags(A);
         }
 
         // Load Accumulator zeropage A5
         public void Cmd_A5()
         {
-            SetRegister("A", ReadByteFromMemory(FetchByte(ref cycles)));
+            SetRegister("A", ReadByteFromMemory(FetchByte(ref _CpuCycle)));
             SetZeroAndNegativeFlags(A);
         }
 
         // Load Accumulator zeropage X B5
         public void Cmd_B5()
         {
-            byte b_tmp = FetchByte(ref cycles);
+            byte b_tmp = FetchByte(ref _CpuCycle);
             b_tmp += X; // add regX to address
             SetRegister("A", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(A);
@@ -43,7 +43,7 @@ namespace CPU_emulator
         // Load X immidiate A2
         public void Cmd_A2()
         {
-            byte b_tmp = FetchByte(ref cycles);
+            byte b_tmp = FetchByte(ref _CpuCycle);
             SetRegister("X", b_tmp);
             SetZeroAndNegativeFlags(X);
         }
@@ -51,7 +51,7 @@ namespace CPU_emulator
         // Load X zeropage A6
         public void Cmd_A6()
         {
-            byte b_tmp = FetchByte(ref cycles);
+            byte b_tmp = FetchByte(ref _CpuCycle);
             SetRegister("X", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(X);
         }
@@ -59,7 +59,7 @@ namespace CPU_emulator
         // Load X zeropage Y B6
         public void Cmd_B6()
         {
-            byte b_tmp = FetchByte(ref cycles); // Get ZP address
+            byte b_tmp = FetchByte(ref _CpuCycle); // Get ZP address
             b_tmp += Y; // add regY to address
             SetRegister("X", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(X);
@@ -71,7 +71,7 @@ namespace CPU_emulator
         // Load Y immidiate A0
         public void Cmd_A0()
         {
-            byte b_tmp = FetchByte(ref cycles);
+            byte b_tmp = FetchByte(ref _CpuCycle);
             SetRegister("Y", b_tmp);
             SetZeroAndNegativeFlags(Y);
         }
@@ -79,7 +79,7 @@ namespace CPU_emulator
         // Load Y zeropage A4
         public void Cmd_A4()
         {
-            byte b_tmp = FetchByte(ref cycles);
+            byte b_tmp = FetchByte(ref _CpuCycle);
             SetRegister("Y", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(Y);
         }
@@ -87,7 +87,7 @@ namespace CPU_emulator
         // Load Y zeropage X B4
         public void Cmd_B4()
         {
-            byte b_tmp = FetchByte(ref cycles); // Get ZP address
+            byte b_tmp = FetchByte(ref _CpuCycle); // Get ZP address
             b_tmp += X; // add regX to address
             SetRegister("Y", ReadByteFromMemory(b_tmp));
             SetZeroAndNegativeFlags(Y);
@@ -100,7 +100,7 @@ namespace CPU_emulator
         // Push Accumulator on Stack
         public void Cmd_48()
         {
-            PushByteToStack(A,ref cycles);
+            PushByteToStack(A,ref _CpuCycle);
         }
 
         #endregion
