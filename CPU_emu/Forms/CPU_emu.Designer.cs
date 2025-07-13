@@ -92,6 +92,7 @@ namespace CPU_emulator
             toolStripStatusLabelKernal = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             toolStripStatusLabelBasic = new System.Windows.Forms.ToolStripStatusLabel();
+            toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             checkBoxSlowDown = new System.Windows.Forms.CheckBox();
             groupBoxStartStop = new System.Windows.Forms.GroupBox();
             panelMain = new System.Windows.Forms.Panel();
@@ -689,23 +690,23 @@ namespace CPU_emulator
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabelBRK, toolStripStatusElapsedTime, toolStripProgressBar1, toolStripStatusLabel1, toolStripStatusLabelKernal, toolStripStatusLabel2, toolStripStatusLabelBasic });
-            statusStrip1.Location = new System.Drawing.Point(0, 599);
+            statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripStatusLabelBRK, toolStripStatusElapsedTime, toolStripProgressBar1, toolStripStatusLabel1, toolStripStatusLabelKernal, toolStripStatusLabel2, toolStripStatusLabelBasic, toolStripStatusLabel3 });
+            statusStrip1.Location = new System.Drawing.Point(0, 597);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            statusStrip1.Size = new System.Drawing.Size(1306, 22);
+            statusStrip1.Size = new System.Drawing.Size(1306, 24);
             statusStrip1.TabIndex = 11;
             // 
             // toolStripStatusLabelBRK
             // 
             toolStripStatusLabelBRK.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
             toolStripStatusLabelBRK.Name = "toolStripStatusLabelBRK";
-            toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusLabelBRK.Size = new System.Drawing.Size(0, 19);
             // 
             // toolStripStatusElapsedTime
             // 
             toolStripStatusElapsedTime.Name = "toolStripStatusElapsedTime";
-            toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 17);
+            toolStripStatusElapsedTime.Size = new System.Drawing.Size(0, 19);
             // 
             // toolStripProgressBar1
             // 
@@ -718,26 +719,32 @@ namespace CPU_emulator
             // toolStripStatusLabel1
             // 
             toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            toolStripStatusLabel1.Size = new System.Drawing.Size(56, 17);
+            toolStripStatusLabel1.Size = new System.Drawing.Size(56, 19);
             toolStripStatusLabel1.Text = "KERNAL: ";
             // 
             // toolStripStatusLabelKernal
             // 
             toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
-            toolStripStatusLabelKernal.Size = new System.Drawing.Size(24, 17);
+            toolStripStatusLabelKernal.Size = new System.Drawing.Size(24, 19);
             toolStripStatusLabelKernal.Text = "0x0";
             // 
             // toolStripStatusLabel2
             // 
             toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            toolStripStatusLabel2.Size = new System.Drawing.Size(45, 17);
+            toolStripStatusLabel2.Size = new System.Drawing.Size(45, 19);
             toolStripStatusLabel2.Text = "BASIC: ";
             // 
             // toolStripStatusLabelBasic
             // 
             toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
-            toolStripStatusLabelBasic.Size = new System.Drawing.Size(24, 17);
+            toolStripStatusLabelBasic.Size = new System.Drawing.Size(24, 19);
             toolStripStatusLabelBasic.Text = "0x0";
+            // 
+            // toolStripStatusLabel3
+            // 
+            toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            toolStripStatusLabel3.Size = new System.Drawing.Size(44, 19);
+            toolStripStatusLabel3.Text = "Cycles:";
             // 
             // checkBoxSlowDown
             // 
@@ -1349,6 +1356,7 @@ namespace CPU_emulator
         private System.Windows.Forms.ToolStripMenuItem loadCharRomToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem loadBasicRomToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
     }
 }
 

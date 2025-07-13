@@ -27,7 +27,7 @@ namespace CPU_emulator
         private ulong _InterruptPeriod;
         private bool _ExitRequested;
         private bool _SteppingMode;
-        private ulong _CpuCycle;
+        internal ulong _CpuCycle;
         private const uint MAX_MEM = 1024 * 64;
         private byte[] Data = new byte[MAX_MEM];
 
@@ -101,6 +101,7 @@ namespace CPU_emulator
 
             OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
             OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
+            ResetCpuCycle();
 
         }
 
@@ -318,6 +319,12 @@ namespace CPU_emulator
             OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
         }
 
+        private void ResetCpuCycle()
+        {
+            _CpuCycle =0;
+            OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
+        }
+
         // Programcounter PC
         //UT
         public void SetPC(uint value)
@@ -394,6 +401,7 @@ namespace CPU_emulator
         public byte A { get; set; }
         public byte X { get; set; }
         public byte Y { get; set; }
+        public ulong Cycles { get; set; }
         public IDictionary<string, bool> Flags { get; set; }
 
         public CPUEventArgs(CPU cpu)
@@ -412,6 +420,7 @@ namespace CPU_emulator
             X = cpu.X;
             Y = cpu.Y;
             Flags = cpu.flags;
+            Cycles = cpu._CpuCycle;
         }
 
         
