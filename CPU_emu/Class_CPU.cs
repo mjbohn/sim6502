@@ -170,7 +170,7 @@ public partial class CPU
         
         while (CpuIsRunning)
         {
-            byte instruction = FetchByte(ref _CpuCycle);
+            byte instruction = FetchByte();
 
             // Build method name from 'Cmd' + opcode
             string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
@@ -254,7 +254,7 @@ public partial class CPU
         OnFlagsUpdate?.Invoke(this, new CPUEventArgs(this));
     }
 
-    private byte FetchByte(ref ulong CpuCycle)
+    private byte FetchByte()
     {
         byte data = Data[PC];
         IncrementPC();

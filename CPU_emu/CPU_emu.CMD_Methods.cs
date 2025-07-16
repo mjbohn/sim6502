@@ -19,21 +19,21 @@ public partial class CPU
     [Opcode(2)]
     public void Cmd_A9()
     {
-        SetRegister("A", FetchByte(ref _CpuCycle));
+        SetRegister("A", FetchByte());
         SetZeroAndNegativeFlags(A);
     }
 
     // Load Accumulator zeropage A5
     public void Cmd_A5()
     {
-        SetRegister("A", ReadByteFromMemory(FetchByte(ref _CpuCycle)));
+        SetRegister("A", ReadByteFromMemory(FetchByte()));
         SetZeroAndNegativeFlags(A);
     }
 
     // Load Accumulator zeropage X B5
     public void Cmd_B5()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle);
+        byte b_tmp = FetchByte();
         b_tmp += X; // add regX to address
         SetRegister("A", ReadByteFromMemory(b_tmp));
         SetZeroAndNegativeFlags(A);
@@ -44,7 +44,7 @@ public partial class CPU
     // Load X immidiate A2
     public void Cmd_A2()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle);
+        byte b_tmp = FetchByte();
         SetRegister("X", b_tmp);
         SetZeroAndNegativeFlags(X);
     }
@@ -52,7 +52,7 @@ public partial class CPU
     // Load X zeropage A6
     public void Cmd_A6()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle);
+        byte b_tmp = FetchByte();
         SetRegister("X", ReadByteFromMemory(b_tmp));
         SetZeroAndNegativeFlags(X);
     }
@@ -60,7 +60,7 @@ public partial class CPU
     // Load X zeropage Y B6
     public void Cmd_B6()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle); // Get ZP address
+        byte b_tmp = FetchByte(); // Get ZP address
         b_tmp += Y; // add regY to address
         SetRegister("X", ReadByteFromMemory(b_tmp));
         SetZeroAndNegativeFlags(X);
@@ -72,7 +72,7 @@ public partial class CPU
     // Load Y immidiate A0
     public void Cmd_A0()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle);
+        byte b_tmp = FetchByte();
         SetRegister("Y", b_tmp);
         SetZeroAndNegativeFlags(Y);
     }
@@ -80,7 +80,7 @@ public partial class CPU
     // Load Y zeropage A4
     public void Cmd_A4()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle);
+        byte b_tmp = FetchByte();
         SetRegister("Y", ReadByteFromMemory(b_tmp));
         SetZeroAndNegativeFlags(Y);
     }
@@ -88,7 +88,7 @@ public partial class CPU
     // Load Y zeropage X B4
     public void Cmd_B4()
     {
-        byte b_tmp = FetchByte(ref _CpuCycle); // Get ZP address
+        byte b_tmp = FetchByte(); // Get ZP address
         b_tmp += X; // add regX to address
         SetRegister("Y", ReadByteFromMemory(b_tmp));
         SetZeroAndNegativeFlags(Y);
