@@ -137,7 +137,7 @@ namespace CPU_emulator
             cpu.WriteByteToMemory(value, 200);
             cpu.SetPC(200);
 
-            Assert.That(GetPrivateMethod("FetchByte",cpu).Invoke(cpu,new object[] {cyc}), Is.EqualTo(0xff));
+            Assert.That(GetPrivateMethod("FetchByte", cpu).Invoke(cpu,null), Is.EqualTo(0xff));
             Assert.That(cpu.PC, Is.EqualTo(201));
 
         }
