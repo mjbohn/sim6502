@@ -42,6 +42,8 @@ public partial class CPU
     public bool SteppingMode { get => _SteppingMode; set => _SteppingMode = value; }
     public bool ExitRequested { get => _ExitRequested; set => _ExitRequested = value; }
     public ulong InterruptPeriod { get => _InterruptPeriod; set => _InterruptPeriod = value; }
+
+    public ulong CpuCycle { get => _CpuCycle; }
     public byte[] Memory
     {
         get
@@ -91,7 +93,7 @@ public partial class CPU
         SetRegister("A", 0);
         SetRegister("X", 0);
         SetRegister("Y", 0);
-        InterruptPeriod = 1000;
+       
         ExitRequested = false;
 
         // set all status flags to false
@@ -163,8 +165,7 @@ public partial class CPU
     
     private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
     {
-        //_CpuCycle = InterruptPeriod;
-        
+                
         Type thisType = this.GetType();
 
         
@@ -172,28 +173,8 @@ public partial class CPU
         {
             byte instruction = FetchByte();
 
-            // Build method name from 'Cmd' + opcode
-            string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
-            
-            MethodInfo theMethod2Call = thisType.GetMethod(cmd);
-            // Check if method Cmd_<opcode> exists
-            if (theMethod2Call != null)
-            {
-                // check for method attribute
-                OpcodeAttribute? attribute = theMethod2Call.GetCustomAttribute<OpcodeAttribute>();
-                
-                theMethod2Call.Invoke(this, new object[] { });
+            CallInstruction(thisType, instruction);
 
-                if (attribute != null)
-                {
-                    IncrementCpuCycle((ulong)attribute.Cycles);
-                }
-            }
-            else
-            {
-                MessageBox.Show(string.Format("Method {0} not found!", cmd),"Error!",MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
-                                            
             if (_SteppingMode)
             {
                 break;
@@ -208,13 +189,38 @@ public partial class CPU
                 break;
             }
 
-            
+
             if (SlowDown && !_SteppingMode)
             {
                 System.Threading.Thread.Sleep(SlowDownTime);
             }
-            
 
+
+        }
+    }
+
+    public void CallInstruction(Type thisType, byte instruction)
+    {
+        // Build method name from 'Cmd' + opcode
+        string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
+
+        MethodInfo theMethod2Call = thisType.GetMethod(cmd);
+        // Check if method Cmd_<opcode> exists
+        if (theMethod2Call != null)
+        {
+            // check for method attribute
+            OpcodeAttribute? attribute = theMethod2Call.GetCustomAttribute<OpcodeAttribute>();
+
+            theMethod2Call.Invoke(this, new object[] { });
+
+            if (attribute != null)
+            {
+                IncrementCpuCycle((ulong)attribute.Cycles);
+            }
+        }
+        else
+        {
+            MessageBox.Show(string.Format("Method {0} not found!", cmd), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 

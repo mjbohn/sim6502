@@ -330,19 +330,21 @@ namespace CPU_emulator
         }
         #region LDA
         // Test Load Accumulator immidiate A9
-        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
-        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
+        [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff, 3 })]
+        [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00, 3 })]
         public object[] Cmd_A9_Test(byte b)
         {
-            object[] result = new object[3];
+            object[] result = new object[4];
 
             cpu.WriteByteToMemory(b, 0x200);
             cpu.SetPC(0x200);
-            cpu.Cmd_A9();
+            //cpu.Cmd_A9();
+            cpu.CallInstruction(cpu.GetType(), 0xA9);
 
             result[0] = cpu.flags["Z"];
             result[1] = cpu.flags["N"];
             result[2] = cpu.A;
+            result[3] = cpu.CpuCycle;
 
             return result;
 
