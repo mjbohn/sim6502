@@ -1,4 +1,5 @@
 
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 using System.Reflection;
 
 
@@ -50,10 +51,17 @@ public class CPU_Tests
     [Test]
     public void Reset_Test()
     {
-        
+        bool eventSetPCRaised = false;
+        bool eventFlagsUpdateRaised = false;
+
+        cpu.OnProgramCounterUpdate += (object? sender, CPUEventArgs e) => { eventSetPCRaised = true; };
+        cpu.OnFlagsUpdate += (object? sender, CPUEventArgs e) => { eventFlagsUpdateRaised = true;  };
+
         cpu.Reset();
-       
-        
+
+        Assert.IsTrue(eventSetPCRaised, "Event for PC update not raised");
+        Assert.IsTrue(eventFlagsUpdateRaised, "Event for flags-update not raised");
+
         Assert.That(cpu.PC, Is.EqualTo(0x200));
         Assert.That(cpu.SP, Is.EqualTo(0x1FF));
         Assert.That(cpu.A, Is.EqualTo(0));
@@ -68,9 +76,8 @@ public class CPU_Tests
         Assert.That(cpu.flags["V"], Is.False);
         Assert.That(cpu.flags["N"], Is.False);
 
-        // TODO: Check events from PC and flags update
     }
-
+    
     [Test]
     public void SetVectors_Test() 
     {
