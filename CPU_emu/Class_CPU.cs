@@ -199,7 +199,7 @@ public partial class CPU
         }
     }
 
-    public void CallInstruction(Type thisType, byte instruction)
+    private void CallInstruction(Type thisType, byte instruction)
     {
         // Build method name from 'Cmd' + opcode
         string cmd = "Cmd_" + instruction.ToString("X2").ToUpper();
