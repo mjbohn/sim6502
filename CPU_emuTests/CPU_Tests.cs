@@ -332,7 +332,7 @@ public class CPU_Command_Tests
         cpu.WriteByteToMemory(b, 0x200);
         cpu.SetPC(0x200);
         
-        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, null);
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType() , (byte)0xA9 });
 
         result[0] = cpu.flags["Z"];
         result[1] = cpu.flags["N"];
