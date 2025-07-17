@@ -14,7 +14,9 @@ public class CPU_Tests
     {
         cpu = new CPU();
     }
+    
     #region set registers
+
     [Test]
     public void SetRegister_A_Test()
     {
@@ -41,7 +43,8 @@ public class CPU_Tests
         Assert.That(cpu.Y, Is.EqualTo(0xff));
 
     }
-    #endregion
+    
+    #endregion set registers
 
     #region misc
     [Test]
@@ -78,9 +81,10 @@ public class CPU_Tests
         Assert.That(memory[0xFFFD], Is.EqualTo(0x02));
     }
 
-    #endregion
+    #endregion misc
 
     #region set flags
+
     [TestCase(0xff, ExpectedResult = new bool[] { false, true })]
     [TestCase(0x00, ExpectedResult = new bool[] { true, false })]
     public bool[] SetZeroAndNegativeFlags_Test(byte b)
@@ -124,7 +128,8 @@ public class CPU_Tests
 
         return result;
     }
-    #endregion
+    
+    #endregion set flags
 
     #region fetch data
     [Test]
@@ -142,9 +147,10 @@ public class CPU_Tests
 
     }
 
-    #endregion
+    #endregion fetch data
 
     #region ProgramCounterTest
+
     [Test]
     public void SetPC_Test() 
     {
@@ -220,7 +226,7 @@ public class CPU_Tests
 
     }
 
-    #endregion
+    #endregion ProgramCounterTest
 
     #region StackPointerTest
     [Test]
@@ -300,12 +306,10 @@ public class CPU_Tests
 
     }
 
-    #endregion
+    #endregion StackPointerTest
 
-    
+
 }
-
-
 
 public class CPU_Command_Tests
 {
@@ -316,6 +320,7 @@ public class CPU_Command_Tests
     {
         cpu = new CPU();
     }
+
     #region LDA
     // Test Load Accumulator immidiate A9
     [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff, 3 })]
@@ -326,9 +331,7 @@ public class CPU_Command_Tests
 
         cpu.WriteByteToMemory(b, 0x200);
         cpu.SetPC(0x200);
-        //cpu.Cmd_A9();
-        //cpu.CallInstruction(cpu.GetType(), 0xA9);
-        //GetPrivateMethod("DecrementSP", cpu).Invoke(cpu, null);
+        
         TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, null);
 
         result[0] = cpu.flags["Z"];
@@ -551,7 +554,7 @@ static class TestHelper
         if (string.IsNullOrWhiteSpace(methodName))
             Assert.Fail("methodName cannot be null or whitespace");
 
-        var method = objectUnderTest.GetType()
+        MethodInfo? method = objectUnderTest.GetType()
             .GetMethod(methodName, BindingFlags.NonPublic | BindingFlags.Instance);
 
         if (method == null)
