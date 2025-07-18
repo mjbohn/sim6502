@@ -1,4 +1,5 @@
-﻿using CPU_emulator;
+﻿using CPU_emu;
+using CPU_emulator;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,6 +31,8 @@ public partial class CPU
     internal ulong _CpuCycle;
     private const uint MAX_MEM = 1024 * 64;
     private byte[] Data = new byte[MAX_MEM];
+
+    MemoryBus _memoryBus;
 
     private byte
         NegativeFlagBit = 0b10000000,
@@ -72,6 +75,7 @@ public partial class CPU
     
     public CPU() 
     {
+        _memoryBus = new MemoryBus(ref Data);
         SetVectors();
     }
 
@@ -107,51 +111,51 @@ public partial class CPU
 
     }
 
-    private void LoadInlineTestProg()
-    {
-        Data[PC] = 0xB5;
-        Data[PC + 1] = 0x0b;
-        Data[PC + 2] = 0x48;
-        Data[PC + 3] = 0xA9;
-        Data[PC + 4] = 0xac;
-        Data[PC + 5] = 0x48;
-        Data[PC + 6] = 0xA9;
-        Data[PC + 7] = 0x00;
-        Data[PC + 8] = 0x48;
-        Data[PC + 9] = 0xA9;
-        Data[PC + 10] = 0xae;
-        Data[PC + 11] = 0x48;
+    //private void LoadInlineTestProg()
+    //{
+    //    Data[PC] = 0xB5;
+    //    Data[PC + 1] = 0x0b;
+    //    Data[PC + 2] = 0x48;
+    //    Data[PC + 3] = 0xA9;
+    //    Data[PC + 4] = 0xac;
+    //    Data[PC + 5] = 0x48;
+    //    Data[PC + 6] = 0xA9;
+    //    Data[PC + 7] = 0x00;
+    //    Data[PC + 8] = 0x48;
+    //    Data[PC + 9] = 0xA9;
+    //    Data[PC + 10] = 0xae;
+    //    Data[PC + 11] = 0x48;
 
-        Data[PC + 12] = 0x48;
-        Data[PC + 13] = 0x48;
-        Data[PC + 14] = 0x48;
-        Data[PC + 15] = 0x48;
+    //    Data[PC + 12] = 0x48;
+    //    Data[PC + 13] = 0x48;
+    //    Data[PC + 14] = 0x48;
+    //    Data[PC + 15] = 0x48;
 
-        Data[PC + 16] = 0x48;
-        Data[PC + 17] = 0x48;
-        Data[PC + 18] = 0x48;
-        Data[PC + 19] = 0x48;
+    //    Data[PC + 16] = 0x48;
+    //    Data[PC + 17] = 0x48;
+    //    Data[PC + 18] = 0x48;
+    //    Data[PC + 19] = 0x48;
 
-        Data[PC + 20] = 0x48;
-        Data[PC + 21] = 0x48;
-        Data[PC + 22] = 0x48;
-        Data[PC + 23] = 0x48;
-        Data[PC + 24] = 0x48;
-        Data[PC + 25] = 0x48;
-        Data[PC + 26] = 0x48;
-        Data[PC + 27] = 0x48;
+    //    Data[PC + 20] = 0x48;
+    //    Data[PC + 21] = 0x48;
+    //    Data[PC + 22] = 0x48;
+    //    Data[PC + 23] = 0x48;
+    //    Data[PC + 24] = 0x48;
+    //    Data[PC + 25] = 0x48;
+    //    Data[PC + 26] = 0x48;
+    //    Data[PC + 27] = 0x48;
 
-        Data[PC + 28] = 0x48;
-        Data[PC + 29] = 0x68;
-        Data[PC + 30] = 0x68;
-        Data[PC + 31] = 0x68;
-        Data[PC + 32] = 0x68;
-        Data[PC + 33] = 0x68;
-        Data[PC + 34] = 0x68;
-        Data[PC + 35] = 0x68;
+    //    Data[PC + 28] = 0x48;
+    //    Data[PC + 29] = 0x68;
+    //    Data[PC + 30] = 0x68;
+    //    Data[PC + 31] = 0x68;
+    //    Data[PC + 32] = 0x68;
+    //    Data[PC + 33] = 0x68;
+    //    Data[PC + 34] = 0x68;
+    //    Data[PC + 35] = 0x68;
 
-        OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
-    }
+    //    OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
+    //}
 
     public void Start()
     {
@@ -262,7 +266,8 @@ public partial class CPU
 
     private byte FetchByte()
     {
-        byte data = Data[PC];
+        //byte data = Data[PC];
+        byte data = _memoryBus.Read((ushort)PC);
         IncrementPC();
         IncrementCpuCycle(1);
         return data;
@@ -281,13 +286,15 @@ public partial class CPU
 
     public void WriteByteToMemory(byte b,ushort address)
     {
-        Data[address] = b;
+        //Data[address] = b;
+        _memoryBus.Write(address, b);
         OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
     }
 
     private byte ReadByteFromMemory(ushort address)
     {
-        return Data[address];
+        //return Data[address];
+        return _memoryBus.Read(address);
     }
 
     private ushort ReadWordFromMemory(ushort address)

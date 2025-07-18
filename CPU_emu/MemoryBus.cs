@@ -14,6 +14,10 @@ namespace CPU_emu
         {
             _memory = new byte[memSize];
         }
+        public MemoryBus(ref byte[] memory)
+        {
+            _memory = memory;
+        }
         public byte Read(ushort address)
         {
             return _memory[address];
