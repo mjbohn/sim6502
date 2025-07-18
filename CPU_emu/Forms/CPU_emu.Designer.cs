@@ -329,7 +329,7 @@ namespace CPU_emulator
             toolStripMenuItemStyleTXT.CheckOnClick = true;
             toolStripMenuItemStyleTXT.CheckState = System.Windows.Forms.CheckState.Checked;
             toolStripMenuItemStyleTXT.Name = "toolStripMenuItemStyleTXT";
-            toolStripMenuItemStyleTXT.Size = new System.Drawing.Size(95, 22);
+            toolStripMenuItemStyleTXT.Size = new System.Drawing.Size(94, 22);
             toolStripMenuItemStyleTXT.Text = "TXT";
             toolStripMenuItemStyleTXT.Click += toolStripMenuItemStyleTXT_Click;
             // 
@@ -337,7 +337,7 @@ namespace CPU_emulator
             // 
             toolStripMenuItemStyleLED.CheckOnClick = true;
             toolStripMenuItemStyleLED.Name = "toolStripMenuItemStyleLED";
-            toolStripMenuItemStyleLED.Size = new System.Drawing.Size(95, 22);
+            toolStripMenuItemStyleLED.Size = new System.Drawing.Size(94, 22);
             toolStripMenuItemStyleLED.Text = "LED";
             toolStripMenuItemStyleLED.Click += toolStripMenuItemStyleLED_Click;
             // 
@@ -711,7 +711,7 @@ namespace CPU_emulator
             // toolStripProgressBar1
             // 
             toolStripProgressBar1.Name = "toolStripProgressBar1";
-            toolStripProgressBar1.Size = new System.Drawing.Size(233, 18);
+            toolStripProgressBar1.Size = new System.Drawing.Size(300, 18);
             toolStripProgressBar1.Step = 1;
             toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             toolStripProgressBar1.Visible = false;
@@ -725,7 +725,7 @@ namespace CPU_emulator
             // toolStripStatusLabelKernal
             // 
             toolStripStatusLabelKernal.Name = "toolStripStatusLabelKernal";
-            toolStripStatusLabelKernal.Size = new System.Drawing.Size(24, 19);
+            toolStripStatusLabelKernal.Size = new System.Drawing.Size(25, 19);
             toolStripStatusLabelKernal.Text = "0x0";
             // 
             // toolStripStatusLabel2
@@ -737,7 +737,7 @@ namespace CPU_emulator
             // toolStripStatusLabelBasic
             // 
             toolStripStatusLabelBasic.Name = "toolStripStatusLabelBasic";
-            toolStripStatusLabelBasic.Size = new System.Drawing.Size(24, 19);
+            toolStripStatusLabelBasic.Size = new System.Drawing.Size(25, 19);
             toolStripStatusLabelBasic.Text = "0x0";
             // 
             // toolStripStatusLabel3
