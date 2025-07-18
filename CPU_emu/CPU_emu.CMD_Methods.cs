@@ -98,7 +98,7 @@ public partial class CPU
 
     #region stack push pull
 
-    // Push Accumulator on Stack
+    // Push Accumulator on Stack PHA
     public void Cmd_48()
     {
         PushByteToStack(A,ref _CpuCycle);
