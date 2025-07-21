@@ -32,7 +32,7 @@ public partial class CPU
     private const uint MAX_MEM = 1024 * 64;
     private byte[] Data = new byte[MAX_MEM];
 
-    MemoryBus _memoryBus;
+    MappedBus _memoryBus;
 
     private byte
         NegativeFlagBit = 0b10000000,
@@ -51,12 +51,13 @@ public partial class CPU
     {
         get
         {
-            return Data;
+            return _memoryBus.Dump(0,_memoryBus.RamSize);
         }
 
         set
         {
             Data = value;
+            _memoryBus.Load(0,value);
             OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
         }
     }
@@ -73,9 +74,10 @@ public partial class CPU
     public event EventHandler<CPUEventArgs> OnPCoverflow;
     public event EventHandler<CPUEventArgs> OnBreak;
     
-    public CPU() 
+    public CPU(MappedBus memoryBus) 
     {
-        _memoryBus = new MemoryBus(ref Data);
+        //_memoryBus = new MemoryBus(ref Data);
+        _memoryBus = memoryBus;
         SetVectors();
     }
 
@@ -222,7 +224,6 @@ public partial class CPU
 
     private byte FetchByte()
     {
-        //byte data = Data[PC];
         byte data = _memoryBus.Read((ushort)PC);
         IncrementPC();
         IncrementCpuCycle(1);
@@ -242,15 +243,13 @@ public partial class CPU
 
     public void WriteByteToMemory(byte b,ushort address)
     {
-        //Data[address] = b;
         _memoryBus.Write(address, b);
         OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
     }
 
     private byte ReadByteFromMemory(ushort address)
     {
-        //return Data[address];
-        return _memoryBus.Read(address);
+       return _memoryBus.Read(address);
     }
 
     private ushort ReadWordFromMemory(ushort address)
@@ -337,10 +336,7 @@ public partial class CPU
     //UT
     public void ResetMemory()
     {
-        for (int i = 0; i < MAX_MEM; i++)
-        {
-            Data[i] = 0x00;
-        }
+        _memoryBus.EraseRam();
 
         SetVectors();
 
@@ -348,14 +344,14 @@ public partial class CPU
     }
     public byte[] ReadMemory()
     {
-        return Data;
+        return _memoryBus.DumpRam();
     }
 
     internal void UpdateMemoryRange(byte[] data, int startAddress)
     {
         for (int i = 0; i < data.Length; i++)
         {
-            Memory[startAddress + i] = data[i];
+            _memoryBus.Write((ushort)(startAddress + i), data[i]);
         }
 
         OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
@@ -364,7 +360,7 @@ public partial class CPU
 
 public class CPUEventArgs : EventArgs
 {
-    CPU cpu = new CPU();
+    CPU cpu;
 
     public string Message { get; set; }
     public byte[] Memory { get; set; }

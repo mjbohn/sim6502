@@ -1,4 +1,5 @@
 
+using CPU_emu;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 using System.Reflection;
 
@@ -9,13 +10,30 @@ namespace CPU_emulator;
 public class CPU_Tests
 {
     private CPU cpu;
-    
+    private RamBus ram;
+    private RomBus basicRom;
+    private RomBus kernalRom;
+    private IoDevice ioDevice;
+    private byte[] _data = new byte[65536];
+
     [SetUp]
     public void Setup()
     {
-        cpu = new CPU();
+        InitializeMemory();
+        MappedBus memoryBus = new MappedBus(ram, basicRom, kernalRom, ioDevice);
+        cpu = new CPU(memoryBus);
     }
-    
+
+    private void InitializeMemory()
+    {
+        ram = new RamBus(_data);
+        //var basicRom = new RomBus(File.ReadAllBytes("basic.rom"), 0xA000);
+        //var kernalRom = new RomBus(File.ReadAllBytes("kernal.rom"), 0xE000);
+        basicRom = new RomBus(new byte[1024 * 8], 0xA000);
+        kernalRom = new RomBus(new byte[1024 * 8], 0xE000);
+        ioDevice = new IoDevice();
+    }
+
     #region set registers
 
     [Test]
@@ -321,11 +339,28 @@ public class CPU_Tests
 public class CPU_Command_Tests
 {
     private CPU cpu;
+    private RamBus ram;
+    private RomBus basicRom;
+    private RomBus kernalRom;
+    private IoDevice ioDevice;
+    private byte[] _data = new byte[65536];
 
     [SetUp]
-    public void SetUp()
+    public void Setup()
     {
-        cpu = new CPU();
+        InitializeMemory();
+        MappedBus memoryBus = new MappedBus(ram, basicRom, kernalRom, ioDevice);
+        cpu = new CPU(memoryBus);
+    }
+
+    private void InitializeMemory()
+    {
+        ram = new RamBus(_data);
+        //var basicRom = new RomBus(File.ReadAllBytes("basic.rom"), 0xA000);
+        //var kernalRom = new RomBus(File.ReadAllBytes("kernal.rom"), 0xE000);
+        basicRom = new RomBus(new byte[1024 * 8], 0xA000);
+        kernalRom = new RomBus(new byte[1024 * 8], 0xE000);
+        ioDevice = new IoDevice();
     }
 
     #region LDA
