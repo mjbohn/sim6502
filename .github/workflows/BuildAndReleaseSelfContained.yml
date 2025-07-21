@@ -1,0 +1,35 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - r*sc
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release-Tag (z. B. v1.2.3)'
+        required: true
+        type: string
+      branch:
+        description: 'Branch (optional, Standard: master)'
+        required: false
+        default: 'master'
+        type: string
+      selfContained:
+        description: 'Self-contained Build (Single EXE)?'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'  
+
+jobs:
+  call-reusable:
+    uses: mjbohn/GithubWorkflows/.github/workflows/dotnet-build-and-release-win-sc.yml@main
+    with:
+      tag: ${{ inputs.tag }}
+      project_path: 'CPU_emu'
+      zip_name: 'sim6502.zip'
+      configuration: 'Release'
+      branch: ${{ inputs.branch }}
