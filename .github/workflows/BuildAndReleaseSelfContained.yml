@@ -15,14 +15,7 @@ on:
         required: false
         default: 'master'
         type: string
-      selfContained:
-        description: 'Self-contained Build (Single EXE)?'
-        required: false
-        default: 'false'
-        type: choice
-        options:
-          - 'false'
-          - 'true'  
+      
 
 jobs:
   call-reusable:
