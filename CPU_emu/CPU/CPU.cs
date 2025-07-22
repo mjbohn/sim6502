@@ -186,11 +186,6 @@ public partial class CPU
         }
     }
 
-    private uint AddrAbsolute()
-    {
-        return FetchWord(ref _CpuCycle);
-    }
-
     private byte PullByteFromStack(ref ulong CpuCycle)
     {
         IncrementSP();
@@ -230,7 +225,7 @@ public partial class CPU
         return data;
     }
 
-    private ushort FetchWord(ref ulong CpuCycle)
+    private ushort FetchWord()
     {
         ushort LoByte = ReadByteFromMemory((ushort)PC);
         PC++;

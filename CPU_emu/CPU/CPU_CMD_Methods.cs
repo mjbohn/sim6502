@@ -15,29 +15,85 @@ public partial class CPU
     #endregion
 
     #region LDA
-    // Load Accumulator immidiate A9
+    
     [Opcode(2)]
-    public void Cmd_A9()
+    public void Cmd_A9() // Load Accumulator immidiate A9
     {
-        SetRegister("A", FetchByte());
+        byte value = AddrImmediate();
+        SetRegister("A", value);
         SetZeroAndNegativeFlags(A);
     }
 
-    // Load Accumulator zeropage A5
-    public void Cmd_A5()
+    // LDA $zz
+    [Opcode(2)]
+    public void Cmd_A5() // Load Accumulator zeropage A5
     {
-        SetRegister("A", ReadByteFromMemory(FetchByte()));
+        ushort addr = AddrZeroPage();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
         SetZeroAndNegativeFlags(A);
     }
 
-    // Load Accumulator zeropage X B5
-    public void Cmd_B5()
+    // LDA $zz,X
+    [Opcode(2)]
+    public void Cmd_B5() // Load Accumulator zeropage X B5
     {
-        byte b_tmp = FetchByte();
-        b_tmp += X; // add regX to address
-        SetRegister("A", ReadByteFromMemory(b_tmp));
+        ushort addr = AddrZeroPageX();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
         SetZeroAndNegativeFlags(A);
     }
+
+    // LDA $nnnn (absolute)
+    [Opcode(3)]
+    public void Cmd_AD()
+    {
+        ushort addr = AddrAbsolute();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
+        SetZeroAndNegativeFlags(A);
+    }
+
+    // LDA $nnnn,X
+    [Opcode(3)]
+    public void Cmd_BD()
+    {
+        ushort addr = AddrAbsoluteX();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
+        SetZeroAndNegativeFlags(A);
+    }
+
+    // LDA $nnnn,Y
+    [Opcode(3)]
+    public void Cmd_B9()
+    {
+        ushort addr = AddrAbsoluteY();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
+        SetZeroAndNegativeFlags(A);
+    }
+
+    // LDA ($zz,X) – Indirect,X
+    [Opcode(2)]
+    public void Cmd_A1()
+    {
+        ushort addr = AddrIndirectX();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
+        SetZeroAndNegativeFlags(A);
+    }
+
+    // LDA ($zz),Y – Indirect,Y
+    [Opcode(2)]
+    public void Cmd_B1()
+    {
+        ushort addr = AddrIndirectY();
+        byte value = ReadByteFromMemory(addr);
+        SetRegister("A", value);
+        SetZeroAndNegativeFlags(A);
+    }
+
     #endregion
 
     #region LDX
@@ -105,4 +161,7 @@ public partial class CPU
     }
 
     #endregion
+
+
+    
 }
