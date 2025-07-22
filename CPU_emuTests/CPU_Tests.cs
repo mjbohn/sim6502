@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
 using System.Reflection;
 
 
+
 namespace CPU_emulator; 
 
 [TestFixture]
@@ -363,27 +364,32 @@ public class CPU_Command_Tests
         ioDevice = new IoDevice();
     }
 
+    public void RunSingleOpcodeTest(byte opcode, byte operand, ushort pcStart = 0x200)
+    {
+        cpu.Reset();
+        cpu.WriteByteToMemory(operand, pcStart);
+        cpu.SetPC(pcStart);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), opcode });
+    }
+
     #region LDA
     // Test Load Accumulator immidiate A9
-    [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff, 3 })]
-    [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00, 3 })]
-    public object[] Cmd_A9_Test(byte b)
+    [TestCase(0xff, false, true, 0xff, 3)]
+    [TestCase(0x00, true, false, 0x00, 3)]
+    public void Cmd_A9_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
     {
-        object[] result = new object[4];
+        RunSingleOpcodeTest(0xA9, value);
 
-        cpu.WriteByteToMemory(b, 0x200);
-        cpu.SetPC(0x200);
-        
-        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType() , (byte)0xA9 });
-
-        result[0] = cpu.flags["Z"];
-        result[1] = cpu.flags["N"];
-        result[2] = cpu.A;
-        result[3] = cpu.CpuCycle;
-
-        return result;
-
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
     }
+         
     
     // Test Load Accumulator zeropage A5
     [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
@@ -604,4 +610,5 @@ static class TestHelper
 
         return method;
     }
+    
 }
