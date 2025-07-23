@@ -228,8 +228,9 @@ public partial class CPU
     private ushort FetchWord()
     {
         ushort LoByte = ReadByteFromMemory((ushort)PC);
-        PC++;
+        IncrementPC();
         ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
+        IncrementPC();
 
         IncrementCpuCycle(2);
 
