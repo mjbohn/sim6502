@@ -1,7 +1,9 @@
 
 using CPU_emu;
 using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities.DataCollection;
+using NuGet.Frameworks;
 using System.Reflection;
+using System.Reflection.Emit;
 
 
 
@@ -364,22 +366,26 @@ public class CPU_Command_Tests
         ioDevice = new IoDevice();
     }
 
-    public void RunSingleOpcodeTest(byte opcode, byte operand, ushort pcStart = 0x200)
-    {
-        cpu.Reset();
-        cpu.WriteByteToMemory(operand, pcStart);
-        cpu.SetPC(pcStart);
+    //public void RunSingleOpcodeTest(byte opcode, byte operand, ushort pcStart = 0x200)
+    //{
+    //    cpu.Reset();
+    //    cpu.WriteByteToMemory(operand, pcStart);
+    //    cpu.SetPC(pcStart);
 
-        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), opcode });
-    }
+    //    TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), opcode });
+    //}
 
     #region LDA
+
     // Test Load Accumulator immidiate A9
     [TestCase(0xff, false, true, 0xff, 3)]
     [TestCase(0x00, true, false, 0x00, 3)]
     public void Cmd_A9_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
     {
-        RunSingleOpcodeTest(0xA9, value);
+        cpu.WriteByteToMemory(value, 0x200);
+        cpu.SetPC(0x200);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xA9 });
 
         Assert.Multiple(() =>
         {
@@ -389,49 +395,74 @@ public class CPU_Command_Tests
             Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
         });
     }
-         
-    
-    // Test Load Accumulator zeropage A5
-    [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
-    [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
-    public object[] Cmd_A5_Test(byte b)
-    {
-        object[] result = new object[3];
 
-        cpu.WriteByteToMemory(b, 0x01); // set byte on zeropage adr. 0x01
+
+    // Test Load Accumulator zeropage A5
+    [TestCase(0xff, false, true, 0xff, 3)]
+    [TestCase(0x00, true, false, 0x00, 3)]
+    public void Cmd_A5_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
+    {
+        cpu.WriteByteToMemory(value, 0x01); // set byte on zeropage adr. 0x01
         cpu.WriteByteToMemory(0x01, 0x200);
         cpu.SetPC(0x200);
-        cpu.Cmd_A5();
-
-        result[0] = cpu.flags["Z"];
-        result[1] = cpu.flags["N"];
-        result[2] = cpu.A;
-
-        return result;
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xA5 });
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
 
     }
 
     // Load Accumulator zeropage X B5
-    [TestCase(0xff, ExpectedResult = new object[] { false, true, 0xff })]
-    [TestCase(0x00, ExpectedResult = new object[] { true, false, 0x00 })]
-    public object[] Cmd_B5_Test(byte b)
+    [TestCase(0xff, false, true, 0xff, 5)]
+    [TestCase(0x00, true, false, 0x00, 5)]
+    public void Cmd_B5_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
     {
-        object[] result = new object[3];
-        cpu.SetRegister("X",0x06); 
-        cpu.WriteByteToMemory(b, 0x07); // set byte on zeropage adr. 0x01
-        cpu.WriteByteToMemory(0x01, 0x200);
+        cpu.Reset();
+        cpu.SetRegister("X",0x06);        // load X with 0x06
+        cpu.WriteByteToMemory(value, 0x07);     // set byte on zeropage adr. 0x07
+        cpu.WriteByteToMemory(0x01, 0x200);  // set 0x01 on the next position of PC so value ox X (0x06) + 0x01 from instruction points to 0x07
         cpu.SetPC(0x200);
-        cpu.Cmd_B5();
+        
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xB5 });
 
-        result[0] = cpu.flags["Z"];
-        result[1] = cpu.flags["N"];
-        result[2] = cpu.A;
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
+    }
 
-        return result;
+    // Load Accumulator absolute AD
+    [TestCase(0xff, false, true, 0xff, 6)]
+    [TestCase(0x00, true, false, 0x00, 6)]
+    public void Cmd_AD_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
+    {
+        cpu.Reset();
+        cpu.WriteByteToMemory(value, 0xFFEE);
+        cpu.WriteByteToMemory(0xEE, 0x200);
+        cpu.WriteByteToMemory(0xFF, 0x201);
+        cpu.SetPC(0x200);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xAD });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
 
     }
 
-    #endregion
+        #endregion
 
     #region LDX
 
