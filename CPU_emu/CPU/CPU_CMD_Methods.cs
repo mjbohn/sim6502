@@ -35,7 +35,7 @@ public partial class CPU
     }
 
     // LDA $zz,X
-    [Opcode(2)]
+    [Opcode(4)]
     public void Cmd_B5() // Load Accumulator zeropage X B5
     {
         ushort addr = AddrZeroPageX();
@@ -45,8 +45,8 @@ public partial class CPU
     }
 
     // LDA $nnnn (absolute)
-    [Opcode(3)]
-    public void Cmd_AD()
+    [Opcode(4)]
+    public void Cmd_AD() // Load Accumulator absolute AD
     {
         ushort addr = AddrAbsolute();
         byte value = ReadByteFromMemory(addr);
@@ -55,8 +55,8 @@ public partial class CPU
     }
 
     // LDA $nnnn,X
-    [Opcode(3)]
-    public void Cmd_BD()
+    [Opcode(4)]
+    public void Cmd_BD() // Load Accumulator absolute X BD
     {
         ushort addr = AddrAbsoluteX();
         byte value = ReadByteFromMemory(addr);
@@ -65,7 +65,7 @@ public partial class CPU
     }
 
     // LDA $nnnn,Y
-    [Opcode(3)]
+    [Opcode(4)]
     public void Cmd_B9()
     {
         ushort addr = AddrAbsoluteY();
@@ -75,7 +75,7 @@ public partial class CPU
     }
 
     // LDA ($zz,X) – Indirect,X
-    [Opcode(2)]
+    [Opcode(6)]
     public void Cmd_A1()
     {
         ushort addr = AddrIndirectX();
@@ -85,7 +85,7 @@ public partial class CPU
     }
 
     // LDA ($zz),Y – Indirect,Y
-    [Opcode(2)]
+    [Opcode(5)]
     public void Cmd_B1()
     {
         ushort addr = AddrIndirectY();
