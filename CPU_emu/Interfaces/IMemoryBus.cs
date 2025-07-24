@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CPU_emu;
 
-internal interface IMemoryBus
+public interface IMemoryBus
 {
     byte Read(ushort address);
     void Write(ushort address, byte value);

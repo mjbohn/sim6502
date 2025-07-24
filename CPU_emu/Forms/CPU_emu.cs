@@ -1,4 +1,5 @@
 ﻿using Bulb;
+using CPU_emu;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace CPU_emulator
@@ -27,12 +29,30 @@ namespace CPU_emulator
         private ConfigSettings config = new ConfigSettings();
         private string _configFilePath = Application.StartupPath + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "config.json";
 
+        private byte[] _data = new byte[65536];
+        private RamBus ram;
+        private RomBus basicRom;
+        private RomBus kernalRom;
+        private IoDevice ioDevice;
+
         public CPU_emu()
         {
             //CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
 
-            Cpu = new CPU();
+            ram = new RamBus(_data);
+            //var basicRom = new RomBus(File.ReadAllBytes("basic.rom"), 0xA000);
+            //var kernalRom = new RomBus(File.ReadAllBytes("kernal.rom"), 0xE000);
+
+            basicRom = new RomBus(new byte[1024 * 8], 0xA000);
+            kernalRom = new RomBus(new byte[1024 * 8], 0xE000);
+
+            ioDevice = new IoDevice();
+
+            MappedBus memoryBus = new MappedBus(ram, basicRom, kernalRom, ioDevice);
+
+
+            Cpu = new CPU(memoryBus);
             Cpu.OnFlagsUpdate += Cpu_onFlagsUpdate;
             Cpu.OnMemoryUpdate += Cpu_OnMemoryUpdate;
             Cpu.OnRegisterUpdate += Cpu_OnRegisterUpdate;
@@ -41,6 +61,8 @@ namespace CPU_emulator
             Cpu.OnPCoverflow += Cpu_OnPCgtThenMaxMem;
             Cpu.OnBreak += Cpu_OnBreak;
             Cpu.OnCpuCycleIncrement += Cpu_OnCpuCycleIncrement;
+
+            
 
             Cpu.Reset();
 
@@ -392,7 +414,8 @@ namespace CPU_emulator
             try
             {
                 fs = new FileStream(fileName, FileMode.OpenOrCreate, FileAccess.Write);
-                fs.Write(Cpu.Memory, 0, Cpu.Memory.Length);
+                //fs.Write(Cpu.Memory, 0, Cpu.Memory.Length);
+                fs.Write(ram.Dump(0, ram.RamSize));
                 fs.Close();
 
             }
@@ -477,10 +500,10 @@ namespace CPU_emulator
                 fs = File.OpenRead(fileName);
                 //Debug.Print(fs.Length.ToString());
                 //Debug.Print(Cpu.Memory.Length.ToString());
-                if (fs.Length <= Cpu.Memory.Length)
+                if (fs.Length <= ram.RamSize)
                 {
                     mem = new byte[fs.Length];
-                    tmpCpuMem = new byte[Cpu.Memory.Length];
+                    tmpCpuMem = new byte[ram.RamSize];
                     tmpCpuMem = Cpu.Memory;
 
                     fs.Read(mem, 0, (int)fs.Length);
@@ -495,15 +518,15 @@ namespace CPU_emulator
                 {
                     StringBuilder ErrorMessage = new StringBuilder();
                     ErrorMessage.AppendLine("File is too large");
-                    ErrorMessage.AppendLine("File has " + fs.Length.ToString() + "bytes.");
-                    ErrorMessage.AppendLine("Max allowed size is  " + Cpu.Memory.Length.ToString() + " bytes.");
+                    ErrorMessage.AppendLine($"File has {fs.Length.ToString()} bytes.");
+                    ErrorMessage.AppendLine($"Max allowed size is {ram.RamSize} bytes.");
 
                     MessageBox.Show(ErrorMessage.ToString(), "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message + "\n---\n" + e.InnerException.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message + "\n---\n" , "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 UseWaitCursor = false;
                 throw;
             }

@@ -13,11 +13,11 @@ namespace CPU_emulator;
 
 public partial class CPU
 {
-    
+
     public uint PC { get; set; } = 0xFFFC;   // ProgramCounter
     public bool SlowDown { get; set; } = false;
     public int SlowDownTime { get; set; } = 750; //
-    
+
     public ushort SP;    // StackPointer
     public byte A, X, Y; // registers
     private ushort ResetVector = 0xFFFC;
@@ -29,16 +29,16 @@ public partial class CPU
     private bool _ExitRequested;
     private bool _SteppingMode;
     internal ulong _CpuCycle;
-    private const uint MAX_MEM = 1024 * 64;
-    private byte[] Data = new byte[MAX_MEM];
+    //private const uint MAX_MEM = 1024 * 64;
+    //private byte[] Data = new byte[MAX_MEM];
 
-    MemoryBus _memoryBus;
+    MappedBus _memoryBus;
 
     private byte
         NegativeFlagBit = 0b10000000,
         OverflowFlagBit = 0b01000000,
-        BreakFlagBit    = 0b000010000,
-        UnusedFlagBit   = 0b000100000,
+        BreakFlagBit = 0b000010000,
+        UnusedFlagBit = 0b000100000,
         InterruptDisableFlagBit = 0b000000100,
         ZeroBit = 0b00000001;
 
@@ -51,12 +51,13 @@ public partial class CPU
     {
         get
         {
-            return Data;
+            return _memoryBus.Dump(0, _memoryBus.RamSize);
         }
 
         set
         {
-            Data = value;
+            //Data = value;
+            _memoryBus.Load(0, value);
             OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
         }
     }
@@ -64,18 +65,19 @@ public partial class CPU
     //public uint PC { get => pC; set => pC = value; }
     //public uint InitialPC { get => _initialPC; set => _initialPC = value; }
 
-    public event EventHandler<CPUEventArgs> OnFlagsUpdate;
-    public event EventHandler<CPUEventArgs> OnMemoryUpdate;
-    public event EventHandler<CPUEventArgs> OnRegisterUpdate;
-    public event EventHandler<CPUEventArgs> OnCpuCycleIncrement;
-    public event EventHandler<CPUEventArgs> OnProgramCounterUpdate;
-    public event EventHandler<CPUEventArgs> OnStackPointerUpdate;
-    public event EventHandler<CPUEventArgs> OnPCoverflow;
-    public event EventHandler<CPUEventArgs> OnBreak;
-    
-    public CPU() 
+    public event EventHandler<CPUEventArgs>? OnFlagsUpdate;
+    public event EventHandler<CPUEventArgs>? OnMemoryUpdate;
+    public event EventHandler<CPUEventArgs>? OnRegisterUpdate;
+    public event EventHandler<CPUEventArgs>? OnCpuCycleIncrement;
+    public event EventHandler<CPUEventArgs>? OnProgramCounterUpdate;
+    public event EventHandler<CPUEventArgs>? OnStackPointerUpdate;
+    public event EventHandler<CPUEventArgs>? OnPCoverflow;
+    public event EventHandler<CPUEventArgs>? OnBreak;
+
+    public CPU(MappedBus memoryBus)
     {
-        _memoryBus = new MemoryBus(ref Data);
+        //_memoryBus = new MemoryBus(ref Data);
+        _memoryBus = memoryBus;
         SetVectors();
     }
 
@@ -97,7 +99,7 @@ public partial class CPU
         SetRegister("A", 0);
         SetRegister("X", 0);
         SetRegister("Y", 0);
-       
+
         ExitRequested = false;
 
         // set all status flags to false
@@ -111,24 +113,24 @@ public partial class CPU
 
     }
 
-    
+
 
     public void Start()
     {
         ExitRequested = false;
-        
+
         var CpuRunner = new BackgroundWorker();
         CpuRunner.DoWork += CpuRunner_DoWork;
         CpuRunner.RunWorkerAsync();
     }
 
-    
+
     private void CpuRunner_DoWork(object sender, DoWorkEventArgs e)
     {
-                
+
         Type thisType = this.GetType();
 
-        
+
         while (CpuIsRunning)
         {
             byte instruction = FetchByte();
@@ -143,7 +145,7 @@ public partial class CPU
             {
                 break;
             }
-            if (PC >= MAX_MEM)
+            if (PC >= _memoryBus.RamSize)
             {
                 OnPCoverflow?.Invoke(this, new CPUEventArgs(this));
                 break;
@@ -184,11 +186,6 @@ public partial class CPU
         }
     }
 
-    private uint AddrAbsolute()
-    {
-        return FetchWord(ref _CpuCycle);
-    }
-
     private byte PullByteFromStack(ref ulong CpuCycle)
     {
         IncrementSP();
@@ -198,13 +195,13 @@ public partial class CPU
         return b;
     }
 
-    private void PushByteToStack(byte b,ref ulong CpuCycle)
+    private void PushByteToStack(byte b, ref ulong CpuCycle)
     {
         WriteByteToMemory(b, SP);
         IncrementCpuCycle(1);
         DecrementSP();
         IncrementCpuCycle(1);
-        
+
     }
 
     public void Stop()
@@ -222,48 +219,41 @@ public partial class CPU
 
     private byte FetchByte()
     {
-        //byte data = Data[PC];
         byte data = _memoryBus.Read((ushort)PC);
         IncrementPC();
         IncrementCpuCycle(1);
         return data;
     }
 
-    private ushort FetchWord(ref ulong CpuCycle)
+    private ushort FetchWord()
     {
         ushort LoByte = ReadByteFromMemory((ushort)PC);
-        PC++;
+        IncrementPC();
         ushort HiByte = (ushort)(ReadByteFromMemory((ushort)PC) << 8);
+        IncrementPC();
 
         IncrementCpuCycle(2);
 
         return LoByte |= HiByte;
     }
 
-    public void WriteByteToMemory(byte b,ushort address)
+    public void WriteByteToMemory(byte b, ushort address)
     {
-        //Data[address] = b;
         _memoryBus.Write(address, b);
         OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
     }
 
     private byte ReadByteFromMemory(ushort address)
     {
-        //return Data[address];
         return _memoryBus.Read(address);
     }
 
     private ushort ReadWordFromMemory(ushort address)
     {
-        //ushort tmpPC = ReadByteFromMemory(ResetVector);
-        //ResetVector++;
-        //tmpPC |= (ushort)(ReadByteFromMemory(ResetVector) << 8);
-
-
         ushort LoByte = ReadByteFromMemory(address);
         address++;
-        ushort HiByte = (ushort)(ReadByteFromMemory(address) <<8);
-        
+        ushort HiByte = (ushort)(ReadByteFromMemory(address) << 8);
+
         return LoByte |= HiByte;
     }
 
@@ -293,7 +283,7 @@ public partial class CPU
 
     private void ResetCpuCycle()
     {
-        _CpuCycle =0;
+        _CpuCycle = 0;
         OnCpuCycleIncrement?.Invoke(this, new CPUEventArgs(this));
     }
 
@@ -314,8 +304,8 @@ public partial class CPU
         PC--;
         OnProgramCounterUpdate?.Invoke(this, new CPUEventArgs(this));
     }
-    
-    //UT
+
+
     public void SetRegister(string regname, byte value)
     {
         switch (regname)
@@ -334,13 +324,10 @@ public partial class CPU
         }
         OnRegisterUpdate?.Invoke(this, new CPUEventArgs(this));
     }
-    //UT
+
     public void ResetMemory()
     {
-        for (int i = 0; i < MAX_MEM; i++)
-        {
-            Data[i] = 0x00;
-        }
+        _memoryBus.EraseRam();
 
         SetVectors();
 
@@ -348,14 +335,14 @@ public partial class CPU
     }
     public byte[] ReadMemory()
     {
-        return Data;
+        return _memoryBus.DumpRam();
     }
 
     internal void UpdateMemoryRange(byte[] data, int startAddress)
     {
         for (int i = 0; i < data.Length; i++)
         {
-            Memory[startAddress + i] = data[i];
+            _memoryBus.Write((ushort)(startAddress + i), data[i]);
         }
 
         OnMemoryUpdate?.Invoke(this, new CPUEventArgs(this));
@@ -364,7 +351,7 @@ public partial class CPU
 
 public class CPUEventArgs : EventArgs
 {
-    CPU cpu = new CPU();
+    CPU cpu;
 
     public string Message { get; set; }
     public byte[] Memory { get; set; }
@@ -395,5 +382,5 @@ public class CPUEventArgs : EventArgs
         Cycles = cpu._CpuCycle;
     }
 
-    
+
 }
