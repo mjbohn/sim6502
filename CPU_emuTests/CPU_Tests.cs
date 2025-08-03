@@ -462,7 +462,78 @@ public class CPU_Command_Tests
 
     }
 
-        #endregion
+    // Load Accumulator absolute X BD
+    [TestCase(0xff, false, true, 0xff, 6)]
+    [TestCase(0x00, true, false, 0x00, 6)]
+    public void Cmd_BD_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
+    {
+        cpu.Reset();
+        cpu.WriteByteToMemory(value, 0xFFEF);
+        cpu.WriteByteToMemory(0xEE, 0x200);
+        cpu.WriteByteToMemory(0xFF, 0x201);
+        cpu.SetRegister("X", 0x01);
+        cpu.SetPC(0x200);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xBD });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
+
+    }
+
+    // Load Accumulator absolute Y B9
+    [TestCase(0xff, false, true, 0xff, 6)]
+    [TestCase(0x00, true, false, 0x00, 6)]
+    public void Cmd_B9_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
+    {
+        cpu.Reset();
+        cpu.WriteByteToMemory(value, 0xFFEF);
+        cpu.WriteByteToMemory(0xEE, 0x200);
+        cpu.WriteByteToMemory(0xFF, 0x201);
+        cpu.SetRegister("Y", 0x01);
+        cpu.SetPC(0x200);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xB9 });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
+
+    }
+
+    // Load Accumulator indirect X A1
+    [TestCase(0xff, false, true, 0xff, 7)]
+    [TestCase(0x00, true, false, 0x00, 7)]
+    public void Cmd_A1_Test(byte value, bool expectedZ, bool expectedN, byte expectedA, int expectedCycles)
+    {
+        cpu.Reset();
+        cpu.WriteByteToMemory(value, 0xFFEF);
+        cpu.WriteByteToMemory(0xEF, 0x01);
+        cpu.WriteByteToMemory(0xFF, 0x02);
+        cpu.SetRegister("X", 0x01);
+        cpu.SetPC(0x200);
+
+        TestHelper.GetPrivateMethod("CallInstruction", cpu).Invoke(cpu, new object[] { cpu.GetType(), (byte)0xA1 });
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(cpu.flags["Z"], Is.EqualTo(expectedZ), "Zero Flag");
+            Assert.That(cpu.flags["N"], Is.EqualTo(expectedN), "Negative Flag");
+            Assert.That(cpu.A, Is.EqualTo(expectedA), "Register A");
+            Assert.That(cpu.CpuCycle, Is.EqualTo(expectedCycles), "CPU Cycles");
+        });
+
+    }
+    #endregion
 
     #region LDX
 

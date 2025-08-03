@@ -66,7 +66,7 @@ public partial class CPU
 
     // LDA $nnnn,Y
     [Opcode(4)]
-    public void Cmd_B9()
+    public void Cmd_B9() // Load Accumulator absolute Y B9
     {
         ushort addr = AddrAbsoluteY();
         byte value = ReadByteFromMemory(addr);
@@ -76,7 +76,7 @@ public partial class CPU
 
     // LDA ($zz,X) – Indirect,X
     [Opcode(6)]
-    public void Cmd_A1()
+    public void Cmd_A1() // Load Accumulator indirect X A1
     {
         ushort addr = AddrIndirectX();
         byte value = ReadByteFromMemory(addr);
@@ -86,7 +86,7 @@ public partial class CPU
 
     // LDA ($zz),Y – Indirect,Y
     [Opcode(5)]
-    public void Cmd_B1()
+    public void Cmd_B1() // Load Accumulator indirect y B1
     {
         ushort addr = AddrIndirectY();
         byte value = ReadByteFromMemory(addr);
